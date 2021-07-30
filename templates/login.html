@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+{%load static%}
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        #login {
+            position: fixed;
+            background-color: white;
+            width: 100%;
+            height: 100vh;
+            left: 0;
+            display: block;
+            z-index: 4;
+            animation: 2s ease-in drop;
+        }
+        
+        .background {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 300px;
+            height: fit-content;
+            transform: translate(-50%, -50%);
+            background: black;
+            color: white;
+            text-align: center;
+        }
+        
+        .background h3 {
+            color: rgb(255, 0, 0);
+            font-size: x-large;
+            font-family: Verdana, Geneva, Tahoma, sans-serif;
+        }
+        
+        .close {
+            position: absolute;
+            right: 4%;
+            color: rgb(255, 0, 0);
+            font-size: xx-large;
+            margin-bottom: 13px;
+        }
+        
+        .background input {
+            width: 85%;
+            padding: 5px;
+        }
+        
+        .background .inputs {
+            border: none;
+            border-bottom: 1px solid white;
+            outline: none;
+            font-size: 18px;
+            margin-bottom: 10px;
+            background: none;
+            color: white;
+        }
+        
+        .background input[type='submit'] {
+            border-radius: 6px;
+            background: rgb(0, 255, 76);
+            outline: none;
+            color: white;
+            cursor: pointer;
+            font-weight: bolder;
+        }
+        
+        .background a {
+            color: darkgray;
+            text-decoration: none;
+        }
+        
+        @keyframes drop {
+            0% {
+                top: -120%;
+            }
+            100% {
+                top: 0%
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <!--login-->
+    <div id="login">
+        <div class="background" id="loggin">
+            <a href="{% url 'home' %}"><span class="close" id="X" draggable="true">&times;</span></a><br><br>
+            <h3>Shopat<span style="color: rgb(255, 255, 255);"> Purchased</span></h3>
+            <h6 style="font-family: Arial, Helvetica, sans-serif; color:rgb(0, 255, 76);">Login</h6>
+            <form method="POST">{% csrf_token %} {{form}}
+                <br><br>
+                <input type="submit" class="inputs" id="subbmit" value="submit" />
+            </form>
+            <br />
+            <a href="{% url 'home' %}" id="forgotten">dont have an account? <span style="color: #ffc107;">join up</span> </a><br><br>
+            <br><br><br>
+        </div>
+    </div>
+    <!--login-->
+</body>
+
+
+</html>

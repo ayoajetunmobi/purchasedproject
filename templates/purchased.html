@@ -1,0 +1,680 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<!DOCTYPE html>
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="HandheldFriendly" content="true">
+    <link rel="stylesheet" href="{% static 'purchased.css' %}" />
+    <link rel="stylesheet" href="{% static 'profile.css' %}" />
+    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
+    <title>purchased</title>
+</head>
+
+<body draggable="true">
+    <div class="mysite">
+        {% if request.user.active %}
+        <div id="backgroundCover" style="z-index:-10; display:none; ">
+            <div class="background">
+                <h4>PLEASE ENTER CODE TO VERIFY YOUR ACCOUNT</h4>
+                <br>
+                <a style="text-decoration: underline;" href="#">resend code</a>
+                <br>
+                <br>
+                <br>
+                <form action="">
+                    <input type="text" name="" id="" placeholder="enter code here">
+                    <br><br>
+                    <input class="subCode" type="submit" value="Submit Code">
+                </form>
+                <br>
+                <form action="">
+                    <h5>edit number</h5>
+                    <input type="text" placeholder=" new number">
+                    <br><br>
+                    <input class="subCode" type="submit" value="EDIT">
+                </form>
+            </div>
+        </div>
+
+        {% endif %}
+        <!--end code for num verifivation-->
+
+
+        <!--head bar-->
+        <header id="header">
+            <div>
+                <img class="logo" src="{% static 'logopurchase.png' %}" alt="">
+            </div>
+            <div id="search">
+                <input type="text" placeholder="search" id="searchbox" />
+                <i class="fa fa-search" id="submitttsearch"></i>
+            </div>
+            <button id='toggle-menu'>
+                <i draggable="true" class="fa fa-bars"></i>
+            </button>
+        </header>
+        <div id="searchcover" style="overflow: scroll;">
+        </div>
+        <!--head bar-->
+
+        <div id="navbarlinks">
+            <ul>
+                <li>
+                    <a href="#" onclick="homebt()" class="navli active" id="homebt2"> <i class="fa fa-home"> </i> HOME</a>
+                </li>
+                <li>
+                    <a href="#" id="profilenavbtn2" class="navli" onclick="probt()"> <i class="fa fa-user"> </i> PROFILE</a>
+                </li>
+                <li>
+                    <a href="#" id="createacct" class="navli" onclick="secdisplay()"> <i class="fa fa-plus-square"> </i> JOIN UP</a>
+                </li>
+                {% if user.is_authenticated %}
+                <li><a href="{% url 'logout' %}" class="navli" draggable="true">LOGOUT</a></li>
+                {% else %}
+                <li><a href="{% url 'login' %}" class="navli" id="loginbtn" draggable="true">LOGIN</a></li>
+                {% endif %}
+            </ul>
+        </div>
+        {% if user.is_authenticated %} {% else %}
+        <div class="loginview">
+            <h5>login to view profiles</h5>
+        </div>
+        {% endif %}
+
+        <div id="topsearch" draggable="true">
+            <div id="suggestions">
+                <div style="position: fixed;  min-width: 100px; height: 180px; background-color:white;text-align:center">
+                    <h5>Product</h5><br>
+                    <i style="color: greenyellow;" class="fa fa-arrow-right"></i><br>
+                    <h4>Suggestions</h4>
+                </div>
+                <div class="suggestPic start">
+                    <img src="{% static 'PURCHASED.jpg' %}" alt="">
+                </div>
+
+                {% for i in images %}
+                <div class="suggestPic">
+                    <img onclick="product_spec(this)" src="{{i.product_img.url}}" data='{{i.product_id}}' alt="">
+                </div>
+                {% endfor %}
+
+            </div>
+
+            <div id="topsellers">
+                <div style="position: fixed; min-width: 100px; height: 180px; background-color:white;text-align:center;">
+                    <h5>Top</h5><br>
+                    <i style="color:gold" class="fa fa-arrow-right"></i><br>
+                    <h4>Sellers</h4>
+                </div>
+                <div class="sellertPic start">
+                    <img src="{% static 'PURCHASED.jpg' %}" alt="">
+                    <h6>no top user yet</h6>
+                </div>
+
+            </div>
+            <div id="advertTp">
+                <img name="advertTpImg" src="" alt="" />
+            </div>
+            <div style="display: none;">
+                <img id="img1" src="{% static 'summer.jpg' %}" alt="" />
+                <img id="img2" src="{% static 'PURCHASED.jpg' %}" alt="" />
+            </div>
+        </div>
+        <!--create aacount-->
+        <section id="section">
+            <div class="account">
+                <h4> Create a <span style="color: red;"> Purchased Account</span> <i class="fa fa-user-circle"></i></h4>
+                <form method="POST" class="getdetails" enctype="multipart/form-data">{% csrf_token %} {{form1.as_p}} {{form2.as_p}}
+
+                    <label for="file"> upload profile picture</label><br>
+                    <input type="file" name="eproimages" accept=".jpg,.png,.PNG,.JPG" required>
+                    <br><br><br />
+                    <input type="submit" value="CREATE" />
+                </form>
+            </div>
+        </section>
+        <!--create aacount-->
+
+        <!--all post-->
+        <div id="wrap" draggable="true">
+            <marquee style="position: absolute; top:3%; width:100%; height:30px;"> <span style="background-color: red; color:white; padding:2px">top notch deals</span> bonanza bonanza get offers free now................................. !!! I <span style="background-color:red;color:white;">Bolanle </span> sell quality wear
+                search my username
+                <span style="color:rgb(43, 255, 0)">
+                    I am a top plug for gadgets search 
+                    <span style="color: blueviolet;">goons me</span> </span>
+            </marquee>
+            {% for i in products %}
+            <div class="pos1" data=5>
+                <a href="#" class="a">{{i.username}}</a>
+                <div style="margin:0px auto">
+                    {% if i.online %}
+                    <div class="online"></div>
+                    {%else%}
+                    <div class="offline"></div>
+                    {%endif%}
+                    <img class="propicp" onclick="propicclick(this)" data-id="{{i.user_id}}" src="{{i.profile_pic.url}}" alt="" />
+                </div>
+                <div class='article' data=5>
+                    {% if i.matricverified %}
+                    <h5 style="position: absolute; top:-5%; right:7%; color:rgb(0, 255, 13);"> <i class="fa fa-star"></i></h5>
+                    {%endif%} {% if i.topuser %}
+                    <h5 style="position: absolute; top:-5%; right:7%; color:gold;"> <i class="fa fa-star"></i></h5>
+                    {%endif%} {% for j in images %} {% if i.id == j.product_id %}
+                    <img class="slidep" onclick="product_spec(this)" data={{i.id}} src="{{ j.product_img.url }}" alt="">{% endif %}{% endfor %}
+                </div>
+                <div class="describe">
+                    <h4> {{i.searchTag}}...</h4>
+                </div>
+                <div class="pricinp">
+                    <h5>N{{i.price}}</h5>
+                </div>
+            </div>
+            {%endfor%}
+        </div>
+    </div>
+
+    <!--all post-->
+
+
+    <!--view product spec-->
+    <div class="productSpec" id="productSpec">
+        <div class="close">
+            <a href="#" onclick="closespec()"><i style="color: black;" class="fa fa-arrow-left"></i></a>
+        </div>
+        <div id="specPropic" style="margin:50px 60%; width:100%;">
+        </div>
+        <h5>Product Description</h5>
+        <h3 id="specDescription" class="productSpecDescription">
+        </h3>
+        <div id="specImgs" style="height: fit-content;">
+        </div>
+
+        <div style="margin-top : 40px; display:grid; grid-template-columns:repeat(2,2f);">
+            <span class="productSpecsStags" style="color:rgb(51, 5, 5);">frequent searched Tags : </span>
+            <span class="productSpecsStags">meals</span>
+            <span class="productSpecsStags">Iphones</span>
+            <span class="productSpecsStags"> graphics and design </span>
+            <span class="productSpecsStags"> cosmetic </span>
+        </div>
+        <br>
+        <h2>Suggestions</h2> <br>
+        <br>
+        <br>
+        <div class="productSpecsugest" id="productSpecsugest">
+        </div>
+        <br><br><br>
+        <div id="contactView" style="margin: 0px auto; width:100%;">
+        </div>
+        <div>
+            <h3 style=" padding:20px;border-left:5px groove aqua; border-right:5px groove aqua; background-color:rgb(204, 197, 197);border-radius:10px;">
+                <span style="color: brown;">TIPs to succeed</span><br><br>
+                <li>
+                    payment should be made after concrete agreement with seller
+                </li>
+                <li>
+                    meeting and delivering point should always be in an open place within the school premises
+                </li>
+                <li>
+                    remember to always drop a review on user after buying or selling
+                </li>
+                <li>
+                    read reviews on user and be convinced enough before making any contact
+                </li>
+                <li>
+                    <span style="color: red;"> purchased  </span> tells you how far a user is from your campus at time of contact, it is only adviseable to respond to contacts from within close range to your campus
+                </li>
+                <li>
+                    it is also very adviseable to transact with users who have been verified by matric number for better security and tracking measures
+                </li>
+            </h3>
+        </div><br>
+        <br>
+
+        <div class="footer" style="width:100%; height:30px;  border-top:1px solid grey; text-align:center;">
+            follow on instagram @ PURCHASED.TECH
+        </div>
+    </div>
+    <!--end view product spec-->
+
+
+    <!--MY STORE API DISPLAY-->
+    <div id="apimyStore">
+    </div>
+    <!--END MY STORE API DISPLAY-->
+
+    <!-- Dsiplay review message-->
+    <div id="msgDisplay" style="display:none; background-color:white; top:0%; left:0%; position: absolute; width:100%; height:100%; z-index:-5; overflow-x:hidden;">
+        <div class="close" onclick=" closemsgDisplay()">
+            <a href="#"><i style="color: black;" class="fa fa-arrow-left"></i></a>
+        </div>
+
+        <div id="msgplace" style="margin-top:24%; height: 18%;">
+        </div>
+        <div id="reviewplace" style="position: absolute; top:35%; margin:0px auto; height:40%;text-align:center; width:100%;">
+        </div>
+    </div>
+    <!--End Dsiplay review message-->
+
+    <!--profile-->
+    <div id="profile" draggable="true">
+        <div class="close">
+            <a href="#" id="close" onclick="homebt()"><i style="color: black;" class="fa fa-arrow-left"></i></a>
+        </div>
+        <div class="mystore" id="mystore">
+            <a class="mystoreLinks" href="" id="advertBtn">
+                        Advertisements
+                </a>
+
+            <br>
+            <br>
+            <a class="mystoreLinks" href="#" onclick="ApiDisMsg(this)" id="msgBtn">
+                       Message 
+                </a>
+            <br>
+            <br>
+            <a class="mystoreLinks" href="" id="reportbugBtn">
+                     Report Bug or Suggestions
+                </a><br><br>
+            <a class="mystoreLinks" href="" id="reportusaBtn">
+                       Report User 
+                </a>
+            <br>
+            <br>
+            <a class="mystoreLinks" href="" id="termscdBtn">
+                     Terms and conditions
+                </a><br> <br>
+            <a class="mystoreLinks" href="" id="tipsBtn">
+                     Tips to Succeed 
+                </a><br> <br>
+            <a class="mystoreLinks" href="" id="deactBtn">
+                     Deactivate Account 
+                </a><br> <br>
+        </div>
+
+        <div id="bigpic-overlay" onclick="propicture(event)">
+            <img src="" title="Click anywhere to close" alt="image picture" id="bigpropic" />
+        </div>
+
+        <div id="cover" class="cover">
+        </div>
+        <div class="allinfo" id="allinfo">
+        </div>
+        <br><br><br><br>
+        <div id="contactSeller">
+
+        </div>
+        <div id="advertImg">
+        </div>
+
+
+        <div class="recentpost">
+            <h3>Recent Post</h3>
+            <div id="recentpost">
+            </div>
+        </div>
+        <div class="review">
+            <h3>Reviews</h3>
+            <br>
+            <h5> <i style="font-size:nedium;" class="fa fa-arrow-right"></i> <i style="font-size:nedium;" class="fa fa-arrow-right"></i></h5>
+            <div id="reviewP">
+            </div>
+        </div>
+
+    </div>
+    <!--profile-->
+
+
+    <div id="viewpost" draggable="true">
+        <div class="close">
+            <a href="#" id="close" onclick="disapp()"><i style="color: black;" class="fa fa-arrow-left"></i></a>
+        </div>
+        <div id="marpicDelete">
+            <p>Are you sure you want to delete this post ? </p><br>
+            <button id="delprod" onclick="ApiDelete(this)">delete</button>
+            <button>cancel</button>
+        </div>
+        <br><br><br>
+        <div id="forpost">
+        </div>
+    </div>
+
+
+    <!--upload products-->
+    <div id="products">
+        <div class="close">
+            <a href="#" onclick="disapp()"><i style="color: black;" class="fa fa-arrow-left"></i></a>
+        </div>
+        <div class="upldpro" id="upldpro">
+
+            {% if user.is_authenticated %}
+            <form id="upldpro_form" action="/addPost/" method="POST" enctype="multipart/form-data" id="uploadproduct"> {% csrf_token %}
+                <h5 style="color: rgb(0, 0, 0); letter-spacing:2px; "> <span style="color: red;">UPLOAD </span> PRODUCT/SERVICES</h5>
+                <br>
+                <label>Enter Price </i></label>
+                <br>
+                <br>
+                <input type="number" name=price required>
+                <br>
+                <br>
+                <label>Search Tag</i></label> <br>
+                <br>
+                <textarea name="desc" cols="30" rows="5" required maxlength="30 " placeholder="eg shoes, caps, phones, iphone six , graphic designer, programmer..max 20 words "></textarea>
+                <br><br>
+                <label>Detailed Description <i class="fa fa-tag "></i></label> <br>
+                <br>
+                <textarea name="desc1" cols="30" rows="5" required maxlength="4000" placeholder="Describe Product Properly, specifications and why your product or service stands out... max 500 words"></textarea>
+                <br>
+                <br>
+                <div id="image">
+                    <label for="uppropic">Upload product Image <i class="fa fa-upload"></i></label>
+                    <br>
+                    <br>
+                    <input type="file" name="images" accept=".jpg,.png,.PNG,.JPG" required>
+                </div><br>
+                <input type="button" id="addImage" onclick="myclick()" value="Add"> <br><br>
+                <input type="submit" value="post" id="submit" />
+            </form>
+
+            {% endif %}
+        </div>
+    </div>
+    <!--end upload products-->
+    </div>
+</body>
+
+</html>
+<script src="https:/code.jquery.com/jquery-3.3.1.js "></script>
+<script src="{% static 'purchasednav.js' %} "></script>
+<script src="{% static 'profile.js' %} "></script>
+<script src="{% static 'viewmore.js' %} "></script>
+
+<script>
+    let submittsearch = document.getElementById("submitttsearch");
+
+
+    function getCookie(name) {
+        let cookieValue = null;
+        if (document.cookie && document.cookie !== '') {
+            const cookies = document.cookie.split(';');
+            for (let i = 0; i < cookies.length; i++) {
+                const cookie = cookies[i].trim();
+                // Does this cookie string begin with the name we want?
+                if (cookie.substring(0, name.length + 1) === (name + '=')) {
+                    cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                    break;
+                }
+            }
+        }
+        return cookieValue;
+    }
+    const csrftoken = getCookie('csrftoken');
+
+    function propicclick(elem) {
+        let searchcover = document.getElementById("searchcover");
+        searchcover.style.transform = "translateY(-120vh) "
+        if (elem.getAttribute('data-id') == null || elem.getAttribute('data-id') == -1) {
+            return false
+        }
+        let tabs = document.querySelectorAll('.tabs li a')
+        let tabcontents = document.querySelectorAll('.tab-cotents li');
+        let target = parseInt(elem.getAttribute('data-id'));
+
+        fetch('{% url "profileUpdate" %}', {
+                method: 'POST',
+                credentials: 'same-origin',
+                headers: {
+                    'Accept': 'application/json',
+                    'X-Requested-With': 'XMLHttpRequest', //Necessary to work with request.is_ajax()
+                    'X-CSRFToken': csrftoken,
+                },
+                body: JSON.stringify({
+                        'post_data': {
+                            target
+                        }
+                    }) //JavaScript object of data to POST
+            })
+            .then(response => {
+                return response.json().then(data => {
+                        if (!data.profileupdate) {
+                            return false
+                        }
+                        if (data.profileupdate) {
+                            addtoMyProfile(data.userdetail, data.data1, data.images, data.reviews, update = true, data.advert)
+                            addtoMyproduct(data.data1, data.images)
+                        }
+                        displayRemove()
+                        profile.style.opacity = 1;
+                        profile.style.zIndex = 2;
+
+                    }) //Convert response to JSON
+            })
+    }
+
+    function probt() {
+        let profilenavbtn2 = document.getElementById("profilenavbtn2");
+        remover()
+        let upldpro_form = document.getElementById('upldpro_form')
+
+        if (upldpro_form == -1 || upldpro_form == null) {
+            return false
+        }
+        profilenavbtn2.classList.add('active')
+        displayRemove()
+
+        fetch('{% url "myprofile" %}', {
+                headers: {
+                    'Accept': 'application/json',
+                    'X-Requested-With': 'XMLHttpRequest', //Necessary to work with request.is_ajax()
+                },
+
+            })
+            .then(response => {
+                return response.json().then(data => {
+                        if (data) {
+                            if (data == null || data == -1) {
+                                return false
+                            }
+                            addtoMyProfile(data.userdetail, data.data1, data.images, data.reviews, update = false, data.advert)
+                            addtoMyproduct(data.data1, data.images, update = true)
+                            profile.style.opacity = 1;
+                            profile.style.zIndex = 2;
+                        }
+                    }) //Convert response to JSON
+            })
+    }
+
+    function yhandler() {
+        let wrap = document.getElementById('wrap');
+        wrap.onscroll = (event) => {
+            behavior: 'smooth'
+            if (event.target.scrollHeight - event.target.scrollTop == event.target.clientHeight) {
+                fetch("{% url 'userList' %} ", {
+                        headers: {
+                            'Accept': 'application/json',
+                            'X-Requested-With': 'XMLHttpRequest', //Necessary to work with request.is_ajax()
+                        },
+                    })
+                    .then(response => {
+                        return response.json().then((data) => {
+                            displaypost(data.data, data.pictures)
+                        })
+                    })
+            }
+        }
+    }
+
+    function product_spec(elem) {
+        let spec = document.getElementById('productSpec');
+        spec.style.display = 'none'
+
+        let data = parseInt(elem.getAttribute('data'));
+
+        fetch('{% url "productspec" %}', {
+                method: 'POST',
+                credentials: 'same-origin',
+                headers: {
+                    'Accept': 'application/json',
+                    'X-Requested-With': 'XMLHttpRequest', //Necessary to work with request.is_ajax()
+                    'X-CSRFToken': csrftoken,
+                },
+                body: JSON.stringify({
+                        'post_data': {
+                            data
+                        }
+                    }) //JavaScript object of data to POST
+            })
+            .then(response => {
+                return response.json().then(data => {
+                        updateProductspec(data.data1, data.images, data.Sproduct, data.Simages, data.contact, data.userthatwascontacted)
+                    }) //Convert response to JSON
+            })
+    }
+
+    function msg(elem) {
+        let seler = elem.getAttribute('seller'),
+
+            contactnumber = [...document.getElementsByClassName('contactnumber')];
+        contactnumber.forEach(contact => {
+            contact.style.display = 'block'
+        })
+        fetch('{% url "contacted" %}', {
+            method: 'POST',
+            credentials: 'same-origin',
+            headers: {
+                'Accept': 'application/json',
+                'X-Requested-With': 'XMLHttpRequest', //Necessary to work with request.is_ajax()
+                'X-CSRFToken': csrftoken,
+            },
+            body: JSON.stringify({
+                    'post_data': {
+                        seler
+                    }
+                }) //JavaScript object of data to POST
+        }).then(response => {
+            return response.json().then(data => {
+
+                }) //Convert response to JSON
+        })
+
+    }
+
+
+    function ApiDelete(elem) {
+        let target = parseInt(elem.getAttribute('data'));
+        fetch('{% url "delete" %}', {
+                method: 'POST',
+                credentials: 'same-origin',
+                headers: {
+                    'Accept': 'application/json',
+                    'X-Requested-With': 'XMLHttpRequest', //Necessary to work with request.is_ajax()
+                    'X-CSRFToken': csrftoken,
+                },
+                body: JSON.stringify({
+                        'post_data': {
+                            target
+                        }
+                    }) //JavaScript object of data to POST
+            })
+            .then(response => {
+                return response.json().then(data => {
+                        let deleteMsg = [...document.getElementsByClassName('deleteMsg')];
+                        let del = deleteMsg.find((item) => parseInt(item.getAttribute('data')) == target);
+                        let div = del.parentNode;
+                        div = div.parentNode
+                        div.parentNode.removeChild(div)
+                        let marpicDelete = document.getElementById('marpicDelete');
+                        marpicDelete.style.display = 'none'
+                    }) //Convert response to JSON
+            })
+    }
+
+    function signals(elem) {
+        let target = elem.getAttribute('signal');
+        let contacted = elem.getAttribute('contacted'),
+            user_review = elem.getAttribute('user_review'),
+            reviewdata = document.getElementById('reviewdata').value,
+            msgid = elem.getAttribute('msgid');
+
+        fetch('{% url "signals" %}', {
+                method: 'POST',
+                credentials: 'same-origin',
+                headers: {
+                    'Accept': 'application/json',
+                    'X-Requested-With': 'XMLHttpRequest', //Necessary to work with request.is_ajax()
+                    'X-CSRFToken': csrftoken,
+                },
+                body: JSON.stringify({
+                        'post_data': {
+                            target,
+                            contacted,
+                            user_review,
+                            reviewdata,
+                            msgid
+                        }
+                    }) //JavaScript object of data to POST
+            })
+            .then(response => {
+                return response.json().then(data => {
+                        let msgDisplay = document.getElementById('msgDisplay');
+                        msgDisplay.style.display = 'none'
+                        msgDisplay.style.zIndex = -5
+                    }) //Convert response to JSON
+            })
+    }
+
+
+    function ApiDisMsg(elem) {
+        fetch('{% url "getMsgs" %}', {
+                headers: {
+                    'Accept': 'application/json',
+                    'X-Requested-With': 'XMLHttpRequest', //Necessary to work with request.is_ajax()
+                },
+
+            })
+            .then(response => {
+                return response.json().then(data => {
+                        getmsg(data.message)
+                    }) //Convert response to JSON
+            })
+    }
+
+
+    submittsearch.addEventListener('click', (event) => {
+
+        let target = document.getElementById('searchbox').value;
+        document.getElementById('searchcover').style.transform = 'translateY(0)'
+
+
+        fetch('{% url "search" %}', {
+                method: 'POST',
+                credentials: 'same-origin',
+                headers: {
+                    'Accept': 'application/json',
+                    'X-Requested-With': 'XMLHttpRequest', //Necessary to work with request.is_ajax()
+                    'X-CSRFToken': csrftoken,
+                },
+                body: JSON.stringify({
+                        'post_data': {
+                            target
+                        }
+                    }) //JavaScript object of data to POST
+            })
+            .then(response => {
+                return response.json().then((data) => {
+                    let target = document.getElementById('searchbox').value;
+                    if (data.yes) {
+                        searchengine(data, yes = true, data.images)
+                        target.innerHTML = ""
+                    } else {
+                        searchengine(data)
+                        target.innerHTML = ""
+                    }
+
+                })
+            }) //Convert response to JSON
+    })
+</script>
