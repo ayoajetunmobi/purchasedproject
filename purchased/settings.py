@@ -91,7 +91,7 @@ if DEBUG:
 else:
     DATABASES = {
         'default': {
-        'ENGINE': 'django.db.backends.postgresql',
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
         'NAME':'purchased',
         'USER': 'ajet',
         'PASSWORD':'aje190591041bi',
@@ -140,6 +140,7 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 STATICFILES_DIRS= [os.path.join(BASE_DIR,'static')]
+STATIC_ROOT = os.path.join(os.path.dirname(BASE_DIR), "static")
 
 MEDIA_URL= '/media/'
 MEDIA_ROOT= os.path.join(BASE_DIR , 'media')
