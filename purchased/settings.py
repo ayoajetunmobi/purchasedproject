@@ -97,8 +97,8 @@ DATABASES = {
         'PASSWORD':'aje190591041bi',
         'HOST': 'localhost',
         'PORT': ''
+    }
 }
-
 
 
 
