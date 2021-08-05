@@ -142,7 +142,7 @@
             productImg.forEach(img=>{
             specImgs.innerHTML+=`
                 <li class="productSpecpiclist">
-                   <img style="width: 100%; height:200px;" src="media/${img.product_img}" alt="" />
+                   <img style="width: 100%; height:400px;" src="media/${img.product_img}" alt="" />
                 </li>
             `  
             })
