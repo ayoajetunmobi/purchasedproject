@@ -9,7 +9,7 @@ from django.http import JsonResponse
 from django.contrib.auth.signals import user_logged_in, user_logged_out
 from django.dispatch import receiver
 import json
-from .models import  User_Detail , User_product , Product_image , Advertisment,Messages,Contacted, Reviews
+from .models import  User_Detail , User_product , Product_image , Advertisment,Messages,Contacted, Reviews,Searchdata
 from django.contrib.auth import get_user_model
 from .forms import ( RegistrationForm, UserDetailForm, Customer_care_form ) 
 from pygments.formatters import img
@@ -251,6 +251,8 @@ def search(request):
                
             else:
                 context['noData']=  str("No MATCH FOR SEARCH")
+                
+            Searchdata.objects.create(word=response,timesSearched =0,user=user)
     return JsonResponse(context , safe=False)
 
 

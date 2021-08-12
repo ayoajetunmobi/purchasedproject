@@ -9,24 +9,25 @@ https://docs.djangoproject.com/en/3.1/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/3.1/ref/settings/
 """
-
+import environ
 import os
 from pathlib import Path
 
+
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
-
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/3.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = '^jqk@4l22)qoni&f--&k6(jjnvz#@_83w75tk7ahq=+o249y*y'
+env = environ.Env()
+environ.Env.read_env()
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
-ALLOWED_HOSTS = ['www.shopatpurchased.com','shopatpurchased.com']
+ALLOWED_HOSTS = ['127.0.0.1','www.shopatpurchased.com','shopatpurchased.com']
 
 
 # Application definition
@@ -92,15 +93,15 @@ else:
     DATABASES = {
         'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME':'purchased',
-        'USER': 'ajet',
-        'PASSWORD':'aje190591041bi',
+        'NAME':env('NAME'),
+        'USER': env('USER'),
+        'PASSWORD':env('PASSWORD'),
         'HOST': 'localhost',
         'PORT': ''
     }
 }
 
-
+SECRET_KEY = env('SECRET_KEY')
 
 # Password validation
 # https://docs.djangoproject.com/en/3.1/ref/settings/#auth-password-validators
