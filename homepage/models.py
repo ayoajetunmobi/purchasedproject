@@ -81,7 +81,7 @@ class User_Detail(models.Model):
     firstname         = models.CharField(max_length = 150 ,blank=False)
     lastname          = models.CharField(max_length = 150,blank=False)
     gender            = models.CharField(max_length = 50,choices=gender)
-    contact           = models.CharField( max_length = 15)
+    contact           = models.CharField( max_length = 15, unique = True)
     about             = models.CharField( max_length =150)
     quote             = models.CharField(max_length = 60,blank=True,null=True)
     university        = models.CharField(max_length=100, default="LASU") 
@@ -120,7 +120,7 @@ class User_product(models.Model):
 class Product_image(models.Model):
      id                = models.AutoField(primary_key=True)
      product           = models.ForeignKey(User_product, on_delete=models.CASCADE) 
-     product_img       = models.ImageField(upload_to = "product_img") 
+     product_img       = models.ImageField(upload_to = "media") 
      
      def __str__(self):
         return str(self.product)
@@ -130,13 +130,13 @@ class Product_image(models.Model):
             #open uploaded image
         img =  Image.open(self.product_img)
         
-        if img.height > 200 or img.width > 200:
-            output_size = (200,200)
+        if img.height > 400 or img.width > 400:
+            output_size = (250,250)
             
             img.thumbnail(output_size)
             
-            img= img.convert('RGB')
             
+            img= img.convert('RGB')            
             output = BytesIO()
              
             img.save(output, format ='JPEG')

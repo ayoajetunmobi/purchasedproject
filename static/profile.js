@@ -99,6 +99,23 @@ advertBtn.addEventListener('click', function(e) {
             <h2 style="color:red;letter-spacing:2px;">Purchased ...</h2>
             <br>
             <h3> advertisement plan </h3>
+
+            <p>
+               Advertising your product is a great way of reaching out to people, <span style="color:red;"> Purchased </span> offers
+            different ways a user can gain more reach on our platform.
+
+               <li> 1) Advertise your username , contact detail or pass a quick short info accross to 
+               users on our <span style="color:red;"> TOP DEALS </span> section  </li>
+               <br>
+               <li> 2) Let us create a custom flyer design for your business and advertise your business 
+               on users profile page and top user section
+               contact us on 09079681347 </li>
+               <br>
+               <li> 3) Advertise your username on your social media platform </li> 
+               <br>
+               <li> 4) Create your own custom high quality flyer to advertise your business and 
+               contact us on 09079681347... jpg image should be less than 2mb </li> 
+            </p>
     `
     apimyStoreDispay()
 })
@@ -209,7 +226,23 @@ termscdBtn.addEventListener('click', function(e) {
             </div>
             <h2 style="color:red;letter-spacing:2px;">Purchased ...</h2>
             <br>
-            <h3> terms and conditions plan </h3>
+            <p style = "font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;"> Purchased is a web app aimed at connecting students who have services to render or products to sell
+            to students and other interested users who want this product or service.
+            Purchased promises to go the extra mile as to the security of user data and transactions. 
+            We the backend team advise all users to stay save and follow the tips to succed as we are doing our best
+            to ensure that any user can be properly traced and found if need be. 
+            </p>
+            <br>
+             PURCHASED would not be held accountable for any user after contact has been collected.
+            <br>
+            <p>
+            if you like the app and wish to donate you can contact us on 09079681347
+            </p>
+            <br>
+            <br>
+            <br>
+            <br>
+            <p style = "font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;">copyright 2021<p>
     `
     apimyStoreDispay()
 })
@@ -222,7 +255,55 @@ tipsBtn.addEventListener('click', function(e) {
             </div>
             <h2 style="color:red;letter-spacing:2px;">Purchased ...</h2>
             <br>
-            <h3> tips to succeed </h3>
+
+            <div>
+            <h3 style=" padding:20px;border-left:5px groove aqua; border-right:5px groove aqua; background-color:rgb(204, 197, 197);border-radius:10px;">
+                <span style="color: brown;">TIPs to succeed</span><br><br>
+                <li>
+                    payment should be made after concrete agreement with seller.
+                </li>
+                <li>
+                    meeting and delivering point should always be in an open place within the school premises.
+                </li>
+                <li>
+                    remember to always drop a review on user after buying or selling.
+                </li>
+                <li>
+                    read reviews on user and be convinced enough before making any contact.
+                </li>
+
+                <li>
+                    it is adviseable to transact with users who have been verified by matric number for better security.
+                </li>
+                <li>
+                    <span style="color: red;"> NOTE </span> Users who can be identified by their profile picture maybe more trust worthy than the others.
+                </li>
+                 <li>
+                   consider advertising your products with us and on your social media platforms for more reach.
+                </li>
+                 <li>
+                   online users would sell more(sharp sharp business).
+                </li>
+                <li>
+                   it is adviseable to create multiple post with less images than a single post with so much images.
+                </li>
+                <li>
+                   remember to delete product or service if it is no longer available , you don't want
+                   potential buyers asking for a product you do not have . I mean that can cause you a bad review.
+                </li>
+                 <li>
+                   Always drop a review on user after business meetings or end of transaction.
+                </li>
+                  <li>
+                   safety first, safety first, safety first.
+                </li>
+                <li>
+                    <span style="color: red;"> purchased  </span> your online market place.
+                </li>
+            </h3>
+
+            
+        </div>
     `
     apimyStoreDispay()
 })
@@ -271,4 +352,9 @@ function delmsg(e) {
     let marpicDelete = document.getElementById('marpicDelete');
     marpicDelete.style.display = 'block'
     e.style.display = 'none'
+}
+
+function closedel() {
+    let marpicDelete = document.getElementById('marpicDelete');
+    marpicDelete.style.display = 'none'
 }

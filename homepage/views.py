@@ -11,7 +11,7 @@ from django.dispatch import receiver
 import json
 from .models import  User_Detail , User_product , Product_image , Advertisment,Messages,Contacted, Reviews
 from django.contrib.auth import get_user_model
-from .forms import ( RegistrationForm, UserDetailForm, PostForm ,  Customer_care_form ) 
+from .forms import ( RegistrationForm, UserDetailForm, Customer_care_form ) 
 from pygments.formatters import img
 from numpy import random
 
@@ -19,26 +19,12 @@ from numpy import random
 
 User=get_user_model()
 page_num = 1
-range1 = 1
-range2 = 4
-
 
 def formsdispaly(request):
     context={}
     form1 = RegistrationForm(request.POST or None)
     form2 = UserDetailForm(request.POST or request.FILES or None)
     loged_in_user= request.user
-    
-    images =[]
-    products = User_product.objects.all().order_by('-id')[:6]
-    context['products']= products
-    for i in products:
-        image = Product_image.objects.filter(product=i)[0]
-        images.append(image)
-    context['images']= images
-
-    
-    
     
     if loged_in_user.is_authenticated:
         review = Reviews.objects.all()
@@ -47,13 +33,27 @@ def formsdispaly(request):
         context['products']= products
         images=[]
         for i in products:
-            image = Product_image.objects.filter(product=i)[0]
-            images.append(image)
+            if Product_image.objects.filter(product=i)[0] != None:
+                image = Product_image.objects.filter(product=i)[0]
+                images.append(image)
+            else:
+                i.delete()
         context['images']= images
         context["usersDetails"] = user_details
         
         if len(review)>0 and len(review) > 15:
             review[:8].delete()
+    else:
+        images =[]
+        products = User_product.objects.all().order_by('-id')[:6]
+        context['products']= products
+        for i in products:
+            if  Product_image.objects.filter(product=i)[0] != None:
+                image = Product_image.objects.filter(product=i)[0]
+                images.append(image)
+            else:
+                i.delete()
+        context['images']= images
 
            
     if form1.is_valid() and form2.is_valid():
@@ -87,14 +87,12 @@ def getting_post(request):
     loged_in_user = request.user
     data= get_object_or_404(User_Detail,user=loged_in_user)
     price  = request.POST.get("price")
-    searchTag   = request.POST.get("desc")
-    desc   = request.POST.get("desc1")
+    searchTag   = str(request.POST.get("desc")).lower()
+    desc   = str(request.POST.get("desc1")).lower()
     Images = request.FILES.getlist('images')
-    if len(Images)>0:
+    if len(Images)>0 :
          product= User_product(user=data,price=price,description=str(desc),campus=data.campus, matricverified=data.matricverified, topuser=data.topuser, searchTag =searchTag, profile_pic=data.profilepic, username = data.username)
          product.save()
-    
-  
          for img in Images:
             fs= FileSystemStorage()
             file_path= fs.save(img.name,img)
@@ -154,7 +152,7 @@ def Prof_Update(request):
             if Reviews.objects.filter(user=user).exists(): 
                 context['reviews']= list(Reviews.objects.filter(user=user).order_by('-id').values())
             else:
-                context['reviews']= [{"review":"no review yet because he is lazy no review yet because he is lazyno review yet because he is lazy","username":"no review yet","as_buyer":"no review yet"}]
+                context['reviews']= [{"review":"no reviews yet","username":"no reviews yet","as_buyer":"no reviews yet"}]
  
     return JsonResponse(context , safe=False)
 
@@ -194,7 +192,7 @@ def get_profile(request):
             if Reviews.objects.filter(user=user).exists(): 
                 context['reviews']= list(Reviews.objects.filter(user=user).order_by('-id').values())
             else:
-                context['reviews']= [{"review":"no review yet because he is lazy no review yet because he is lazyno review yet because he is lazy","username":"no review yet","as_buyer":"no review yet"}]
+                context['reviews']= [{"review":"no reviews yet","username":"no reviews yet","as_buyer":"no reviews yet"}]
     return JsonResponse(context , safe=False)
 
 def pagination_page(request):
@@ -235,7 +233,7 @@ def search(request):
         if request.headers.get('x-requested-with') == 'XMLHttpRequest':
             images = []
             response = json.load(request)['post_data'] 
-            response = response['target']
+            response = str(response['target']).lower()
             user = User_Detail.objects.get(user= request.user)
                       
             if User_Detail.objects.filter(username = response).exists():

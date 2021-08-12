@@ -24,9 +24,9 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = '^jqk@4l22)qoni&f--&k6(jjnvz#@_83w75tk7ahq=+o249y*y'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
-ALLOWED_HOSTS = ['localhost','www.shopatpurchased.com','shopatpurchased.com']
+ALLOWED_HOSTS = ['127.0.0.1','www.shopatpurchased.com','shopatpurchased.com']
 
 
 # Application definition

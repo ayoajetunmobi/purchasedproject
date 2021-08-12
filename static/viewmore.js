@@ -148,9 +148,9 @@
             })
             contactView.innerHTML=""
             contactView.innerHTML = `
-            <h4 class="contactnumber" style='display:none; text-align:center;'>${contact}<br>
-            <span style="color:yellow; font-size:medium;"> please drop a review on user after product delivery </span>
-            </h4><br><br>
+            <h3 class="contactnumber" style='display:none; text-align:center;'>${contact}<br>
+            <span style="color:red; font-size:medium;"> please drop a review on user after product delivery </span>
+            </h3><br><br>
               <button onclick= "msg(this)" seller = ${seller} style="width: 100%; margin-bottom:30px; color:white;height:30px; border-radius:15px; background-image: linear-gradient(to bottom right, rgb(0, 255, 34), rgb(52, 107, 59));">contact seller</button>
             `
             productSpecsugest.innerHTML=""
@@ -215,9 +215,9 @@
                  ${(profile.online == true)?` <h5 style="color:green;"> active <h5>`:`<h5 style="color:grey;"> offline <h5>`}
             `;
             contactseller.innerHTML =
-                `<h4 style= "display:none;" class="contactnumber">${profile.contact}<br>
-            <span style="color:yellow; font-size:small;"> please drop a review on user after product delivery </span>
-            </h4>
+                `<h3 style= "display:none;" class="contactnumber">${profile.contact}<br>
+            <span style="color:red; font-size:small;"> please drop a review on user after product delivery </span>
+            </h3>
             <button  onclick= "msg(this)" seller = ${profile.username} style="background-image: linear-gradient(to bottom right, rgb(0, 255, 34), rgb(52, 107, 59))" >CONTACT SELLER</button>`
 
 

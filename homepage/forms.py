@@ -102,17 +102,6 @@ class UserDetailForm (forms.ModelForm):
             raise ValidationError('this user is already taken')
         return username
 
-        
-    
-class PostForm(forms.ModelForm):  
-    desciption =  forms.CharField(max_length=100 , widget=forms.Textarea(
-        attrs={
-            "cols":"30" ,"rows":"5"
-        }
-    ))
-    class Meta:
-        model=User_product
-        fields=('price',)
 
 class Customer_care_form(forms.ModelForm):
     report_problem         = forms.CharField(max_length = 10000 ,widget=forms.Textarea(

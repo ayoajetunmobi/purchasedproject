@@ -15,7 +15,9 @@ let i = 0,
     apimyStore = document.getElementById('apimyStore'),
     topsearch = document.getElementById('topsearch'),
     header = document.getElementById('header'),
-    productSpec = document.querySelector('.productSpec');
+    wrapper = document.getElementById('wrapper');
+productSpec = document.querySelector('.productSpec');
+
 
 
 let docs = document.documentElement;
@@ -67,7 +69,7 @@ function callrecomend() {
             recom_i = 0
         }
     }
-    setTimeout("callrecomend()", 10000)
+    setTimeout("callrecomend()", 30000)
 }
 
 function displayRemove() {
@@ -88,6 +90,8 @@ function displayRemove() {
     topsearch.style.zIndex = -1
     wrapone.style.opacity = 0
     wrapone.style.zIndex = -2
+    wrapper.style.opacity = 0
+    wrapper.style.zIndex = -2
     navbarlinks.style.transform = 'translateX(-100%)'
 }
 
@@ -103,6 +107,8 @@ function homebt() {
     header.style.backgroundColor = 'rgb(0, 255, 76)'
     wrapone.style.opacity = 1
     wrapone.style.zIndex = 1
+    wrapper.style.opacity = 1
+    wrapper.style.zIndex = 1
     topsearch.style.opacity = 1
     topsearch.style.zIndex = 1
 

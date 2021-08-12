@@ -93,7 +93,7 @@
                     <h4>Suggestions</h4>
                 </div>
                 <div class="suggestPic start">
-                    <img src="{% static 'PURCHASED.jpg' %}" alt="">
+                    <img src="{% static 'summer.PNG' %}" alt="">
                 </div>
 
                 {% for i in images %}
@@ -111,7 +111,7 @@
                     <h4>Sellers</h4>
                 </div>
                 <div class="sellertPic start">
-                    <img src="{% static 'PURCHASED.jpg' %}" alt="">
+                    <img src="{% static 'summer.PNG' %}" alt="">
                     <h6>no top user yet</h6>
                 </div>
 
@@ -120,8 +120,8 @@
                 <img name="advertTpImg" src="" alt="" />
             </div>
             <div style="display: none;">
-                <img id="img1" src="{% static 'summer.jpg' %}" alt="" />
-                <img id="img2" src="{% static 'PURCHASED.jpg' %}" alt="" />
+                <img id="img1" src="{% static 'summer.PNG' %}" alt="" />
+                <img id="img2" src="{% static 'PURCHASED.PNG' %}" alt="" />
             </div>
         </div>
         <!--create aacount-->
@@ -140,40 +140,40 @@
         <!--create aacount-->
 
         <!--all post-->
-        <div id="wrap" draggable="true">
-            <marquee style="position: absolute; top:3%; width:100%; height:30px;"> <span style="background-color: red; color:white; padding:2px">top notch deals</span> bonanza bonanza get offers free now................................. !!! I <span style="background-color:red;color:white;">Bolanle </span> sell quality wear
-                search my username
-                <span style="color:rgb(43, 255, 0)">
-                    I am a top plug for gadgets search 
-                    <span style="color: blueviolet;">goons me</span> </span>
-            </marquee>
-            {% for i in products %}
-            <div class="pos1" data=5>
-                <a href="#" class="a">{{i.username}}</a>
-                <div style="margin:0px auto">
-                    {% if i.online %}
-                    <div class="online"></div>
-                    {%else%}
-                    <div class="offline"></div>
-                    {%endif%}
-                    <img class="propicp" onclick="propicclick(this)" data-id="{{i.user_id}}" src="{{i.profile_pic.url}}" alt="" />
+        <div id="wrapper">
+            <div id="wrap" draggable="true">
+                <marquee style="position: absolute; top:3%; width:100%; height:30px;"> <span style="background-color: red; color:white; padding:2px"> TOP DEALS </span> Advertise your product or username on our top deals section for as low as 300 hundred Naira per 4hr........ eg Hi my username is BOLANLE and I sell designer
+                    wears .... <span style="background-color:red;color:white;">TOP DEALS </span> eg... I sell all sort of iphones contact me on 0802NITE...
+                    <span style="color: blueviolet;">TOP DEALS</span> eg... I design websites and flyers check my username now MRayola
+                </marquee>
+                {% for i in products %}
+                <div class="pos1" data=5>
+                    <a href="#" class="a">{{i.username}}</a>
+                    <div style="margin:0px auto">
+                        {% if i.online %}
+                        <div class="online"></div>
+                        {%else%}
+                        <div class="offline"></div>
+                        {%endif%}
+                        <img class="propicp" onclick="propicclick(this)" data-id="{{i.user_id}}" src="{{i.profile_pic.url}}" alt="" />
+                    </div>
+                    <div class='article' data=5>
+                        {% if i.matricverified %}
+                        <h5 style="position: absolute; top:-5%; right:7%; color:rgb(0, 255, 13);"> <i class="fa fa-star"></i></h5>
+                        {%endif%} {% if i.topuser %}
+                        <h5 style="position: absolute; top:-5%; right:7%; color:gold;"> <i class="fa fa-star"></i></h5>
+                        {%endif%} {% for j in images %} {% if i.id == j.product_id %}
+                        <img class="slidep" onclick="product_spec(this)" data={{i.id}} src="{{ j.product_img.url }}" alt="">{% endif %}{% endfor %}
+                    </div>
+                    <div class="describe">
+                        <h4> {{i.searchTag}}...</h4>
+                    </div>
+                    <div class="pricinp">
+                        <h5>N{{i.price}}</h5>
+                    </div>
                 </div>
-                <div class='article' data=5>
-                    {% if i.matricverified %}
-                    <h5 style="position: absolute; top:-5%; right:7%; color:rgb(0, 255, 13);"> <i class="fa fa-star"></i></h5>
-                    {%endif%} {% if i.topuser %}
-                    <h5 style="position: absolute; top:-5%; right:7%; color:gold;"> <i class="fa fa-star"></i></h5>
-                    {%endif%} {% for j in images %} {% if i.id == j.product_id %}
-                    <img class="slidep" onclick="product_spec(this)" data={{i.id}} src="{{ j.product_img.url }}" alt="">{% endif %}{% endfor %}
-                </div>
-                <div class="describe">
-                    <h4> {{i.searchTag}}...</h4>
-                </div>
-                <div class="pricinp">
-                    <h5>N{{i.price}}</h5>
-                </div>
+                {%endfor%}
             </div>
-            {%endfor%}
         </div>
     </div>
 
@@ -213,29 +213,33 @@
             <h3 style=" padding:20px;border-left:5px groove aqua; border-right:5px groove aqua; background-color:rgb(204, 197, 197);border-radius:10px;">
                 <span style="color: brown;">TIPs to succeed</span><br><br>
                 <li>
-                    payment should be made after concrete agreement with seller
+                    payment should be made after concrete agreement with seller.
                 </li>
                 <li>
-                    meeting and delivering point should always be in an open place within the school premises
+                    meeting and delivering point should always be in an open place within the school premises.
                 </li>
                 <li>
-                    remember to always drop a review on user after buying or selling
+                    remember to always drop a review on user after buying or selling.
                 </li>
                 <li>
-                    read reviews on user and be convinced enough before making any contact
+                    read reviews on user and be convinced enough before making any contact.
+                </li>
+
+                <li>
+                    it is adviseable to transact with users who have been verified by matric number for better security.
                 </li>
                 <li>
-                    <span style="color: red;"> purchased  </span> tells you how far a user is from your campus at time of contact, it is only adviseable to respond to contacts from within close range to your campus
+                    <span style="color: red;"> NOTE </span> Users who can be identified by their profile picture maybe more trust worthy than the others.
                 </li>
                 <li>
-                    it is also very adviseable to transact with users who have been verified by matric number for better security and tracking measures
+                    <span style="color: red;"> purchased  </span> your online market place.
                 </li>
             </h3>
         </div><br>
         <br>
 
         <div class="footer" style="width:100%; height:30px;  border-top:1px solid grey; text-align:center;">
-            follow on instagram @ PURCHASED.TECH
+            follow on instagram @ purchased.tech
         </div>
     </div>
     <!--end view product spec-->
@@ -335,7 +339,7 @@
         <div id="marpicDelete">
             <p>Are you sure you want to delete this post ? </p><br>
             <button id="delprod" onclick="ApiDelete(this)">delete</button>
-            <button>cancel</button>
+            <button onclick="closedel()">cancel</button>
         </div>
         <br><br><br>
         <div id="forpost">
@@ -489,9 +493,12 @@
 
     function yhandler() {
         let wrap = document.getElementById('wrap');
-        wrap.onscroll = (event) => {
-            behavior: 'smooth'
-            if (event.target.scrollHeight - event.target.scrollTop == event.target.clientHeight) {
+        let wrapper = document.getElementById('wrapper');
+        wrapper.onscroll = (event) => {
+            wrapper.style.scrollBehavior = 'smooth'
+
+            if (wrapper.scrollTop + wrapper.offsetHeight + 100 > wrap.offsetHeight) {
+
                 fetch("{% url 'userList' %} ", {
                         headers: {
                             'Accept': 'application/json',

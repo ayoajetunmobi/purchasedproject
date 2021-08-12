@@ -364,22 +364,29 @@
         border-radius: 5px;
     }
     
-    #wrap {
+    #wrapper {
         position: fixed;
         top: 37.5%;
         width: 100%;
-        height: 60.5%;
+        height: 60%;
         left: 0;
+        background-color: #fff;
+        z-index: 1;
         padding-top: 35px;
+        overflow: auto;
+        opacity: 1;
+        scroll-behavior: smooth;
+    }
+    
+    #wrap {
+        width: 100%;
         text-align: center;
         display: grid;
         grid-template-columns: repeat(4, 1fr);
-        overflow: scroll;
         background-color: #fff;
         border-top: 2px groove grey;
         opacity: 1;
         z-index: 1;
-        scroll-behavior: smooth;
     }
     
     .pos1 {
