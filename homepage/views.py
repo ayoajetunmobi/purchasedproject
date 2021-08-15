@@ -125,7 +125,7 @@ def Prof_Update(request):
             context['profileupdate']= True
             context['userdetail'] = {
                 "firstname":user.firstname,"lastname": user.lastname,"username":user.username,"about":user.about,
-                "quote":user.quote, "gender":user.gender,"matricverified":user.matricverified, "topuser":user.topuser,
+                "gender":user.gender,"matricverified":user.matricverified, "topuser":user.topuser,
                 "online":user.online , "propic":str(user.profilepic),"contact":user.contact
             }
             
@@ -142,7 +142,7 @@ def Prof_Update(request):
                 
                   
             if Advertisment.objects.filter(id=1).exists(): 
-               id_advert= random.randint(1,5)
+               id_advert= random.randint(1,4)
                picture = Advertisment.objects.get(id=id_advert)
                context['advert'] = str(picture.picture)
             else:
@@ -165,7 +165,7 @@ def get_profile(request):
             
             context['userdetail'] = {
                 "firstname":user.firstname,"lastname": user.lastname,"username":user.username,"about":user.about,
-                "quote":user.quote, "gender":user.gender,"matricverified":user.matricverified, "topuser":user.topuser,
+                "gender":user.gender,"matricverified":user.matricverified, "topuser":user.topuser,
                 "online":user.online , "propic":str(user.profilepic), "contact":user.contact
             }
             
@@ -182,7 +182,7 @@ def get_profile(request):
                 
                   
             if Advertisment.objects.filter(id=1).exists(): 
-               id_advert=random.randint(1,5)
+               id_advert=random.randint(1,4)
                picture = Advertisment.objects.get(id=id_advert)
                context['advert'] = str(picture.picture)
             else:

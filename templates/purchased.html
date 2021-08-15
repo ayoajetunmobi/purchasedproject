@@ -10,40 +10,12 @@
     <meta name="HandheldFriendly" content="true">
     <link rel="stylesheet" href="{% static 'purchased.css' %}" />
     <link rel="stylesheet" href="{% static 'profile.css' %}" />
-    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
     <title>purchased</title>
 </head>
 
 <body draggable="true">
     <div class="mysite">
-        {% if request.user.active %}
-        <div id="backgroundCover" style="z-index:-10; display:none; ">
-            <div class="background">
-                <h4>PLEASE ENTER CODE TO VERIFY YOUR ACCOUNT</h4>
-                <br>
-                <a style="text-decoration: underline;" href="#">resend code</a>
-                <br>
-                <br>
-                <br>
-                <form action="">
-                    <input type="text" name="" id="" placeholder="enter code here">
-                    <br><br>
-                    <input class="subCode" type="submit" value="Submit Code">
-                </form>
-                <br>
-                <form action="">
-                    <h5>edit number</h5>
-                    <input type="text" placeholder=" new number">
-                    <br><br>
-                    <input class="subCode" type="submit" value="EDIT">
-                </form>
-            </div>
-        </div>
-
-        {% endif %}
-        <!--end code for num verifivation-->
-
-
         <!--head bar-->
         <header id="header">
             <div>
@@ -121,9 +93,10 @@
             </div>
             <div style="display: none;">
                 <img id="img1" src="{% static 'summer.png' %}" alt="" />
-                <img id="img2" src="{% static 'PURCHASED.png' %}" alt="" />
+                <img id="img2" src="{% static 'PURCHASED.JPG' %}" alt="" />
             </div>
         </div>
+
         <!--create aacount-->
         <section id="section">
             <div class="account">
@@ -141,13 +114,14 @@
 
         <!--all post-->
         <div id="wrapper">
-            <div id="wrap" draggable="true">
-                <marquee style="position: absolute; top:3%; width:100%; height:30px;"> <span style="background-color: red; color:white; padding:2px"> TOP DEALS </span> Advertise your product or username on our top deals section for as low as 300 hundred Naira per 4hr........ eg Hi my username is BOLANLE and I sell designer
-                    wears .... <span style="background-color:red;color:white;">TOP DEALS </span> eg... I sell all sort of iphones contact me on 0802NITE...
-                    <span style="color: blueviolet;">TOP DEALS</span> eg... I design websites and flyers check my username now MRayola.. <span style="color: rgb(4, 0, 255);">click the picture 
-                        on any post and wait to view full post details , click the profile picture on any post and wait to view the users profile.
+            <marquee style="width:100%; height:20px;"> <span style="background-color: red; color:white; padding:2px"> TOP DEALS </span> Advertise your product or username on our top deals section for as low as 300 hundred Naira per 4hr........ eg Hi my username is BOLANLE and I sell designer wears
+                .... <span style="background-color:red;color:white;">TOP DEALS </span> eg... I sell all sort of iphones contact me on 0802NITE...
+                <span style="color: blueviolet;">TOP DEALS</span> eg... I design websites and flyers check my username now MRayola.. <span style="color: rgb(4, 0, 255);">click the picture 
+                        on any post and wait to view full post details , click the profile picture on any post and wait to view the users profile.  check messages frequently to know if you have been contacted.  
+                        endeavor to drop a review after contacting a user or if you were contacted by a user.
                     </span>
-                </marquee>
+            </marquee>
+            <div id="wrap" draggable="true">
                 {% for i in products %}
                 <div class="pos1" data=5>
                     <a href="#" class="a">{{i.username}}</a>

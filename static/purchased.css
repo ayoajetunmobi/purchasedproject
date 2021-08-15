@@ -283,8 +283,8 @@
     }
     
     .propicp {
-        width: 30px;
-        height: 30px;
+        width: 20px;
+        height: 20px;
         border: 1px groove rgb(0, 0, 0);
         border-radius: 150px;
         left: 0;
@@ -384,21 +384,22 @@
         display: grid;
         grid-template-columns: repeat(4, 1fr);
         background-color: #fff;
-        border-top: 2px groove grey;
         opacity: 1;
         z-index: 1;
+        margin-top: 5px;
     }
     
     .pos1 {
         box-shadow: 0 29px 29px rgba(29, 29, 25, 0.25);
         background: white;
-        min-width: 150px;
-        min-height: 340px;
+        min-width: 100px;
+        min-height: 140px;
         max-height: 340px;
-        margin: 4px;
+        margin: 3px;
         display: grid;
         margin-bottom: 9;
         grid-template-columns: repeat(1, 3fr);
+        text-align: center;
     }
     
     .offline {
@@ -468,39 +469,36 @@
         text-decoration: none;
         color: blue;
         cursor: none;
-        font-size: small;
+        font-size: x-small;
         font-weight: lighter;
-        letter-spacing: 2px;
+        letter-spacing: 1px;
+        margin-top: 10px;
     }
     
     .article {
         position: relative;
         background: #ffffff;
-        text-align: center;
         height: 155px;
         overflow: hidden;
-        max-height: 220px;
+        max-height: 100px;
     }
     
     .slidep {
-        width: 99%;
-        height: 99%;
-        max-width: 200px;
-        max-height: 170px;
-        border: 1px solid rgb(88, 77, 12);
+        max-width: 99px;
+        max-height: 150px;
         z-index: 1;
         overflow: hidden;
     }
     
     .slidep img {
-        max-height: 200px;
+        max-height: 100px;
     }
     
     .pricinp {
         background-color: #ffffff;
         font-size: medium;
         color: #91792b;
-        letter-spacing: 9px;
+        letter-spacing: 1px;
         max-height: 50px;
         z-index: 1;
     }
@@ -508,12 +506,14 @@
     .describe {
         position: relative;
         width: 100%;
+        text-align: center;
         letter-spacing: 1px;
-        font-size: 9pt;
+        font-size: 7pt;
         font-family: Arial, Helvetica, sans-serif;
         font-weight: lighter;
         background: #ffffff;
         z-index: 1;
+        overflow: hidden;
     }
     
     @media screen and (max-width: 1000px) {
@@ -567,7 +567,7 @@
             left: 43%;
         }
         #wrap {
-            grid-template-columns: repeat(2, 1fr);
+            grid-template-columns: repeat(3, 1fr);
         }
     }
     
