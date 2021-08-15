@@ -81,9 +81,9 @@ class User_Detail(models.Model):
     firstname         = models.CharField(max_length = 150 ,blank=False)
     lastname          = models.CharField(max_length = 150,blank=False)
     gender            = models.CharField(max_length = 50,choices=gender)
-    contact           = models.CharField( max_length = 15, unique = True)
+    contact           = models.CharField( max_length = 255, unique = True)
     about             = models.CharField( max_length =150)
-    quote             = models.CharField(max_length = 60,blank=True,null=True)
+    quote             = models.CharField(max_length = 60,blank=False,null=False)
     university        = models.CharField(max_length=100, default="LASU") 
     campus            = models.CharField(max_length=100, choices= campus) 
     matricNo          = models.CharField(max_length=100,blank=True,null=True) 
@@ -131,7 +131,7 @@ class Product_image(models.Model):
         img =  Image.open(self.product_img)
         
         if img.height > 400 or img.width > 400:
-            output_size = (250,250)
+            output_size = (150,150)
             
             img.thumbnail(output_size)
             

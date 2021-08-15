@@ -13,7 +13,6 @@ from django.forms import ValidationError
 
 User=get_user_model()
 
-
 def login_user(request): 
     form =   UserLoginForm(request.POST or None)
     nextt = request.GET.get('next')
@@ -25,30 +24,29 @@ def login_user(request):
        login(request, user)
        if nextt:
            return redirect(nextt)
-       return redirect("/")
-   
+       return redirect("/")             
     context={"form":form}
     return render(request,'login.html',context)
-           
-
-def logout_user(request):
-    logout(request)
-    return redirect('/login/')
-
-def reset_password(request):
+  
+def password_reset(request):
     form2 =  Password_resetform(request.POST or None)
+        
     if form2.is_valid():
-        email = form2.cleaned_data.get('email')
+        email = form2.cleaned_data.get('email_address')
         password2 = form2.cleaned_data.get('confirm_password')
         
         user = User.objects.get(email=email)
         user.password = make_password(password2)
         user.save()
-        return redirect("login")
-              
-    context={"form2":form2}
+        return redirect("login") 
     
-    return render(request,'reset.html',context) 
+    context = {"form2":form2} 
+    return render(request,'password.html',context)       
+
+def logout_user(request):
+    logout(request)
+    return redirect('/login/')
+
 
 @receiver(user_logged_in)
 def is_online(sender, user, request,**kwargs):

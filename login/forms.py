@@ -27,18 +27,13 @@ class UserLoginForm (forms.Form):
 
                    
 class Password_resetform (forms.Form):
-    email= forms.EmailField(widget=forms.TextInput(attrs={  
+    email_address = forms.EmailField(widget=forms.TextInput(attrs={  
         "placeholder":"Enter email" , "class":"inputs"
     }))
-    username= forms.CharField(widget=forms.TextInput(attrs={  
+    favourite_quote = forms.CharField(widget=forms.TextInput(attrs={  
         "placeholder":"Enter username" , "class":"inputs"
     }))
-    password_reset_key= forms.CharField(widget = forms.PasswordInput(
-        attrs={
-          "placeholder":"Enter password reset key" ,"class":"inputs"
-        } 
-    ))    
-    password= forms.CharField(widget = forms.PasswordInput(
+    new_password = forms.CharField(widget = forms.PasswordInput(
         attrs={
           "placeholder":"Enter password" ,"class":"inputs"
         }  
@@ -50,46 +45,35 @@ class Password_resetform (forms.Form):
     ))
   
     
-    def clean_email(self):
-        email = self.cleaned_data.get('email')
+    def clean_email_address(self):
+        email = self.cleaned_data.get('email_address')
         
         err= User.objects.filter(email=email).exists()
+        print(err)
         if not err:
-            raise forms.ValidationError('check credentials/password reset key and try again')
+            raise forms.ValidationError('check credentials and try again')
         return email
     
     
-    def clean_username(self):
-        username = self.cleaned_data.get('username')
-        email = self.cleaned_data.get('email')
+    def clean_favourite_quote(self):
+        favourite_quote = self.cleaned_data.get('favourite_quote')
+        email = self.cleaned_data.get('email_address')
         
         err= User.objects.get(email=email)
-        user= User_Detail.objects.get(user=err)
+        quote= User_Detail.objects.get(user=err).quote 
         
-        if user.username != username:
-            raise forms.ValidationError('username is incorrect')
+       
+        if str(quote).lower() != str(favourite_quote).lower():
+            raise forms.ValidationError('favorite quote did not match contact support 09079681347')
         else:
-            return username
+            return favourite_quote
             
             
-    def clean_password_reset_key(self):
-        password_reset_key = self.cleaned_data.get('password_reset_key')
-        username = self.cleaned_data.get('username')
-        email = self.cleaned_data.get('email')
-        err  = User.objects.get(email=email)
-        user = User_Detail.objects.get(user=err)
-        
-        
-        if user.password_reset_key != password_reset_key:
-            raise forms.ValidationError('password reset key is incorrect')
-        else:
-            return password_reset_key
             
     def clean_confirm_password(self):
-        pass1 = self.cleaned_data.get('password')
+        pass1 = self.cleaned_data.get('new_password')
         confirm_password = self.cleaned_data.get('confirm_password')
         
-        print(pass1,confirm_password)
         if pass1 == confirm_password:
             return confirm_password
         else:
