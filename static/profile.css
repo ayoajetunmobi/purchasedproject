@@ -488,6 +488,8 @@
     cursor: pointer;
     color: rgb(0, 0, 0);
     z-index: 1;
+    background-color: white;
+    border: 1px groove greenyellow;
 }
 
 .deleteMsg {
