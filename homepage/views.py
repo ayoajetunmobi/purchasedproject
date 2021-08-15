@@ -141,7 +141,7 @@ def Prof_Update(request):
                 context['data1']  =  [{"searchTag":"no product yet"}] 
                 
                   
-            if Advertisment.objects.filter(id=1).exists(): 
+            if Advertisment.objects.filter(id=2).exists(): 
                id_advert= random.randint(2,4)
                picture = Advertisment.objects.get(id=id_advert)
                context['advert'] = str(picture.picture)
@@ -181,7 +181,7 @@ def get_profile(request):
                 context['data1']  =  [{"searchTag":"no product yet"}] 
                 
                   
-            if Advertisment.objects.filter(id=1).exists(): 
+            if Advertisment.objects.filter(id=2).exists(): 
                id_advert=random.randint(2,4)
                picture = Advertisment.objects.get(id=id_advert)
                context['advert'] = str(picture.picture)
