@@ -142,7 +142,7 @@ def Prof_Update(request):
                 
                   
             if Advertisment.objects.filter(id=1).exists(): 
-               id_advert= random.randint(1,4)
+               id_advert= random.randint(2,4)
                picture = Advertisment.objects.get(id=id_advert)
                context['advert'] = str(picture.picture)
             else:
@@ -182,7 +182,7 @@ def get_profile(request):
                 
                   
             if Advertisment.objects.filter(id=1).exists(): 
-               id_advert=random.randint(1,4)
+               id_advert=random.randint(2,4)
                picture = Advertisment.objects.get(id=id_advert)
                context['advert'] = str(picture.picture)
             else:
