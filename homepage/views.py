@@ -29,7 +29,7 @@ def formsdispaly(request):
     if loged_in_user.is_authenticated:
         review = Reviews.objects.all()
         user_details = User_Detail.objects.get(user=loged_in_user)
-        products = User_product.objects.filter(campus = user_details.campus).order_by('-id')[:6]
+        products = User_product.objects.filter(campus = user_details.campus).order_by('-id')[:9]
         context['products']= products
         images=[]
         for i in products:
@@ -45,7 +45,7 @@ def formsdispaly(request):
             review[:8].delete()
     else:
         images =[]
-        products = User_product.objects.all().order_by('-id')[:6]
+        products = User_product.objects.all().order_by('-id')[:9]
         context['products']= products
         for i in products:
             if  Product_image.objects.filter(product=i)[0] != None:
@@ -142,7 +142,7 @@ def Prof_Update(request):
                 
                   
             if Advertisment.objects.filter(id=2).exists(): 
-               id_advert= random.randint(2,4)
+               id_advert= random.randint(2,5)
                picture = Advertisment.objects.get(id=id_advert)
                context['advert'] = str(picture.picture)
             else:
@@ -182,7 +182,7 @@ def get_profile(request):
                 
                   
             if Advertisment.objects.filter(id=2).exists(): 
-               id_advert=random.randint(2,4)
+               id_advert=random.randint(2,5)
                picture = Advertisment.objects.get(id=id_advert)
                context['advert'] = str(picture.picture)
             else:
