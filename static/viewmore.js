@@ -23,7 +23,7 @@
                     <img class="propicp" onclick="propicclick(this)" data-id=${post.user_id} src="media/${post.profile_pic}" alt="" />
                 </div>
                 <div class='article' data=5>
-                    ${(post.matricverified)?` <h5 style="position: absolute; top:-5%; right:7%; color:rgb(0, 255, 13);"> <i class="fa fa-star"></i></h5>`:''}
+                    ${(post.matricverified)?` <h5 style="position: absolute; top:-5%; right:7%; color:blue;"> <i class="fa fa-star"></i></h5>`:''}
                    ${(post.topuser)?` <h5 style="position: absolute; top:-5%; right:7%; color:gold;"> <i class="fa fa-star"></i></h5>`:''}
                     <img class="slidep" onclick="product_spec(this)" data=${post.id} src="media/${images[i].product_img}" alt="">
                 </div>
