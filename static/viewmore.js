@@ -153,7 +153,7 @@
             </h3><br><br>
               <button onclick= "msg(this)" seller = ${seller} style="width: 100%; margin-bottom:30px; color:white;height:30px; border-radius:15px; background-image: linear-gradient(to bottom right, rgb(0, 255, 34), rgb(52, 107, 59));">contact seller</button>
             `
-            productSpecsugest.innerHTML=""
+            productSpecsugest.innerHTML= ""
             sproduct.forEach(pro => {
                 let a = "";
                 sproductImg.forEach(img=>{

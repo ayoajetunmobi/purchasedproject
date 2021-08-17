@@ -178,8 +178,9 @@
             <span class="productSpecsStags"> cosmetic </span>
         </div>
         <br>
-        <h2>Suggestions</h2> <br>
+        <h2>Suggestions</h2> <br> {% if user.is_authenticated %}
         <p style="color: brown;"> Kindly JOIN UP / LOGIN to view product details </p>
+        {% endif %}
         <br>
         <br>
         <div class="productSpecsugest" id="productSpecsugest">
