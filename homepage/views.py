@@ -238,7 +238,7 @@ def search(request):
             user = User_Detail.objects.get(user= request.user)
                       
             if User_Detail.objects.filter(username = res).exists():
-                data = User_Detail.objects.get(username = res2)
+                data = User_Detail.objects.get(username = res)
                 context["username"] =[str(data.username),str(data.profilepic),str(data.id)]    
             elif User_product.objects.filter(Q(description__contains = response)|Q(searchTag__contains = response) & Q(campus__contains = user.campus)).exists():
                 data2 =  User_product.objects.filter(
