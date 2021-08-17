@@ -76,7 +76,7 @@ class UserDetailForm (forms.ModelForm):
         attrs={
             "placeholder":"About user" , "maxlength":"70","class":"inputs"
         }))
-    quote             = forms.CharField(max_length = 60,required=False,widget=forms.TextInput(
+    quote             = forms.CharField(max_length = 60, required=True, widget=forms.TextInput(
         attrs={
             "placeholder":"Favorite Quote","maxlength":"60","class":"inputs"
         }))
