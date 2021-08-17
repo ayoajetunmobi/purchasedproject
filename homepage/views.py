@@ -234,10 +234,11 @@ def search(request):
             images = []
             response = json.load(request)['post_data'] 
             response = str(response['target']).lower()
+            res2 =  str(response['target'])
             user = User_Detail.objects.get(user= request.user)
                       
-            if User_Detail.objects.filter(username = response).exists():
-                data = User_Detail.objects.get(username = response)
+            if User_Detail.objects.filter(username = res2).exists():
+                data = User_Detail.objects.get(username = res2)
                 context["username"] =[str(data.username),str(data.profilepic),str(data.id)]    
             elif User_product.objects.filter(Q(description__contains = response)|Q(searchTag__contains = response) & Q(campus__contains = user.campus)).exists():
                 data2 =  User_product.objects.filter(
