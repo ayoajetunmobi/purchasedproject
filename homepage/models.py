@@ -83,7 +83,7 @@ class User_Detail(models.Model):
     gender            = models.CharField(max_length = 50,choices=gender)
     contact           = models.CharField( max_length = 255, unique = True)
     about             = models.CharField( max_length =150)
-    quote             = models.CharField(max_length = 60,blank=False,null=False)
+    quote             = models.CharField(max_length = 60, blank=False, null=False)
     university        = models.CharField(max_length=100, default="LASU") 
     campus            = models.CharField(max_length=100, choices= campus) 
     matricNo          = models.CharField(max_length=100,blank=True,null=True) 
