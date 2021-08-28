@@ -11,96 +11,155 @@
     <link rel="stylesheet" href="{% static 'purchased.css' %}" />
     <link rel="stylesheet" href="{% static 'profile.css' %}" />
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We" crossorigin="anonymous">
     <title>purchased</title>
+    <style>
+        header {
+            min-height: 75vh;
+            align-items: center;
+            width: auto;
+        }
+        
+        .form {
+            margin-top: 75px;
+        }
+        
+        #section {
+            position: fixed;
+            top: 0vh;
+            left: 0%;
+            display: none;
+            opacity: 1;
+            width: 100%;
+            height: 100%;
+            z-index: 3;
+            margin: 0px auto;
+            background: linear-gradient(#0005, #0005),
+            url("{%static 'wardrope.jpg'%}");
+            overflow-x: hidden;
+        }
+        
+        #section h4 {
+            border-bottom: 1px groove #676b81;
+            padding: 10px;
+        }
+        
+        .account {
+            width: 97%;
+            margin: 0px auto;
+            height: fit-content;
+            opacity: 1;
+            color: beige;
+            background: linear-gradient(#0005,
+            #0005),
+            url("{%static 'wardrope.jpg'%}");
+            margin-bottom: 60px;
+            border-radius: 5px;
+            box-shadow: 0 7px 7px rgba(0, 0, 0, 0.25);
+            text-align: center;
+        }
+        
+        @media (min-width: 1200px) {
+            header {
+                padding: 0 45vh;
+            }
+        }
+    </style>
 </head>
 
 <body draggable="true">
-    <div class="mysite">
-        <!--head bar-->
-        <header id="header">
-            <div>
-                <img class="logo" src="{% static 'logopurchase.png' %}" alt="">
+    <div style="display: none;">
+        <img id="img1" src="{% static 'wardrope.jpg' %}" alt="">
+        <img id="img2" src="{% static 'atease.jpg' %}" alt="">
+        <img id="img3" src="{% static 'PURCHASED.jpg' %}" alt="">
+    </div>
+    <!--header nav and search-->
+    <div id="mysite">
+        <nav class="navbar navbar-light bg-light navbar-expand-lg">
+            <div class="container-fluid">
+                <img src="{% static 'logopurchase.png' %}" alt="" width="30" height="24" />
+                <a class="navbar-brand" href="#">SHOPATPURCHASED</a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarScroll" aria-controls="navbarScroll" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarScroll">
+                    <ul class="navbar-nav ml-auto my-2 my-lg-0 navbar-nav-scroll" style="--bs-scroll-height: 100px;">
+                        <li class="nav-item">
+                            <a class="nav-link" onclick="secdisplay()" href="#">JOIN UP</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" onclick="probt()" href="#">MY PROFILE</a>
+                        </li>
+                        {% if user.is_authenticated %}
+                        <li class="nav-item">
+                            <a class="nav-link" href="{% url 'logout' %}"> SIGN OUT</a>
+                        </li>
+                        {% else %}
+                        <li class="nav-item">
+                            <a class="nav-link" href="{% url 'login' %}"> SIGN IN</a>
+                        </li>
+                        {% endif %}
+                    </ul>
+                </div>
             </div>
-            <div id="search">
-                <input type="text" placeholder="search" id="searchbox" />
-                <i class="fa fa-search" id="submitttsearch"></i>
+        </nav>
+        <header>
+            <img id="header" style="width:100%; height:75vh; position:absolute; z-index:-1; left:0;" src="" alt="">
+            <div class="container">
+                <h1 style="color :rgb(255, 255, 255);padding-top:60px; font-size: medium; text-align:center;" class="h1"> Find Products and Services around your campus </h1>
+                <h4 style="color :rgba(224, 185, 185, 0.979); padding-top:60px; font-size: medium;" class="h1">
+                    Let's uncover the best products, services, and stores in LASU. </h4>
+
+                <form class="form ">
+                    <div class="row">
+                        <div class="col-md-4">
+                            <input class="form-control" id="searchinput" placeholder="I am looking for ?">
+                        </div>
+                        <div class="col-md-4">
+                            <select class="form-select" aria-label="Default select example">
+                                <option selected> All categories </option>
+                                <option value="1"> Asun Ofada </option>
+                                <option value="11"> Bags </option>
+                                <option value="6"> Bedsheets </option>
+                                <option value="5"> Crotchet Wears </option>
+                                <option value="2"> Food </option>
+                                <option value="3"> Graphics and Design </option>
+                                <option value="7"> Google Voice </option>
+                                <option value="4"> Jeans </option>
+                                <option value="10"> Leggings </option>
+                                <option value="5"> Necklace and Jewelries </option>
+                                <option value="8"> Senator Materials </option>
+                                <option value="9"> Shirt Gown </option>
+                                <option value="6"> Women Suits </option>
+                                <option value="9"> Wigs </option>
+                            </select>
+                        </div>
+                        <div class="col-md-4">
+                            <button style="z-index: 6;" id="submitttsearch" onclick="submitSearcsignals(1)" class="btn btn-outline-success">Search</button>
+                        </div>
+                    </div>
+                </form>
             </div>
-            <button id='toggle-menu'>
-                <i draggable="true" class="fa fa-bars"></i>
-            </button>
         </header>
-        <div id="searchcover" style="overflow: scroll;">
+
+        <!--head bar-->
+        <div id="searchcover">
+
         </div>
         <!--head bar-->
+        <!-- end header nav and search-->
 
-        <div id="navbarlinks">
-            <ul>
-                <li>
-                    <a href="#" onclick="homebt()" class="navli active" id="homebt2"> <i class="fa fa-home"> </i> HOME</a>
-                </li>
-                <li>
-                    <a href="#" id="profilenavbtn2" class="navli" onclick="probt()"> <i class="fa fa-user"> </i> PROFILE</a>
-                </li>
-                <li>
-                    <a href="#" id="createacct" class="navli" onclick="secdisplay()"> <i class="fa fa-plus-square"> </i> JOIN UP</a>
-                </li>
-                {% if user.is_authenticated %}
-                <li><a href="{% url 'logout' %}" class="navli" draggable="true">LOGOUT</a></li>
-                {% else %}
-                <li><a href="{% url 'login' %}" class="navli" id="loginbtn" draggable="true">LOGIN</a></li>
-                {% endif %}
-            </ul>
-        </div>
-        {% if user.is_authenticated %} {% else %}
-        <div class="loginview">
-            <h5>login to view profiles</h5>
-        </div>
-        {% endif %}
 
-        <div id="topsearch" draggable="true">
-            <div id="suggestions">
-                <div style="position: fixed;  min-width: 100px; height: 180px; background-color:white;text-align:center">
-                    <h5>Product</h5><br>
-                    <i style="color: greenyellow;" class="fa fa-arrow-right"></i><br>
-                    <h4>Suggestions</h4>
-                </div>
-                <div class="suggestPic start">
-                    <img src="{% static 'summer.png' %}" alt="">
-                </div>
-
-                {% for i in images %}
-                <div class="suggestPic">
-                    <img onclick="product_spec(this)" src="{{i.product_img.url}}" data='{{i.product_id}}' alt="">
-                </div>
-                {% endfor %}
-
-            </div>
-
-            <div id="topsellers">
-                <div style="position: fixed; min-width: 100px; height: 180px; background-color:white;text-align:center;">
-                    <h5>Top</h5><br>
-                    <i style="color:gold" class="fa fa-arrow-right"></i><br>
-                    <h4>Sellers</h4>
-                </div>
-                <div class="sellertPic start">
-                    <img src="{% static 'summer.png' %}" alt="">
-                    <h6>no top user yet</h6>
-                </div>
-
-            </div>
-            <div id="advertTp">
-                <img name="advertTpImg" src="" alt="" />
-            </div>
-            <div style="display: none;">
-                <img id="img1" src="{% static 'summer.png' %}" alt="" />
-                <img id="img2" src="{% static 'PURCHASED.png' %}" alt="" />
-            </div>
-        </div>
 
         <!--create aacount-->
         <section id="section">
+            <div class="close">
+                <a href="#" onclick="homebt()"> <i style="color: black;" class="fa fa-arrow-left"></i></a>
+            </div>
             <div class="account">
-                <h4> Create a <span style="color: red;"> Purchased Account</span> <i class="fa fa-user-circle"></i></h4>
+
+                <h4> Create an<span style="color: rgb(21, 255, 0);"> Account</span> <i class="fa fa-user-circle"></i>
+                </h4>
                 <form method="POST" class="getdetails" enctype="multipart/form-data">{% csrf_token %} {{form1.as_p}} {{form2.as_p}}
 
                     <label for="file"> upload profile picture</label><br>
@@ -110,18 +169,142 @@
                 </form>
             </div>
         </section>
-        <!--create aacount-->
+        <!-- end create aacount-->
+
+
+        <!-- Product suggestions-->
+
+        <div style=" position:relative; top:-60px; height:200px; width:100%;overflow-x:hidden; z-index:2;">
+            <div class="firstproductdisplay" style="display:grid; grid-template-columns: repeat(5, 5fr); overflow-x:scroll;">
+                <div class="Fprodisplay">
+                    <img onclick="submitSearcsignals(2)" src="{% static 'fashion.jpg' %}" alt="">
+                </div>
+                <div class="Fprodisplay">
+                    <img onclick="submitSearcsignals(3)" src="{% static 'food.jpg' %}" alt="">
+                </div>
+                <div class="Fprodisplay">
+                    <img onclick="submitSearcsignals(4)" src="{% static 'cereals.jpg' %}" alt="">
+                </div>
+                <div style="border: 2px groove rgb(255, 255, 255);" class="Fprodisplay">
+                    <img onclick="submitSearcsignals(5)" src="{% static 'phones.jpg' %}" alt="">
+                </div>
+                <div style="border: 2px groove rgb(255, 255, 255);" onclick="secdisplay()" class="Fprodisplay">
+                    <img src="{% static 'signin.jpg' %}" alt="">
+                </div>
+            </div>
+        </div>
+
+        <!-- Top Deals-->
+        <div class="topdealsdiv">
+            <div style=" text-align:center; overflow:hidden; position: absolute; width:50%; height:100%;  z-index:2; right:0;">
+                <br><br><br>
+                <h3> TOP DEALS </h3> <br>
+                <div style="width: 100%; height:300px; overflow-x:hidden; display:grid;  grid-template-columns:repeat(1, 5fr)">
+                    {% for i in topdealproducts %}
+                    <article data="{{i.id}}" class="post" onclick="product_spec(this)">
+                        {% for j in topdealproductImg %} {% if j.product_id == i.id %}
+                        <img class="postimg" src="{{ j.product_img.url }}" alt=""> {% endif%}{% endfor %}
+                        <p>{{i.searchTag}}</p>
+                        <p>N{{i.price}}</p>
+                    </article>
+                    {% endfor %}
+                </div>
+            </div>
+            <img style="width:100%; height:100%; ; z-index:-1;" src="{% static 'lookat.jpg' %}" alt="">
+        </div>
+        <!-- End Top Deals -->
+
+        <!--Random suggestions-->
+        <div style="width: 100%; height:700px; position:relative;top:-80px; z-index:1; background-color:rgb(243, 243, 243); padding-left:30px; padding-bottom: 40px;">
+            <br>
+            <h4 style="text-align: center;">SUGGESTED CHECK NOW </h4><br>
+            <h6 style="text-align: center;"> Products and Services </h6> <br><br>
+            <div style="display: grid; grid-template-columns: repeat(2, 2fr); margin:0 auto; width:100%">
+                {% for i in suggestions %}
+                <article data="{{i.id}}" onclick="product_spec(this)" class="post">
+                    {% for j in suggestionImg %} {% if j.product_id == i.id %}
+                    <img class="postimg" src="{{ j.product_img.url }}" alt=""> {% endif %} {% endfor %}
+                    <p class="postdesc">{{i.searchTag}}</p>
+                    <p>N{{i.price}}</p>
+                </article>
+                {% endfor %}
+            </div>
+        </div>
+        <!-- end Random suggestions-->
+
+        <!--USER STORE -->
+        <div style="width: 100%; height:350px; position:relative;top:-70px; z-index:1; background-color:rgb(255,
+        255, 255); overflow-y:hidden; box-shadow: 0px 15px 15px rgba(12, 12, 0.55, 0.55);">
+            <h4 style="margin-left: 40px;">{{userstore1productsImg.0}}</h4><br>
+            <h6 style="margin-left: 40px;"> market</h6>
+            <div style=" overflow-y:hidden;">
+                <div style="display: grid; grid-template-columns: repeat(8, 1fr);">
+                    {% for i in userstore1products%}
+                    <article data="{{i.id}}" onclick="product_spec(this)" class="post4store">
+                        {%for j in userstore1productsImg %}{%if i.id == j.product_id %}
+                        <img class="postimg" src="{{j.product_img.url}}" alt=""> {% endif %}{%endfor%}
+                        <p class="postdesc">{{i.searchTag}}</p>
+                        <p>N{{i.price}}</p>
+                    </article>
+                    {%endfor%}
+                </div>
+            </div>
+        </div>
+
+        <div style="width: 100%; height:350px; position:relative;top:-50px; z-index:1; background-color:rgb(255,
+        255, 255); overflow-y:hidden; box-shadow: 0px 15px 15px rgba(12, 12, 0.55, 0.55);">
+            <h4 style="margin-left: 40px;">{{userstore2productsImg.0}}</h4><br>
+            <h6 style="margin-left: 40px;"> market</h6>
+            <div style=" overflow:scroll;">
+                <div style="display: grid; grid-template-columns: repeat(8, 1fr); height:330px;">
+                    {% for i in userstore2products%}
+                    <article data="{{i.id}}" onclick="product_spec(this)" class="post4store">
+                        {%for j in userstore2productsImg %}{%if i.id == j.product_id %}
+                        <img class="postimg" src="{{j.product_img.url}}" alt=""> {% endif %}{%endfor%}
+                        <p class="postdesc">{{i.searchTag}}</p>
+                        <p>N{{i.price}}</p>
+                    </article>
+                    {%endfor%}
+                </div>
+            </div>
+        </div>
+
+
+        <!-- End User Store-->
+
+
+        <div style=" position:relative;height:200px; width:100%">
+            <img style="width:60%; height:300px; position:absolute; top:-40%; left:-5%;" src="{% static 'graphicdesigng.jpg' %}" alt="">
+            <p style="position: absolute; right:0%;"> NEED A GRAPHIC ARTIST ?<br> CONTACT ONE TODAY..<br>
+                <button onclick="submitSearcsignals(6)" style="color:rgb(255, 255, 255); border-radius:4px; background-color:green;">
+                    CLICK ME
+                </button>
+            </p>
+        </div>
+
+        <div style="width: 100%; height:200px; position:relative; top:-40px; z-index:1; background-color:rgb(15, 185, 29); box-shadow: 0px 15px 15px rgba(12, 12, 0.55, 0.55);">
+            <br>
+            <h3 style="margin-left:10px"> BUY FROM A STUDENT </h3><br>
+            <h6 style="margin-left:10px"> contact a seller </h6>
+            <div style="display: grid; grid-template-columns: repeat(2, 2fr); overflow-x:hidden; width:100%;">
+                {% for i in buyfromstudent %}
+                <div class="buy4student">
+                    <img onclick="propicclick(this)" data-id="{{i.id}}" src="{{i.profilepic.url}}" alt="">
+                    <p style="color: white;"><i class="fa fa-male"></i><i class="fa fa-female"></i>{{i.gender}}</p>
+                    <h6 style="color: white;">{{i.about}}</h6>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+        <!-- Product suggestions-->
+
+
+        <h2 style="position:relative; top:450px;"> RECENT ADS </h2>
+
 
         <!--all post-->
         <div id="wrapper">
-            <marquee style="width:100%; height:20px;"> <span style="background-color: red; color:white; padding:2px"> TOP DEALS </span>... Hello Guys !!! <i class="fa fa-child" style="color: blueviolet;"></i> Advertise your product or username on our top deals section for as low as 300 hundred
-                Naira per 4hr........ eg Hi my username is BOLANLE and I sell designer wears .... <span style="background-color:red;color:white;">TOP DEALS </span> eg... I sell all sort of iphones <i class="fa fa-apple"></i> contact me on 0802NITE...
-                <span style="color: blueviolet;">TOP DEALS</span> eg... I design websites and flyers check my username now MRayola.. <span style="color: rgb(4, 0, 255);">click the picture 
-                        on any post and wait to view full post details , click the profile picture on any post and wait to view the users profile.  check messages frequently to know if you have been contacted.  
-                        endeavor to drop a review after contacting a user or if you were contacted by a user.
-                    </span>..... <span style="color:red;">DELETE POST if it is no longer available  .... 
-                    </span> common why not tell a LASUITE <i class="fa fa-child" style="color: blue;"></i> about <span style="color:red;">PURCHASED.</span>
-            </marquee>
+            <br>
             <div id="wrap" draggable="true">
                 {% for i in products %}
                 <div class="pos1" data=5>
@@ -143,17 +326,20 @@
                         <img class="slidep" onclick="product_spec(this)" data={{i.id}} src="{{ j.product_img.url }}" alt="">{% endif %}{% endfor %}
                     </div>
                     <div class="describe">
-                        <h4> {{i.searchTag}}...</h4>
+                        {{i.searchTag}}...
                     </div>
                     <div class="pricinp">
-                        <h5>N{{i.price}}</h5>
+                        N{{i.price}}
                     </div>
                 </div>
                 {%endfor%}
             </div>
+            <footer style="width: 100%; margin-top:60px;">
+                <p> contact support 09079681347 07011601354 </p>
+                <p> follow now on instagram <i class="fa fa-instagram"> purchased.tech</i></p>
+            </footer>
         </div>
     </div>
-
     <!--all post-->
 
 
@@ -164,18 +350,30 @@
         </div>
         <div id="specPropic" style="margin:50px 60%; width:100%;">
         </div>
-        <h5>Product Description</h5>
+        <div id="specImgs" style="height: fit-content;">
+        </div>
         <h3 id="specDescription" class="productSpecDescription">
         </h3>
-        <div id="specImgs" style="height: fit-content;">
+        <div id="contactView" style="margin: 0px auto; width:100%; padding:6px; ">
+            {% if user.is_authenticated %}
+            <h3 class="contactnumber" style='display:none; text-align:center;'>{{ usersDetails.contact }}<br>
+                <span style="color:red; font-size:medium;margin:20px;"> please drop a review on user after product
+                    delivery </span>
+            </h3><br><br> {% else %}
+            <h3 class="contactnumber" style='display:none; text-align:center;'>
+                <span style="color:red; font-size:medium; margin:20px;"> please create an account and signin to view
+                    contact </span>
+            </h3><br><br> {% endif %}
+            <button onclick="msg(this)" seller=${seller} style="width: 100%; margin-bottom:30px; color:white;height:30px; border-radius:15px; background-image: linear-gradient(to bottom right, rgb(0, 255, 34), rgb(52, 107, 59));">contact
+                seller</button>
         </div>
 
         <div style="margin-top : 40px; display:grid; grid-template-columns:repeat(2,2f);">
             <span class="productSpecsStags" style="color:rgb(51, 5, 5);">frequent searched Tags : </span>
-            <span class="productSpecsStags">meals</span>
-            <span class="productSpecsStags">Iphones</span>
+            <span class="productSpecsStags">Bedsheets</span>
+            <span class="productSpecsStags">Food</span>
             <span class="productSpecsStags"> graphics and design </span>
-            <span class="productSpecsStags"> cosmetic </span>
+            <span class="productSpecsStags"> leggings </span>
         </div>
         <br>
         <h2>Suggestions</h2> <br> {% if user.is_authenticated%} {%else%}
@@ -186,8 +384,6 @@
         <div class="productSpecsugest" id="productSpecsugest">
         </div>
         <br><br><br>
-        <div id="contactView" style="margin: 0px auto; width:100%;">
-        </div>
         <div>
             <h3 style=" padding:20px;border-left:5px groove aqua; border-right:5px groove aqua; background-color:rgb(204, 197, 197);border-radius:10px;">
                 <span style="color: brown;">TIPs to succeed</span><br><br>
@@ -211,10 +407,11 @@
                     <span style="color: red;"> NOTE </span> Users who can be identified by their profile picture maybe more trust worthy than the others.
                 </li>
                 <li>
-                    <span style="color: red;"> purchased  </span> your online market place.
+                    <span style="color: red;"> purchased </span> your online market place.
                 </li>
             </h3>
-        </div><br>
+        </div>
+        <br>
         <br>
 
         <div class="footer" style="width:100%; height:30px;  border-top:1px solid grey; text-align:center;">
@@ -249,33 +446,33 @@
         </div>
         <div class="mystore" id="mystore">
             <a class="mystoreLinks" href="" id="advertBtn">
-                        Advertisements
-                </a>
+                Advertisements
+            </a>
 
             <br>
             <br>
             <a class="mystoreLinks" href="#" onclick="ApiDisMsg(this)" id="msgBtn">
-                       Message 
-                </a>
+                Message
+            </a>
             <br>
             <br>
             <a class="mystoreLinks" href="" id="reportbugBtn">
-                     Report Bug or Suggestions
-                </a><br><br>
+                Report Bug or Suggestions
+            </a><br><br>
             <a class="mystoreLinks" href="" id="reportusaBtn">
-                       Report User 
-                </a>
+                Report User
+            </a>
             <br>
             <br>
             <a class="mystoreLinks" href="" id="termscdBtn">
-                     Terms and conditions
-                </a><br> <br>
+                Terms and conditions
+            </a><br> <br>
             <a class="mystoreLinks" href="" id="tipsBtn">
-                     Tips to Succeed 
-                </a><br> <br>
+                Tips to Succeed
+            </a><br> <br>
             <a class="mystoreLinks" href="" id="deactBtn">
-                     Deactivate Account 
-                </a><br> <br>
+                Deactivate Account
+            </a><br> <br>
         </div>
 
         <div id="bigpic-overlay" onclick="propicture(event)">
@@ -334,8 +531,10 @@
         <div class="upldpro" id="upldpro">
 
             {% if user.is_authenticated %}
-            <form id="upldpro_form" action="/addPost/" method="POST" enctype="multipart/form-data" id="uploadproduct"> {% csrf_token %}
-                <h5 style="color: rgb(0, 0, 0); letter-spacing:2px; "> <span style="color: red;">UPLOAD </span> PRODUCT/SERVICES</h5>
+            <form id="upldpro_form" action="/addPost/" method="POST" enctype="multipart/form-data" id="uploadproduct">
+                {% csrf_token %}
+                <h5 style="color: rgb(0, 0, 0); letter-spacing:2px; "> <span style="color: red;">UPLOAD </span> PRODUCT/SERVICES
+                </h5>
                 <br>
                 <label>Enter Price </i></label>
                 <br>
@@ -374,6 +573,8 @@
 <script src="{% static 'purchasednav.js' %} "></script>
 <script src="{% static 'profile.js' %} "></script>
 <script src="{% static 'viewmore.js' %} "></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-U1DAWAznBHeqEIlVSCgzq+c9gqGAJn5c/t99JyeKa9xxaYpSvHU5awsuZVVFIhvj" crossorigin="anonymous">
+</script>
 
 <script>
     let submittsearch = document.getElementById("submitttsearch");
@@ -397,8 +598,8 @@
     const csrftoken = getCookie('csrftoken');
 
     function propicclick(elem) {
-        let searchcover = document.getElementById("searchcover");
-        searchcover.style.transform = "translateY(-120vh) "
+        let mysite = document.getElementById('mysite');
+        ammountscrolled = mysite.scrollTop
         if (elem.getAttribute('data-id') == null || elem.getAttribute('data-id') == -1) {
             return false
         }
@@ -426,7 +627,8 @@
                             return false
                         }
                         if (data.profileupdate) {
-                            addtoMyProfile(data.userdetail, data.data1, data.images, data.reviews, update = true, data.advert)
+                            addtoMyProfile(data.userdetail, data.data1, data.images, data.reviews, update =
+                                true, data.advert)
                             addtoMyproduct(data.data1, data.images)
                         }
                         displayRemove()
@@ -438,16 +640,13 @@
     }
 
     function probt() {
-        let profilenavbtn2 = document.getElementById("profilenavbtn2");
-        remover()
         let upldpro_form = document.getElementById('upldpro_form')
-
+        let mysite = document.getElementById('mysite');
+        ammountscrolled = mysite.scrollTop
         if (upldpro_form == -1 || upldpro_form == null) {
             return false
         }
-        profilenavbtn2.classList.add('active')
         displayRemove()
-
         fetch('{% url "myprofile" %}', {
                 headers: {
                     'Accept': 'application/json',
@@ -461,7 +660,8 @@
                             if (data == null || data == -1) {
                                 return false
                             }
-                            addtoMyProfile(data.userdetail, data.data1, data.images, data.reviews, update = false, data.advert)
+                            addtoMyProfile(data.userdetail, data.data1, data.images, data.reviews, update =
+                                false, data.advert)
                             addtoMyproduct(data.data1, data.images, update = true)
                             profile.style.opacity = 1;
                             profile.style.zIndex = 2;
@@ -470,33 +670,32 @@
             })
     }
 
-    function yhandler() {
-        let wrap = document.getElementById('wrap');
-        let wrapper = document.getElementById('wrapper');
-        wrapper.onscroll = (event) => {
-            wrapper.style.scrollBehavior = 'smooth'
+    //function yhandler() {
+    //  let wrap = document.getElementById('wrap');
+    //let wrapper = document.getElementById('wrapper');
+    //wrapper.onscroll = (event) => {
+    //  wrapper.style.scrollBehavior = 'smooth'
 
-            if (wrapper.scrollTop + wrapper.offsetHeight + 100 > wrap.offsetHeight) {
+    //if (wrapper.scrollTop + wrapper.offsetHeight + 100 > wrap.offsetHeight) {
 
-                fetch("{% url 'userList' %} ", {
-                        headers: {
-                            'Accept': 'application/json',
-                            'X-Requested-With': 'XMLHttpRequest', //Necessary to work with request.is_ajax()
-                        },
-                    })
-                    .then(response => {
-                        return response.json().then((data) => {
-                            displaypost(data.data, data.pictures)
-                        })
-                    })
-            }
-        }
-    }
+    //  fetch("{% url 'userList' %} ", {
+    //        headers: {
+    //          'Accept': 'application/json',
+    //        'X-Requested-With': 'XMLHttpRequest', //Necessary to work with request.is_ajax()
+    //  },
+    // })
+    // .then(response => {
+    // return response.json().then((data) => {
+    //   displaypost(data.data, data.pictures)
+    //})
+    // })
+    //  }
+    // }
+    // }
 
     function product_spec(elem) {
-        let spec = document.getElementById('productSpec');
-        spec.style.display = 'none'
-
+        let searchcover = document.getElementById("searchcover");
+        searchcover.style.display = "none"
         let data = parseInt(elem.getAttribute('data'));
 
         fetch('{% url "productspec" %}', {
@@ -515,7 +714,8 @@
             })
             .then(response => {
                 return response.json().then(data => {
-                        updateProductspec(data.data1, data.images, data.Sproduct, data.Simages, data.contact, data.userthatwascontacted)
+                        updateProductspec(data.data1, data.images, data.Sproduct, data.Simages, data.contact,
+                            data.userthatwascontacted)
                     }) //Convert response to JSON
             })
     }
@@ -629,11 +829,29 @@
     }
 
 
-    submittsearch.addEventListener('click', (event) => {
-
-        let target = document.getElementById('searchbox').value;
-        document.getElementById('searchcover').style.transform = 'translateY(0)'
-
+    function submitSearcsignals(signal) {
+        event.preventDefault()
+        let target = ''
+        let target2 = ''
+        if (signal == 1) {
+            target = 1
+            target2 = document.getElementById("searchinput").value;
+        }
+        if (signal == 2) {
+            target = 2
+        }
+        if (signal == 3) {
+            target = 3
+        }
+        if (signal == 4) {
+            target = 4
+        }
+        if (signal == 5) {
+            target = 5
+        }
+        if (signal == 6) {
+            target = 6
+        }
 
         fetch('{% url "search" %}', {
                 method: 'POST',
@@ -645,22 +863,20 @@
                 },
                 body: JSON.stringify({
                         'post_data': {
-                            target
+                            target,
+                            target2
                         }
                     }) //JavaScript object of data to POST
             })
             .then(response => {
                 return response.json().then((data) => {
-                    let target = document.getElementById('searchbox').value;
                     if (data.yes) {
                         searchengine(data, yes = true, data.images)
-                        target.innerHTML = ""
                     } else {
                         searchengine(data)
-                        target.innerHTML = ""
-                    }
 
+                    }
                 })
             }) //Convert response to JSON
-    })
+    }
 </script>

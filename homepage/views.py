@@ -26,6 +26,57 @@ def formsdispaly(request):
     form2 = UserDetailForm(request.POST or request.FILES or None)
     loged_in_user= request.user
     
+    userstore1 = User_Detail.objects.get(username ='Ola Flourish')
+    userstore1products = User_product.objects.filter(user = userstore1)[:8]
+    userstore1productsImg = [userstore1.username]
+    for i in userstore1products:
+        userstore1productsImg.append(Product_image.objects.filter(product=i)[0])
+    context['userstore1products'] = userstore1products
+    context['userstore1productsImg'] = userstore1productsImg
+
+    userstore2 = User_Detail.objects.get(username ='Estee D Enterprises')
+    userstore2products = User_product.objects.filter(user = userstore2)[:8]
+    userstore2productsImg = [userstore2.username]
+    for i in userstore2products:
+        userstore2productsImg.append(Product_image.objects.filter(product=i)[0])
+    context['userstore2products'] = userstore2products
+    context['userstore2productsImg'] = userstore2productsImg
+    
+    topdealsNDstudent1 = User_Detail.objects.get(username = "Charlie's Spag")
+    topdealsNDstudent2 = User_Detail.objects.get(username = 'Solanke')
+    topdealsNDstudent2 = User_Detail.objects.get(username = 'Oyindamola')
+    topdealsNDstudent2 = User_Detail.objects.get(username = 'Kikelomo')
+    
+   
+    
+    topdealproducts = []
+    topdealsNDstudent = [topdealsNDstudent1,topdealsNDstudent2]
+    for i in topdealsNDstudent:
+        topdealproducts.append(User_product.objects.filter(user=i)[0])
+        
+    topdealproductImg = []
+    for i in topdealproducts:
+        topdealproductImg.append(Product_image.objects.filter(product = i)[0])
+        
+    context['buyfromstudent'] = topdealsNDstudent
+    context['topdealproducts'] = topdealproducts
+    context['topdealproductImg'] = topdealproductImg
+    
+    suggestions  = []
+    suggestions1 = suggestions.append(User_product.objects.filter(Q(description__contains = 'food')|Q(searchTag__contains = 'soup'))[0])
+    suggestions2 = suggestions.append(User_product.objects.filter(Q(description__contains = 'necklace')|Q(searchTag__contains = 'jewel'))[0])
+    suggestions3 = suggestions.append(User_product.objects.filter(Q(description__contains = 'dress')|Q(searchTag__contains ='wears'))[0])
+    suggestions4 = suggestions.append(User_product.objects.filter(Q(description__contains = 'graphics')|Q(searchTag__contains ='web dev'))[0])
+    
+    
+    suggestionImg = []
+    for i in suggestions:
+        suggestionImg.append(Product_image.objects.filter(product = i)[0])
+        
+    context['suggestions'] = suggestions
+    context['suggestionImg'] = suggestionImg
+    
+        
     if loged_in_user.is_authenticated:
         review = Reviews.objects.all()
         user_details = User_Detail.objects.get(user=loged_in_user)
@@ -41,7 +92,7 @@ def formsdispaly(request):
         context['images']= images
         context["usersDetails"] = user_details
         
-        if len(review)>0 and len(review) > 15:
+        if len(review)>0 and len(review) > 25:
             review[:8].delete()
     else:
         images =[]
@@ -124,7 +175,7 @@ def Prof_Update(request):
 
             context['profileupdate']= True
             context['userdetail'] = {
-                "firstname":user.firstname,"lastname": user.lastname,"username":user.username,"about":user.about,
+                "username":user.username,"about":user.about,
                 "gender":user.gender,"matricverified":user.matricverified, "topuser":user.topuser,
                 "online":user.online , "propic":str(user.profilepic),"contact":user.contact
             }
@@ -164,7 +215,7 @@ def get_profile(request):
             user = User_Detail.objects.get(user = request.user)
             
             context['userdetail'] = {
-                "firstname":user.firstname,"lastname": user.lastname,"username":user.username,"about":user.about,
+              "username":user.username,"about":user.about,
                 "gender":user.gender,"matricverified":user.matricverified, "topuser":user.topuser,
                 "online":user.online , "propic":str(user.profilepic), "contact":user.contact
             }
@@ -228,38 +279,163 @@ def pagination_page(request):
     return JsonResponse( context, safe=False)
 
 def search(request):
-    context = {}
-    if request.user.is_authenticated:
+        context = {}
         if request.headers.get('x-requested-with') == 'XMLHttpRequest':
             images = []
             response = json.load(request)['post_data'] 
-            res =  str(response['target'])
-            response = str(response['target']).lower()
-            user = User_Detail.objects.get(user= request.user)
-                      
-            if User_Detail.objects.filter(username = res).exists():
-                data = User_Detail.objects.get(username = res)
-                context["username"] =[str(data.username),str(data.profilepic),str(data.id)]    
-            elif User_product.objects.filter(Q(description__contains = response)|Q(searchTag__contains = response) & Q(campus__contains = user.campus)).exists():
-                data2 =  User_product.objects.filter(
-                    Q(description__contains = response) | Q(searchTag__contains = response) & Q(campus__contains = user.campus)
-                )[:20]
-                for i in data2:
-                    images.append(Product_image.objects.filter(product = i).values()[0])
-                    context['images'] = list(images)
-                context["product"] = list((data2).values())
-                context["yes"] = True
-               
-            else:
-                context['noData']=  str("No MATCH FOR SEARCH")
+            target = response['target']
+            res = str(response['target2'])
+            response = str(response['target2']).lower()
+            if int(target) == 1:
+                print(response)
+                if User_Detail.objects.filter(username = res).exists():
+                    data = User_Detail.objects.get(username = res)
+                    context["username"] =[str(data.username),str(data.profilepic),str(data.id)]    
+                elif User_product.objects.filter(Q(description__contains = response)|Q(searchTag__contains = response)).exists():
+                    if request.user.is_authenticated:   
+                        user = User_Detail.objects.get(user= request.user)
+                        data2 =  User_product.objects.filter(
+                        Q(description__contains = response) | Q(searchTag__contains = response) & Q(campus__contains = user.campus)
+                        ).order_by("-id")[:20]
+                        context["product"] = list((data2).values())
+                        for i in data2:
+                            images.append(Product_image.objects.filter(product = i).values()[0])
+                            context['images'] = list(images)
+                        context["yes"] = True 
+                        Searchdata.objects.create(word=response,timesSearched =0,user=user)
+                    else:
+                        data2 =  User_product.objects.filter(
+                        Q(description__contains = response) | Q(searchTag__contains = response)).order_by("-id")[:20]
+                        for i in data2:
+                            images.append(Product_image.objects.filter(product = i).values()[0])
+                            context['images'] = list(images)
+                        context["product"] = list((data2).values())
+                        context["yes"] = True   
+                else:
+                    context['noData'] =  str("No MATCH FOR SEARCH")     
+                     
+            if int(target) == 2:
+                if request.user.is_authenticated:
+                    user = User_Detail.objects.get(user= request.user)
+                    data2 =  User_product.objects.filter(
+                    Q(description__contains = 'shoe') | Q(description__contains = 'bag') | Q(description__contains = 'wear') | Q(description__contains = 'sneaker')  | Q(description__contains = 'material') | Q(description__contains = 'cloth')
+                    | Q(description__contains = 'dress') | Q(searchTag__contains = 'jewel') | Q(description__contains = 'wig') | Q(description__contains = 'suit')  | Q(description__contains = 'women') & Q(campus__contains = user.campus)
+                    ).order_by("-id")[:20]
+                    context["product"] = list((data2).values())
+                    for i in data2:
+                        images.append(Product_image.objects.filter(product = i).values()[0])
+                        context['images'] = list(images)
+                    context["yes"] = True 
+                    Searchdata.objects.create(word=response,timesSearched =0,user=user)
+                else:
+                    data2 =  User_product.objects.filter(
+                    Q(description__contains = 'shoes') | Q(description__contains = 'bag') | Q(searchTag__contains = 'wear') | Q(description__contains = 'sneaker') | Q(description__contains = 'material') | Q(description__contains = 'cloth')
+                    | Q(description__contains = 'dress') | Q(searchTag__contains = 'jewel') | Q(description__contains = 'wig') | Q(description__contains = 'suit')  | Q(description__contains = 'ladie')
+                    ).order_by("-id")[:20]
+                    for i in data2:
+                        images.append(Product_image.objects.filter(product = i).values()[0])
+                        context['images'] = list(images)
+                    context["product"] = list((data2).values())
+                    context["yes"] = True
+                    
+            if int(target) == 3:
+                if request.user.is_authenticated:
+                    user = User_Detail.objects.get(user= request.user)
+                    data2 =  User_product.objects.filter(
+                        Q(description__contains = 'food') | Q(description__contains = 'rice') | Q(description__contains = 'asun') | Q(searchTag__contains = 'ofada')
+                     | Q(searchTag__contains = 'food') | Q(description__contains = 'soup') | Q(description__contains = 'turkey')  & Q(campus__contains = user.campus)
+                       ).order_by("-id")[:20]
+                    context["product"] = list((data2).values())
+                    for i in data2:
+                        images.append(Product_image.objects.filter(product = i).values()[0])
+                        context['images'] = list(images)
+                    context["yes"] = True 
+                    Searchdata.objects.create(word=response,timesSearched =0,user=user)
+                else:
+                    data2 =  User_product.objects.filter(
+                      Q(description__contains = 'food') | Q(description__contains = 'rice') | Q(description__contains = 'asun') | Q(searchTag__contains = 'ofada')
+                     | Q(searchTag__contains = 'food') | Q(description__contains = 'soup') | Q(description__contains = 'turkey')  & Q(campus__contains = user.campus)
+                       ).order_by("-id")[:20]
+                    for i in data2:
+                        images.append(Product_image.objects.filter(product = i).values()[0])
+                        context['images'] = list(images)
+                    context["product"] = list((data2).values())
+                    context["yes"] = True
+                    
+                    
+            if int(target) == 4:
+                if request.user.is_authenticated:
+                    user = User_Detail.objects.get(user= request.user)
+                    data2 =  User_product.objects.filter(
+                     Q(description__contains = 'milk') | Q(description__contains = 'flakes') | Q(description__contains = 'spag') | Q(description__contains = 'mourn')
+                    | Q(description__contains = 'cereals')  & Q(campus__contains = user.campus)
+                    ).order_by("-id")[:20]
+                    context["product"] = list((data2).values())
+                    for i in data2:
+                        images.append(Product_image.objects.filter(product = i).values()[0])
+                        context['images'] = list(images)
+                        context["yes"] = True 
+                    Searchdata.objects.create(word=response,timesSearched =0,user=user)
+                else:
+                    data2 =  User_product.objects.filter(
+                    Q(description__contains = 'milk') | Q(description__contains = 'flakes') | Q(description__contains = 'spag') | Q(description__contains = 'mourn')
+                    | Q(description__contains = 'cereals') 
+                    ).order_by("-id")[:20]
+                    for i in data2:
+                        images.append(Product_image.objects.filter(product = i).values()[0])
+                        context['images'] = list(images)
+                    context["product"] = list((data2).values())
+                    context["yes"] = True
+                    
+            if int(target) == 5:
+                if request.user.is_authenticated:
+                    user = User_Detail.objects.get(user= request.user)
+                    data2 =  User_product.objects.filter(
+                    Q(description__contains = 'phone') | Q(searchTag__contains = 'laptop') | Q(description__contains = 'gadget') & Q(campus__contains = user.campus)
+                    ).order_by("-id")[:20]
+                    context["product"] = list((data2).values())
+                    for i in data2:
+                        images.append(Product_image.objects.filter(product = i).values()[0])
+                        context['images'] = list(images)
+                    context["yes"] = True 
+                    Searchdata.objects.create(word=response,timesSearched =0,user=user)
+                else:
+                    data2 =  User_product.objects.filter(
+                        Q(description__contains = 'phone') | Q(searchTag__contains = 'laptop') | Q(description__contains = 'gadget') 
+                    ).order_by("-id")[:20]
+                    for i in data2:
+                        images.append(Product_image.objects.filter(product = i).values()[0])
+                        context['images'] = list(images)
+                    context["product"] = list((data2).values())
+                    context["yes"] = True
+                    
+            if int(target) == 6:
+                if request.user.is_authenticated:
+                    user = User_Detail.objects.get(user= request.user)
+                    data2 =  User_product.objects.filter(
+                    Q(description__contains = 'graphics') & Q(campus__contains = user.campus)
+                    ).order_by("-id")[:20]
+                    context["product"] = list((data2).values())
+                    for i in data2:
+                        images.append(Product_image.objects.filter(product = i).values()[0])
+                        context['images'] = list(images)
+                    context["yes"] = True 
+                    Searchdata.objects.create(word=response,timesSearched =0,user=user)
+                else:
+                    data2 =  User_product.objects.filter(
+                     Q(description__contains = 'graphics')
+                    ).order_by("-id")[:20]
+                    for i in data2:
+                        images.append(Product_image.objects.filter(product = i).values()[0])
+                        context['images'] = list(images)
+                    context["product"] = list((data2).values())
+                    context["yes"] = True
                 
-            Searchdata.objects.create(word=response,timesSearched =0,user=user)
-    return JsonResponse(context , safe=False)
+        return JsonResponse(context , safe=False)
 
 
 def Product_spec(request):
-    context={}
-    if request.user.is_authenticated:
+        context={}
         if request.headers.get('x-requested-with') == 'XMLHttpRequest':
             response = json.load(request)['post_data']
             response = response['data']
@@ -288,7 +464,7 @@ def Product_spec(request):
             context['userthatwascontacted'] = str(data1.user.username)
              
 
-    return JsonResponse(context , safe=False)          
+        return JsonResponse(context , safe=False)          
             
 def whencontacted(request):
     context={}

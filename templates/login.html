@@ -9,23 +9,29 @@
     <style>
         .login {
             position: fixed;
-            background-color: white;
+            background: linear-gradient(#0005, #0005),
+            url("{%static 'wardrope.jpg'%}");
             width: 100%;
             height: 100vh;
             left: 0;
+            top: 0%;
             display: block;
             z-index: 1;
             animation: 2s ease-in drop;
         }
         
         .background {
+            opacity: 0.91;
             position: absolute;
+            border-radius: 20px;
             top: 50%;
             left: 50%;
             width: 300px;
             height: fit-content;
             transform: translate(-50%, -50%);
-            background: black;
+            background: linear-gradient(#0005,
+            #0005),
+            url("{%static 'wardrope.jpg'%}");
             color: white;
             text-align: center;
             z-index: 2;
@@ -91,7 +97,8 @@
     <!--login-->
     <div class="login">
         <div class="background" id="loggin">
-            <a href="{% url 'home' %}"><span class="close" draggable="true"><i style="color: rgb(130, 214, 119);" class="fa fa-arrow-left"></i></span></a><br><br>
+            <a href="{% url 'home' %}"><span class="close" draggable="true"><i style="color: rgb(46, 247, 19);"
+                        class="fa fa-arrow-left"></i></span></a><br><br>
             <h2>Shopat<span style="color: rgb(255, 255, 255);"> Purchased</span></h2>
             <h6 style="font-family: Arial, Helvetica, sans-serif; color:rgb(0, 255, 76);">Login</h6>
             <form method="POST">{% csrf_token %} {{form}}

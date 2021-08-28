@@ -1,302 +1,90 @@
     body {
-        background: #e3e8e9;
+        background: #ffffff;
         font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
         scroll-behavior: smooth;
-    }
-    
-    .mysite {
-        position: absolute;
-        top: 50%;
-        left: 50%;
-        width: 70%;
-        height: 90%;
-        transform: translate(-50%, -50%);
-        background-color: white;
-        text-align: left;
-        z-index: 1;
-        opacity: 1;
-        box-shadow: 0px 15px 15px rgba(12, 12, 0.55, 0.55);
-        overflow: hidden;
-        transition: 1s ease-in-out;
-    }
-    
-    #header {
-        position: fixed;
         width: 100%;
-        height: 10%;
-        background-image: linear-gradient(to bottom right, rgb(0, 255, 34), rgb(52, 107, 59));
-        margin: auto;
-        padding: 0px;
-        top: 0;
-        left: 0;
-        align-items: center;
-        line-height: 5px;
-        z-index: 5;
-        display: grid;
-        grid-template-columns: repeat(3, 1fr);
-        border-top: 1px solid gray;
-        overflow: hidden;
+        overflow-x: hidden;
     }
     
-    #navbarlinks {
-        position: fixed;
-        top: 7%;
-        right: 0;
+    #mysite {
         width: 100%;
-        background: white;
-        z-index: 4;
-        text-align: center;
-        transform: translateX(-100%);
-        transition: 1s ease-in-out;
-        box-shadow: 0 20px 20px rgba(0, 0, 0, 0.25);
-        background-image: linear-gradient(to bottom left, rgb(0, 255, 34), rgb(52, 107, 59));
-        opacity: 0.9;
-    }
-    
-    #navbarlinks li {
-        list-style: none;
-        margin: 26px 0px;
-        text-decoration: none;
-        color: rgb(255, 250, 250);
-        letter-spacing: 2px;
-    }
-    
-    #navbarlinks .navli {
-        text-decoration: none;
-        color: rgb(255, 250, 250);
-        letter-spacing: 2px;
-        font-size: medium;
-        font-family: Arial, Helvetica, sans-serif;
-    }
-    
-    .active {
-        background: rgb(12, 107, 3);
-        padding: 8px 7px;
-    }
-    
-    .loginview {
-        position: fixed;
-        top: 7.7%;
-        left: 0;
-        width: 100%;
-        background-image: linear-gradient(to bottom right, rgb(0, 255, 34), rgb(52, 107, 59));
-        height: 63px;
-        text-align: center;
-        z-index: 4;
-        display: block;
-        letter-spacing: 2px;
-        font-weight: lighter;
-        color: white;
-    }
-    
-    #backgroundCover {
-        position: absolute;
-        background-color: rgb(201, 166, 166);
-        z-index: 17;
-        width: 100%;
-        height: 100%;
-        display: none;
-        font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif
-    }
-    
-    .background {
-        position: absolute;
-        top: 50%;
-        left: 50%;
-        width: 300px;
         height: fit-content;
-        transform: translate(-50%, -50%);
-        background: rgb(6, 117, 52);
-        color: white;
-        text-align: center;
-        z-index: 10;
-        padding-bottom: 20px;
-        box-shadow: 0 20px 20px rgba(0, 0, 0, 0.25);
-    }
-    
-    .background .subCode {
-        background-color: green;
-        color: white;
-        border-radius: 6px;
-    }
-    
-    #toggle-menu {
-        position: absolute;
-        display: block;
-        top: 0;
-        width: 30px;
-        height: 100%;
-        background: rgb(255, 255, 255);
-        right: 0;
-        z-index: 5;
-        margin-right: 20px;
-    }
-    
-    #search {
-        position: relative;
-        top: -10%;
-        left: -30%;
-        width: 100%;
-        z-index: 5;
-        height: 40%;
-    }
-    
-    .logo {
-        margin-left: 6%;
-        max-width: 70px;
-        height: 40px;
-    }
-    
-    #submitttsearch {
-        position: absolute;
-        left: 90%;
-        top: 20%;
-    }
-    
-    #searchbox {
-        position: absolute;
-        width: 100%;
-        height: 100%;
-        background: white;
-        opacity: 0.9;
-        padding: 3px;
-        outline: none;
-        border-radius: 10px;
-        font-size: larger;
-    }
-    
-    #topsearch {
-        position: absolute;
-        top: 10%;
-        min-height: 25%;
-        width: 99%;
-        border-bottom: 2px groove grey;
-        opacity: 1;
         z-index: 1;
-    }
-    
-    #suggestions {
-        display: grid;
-        grid-template-columns: repeat(10, 1fr);
-        overflow-x: scroll;
-        overflow-y: hidden;
-        height: 190px;
-        opacity: 0;
-        transition: 1s ease-in;
-    }
-    
-    #advertTp {
-        width: 100%;
-        height: 180px;
-        opacity: 0;
-    }
-    
-    #advertTp img {
-        width: 102%;
-        height: 104%;
-    }
-    
-    #topsellers {
-        display: grid;
-        grid-template-columns: repeat(10, 1fr);
-        overflow-x: scroll;
-        overflow-y: hidden;
-        height: 180px;
-        opacity: 0;
-        transition: 1s ease-in;
-    }
-    
-    .suggestPic {
-        min-width: 110px;
-        height: 100%;
-        display: grid;
-        grid-template-columns: repeat(1, 2fr);
-        text-align: center;
-        margin: -3px 5px 5px 0px;
-    }
-    
-    .sellertPic {
-        min-width: 200px;
-        height: 100%;
-        display: grid;
-        grid-template-columns: repeat(1, 2fr);
-        text-align: center;
-        margin-left: -105px;
-    }
-    
-    .start {
-        margin-left: 50px;
-    }
-    
-    .suggestPic img {
-        max-width: 103px;
-        height: 133px;
-        max-height: 133px;
-        margin: 0px auto;
-        margin-top: 19px;
-        border-radius: 5px;
-        border: 2px solid violet;
-    }
-    
-    .sellertPic img {
-        max-width: 70px;
-        max-height: 70px;
-        margin: 0px auto;
-        margin-top: 10px;
-        border-radius: 630px;
-        border: 2px solid violet;
-    }
-    
-    .suggestPic h6,
-    .sellertPic h6 {
-        font-size: 9pt;
-        font-family: Arial, Helvetica, sans-serif;
-        color: rgb(8, 12, 8);
+        opacity: 1;
+        transition: 1s ease-in-out;
+        overflow-x: hidden;
+        transition: 2.4s ease-in;
     }
     
     #searchcover {
-        position: absolute;
-        top: 9.3%;
-        left: 0;
+        position: fixed;
+        top: 0%;
+        display: none;
+        background-color: white;
         width: 100%;
-        height: 100vh;
-        background-color: #c1c4cf;
-        opacity: 0.9;
+        height: 100%;
+        overflow-x: hidden;
         z-index: 4;
-        transform: translateY(-130vh);
         transition: 1.5s ease-in;
-        overflow-y: scroll;
     }
     
-    .scontent {
-        min-width: 150px;
-        width: 150px;
-        height: 150px;
-        background: white;
-        display: grid;
-        grid-template-columns: repeat(1, 2fr);
-        border-radius: 15px;
-        text-align: center;
-        margin: 25px;
-        box-shadow: 0 20px 20px rgba(0, 0, 0, 0.25);
-        overflow: hidden;
-    }
-    
-    .propicp {
-        width: 20px;
-        height: 20px;
-        border: 1px groove rgb(0, 0, 0);
-        border-radius: 150px;
-        left: 0;
-        cursor: pointer;
-        margin: 7px 0px;
+    .topdealsdiv {
+        width: 100%;
+        height: 400px;
+        position: relative;
+        top: -90px;
         z-index: 1;
+        background-color: red;
+    }
+    
+    .Fprodisplay {
+        height: 170px;
+        width: 290px;
+        margin-top: 25px;
+        border-radius: 5px 5px 8px 8px;
+        margin-left: 10px
+    }
+    
+    .Fprodisplay img {
+        width: 100%;
+        border-radius: 5px;
+        height: 100%;
+    }
+    
+    .post {
+        margin: 0px auto;
+        width: 200px;
+        height: 250px;
         overflow: hidden;
     }
     
-    .scontent h2 {
-        font: bolder;
-        font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    .postimg {
+        width: 100px;
+        height: 100px
+    }
+    
+    .postdesc {
+        width: 70%;
+    }
+    
+    .post4store {
+        width: 120px;
+    }
+    
+    .buy4student {
+        text-align: center;
+        width: 150px;
+        height: 230px;
+        background-color: blue;
+        border-radius: 9px;
+        margin: 10px 15%;
+    }
+    
+    .buy4student img {
+        width: 75%;
+        margin: 4px 20px;
+        height: 45%;
+        border-radius: 100px;
     }
     
     #closesearch {
@@ -305,37 +93,6 @@
         left: 90%;
         font-size: large;
         color: red;
-    }
-    
-    #section {
-        position: absolute;
-        top: 7.3vh;
-        left: 0%;
-        display: none;
-        opacity: 1;
-        width: 100%;
-        height: 99%;
-        z-index: 1;
-        margin: 0px auto;
-        background-color: rgb(255, 255, 255);
-        overflow: scroll;
-    }
-    
-    #section h4 {
-        border-bottom: 1px groove #676b81;
-        padding: 10px;
-    }
-    
-    .account {
-        width: 90%;
-        margin: 0px auto;
-        height: fit-content;
-        opacity: 1;
-        background: white;
-        margin-bottom: 60px;
-        border-radius: 5px;
-        box-shadow: 0 7px 7px rgba(0, 0, 0, 0.25);
-        text-align: center;
     }
     
     .account .inputs {
@@ -365,14 +122,13 @@
     }
     
     #wrapper {
-        position: fixed;
-        top: 37.5%;
+        position: relative;
         width: 100%;
-        height: 60%;
         left: 0;
         background-color: #fff;
         z-index: 1;
         padding-top: 35px;
+        top: 450px;
         overflow: auto;
         opacity: 1;
         scroll-behavior: smooth;
@@ -422,31 +178,45 @@
         border: 1px solid white;
     }
     
+    .propicp {
+        width: 20px;
+        height: 20px;
+        border: 1px groove rgb(0, 0, 0);
+        border-radius: 150px;
+        left: 0;
+        cursor: pointer;
+        margin: 7px 0px;
+        z-index: 1;
+        overflow: hidden;
+    }
+    
     .productSpec {
-        display: none;
         grid-template-columns: repeat(1, 9fr);
-        z-Index: -3;
+        z-Index: -5;
+        opacity: 0;
         background-color: rgb(255, 255, 255);
-        position: absolute;
+        position: fixed;
         top: 0vh;
         left: 14%;
         width: 74%;
-        height: fit-content;
+        height: 100%;
         overflow-x: hidden;
+        transition: 0.4s ease-in;
     }
     
-    .productSpecDescription {
-        padding: 20px;
-        border-left: 5px groove aqua;
-        border-right: 5px groove aqua;
-        background-color: rgb(204, 197, 197);
-        border-radius: 10px;
+    #specImgs {
+        position: relative;
+        width: 100%;
+        height: 300px;
+        overflow: hidden;
     }
     
     .productSpecpiclist {
-        list-style: decimal;
-        margin-bottom: 24px;
-        border: 1px solid black;
+        position: relative;
+        width: 350px;
+        height: 350px;
+        margin: 0px auto;
+        overflow: hidden;
     }
     
     .productSpecsugest {
@@ -461,7 +231,6 @@
     .productSpecsStags {
         padding: 10px;
         color: rgb(255, 0, 0);
-        background-color: antiquewhite;
         margin-left: 23px
     }
     
@@ -496,7 +265,7 @@
     
     .pricinp {
         background-color: #ffffff;
-        font-size: medium;
+        font-size: small;
         color: #91792b;
         letter-spacing: 1px;
         max-height: 50px;
@@ -508,7 +277,7 @@
         width: 100%;
         text-align: center;
         letter-spacing: 1px;
-        font-size: 7pt;
+        font-size: 9pt;
         font-family: Arial, Helvetica, sans-serif;
         font-weight: lighter;
         background: #ffffff;
@@ -516,67 +285,19 @@
         overflow: hidden;
     }
     
-    @media screen and (max-width: 1000px) {
-        #submitttsearch {
-            left: 86%;
-        }
-    }
-    
     @media screen and (max-width: 964px) {
-        #search {
-            position: absolute;
-            top: 18%;
-            left: 20%;
-            height: 100%;
-        }
-        #searchbox {
-            position: absolute;
-            width: 50%;
-            height: 43%;
-            left: 0%;
-        }
-        #submitttsearch {
-            position: absolute;
-            top: 10%;
-            left: 45%;
-        }
         .artic {
             height: 70vh;
         }
     }
     
-    @media screen and (max-width: 670px) {
-        .scontent {
-            width: 60%;
-            left: -15%;
-        }
-    }
-    
     @media screen and (max-width: 590px) {
-        .mysite {
-            width: 100%;
-            height: 100%;
-        }
         .productSpec {
             left: 0vw;
             width: 100%;
-        }
-        #submitttsearch {
-            position: absolute;
-            top: 10%;
-            left: 43%;
+            height: 100%;
         }
         #wrap {
             grid-template-columns: repeat(3, 1fr);
-        }
-    }
-    
-    @media screen and (max-width: 440px) {
-        .scontent {
-            width: 80%;
-            left: -35%;
-        }
-        .logo {
-            margin-left: 7px;
         }
     }

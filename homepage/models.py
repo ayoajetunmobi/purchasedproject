@@ -110,7 +110,7 @@ class User_Detail(models.Model):
             img= img.convert('RGB')            
             output = BytesIO()
              
-            img.save(output, format ='JPEG', optimize = True , quality = 80)
+            img.save(output, format ='JPEG', optimize = True , quality = 70)
             output.seek(0)  
                   
             
@@ -160,7 +160,7 @@ class Product_image(models.Model):
             img= img.convert('RGB')            
             output = BytesIO()
              
-            img.save(output, format ='JPEG', optimize = True , quality = 80)
+            img.save(output, format ='JPEG', optimize = True , quality = 70)
             output.seek(0)  
                   
             

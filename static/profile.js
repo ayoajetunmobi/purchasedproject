@@ -103,18 +103,16 @@ advertBtn.addEventListener('click', function(e) {
             <p>
                Advertising your product is a great way of reaching out to people, <span style="color:red;"> Purchased </span> offers
             different ways a user can gain more reach on our platform.
-
-               <li> 1) Advertise your username , contact detail or pass a quick short info accross to 
-               users on our <span style="color:red;"> TOP DEALS </span> section  </li>
-               <br>
-               <li> 2) Let us create a custom flyer design for your business and advertise your business 
+]
+               <li> 1) Let us create a custom flyer design for your business and advertise your business 
                on users profile page and top user section
                contact us on 09079681347 </li>
                <br>
-               <li> 3) Advertise your username on your social media platform </li> 
-               <br>
-               <li> 4) Create your own custom high quality flyer to advertise your business and 
+             
+               <li> 2) Create your own custom high quality flyer to advertise your business and 
                contact us on 09079681347... jpg image should be less than 2mb </li> 
+
+               <li> 2) contact support for more tips </li> 
             </p>
     `
     apimyStoreDispay()
