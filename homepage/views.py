@@ -62,19 +62,19 @@ def formsdispaly(request):
     context['topdealproducts'] = topdealproducts
     context['topdealproductImg'] = topdealproductImg
     
-    # suggestions  = []
-    # suggestions1 = suggestions.append(User_product.objects.filter(Q(searchTag__contains = 'food') | Q(searchTag__contains = 'soup'))[0])
+    suggestions  = []
+    suggestions1 = suggestions.append(User_product.objects.filter(Q(searchTag__contains = 'food') | Q(searchTag__contains = 'ofada'))[0])
     # # suggestions2 = suggestions.append(User_product.objects.filter(Q(searchTag__contains = 'necklace') | Q(searchTag__contains = 'jewel'))[0])
     # # suggestions3 = suggestions.append(User_product.objects.filter(Q(searchTag__contains = 'dress')| Q(searchTag__contains ='wear'))[0])
     # # suggestions4 = suggestions.append(User_product.objects.filter(Q(searchTag__contains = 'graphic' )| Q(searchTag__contains ='web dev'))[0])
     
     
-    # suggestionImg = []
-    # for i in suggestions:
-    #     suggestionImg.append(Product_image.objects.filter(product = i)[0])
+    suggestionImg = []
+    for i in suggestions:
+        suggestionImg.append(Product_image.objects.filter(product = i)[0])
         
-    # context['suggestions'] = suggestions
-    # context['suggestionImg'] = suggestionImg
+    context['suggestions'] = suggestions
+    context['suggestionImg'] = suggestionImg
     
     
     if loged_in_user.is_authenticated:
