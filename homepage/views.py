@@ -43,7 +43,7 @@ def formsdispaly(request):
     context['userstore2productsImg'] = userstore2productsImg
     
     topdealsNDstudent1 = User_Detail.objects.get(username = 'ajet')
-    topdealsNDstudent2 = User_Detail.objects.get(username = 'Solanke')
+    topdealsNDstudent2 = User_Detail.objects.get(username = 'Charlies Spag')
     topdealsNDstudent3 = User_Detail.objects.get(username = 'Oyindamola')
     topdealsNDstudent4 = User_Detail.objects.get(username = 'Kikelomo')
     
