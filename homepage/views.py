@@ -42,24 +42,24 @@ def formsdispaly(request):
     context['userstore2products'] = userstore2products
     context['userstore2productsImg'] = userstore2productsImg
     
-    topdealsNDstudent2 = User_Detail.objects.get(username = 'Solanke')
-    topdealsNDstudent3 = User_Detail.objects.get(username = 'Oyindamola')
-    topdealsNDstudent4 = User_Detail.objects.get(username = 'Kikelomo')
+    # topdealsNDstudent2 = User_Detail.objects.get(username = 'Solanke')
+    # topdealsNDstudent3 = User_Detail.objects.get(username = 'Oyindamola')
+    # topdealsNDstudent4 = User_Detail.objects.get(username = 'Kikelomo')
     
    
     
-    topdealproducts = []
-    topdealsNDstudent = [topdealsNDstudent2,topdealsNDstudent3,topdealsNDstudent4]
-    for i in topdealsNDstudent:
-       topdealproducts.append(User_product.objects.filter(user=i)[0])
+    # topdealproducts = []
+    # topdealsNDstudent = [topdealsNDstudent2,topdealsNDstudent3,topdealsNDstudent4]
+    # for i in topdealsNDstudent:
+    #    topdealproducts.append(User_product.objects.filter(user=i)[0])
         
-    topdealproductImg = []
-    for i in topdealproducts:
-       topdealproductImg.append(Product_image.objects.filter(product = i)[0])
+    # topdealproductImg = []
+    # for i in topdealproducts:
+    #    topdealproductImg.append(Product_image.objects.filter(product = i)[0])
         
-    context['buyfromstudent'] = topdealsNDstudent
-    context['topdealproducts'] = topdealproducts
-    context['topdealproductImg'] = topdealproductImg
+    # context['buyfromstudent'] = topdealsNDstudent
+    # context['topdealproducts'] = topdealproducts
+    # context['topdealproductImg'] = topdealproductImg
     
     suggestions  = []
     suggestions1 = suggestions.append(User_product.objects.filter(Q(description__contains = 'food') | Q(searchTag__contains = 'soup'))[0])
