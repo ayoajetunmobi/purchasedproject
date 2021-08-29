@@ -318,8 +318,8 @@ def search(request):
                 if request.user.is_authenticated:
                     user = User_Detail.objects.get(user= request.user)
                     data2 =  User_product.objects.filter(
-                    Q(description__contains = 'shoe') | Q(description__contains = 'bag') | Q(description__contains = 'wear') | Q(description__contains = 'sneaker')  | Q(description__contains = 'material') | Q(description__contains = 'cloth')
-                    | Q(description__contains = 'dress') | Q(searchTag__contains = 'jewel') | Q(description__contains = 'wig') | Q(description__contains = 'suit')  | Q(description__contains = 'women') & Q(campus__contains = user.campus)
+                    Q(description__contains = 'shoe') | Q(description__contains = 'bag') | Q(description__contains = 'wear') | Q(searchTag__contains = 'wear') | Q(description__contains = 'sneaker')  | Q(searchTag__contains = 'material') | Q(description__contains = 'cloth')
+                    | Q(description__contains = 'dress') | Q(searchTag__contains = 'jewel') | Q(description__contains = 'wig') | Q(description__contains = 'suit')  | Q(description__contains = 'women')  | Q(searchTag__contains = 'ladies') & Q(campus__contains = user.campus)
                     ).order_by("-id")[:20]
                     context["product"] = list((data2).values())
                     for i in data2:
@@ -330,7 +330,7 @@ def search(request):
                 else:
                     data2 =  User_product.objects.filter(
                     Q(description__contains = 'shoes') | Q(description__contains = 'bag') | Q(searchTag__contains = 'wear') | Q(description__contains = 'sneaker') | Q(description__contains = 'material') | Q(description__contains = 'cloth')
-                    | Q(description__contains = 'dress') | Q(searchTag__contains = 'jewel') | Q(description__contains = 'wig') | Q(description__contains = 'suit')  | Q(description__contains = 'ladie')
+                    | Q(description__contains = 'dress') | Q(searchTag__contains = 'jewel') | Q(description__contains = 'wig') | Q(description__contains = 'suit')  | Q(description__contains = 'ladies')
                     ).order_by("-id")[:20]
                     for i in data2:
                         images.append(Product_image.objects.filter(product = i).values()[0])
@@ -342,8 +342,8 @@ def search(request):
                 if request.user.is_authenticated:
                     user = User_Detail.objects.get(user= request.user)
                     data2 =  User_product.objects.filter(
-                        Q(description__contains = 'food') | Q(description__contains = 'rice') | Q(description__contains = 'asun') | Q(searchTag__contains = 'ofada')
-                     | Q(searchTag__contains = 'food') | Q(description__contains = 'soup') | Q(description__contains = 'turkey')  & Q(campus__contains = user.campus)
+                        Q(description__contains = 'food') | Q(searchTag__contains = 'rice') | Q(description__contains = 'asun') | Q(searchTag__contains = 'ofada') | Q(searchTag__contains = 'spag')
+                     | Q(searchTag__contains = 'food') | Q(searchTag__contains = 'soup') | Q(description__contains = 'turkey')  & Q(campus__contains = user.campus)
                        ).order_by("-id")[:20]
                     context["product"] = list((data2).values())
                     for i in data2:
@@ -353,8 +353,8 @@ def search(request):
                     Searchdata.objects.create(word=response,timesSearched =0,user=user)
                 else:
                     data2 =  User_product.objects.filter(
-                      Q(description__contains = 'food') | Q(description__contains = 'rice') | Q(description__contains = 'asun') | Q(searchTag__contains = 'ofada')
-                     | Q(searchTag__contains = 'food') | Q(description__contains = 'soup') | Q(description__contains = 'turkey')  & Q(campus__contains = user.campus)
+                      Q(description__contains = 'food') | Q(searchTag__contains = 'rice') | Q(description__contains = 'asun') | Q(searchTag__contains = 'ofada') | Q(searchTag__contains = 'spag') 
+                     | Q(searchTag__contains = 'food') | Q(searchTag__contains = 'soup') | Q(description__contains = 'turkey')  & Q(campus__contains = user.campus)
                        ).order_by("-id")[:20]
                     for i in data2:
                         images.append(Product_image.objects.filter(product = i).values()[0])
@@ -367,7 +367,7 @@ def search(request):
                 if request.user.is_authenticated:
                     user = User_Detail.objects.get(user= request.user)
                     data2 =  User_product.objects.filter(
-                     Q(description__contains = 'milk') | Q(description__contains = 'flakes') | Q(description__contains = 'spag') | Q(description__contains = 'mourn')
+                     Q(searchTag__contains = 'milk') | Q(searchTag__contains = 'flake') | Q(searchTag__contains = 'morn')
                     | Q(description__contains = 'cereals')  & Q(campus__contains = user.campus)
                     ).order_by("-id")[:20]
                     context["product"] = list((data2).values())
@@ -378,7 +378,7 @@ def search(request):
                     Searchdata.objects.create(word=response,timesSearched =0,user=user)
                 else:
                     data2 =  User_product.objects.filter(
-                    Q(description__contains = 'milk') | Q(description__contains = 'flakes') | Q(description__contains = 'spag') | Q(description__contains = 'mourn')
+                    Q(searchTag__contains = 'milk') | Q(searchTag__contains = 'flakes') | Q(searchTag__contains = 'morn')
                     | Q(description__contains = 'cereals') 
                     ).order_by("-id")[:20]
                     for i in data2:
@@ -413,7 +413,7 @@ def search(request):
                 if request.user.is_authenticated:
                     user = User_Detail.objects.get(user= request.user)
                     data2 =  User_product.objects.filter(
-                    Q(description__contains = 'graphics') & Q(campus__contains = user.campus)
+                    Q(description__contains = 'graphic') |  Q(searchTag__contains = 'graphic') & Q(campus__contains = user.campus)
                     ).order_by("-id")[:20]
                     context["product"] = list((data2).values())
                     for i in data2:
@@ -423,7 +423,7 @@ def search(request):
                     Searchdata.objects.create(word=response,timesSearched =0,user=user)
                 else:
                     data2 =  User_product.objects.filter(
-                     Q(description__contains = 'graphics')
+                     Q(description__contains = 'graphics') |  Q(searchTag__contains = 'graphic')
                     ).order_by("-id")[:20]
                     for i in data2:
                         images.append(Product_image.objects.filter(product = i).values()[0])
