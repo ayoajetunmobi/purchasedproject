@@ -176,17 +176,17 @@
 
         <div style=" position:relative; top:-60px; height:200px; width:100%;overflow-x:hidden; z-index:2;">
             <div class="firstproductdisplay" style="display:grid; grid-template-columns: repeat(5, 5fr); overflow-x:scroll;">
-                <div class="Fprodisplay">
-                    <img onclick="submitSearcsignals(2)" src="{% static 'fashion.jpg' %}" alt="">
+                <div class="Fprodisplay" onclick="submitSearcsignals(2)">
+                    <img src="{% static 'fashion.jpg' %}" alt="">
                 </div>
-                <div class="Fprodisplay">
-                    <img onclick="submitSearcsignals(3)" src="{% static 'food.jpg' %}" alt="">
+                <div class="Fprodisplay" onclick="submitSearcsignals(3)">
+                    <img src="{% static 'food.jpg' %}" alt="">
                 </div>
-                <div class="Fprodisplay">
-                    <img onclick="submitSearcsignals(4)" src="{% static 'cereals.jpg' %}" alt="">
+                <div class="Fprodisplay" onclick="submitSearcsignals(4)">
+                    <img src="{% static 'cereals.jpg' %}" alt="">
                 </div>
-                <div style="border: 2px groove rgb(255, 255, 255);" class="Fprodisplay">
-                    <img onclick="submitSearcsignals(5)" src="{% static 'phones.jpg' %}" alt="">
+                <div style="border: 2px groove rgb(255, 255, 255);" class="Fprodisplay" onclick="submitSearcsignals(5)">
+                    <img src="{% static 'phones.jpg' %}" alt="">
                 </div>
                 <div style="border: 2px groove rgb(255, 255, 255);" onclick="secdisplay()" class="Fprodisplay">
                     <img src="{% static 'signin.jpg' %}" alt="">
@@ -273,10 +273,10 @@
         <!-- End User Store-->
 
 
-        <div style=" position:relative;height:200px; width:100%">
+        <div style=" position:relative;height:200px; width:100%" onclick="submitSearcsignals(6)">
             <img style="width:60%; height:300px; position:absolute; top:-40%; left:-5%;" src="{% static 'graphicdesigng.jpg' %}" alt="">
             <p style="position: absolute; right:0%;"> NEED A GRAPHIC ARTIST ?<br> CONTACT ONE TODAY..<br>
-                <button onclick="submitSearcsignals(6)" style="color:rgb(255, 255, 255); border-radius:4px; background-color:green;">
+                <button style="color:rgb(255, 255, 255); border-radius:4px; background-color:green;">
                     CLICK ME
                 </button>
             </p>
@@ -319,7 +319,7 @@
                     </div>
                     <div class='article' data=5>
                         {% if i.matricverified %}
-                        <h5 style="position: absolute; top:-5%; right:7%; color:rgb(0, 255, 13);"> <i class="fa fa-star"></i></h5>
+                        <h5 style="position: absolute; top:-5%; right:7%; color:rgb(47, 0, 255);"> <i class="fa fa-star"></i></h5>
                         {%endif%} {% if i.topuser %}
                         <h5 style="position: absolute; top:-5%; right:7%; color:gold;"> <i class="fa fa-star"></i></h5>
                         {%endif%} {% for j in images %} {% if i.id == j.product_id %}

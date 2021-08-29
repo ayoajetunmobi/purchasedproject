@@ -246,37 +246,37 @@ def get_profile(request):
                 context['reviews']= [{"review":"no reviews yet","username":"no reviews yet","as_buyer":"no reviews yet"}]
     return JsonResponse(context , safe=False)
 
-def pagination_page(request):
-    context={}
-    picture=[]
+# def pagination_page(request):
+#     context={}
+#     picture=[]
     
-    global page_num
+#     global page_num
     
-    listt= User_product.objects.all().order_by("-id")
+#     listt= User_product.objects.all().order_by("-id")
     
-    page = request.GET.get('page', page_num)
+#     page = request.GET.get('page', page_num)
     
-    paginator = Paginator(listt, 4)
+#     paginator = Paginator(listt, 4)
     
-    try:
-        users = paginator.page(page)
-    except PageNotAnInteger:
-        users = paginator.page(1)
+#     try:
+#         users = paginator.page(page)
+#     except PageNotAnInteger:
+#         users = paginator.page(1)
         
-    for i in users.object_list:
-        picture.append(list((Product_image.objects.filter(product=i.id)).values())[0])
+#     for i in users.object_list:
+#         picture.append(list((Product_image.objects.filter(product=i.id)).values())[0])
     
-    if users.has_next() == True:
-        page_num = users.next_page_number()
-        context["pictures"] = picture
-        context["data"]= list((users.object_list).values())
+#     if users.has_next() == True:
+#         page_num = users.next_page_number()
+#         context["pictures"] = picture
+#         context["data"]= list((users.object_list).values())
         
-    if users.has_next() == False:
-       context["pictures"] = picture
-       context["data"]= list((users.object_list).values())
-       page_num = 1
+#     if users.has_next() == False:
+#        context["pictures"] = picture
+#        context["data"]= list((users.object_list).values())
+#        page_num = 1
        
-    return JsonResponse( context, safe=False)
+#     return JsonResponse( context, safe=False)
 
 def search(request):
         context = {}
@@ -287,7 +287,6 @@ def search(request):
             res = str(response['target2'])
             response = str(response['target2']).lower()
             if int(target) == 1:
-                print(response)
                 if User_Detail.objects.filter(username = res).exists():
                     data = User_Detail.objects.get(username = res)
                     context["username"] =[str(data.username),str(data.profilepic),str(data.id)]    
@@ -300,7 +299,7 @@ def search(request):
                         context["product"] = list((data2).values())
                         for i in data2:
                             images.append(Product_image.objects.filter(product = i).values()[0])
-                            context['images'] = list(images)
+                        context['images'] = list(images)
                         context["yes"] = True 
                         Searchdata.objects.create(word=response,timesSearched =0,user=user)
                     else:
@@ -308,7 +307,7 @@ def search(request):
                         Q(description__contains = response) | Q(searchTag__contains = response)).order_by("-id")[:20]
                         for i in data2:
                             images.append(Product_image.objects.filter(product = i).values()[0])
-                            context['images'] = list(images)
+                        context['images'] = list(images)
                         context["product"] = list((data2).values())
                         context["yes"] = True   
                 else:
@@ -324,7 +323,7 @@ def search(request):
                     context["product"] = list((data2).values())
                     for i in data2:
                         images.append(Product_image.objects.filter(product = i).values()[0])
-                        context['images'] = list(images)
+                    context['images'] = list(images)
                     context["yes"] = True 
                     Searchdata.objects.create(word=response,timesSearched =0,user=user)
                 else:
@@ -334,7 +333,7 @@ def search(request):
                     ).order_by("-id")[:20]
                     for i in data2:
                         images.append(Product_image.objects.filter(product = i).values()[0])
-                        context['images'] = list(images)
+                    context['images'] = list(images)
                     context["product"] = list((data2).values())
                     context["yes"] = True
                     
@@ -342,23 +341,23 @@ def search(request):
                 if request.user.is_authenticated:
                     user = User_Detail.objects.get(user= request.user)
                     data2 =  User_product.objects.filter(
-                        Q(description__contains = 'food') | Q(description__contains = 'rice') | Q(description__contains = 'asun') | Q(searchTag__contains = 'ofada')
+                        Q(description__contains = 'food') | Q(description__contains = 'rice') | Q(description__contains = 'asun') | Q(searchTag__contains = 'ofada') | Q(searchTag__contains = 'spag')
                      | Q(searchTag__contains = 'food') | Q(description__contains = 'soup') | Q(description__contains = 'turkey')  & Q(campus__contains = user.campus)
                        ).order_by("-id")[:20]
                     context["product"] = list((data2).values())
                     for i in data2:
                         images.append(Product_image.objects.filter(product = i).values()[0])
-                        context['images'] = list(images)
+                    context['images'] = list(images)
                     context["yes"] = True 
                     Searchdata.objects.create(word=response,timesSearched =0,user=user)
                 else:
                     data2 =  User_product.objects.filter(
-                      Q(description__contains = 'food') | Q(description__contains = 'rice') | Q(description__contains = 'asun') | Q(searchTag__contains = 'ofada')
+                      Q(description__contains = 'food') | Q(description__contains = 'rice') | Q(description__contains = 'asun') | Q(searchTag__contains = 'ofada') | Q(searchTag__contains = 'spag')
                      | Q(searchTag__contains = 'food') | Q(description__contains = 'soup') | Q(description__contains = 'turkey')  & Q(campus__contains = user.campus)
                        ).order_by("-id")[:20]
                     for i in data2:
                         images.append(Product_image.objects.filter(product = i).values()[0])
-                        context['images'] = list(images)
+                    context['images'] = list(images)
                     context["product"] = list((data2).values())
                     context["yes"] = True
                     
@@ -367,14 +366,14 @@ def search(request):
                 if request.user.is_authenticated:
                     user = User_Detail.objects.get(user= request.user)
                     data2 =  User_product.objects.filter(
-                     Q(description__contains = 'milk') | Q(description__contains = 'flakes') | Q(description__contains = 'spag') | Q(description__contains = 'mourn')
+                     Q(description__contains = 'milk') | Q(description__contains = 'flakes') | Q(description__contains = 'spag') | Q(description__contains = 'morn')
                     | Q(description__contains = 'cereals')  & Q(campus__contains = user.campus)
                     ).order_by("-id")[:20]
                     context["product"] = list((data2).values())
                     for i in data2:
                         images.append(Product_image.objects.filter(product = i).values()[0])
-                        context['images'] = list(images)
-                        context["yes"] = True 
+                    context['images'] = list(images)
+                    context["yes"] = True 
                     Searchdata.objects.create(word=response,timesSearched =0,user=user)
                 else:
                     data2 =  User_product.objects.filter(
@@ -383,7 +382,7 @@ def search(request):
                     ).order_by("-id")[:20]
                     for i in data2:
                         images.append(Product_image.objects.filter(product = i).values()[0])
-                        context['images'] = list(images)
+                    context['images'] = list(images)
                     context["product"] = list((data2).values())
                     context["yes"] = True
                     
@@ -396,7 +395,7 @@ def search(request):
                     context["product"] = list((data2).values())
                     for i in data2:
                         images.append(Product_image.objects.filter(product = i).values()[0])
-                        context['images'] = list(images)
+                    context['images'] = list(images)
                     context["yes"] = True 
                     Searchdata.objects.create(word=response,timesSearched =0,user=user)
                 else:
@@ -405,7 +404,7 @@ def search(request):
                     ).order_by("-id")[:20]
                     for i in data2:
                         images.append(Product_image.objects.filter(product = i).values()[0])
-                        context['images'] = list(images)
+                    context['images'] = list(images)
                     context["product"] = list((data2).values())
                     context["yes"] = True
                     
@@ -418,7 +417,7 @@ def search(request):
                     context["product"] = list((data2).values())
                     for i in data2:
                         images.append(Product_image.objects.filter(product = i).values()[0])
-                        context['images'] = list(images)
+                    context['images'] = list(images)
                     context["yes"] = True 
                     Searchdata.objects.create(word=response,timesSearched =0,user=user)
                 else:
@@ -427,7 +426,7 @@ def search(request):
                     ).order_by("-id")[:20]
                     for i in data2:
                         images.append(Product_image.objects.filter(product = i).values()[0])
-                        context['images'] = list(images)
+                    context['images'] = list(images)
                     context["product"] = list((data2).values())
                     context["yes"] = True
                 
