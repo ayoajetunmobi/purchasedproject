@@ -26,47 +26,47 @@ def formsdispaly(request):
     form2 = UserDetailForm(request.POST or request.FILES or None)
     loged_in_user= request.user
     
-    # userstore1 = User_Detail.objects.get(username = 'Estee D Enterprises')
-    # userstore1products = User_product.objects.filter(user = userstore1)[:8]
-    # userstore1productsImg = [userstore1.username]
-    # for i in userstore1products:
-    #     userstore1productsImg.append(Product_image.objects.filter(product=i)[0])
-    # context['userstore1products'] = userstore1products
-    # context['userstore1productsImg'] = userstore1productsImg
+    userstore1 = User_Detail.objects.get(username = 'Estee D Enterprises')
+    userstore1products = User_product.objects.filter(user = userstore1)[:8]
+    userstore1productsImg = [userstore1.username]
+    for i in userstore1products:
+        userstore1productsImg.append(Product_image.objects.filter(product=i)[0])
+    context['userstore1products'] = userstore1products
+    context['userstore1productsImg'] = userstore1productsImg
 
-    # userstore2 = User_Detail.objects.get(username = 'Ola Flourish')
-    # userstore2products = User_product.objects.filter(user = userstore2)[:8]
-    # userstore2productsImg = [userstore2.username]
-    # for i in userstore2products:
-    #     userstore2productsImg.append(Product_image.objects.filter(product=i)[0])
-    # context['userstore2products'] = userstore2products
-    # context['userstore2productsImg'] = userstore2productsImg
+    userstore2 = User_Detail.objects.get(username = 'Ola Flourish')
+    userstore2products = User_product.objects.filter(user = userstore2)[:8]
+    userstore2productsImg = [userstore2.username]
+    for i in userstore2products:
+        userstore2productsImg.append(Product_image.objects.filter(product=i)[0])
+    context['userstore2products'] = userstore2products
+    context['userstore2productsImg'] = userstore2productsImg
     
-    # topdealsNDstudent1 = User_Detail.objects.get(username = 'ajet')
-    # topdealsNDstudent2 = User_Detail.objects.get(username = 'Solanke')
-    # topdealsNDstudent3 = User_Detail.objects.get(username = 'Oyindamola')
-    # topdealsNDstudent4 = User_Detail.objects.get(username = 'Kikelomo')
+    topdealsNDstudent1 = User_Detail.objects.get(username = 'ajet')
+    topdealsNDstudent2 = User_Detail.objects.get(username = 'Solanke')
+    topdealsNDstudent3 = User_Detail.objects.get(username = 'Oyindamola')
+    topdealsNDstudent4 = User_Detail.objects.get(username = 'Kikelomo')
     
    
     
-    # topdealproducts = []
-    # topdealsNDstudent = [topdealsNDstudent1,topdealsNDstudent2,topdealsNDstudent3,topdealsNDstudent4]
-    # for i in topdealsNDstudent:
-    #    topdealproducts.append(User_product.objects.filter(user=i)[0])
+    topdealproducts = []
+    topdealsNDstudent = [topdealsNDstudent1,topdealsNDstudent2,topdealsNDstudent3,topdealsNDstudent4]
+    for i in topdealsNDstudent:
+       topdealproducts.append(User_product.objects.filter(user=i)[0])
         
-    # topdealproductImg = []
-    # for i in topdealproducts:
-    #    topdealproductImg.append(Product_image.objects.filter(product = i)[0])
+    topdealproductImg = []
+    for i in topdealproducts:
+       topdealproductImg.append(Product_image.objects.filter(product = i)[0])
         
-    # context['buyfromstudent'] = topdealsNDstudent
-    # context['topdealproducts'] = topdealproducts
-    # context['topdealproductImg'] = topdealproductImg
+    context['buyfromstudent'] = topdealsNDstudent
+    context['topdealproducts'] = topdealproducts
+    context['topdealproductImg'] = topdealproductImg
     
     # suggestions  = []
-    # suggestions1 = suggestions.append(User_product.objects.filter(Q(description__contains = 'food') | Q(searchTag__contains = 'soup'))[0])
-    # suggestions2 = suggestions.append(User_product.objects.filter(Q(description__contains = 'necklace') | Q(searchTag__contains = 'jewel'))[0])
-    # suggestions3 = suggestions.append(User_product.objects.filter(Q(description__contains = 'dress')| Q(searchTag__contains ='wears'))[0])
-    # suggestions4 = suggestions.append(User_product.objects.filter(Q(description__contains = 'graphics' )| Q(searchTag__contains ='web dev'))[0])
+    # suggestions1 = suggestions.append(User_product.objects.filter(Q(searchTag__contains = 'food') | Q(searchTag__contains = 'soup'))[0])
+    # # suggestions2 = suggestions.append(User_product.objects.filter(Q(searchTag__contains = 'necklace') | Q(searchTag__contains = 'jewel'))[0])
+    # # suggestions3 = suggestions.append(User_product.objects.filter(Q(searchTag__contains = 'dress')| Q(searchTag__contains ='wear'))[0])
+    # # suggestions4 = suggestions.append(User_product.objects.filter(Q(searchTag__contains = 'graphic' )| Q(searchTag__contains ='web dev'))[0])
     
     
     # suggestionImg = []
