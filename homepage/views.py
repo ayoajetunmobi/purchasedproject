@@ -34,13 +34,13 @@ def formsdispaly(request):
     context['userstore1products'] = userstore1products
     context['userstore1productsImg'] = userstore1productsImg
 
-    # userstore2 = User_Detail.objects.get(username = 'Ola Flourish')
-    # userstore2products = User_product.objects.filter(user = userstore2)[:8]
-    # userstore2productsImg = [userstore2.username]
-    # for i in userstore2products:
-    #     userstore2productsImg.append(Product_image.objects.filter(product=i)[0])
-    # context['userstore2products'] = userstore2products
-    # context['userstore2productsImg'] = userstore2productsImg
+    userstore2 = User_Detail.objects.get(username = 'Ola Flourish')
+    userstore2products = User_product.objects.filter(user = userstore2)[:8]
+    userstore2productsImg = [userstore2.username]
+    for i in userstore2products:
+        userstore2productsImg.append(Product_image.objects.filter(product=i)[0])
+    context['userstore2products'] = userstore2products
+    context['userstore2productsImg'] = userstore2productsImg
     
     # topdealsNDstudent1 = User_Detail.objects.get(username = "")
     # topdealsNDstudent2 = User_Detail.objects.get(username = 'Solanke')
