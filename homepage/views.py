@@ -26,41 +26,41 @@ def formsdispaly(request):
     form2 = UserDetailForm(request.POST or request.FILES or None)
     loged_in_user= request.user
     
-    userstore1 = User_Detail.objects.get(username = 'Estee D Enterprises')
-    userstore1products = User_product.objects.filter(user = userstore1)[:8]
-    userstore1productsImg = [userstore1.username]
-    for i in userstore1products:
-        userstore1productsImg.append(Product_image.objects.filter(product=i)[0])
-    context['userstore1products'] = userstore1products
-    context['userstore1productsImg'] = userstore1productsImg
+    # userstore1 = User_Detail.objects.get(username = 'Estee D Enterprises')
+    # userstore1products = User_product.objects.filter(user = userstore1)[:8]
+    # userstore1productsImg = [userstore1.username]
+    # for i in userstore1products:
+    #     userstore1productsImg.append(Product_image.objects.filter(product=i)[0])
+    # context['userstore1products'] = userstore1products
+    # context['userstore1productsImg'] = userstore1productsImg
 
-    userstore2 = User_Detail.objects.get(username = 'Ola Flourish')
-    userstore2products = User_product.objects.filter(user = userstore2)[:8]
-    userstore2productsImg = [userstore2.username]
-    for i in userstore2products:
-        userstore2productsImg.append(Product_image.objects.filter(product=i)[0])
-    context['userstore2products'] = userstore2products
-    context['userstore2productsImg'] = userstore2productsImg
+    # userstore2 = User_Detail.objects.get(username = 'Ola Flourish')
+    # userstore2products = User_product.objects.filter(user = userstore2)[:8]
+    # userstore2productsImg = [userstore2.username]
+    # for i in userstore2products:
+    #     userstore2productsImg.append(Product_image.objects.filter(product=i)[0])
+    # context['userstore2products'] = userstore2products
+    # context['userstore2productsImg'] = userstore2productsImg
     
-    topdealsNDstudent1 = User_Detail.objects.get(username = 'ajet')
-    topdealsNDstudent2 = User_Detail.objects.get(username = 'Solanke')
-    topdealsNDstudent3 = User_Detail.objects.get(username = 'Oyindamola')
-    topdealsNDstudent4 = User_Detail.objects.get(username = 'Kikelomo')
+    # topdealsNDstudent1 = User_Detail.objects.get(username = 'ajet')
+    # topdealsNDstudent2 = User_Detail.objects.get(username = 'Solanke')
+    # topdealsNDstudent3 = User_Detail.objects.get(username = 'Oyindamola')
+    # topdealsNDstudent4 = User_Detail.objects.get(username = 'Kikelomo')
     
    
     
-    topdealproducts = []
-    topdealsNDstudent = [topdealsNDstudent1,topdealsNDstudent2,topdealsNDstudent3,topdealsNDstudent4]
-    for i in topdealsNDstudent:
-       topdealproducts.append(User_product.objects.filter(user=i)[0])
+    # topdealproducts = []
+    # topdealsNDstudent = [topdealsNDstudent1,topdealsNDstudent2,topdealsNDstudent3,topdealsNDstudent4]
+    # for i in topdealsNDstudent:
+    #    topdealproducts.append(User_product.objects.filter(user=i)[0])
         
-    topdealproductImg = []
-    for i in topdealproducts:
-       topdealproductImg.append(Product_image.objects.filter(product = i)[0])
+    # topdealproductImg = []
+    # for i in topdealproducts:
+    #    topdealproductImg.append(Product_image.objects.filter(product = i)[0])
         
-    context['buyfromstudent'] = topdealsNDstudent
-    context['topdealproducts'] = topdealproducts
-    context['topdealproductImg'] = topdealproductImg
+    # context['buyfromstudent'] = topdealsNDstudent
+    # context['topdealproducts'] = topdealproducts
+    # context['topdealproductImg'] = topdealproductImg
     
     # suggestions  = []
     # suggestions1 = suggestions.append(User_product.objects.filter(Q(description__contains = 'food') | Q(searchTag__contains = 'soup'))[0])
@@ -340,22 +340,22 @@ def search(request):
                     
             if int(target) == 3:
                 if request.user.is_authenticated:
-                    user = User_Detail.objects.get(user= request.user)
+                    user = User_Detail.objects.get(user = request.user)
                     data2 =  User_product.objects.filter(
-                        Q(description__contains = 'food') | Q(searchTag__contains = 'rice') | Q(description__contains = 'asun') | Q(searchTag__contains = 'ofada') | Q(searchTag__contains = 'spag')
-                     | Q(searchTag__contains = 'food') | Q(searchTag__contains = 'soup') | Q(description__contains = 'turkey')  & Q(campus__contains = user.campus)
-                       ).order_by("-id")[:20]
+                    Q(description__contains = 'food') | Q(searchTag__contains = 'rice') | Q(description__contains = 'asun') | Q(searchTag__contains = 'ofada') | Q(searchTag__contains = 'spag')
+                    | Q(searchTag__contains = 'food') | Q(searchTag__contains = 'soup') | Q(description__contains = 'turkey') & Q(campus__contains = user.campus)
+                     ).order_by("-id")[:20]
                     context["product"] = list((data2).values())
                     for i in data2:
                         images.append(Product_image.objects.filter(product = i).values()[0])
                         context['images'] = list(images)
                     context["yes"] = True 
-                    Searchdata.objects.create(word=response,timesSearched =0,user=user)
+                    Searchdata.objects.create(word=response,timesSearched =0, user=user)
                 else:
                     data2 =  User_product.objects.filter(
-                      Q(description__contains = 'food') | Q(searchTag__contains = 'rice') | Q(description__contains = 'asun') | Q(searchTag__contains = 'ofada') | Q(searchTag__contains = 'spag') 
-                     | Q(searchTag__contains = 'food') | Q(searchTag__contains = 'soup') | Q(description__contains = 'turkey')  & Q(campus__contains = user.campus)
-                       ).order_by("-id")[:20]
+                    Q(description__contains = 'food') | Q(searchTag__contains = 'rice') | Q(description__contains = 'asun') | Q(searchTag__contains = 'ofada') | Q(searchTag__contains = 'spag') 
+                    | Q(searchTag__contains = 'food') | Q(searchTag__contains = 'soup') | Q(description__contains = 'turkey')
+                     ).order_by("-id")[:20]
                     for i in data2:
                         images.append(Product_image.objects.filter(product = i).values()[0])
                         context['images'] = list(images)
