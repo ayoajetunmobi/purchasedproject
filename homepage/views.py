@@ -42,7 +42,7 @@ def formsdispaly(request):
     context['userstore2products'] = userstore2products
     context['userstore2productsImg'] = userstore2productsImg
     
- 
+    topdealsNDstudent1 = User_Detail.objects.get(username = "Charlie's Spag")
     topdealsNDstudent2 = User_Detail.objects.get(username = 'Solanke')
     topdealsNDstudent3 = User_Detail.objects.get(username = 'Oyindamola')
     topdealsNDstudent4 = User_Detail.objects.get(username = 'Kikelomo')
@@ -50,7 +50,7 @@ def formsdispaly(request):
    
     
     topdealproducts = []
-    topdealsNDstudent = [topdealsNDstudent2,topdealsNDstudent3,topdealsNDstudent4]
+    topdealsNDstudent = [topdealsNDstudent1,topdealsNDstudent2,topdealsNDstudent3,topdealsNDstudent4]
     for i in topdealsNDstudent:
        topdealproducts.append(User_product.objects.filter(user=i)[0])
         
