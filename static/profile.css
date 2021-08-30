@@ -75,7 +75,7 @@
 }
 
 * {
-    scrollbar-width: thin;
+    scrollbar-width: initial;
     scroll-behavior: smooth;
     transition: 1s ease-out;
 }

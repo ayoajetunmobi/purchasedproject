@@ -26,41 +26,41 @@ def formsdispaly(request):
     form2 = UserDetailForm(request.POST or request.FILES or None)
     loged_in_user= request.user
     
-    userstore1 = User_Detail.objects.get(username = 'Estee D Enterprises')
-    userstore1products = User_product.objects.filter(user = userstore1)[:8]
-    userstore1productsImg = [userstore1.username]
-    for i in userstore1products:
-        userstore1productsImg.append(Product_image.objects.filter(product=i)[0])
-    context['userstore1products'] = userstore1products
-    context['userstore1productsImg'] = userstore1productsImg
+    # userstore1 = User_Detail.objects.get(username = 'Estee D Enterprises')
+    # userstore1products = User_product.objects.filter(user = userstore1)[:8]
+    # userstore1productsImg = [userstore1.username]
+    # for i in userstore1products:
+    #     userstore1productsImg.append(Product_image.objects.filter(product=i)[0])
+    # context['userstore1products'] = userstore1products
+    # context['userstore1productsImg'] = userstore1productsImg
 
-    userstore2 = User_Detail.objects.get(username = 'Ola Flourish')
-    userstore2products = User_product.objects.filter(user = userstore2)[:8]
-    userstore2productsImg = [userstore2.username]
-    for i in userstore2products:
-        userstore2productsImg.append(Product_image.objects.filter(product=i)[0])
-    context['userstore2products'] = userstore2products
-    context['userstore2productsImg'] = userstore2productsImg
+    # userstore2 = User_Detail.objects.get(username = 'Ola Flourish')
+    # userstore2products = User_product.objects.filter(user = userstore2)[:8]
+    # userstore2productsImg = [userstore2.username]
+    # for i in userstore2products:
+    #     userstore2productsImg.append(Product_image.objects.filter(product=i)[0])
+    # context['userstore2products'] = userstore2products
+    # context['userstore2productsImg'] = userstore2productsImg
     
-    topdealsNDstudent1 = User_Detail.objects.get(username = 'ajet')
-    topdealsNDstudent2 = User_Detail.objects.get(username = 'Charlies Spag')
-    topdealsNDstudent3 = User_Detail.objects.get(username = 'Oyindamola')
-    topdealsNDstudent4 = User_Detail.objects.get(username = 'Kikelomo')
+    # topdealsNDstudent1 = User_Detail.objects.get(username = 'ajet')
+    # topdealsNDstudent2 = User_Detail.objects.get(username = 'Charlies Spag')
+    # topdealsNDstudent3 = User_Detail.objects.get(username = 'Oyindamola')
+    # topdealsNDstudent4 = User_Detail.objects.get(username = 'Kikelomo')
     
    
     
-    topdealproducts = []
-    topdealsNDstudent = [topdealsNDstudent1,topdealsNDstudent2,topdealsNDstudent3,topdealsNDstudent4]
-    for i in topdealsNDstudent:
-       topdealproducts.append(User_product.objects.filter(user=i)[0])
+    # topdealproducts = []
+    # topdealsNDstudent = [topdealsNDstudent1,topdealsNDstudent2,topdealsNDstudent3,topdealsNDstudent4]
+    # for i in topdealsNDstudent:
+    #    topdealproducts.append(User_product.objects.filter(user=i)[0])
         
-    topdealproductImg = []
-    for i in topdealproducts:
-       topdealproductImg.append(Product_image.objects.filter(product = i)[0])
+    # topdealproductImg = []
+    # for i in topdealproducts:
+    #    topdealproductImg.append(Product_image.objects.filter(product = i)[0])
         
-    context['buyfromstudent'] = topdealsNDstudent
-    context['topdealproducts'] = topdealproducts
-    context['topdealproductImg'] = topdealproductImg
+    # context['buyfromstudent'] = topdealsNDstudent
+    # context['topdealproducts'] = topdealproducts
+    # context['topdealproductImg'] = topdealproductImg
     
     # suggestions  = []
     # suggestions1 = suggestions.append(User_product.objects.filter(Q(searchTag__contains = 'food') | Q(searchTag__contains = 'ofada'))[0])
@@ -433,7 +433,6 @@ def search(request):
                 
         return JsonResponse(context , safe=False)
 
-
 def Product_spec(request):
         context={}
         if request.headers.get('x-requested-with') == 'XMLHttpRequest':
@@ -489,19 +488,7 @@ def whencontacted(request):
                       Contacted.objects.create(username = seler.username, user =buyer)
                            
     return JsonResponse(context , safe=False)
-    
-def msgDisplay(request):
-    context={}
-    if request.user.is_authenticated:
-        if request.headers.get('x-requested-with') == 'XMLHttpRequest':
-                
-            user = User_Detail.objects.get(user = request.user)
-            if Messages.objects.filter(my_messages = user).exists:
-                message= list( Messages.objects.filter(my_messages =user).values())
-                context['message'] = message
-    return JsonResponse(context , safe=False)   
-
-
+  
 def Signals(request):
     context={}
     if request.user.is_authenticated:
@@ -525,9 +512,66 @@ def Signals(request):
                        userwhoreviewed = User_Detail.objects.get(user = request.user);
                        userreviewed = User_Detail.objects.get(username = response3);
                        Reviews.objects.create(review =response4, as_buyer =  response2, username = userwhoreviewed.username, user= userreviewed )
-           
-               
-                 
+                             
+    return JsonResponse(context , safe=False)  
+
+def msgDisplay(request):
+    context={}
+    if request.user.is_authenticated:
+        if request.headers.get('x-requested-with') == 'XMLHttpRequest':
+                
+            user = User_Detail.objects.get(user = request.user)
+            if Messages.objects.filter(my_messages = user).exists:
+                message= list( Messages.objects.filter(my_messages =user).values())
+                context['message'] = message
+    return JsonResponse(context , safe=False)   
+
+
+
+    context={}
+    if request.user.is_authenticated:
+        if request.headers.get('x-requested-with') == 'XMLHttpRequest':
+            response = json.load(request)['post_data']
+            response1= response['target']
+            response2= response['contacted']
+            response3= response['user_review']
+            response4= response['reviewdata']
+            response5= response['msgid']
+            response5 = int(response5)
+            
+            if Messages.objects.filter(id = response5).exists:
+                if str(response2) == 'true':
+                    response2 = False
+                else:
+                     response2 = True  
+            
+                if int(response1) == 2:
+                       Messages.objects.get(id =response5).delete()
+                       userwhoreviewed = User_Detail.objects.get(user = request.user);
+                       userreviewed = User_Detail.objects.get(username = response3);
+                       Reviews.objects.create(review =response4, as_buyer =  response2, username = userwhoreviewed.username, user= userreviewed )
            
                            
+    return JsonResponse(context , safe=False)
+
+def suggestproduct(request):
+    context={}
+    suggestions  = []
+    suggestions1 = User_product.objects.filter(Q(searchTag__contains = 'food') | Q(searchTag__contains = 'ofada')).order_by("-id")[:1]
+    suggestions2 = User_product.objects.filter(Q(searchTag__contains = 'google') | Q(searchTag__contains = 'phone')).order_by("-id")[:1]
+    suggestions3 = User_product.objects.filter(Q(searchTag__contains = 'beuty') | Q(searchTag__contains = 'wig')).order_by("-id")[:1]
+    suggestions4 =  User_product.objects.filter(Q(searchTag__contains = 'jewel') | Q(searchTag__contains = 'necklace')).order_by("-id")[:1]
+    
+    suggestions = [suggestions1,suggestions2,suggestions3,suggestions4]
+    suggestionImg = []
+    for i in suggestions:
+        suggestionImg.append(Product_image.objects.filter(product = i).values()[0])
+    
+   
+    context['suggestion1'] = list((suggestions1).values())
+    context['suggestion2'] = list((suggestions2).values())
+    context['suggestion3'] = list((suggestions3).values())
+    context['suggestion4'] = list((suggestions4).values())
+        
+    context['suggestionImg'] = list(suggestionImg)
     return JsonResponse(context , safe=False)

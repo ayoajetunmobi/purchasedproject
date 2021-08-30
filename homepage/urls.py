@@ -15,4 +15,5 @@ urlpatterns = [
   path('contacted/',views.whencontacted,name= 'contacted'),
   path('msg/',views.msgDisplay,name= 'getMsgs'),
   path('signals/',views.Signals,name= 'signals'),
+  path('suggest/',views.suggestproduct, name='suggest'),
 ]

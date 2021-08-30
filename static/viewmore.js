@@ -11,6 +11,7 @@
         //  yhandler()
         enter()
         callslide()
+        suggest()
     })
 
     // function displaypost(posts, images) {
@@ -74,7 +75,7 @@
                    <article class="post4store"  data = "${data2.id}" onclick= "product_spec(this)">
                         <img class="postimg" src="media/${images[i].product_img}" alt="">
                         <p class="postdesc">${data2.searchTag}</p>
-                        <p>...</p>
+                        <p>${data2.price}</p>
                     </article>`
                 i++
             })
@@ -220,14 +221,13 @@
                  <a>online status</a>
                  ${(profile.online == true)?` <h5 style="color:green;"> active <h5>`:`<h5 style="color:grey;"> offline <h5>`}
             `;
-            contactseller.innerHTML =
-                `<h3 style= "display:none;" class="contactnumber">${profile.contact}<br>
-            <span style="color:red; font-size:small;"> please drop a review on user after product delivery </span>
-            </h3>
-            <button  onclick= "msg(this)" seller = ${profile.username} style="background-image: linear-gradient(to bottom right, rgb(0, 255, 34), rgb(52, 107, 59))" >CONTACT SELLER</button>`
 
-
-            
+            contactseller.innerHTML =`<h3 style= "display:none;" class="contactnumber">${profile.contact}<br>
+                <span style="color:red; font-size:small;"> please drop a review on user after product delivery </span>
+                </h3>
+                <button  onclick= "msg(this)" seller = ${profile.username} style="background-image: linear-gradient(to bottom right, rgb(0, 255, 34), rgb(52, 107, 59))" > CONTACT SELLER </button>
+            `
+          
             advertImg.style.display = "block"
             advertImg.innerHTML=''
             advertImg.innerHTML = `<img style="display:block;" src="media/${advert}" alt=""/>`
@@ -315,4 +315,41 @@
                     move[j].style.left = +move[j].style.left.replace(/[^-\d\.]/g, "") - 350 + "px";
                 }
             }
+    }
+
+    function suggestproduct(data){
+        let suggestproduct = document.getElementById('suggestproduct');
+        let suggest1 = data['suggestion1'];
+        let suggest2 = data['suggestion2'];
+        let suggest3 = data['suggestion3'];
+        let suggest4 = data['suggestion4'];
+
+        let suggestImg = data['suggestionImg'];
+        console.log(suggest1[0].id)
+        suggestproduct.innerHTML= ""
+        suggestproduct.innerHTML= `
+         <article data="${suggest1[0].id}" onclick="product_spec(this)" class="post">
+             <img class="postimg" src="media/${suggestImg[0].product_img}" alt="">
+             <p class="postdesc">${suggest1[0].searchTag}</p>
+             <p>N${suggest1[0].price}</p>
+             </article>
+
+              <article data="${suggest2[0].id}" onclick="product_spec(this)" class="post">
+             <img class="postimg" src="media/${suggestImg[1].product_img}" alt="">
+             <p class="postdesc">${suggest2[0].searchTag}</p>
+             <p>N${suggest2[0].price}</p>
+             </article>
+
+             <article data="${suggest3[0].id}" onclick="product_spec(this)" class="post">
+             <img class="postimg" src="media/${suggestImg[2].product_img}" alt="">
+             <p class="postdesc">${suggest3[0].searchTag}</p>
+             <p>N${suggest3[0].price}</p>
+             </article>
+
+            <article data="${suggest4[0].id}" onclick="product_spec(this)" class="post">
+             <img class="postimg" src="media/${suggestImg[3].product_img}" alt="">
+             <p class="postdesc">${suggest4[0].searchTag}</p>
+             <p>N${suggest4[0].price}</p>
+             </article>
+        `
     }

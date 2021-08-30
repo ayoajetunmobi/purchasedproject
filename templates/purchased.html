@@ -15,7 +15,7 @@
     <title>purchased</title>
     <style>
         header {
-            min-height: 75vh;
+            min-height: 76vh;
             align-items: center;
             width: auto;
         }
@@ -219,7 +219,7 @@
             <br>
             <h4 style="text-align: center;">SUGGESTED CHECK NOW </h4><br>
             <h6 style="text-align: center;"> Products and Services </h6> <br><br>
-            <div style="display: grid; grid-template-columns: repeat(2, 2fr); margin:0 auto; width:100%">
+            <div id="suggestproduct" style="display: grid; grid-template-columns: repeat(2, 2fr); margin:0 auto; width:100%">
                 {% for i in suggestions %}
                 <article data="{{i.id}}" onclick="product_spec(this)" class="post">
                     {% for j in suggestionImg %} {% if j.product_id == i.id %}
@@ -288,8 +288,8 @@
             <h6 style="margin-left:10px"> contact a seller </h6>
             <div style="display: grid; grid-template-columns: repeat(2, 2fr); overflow-x:hidden; width:100%;">
                 {% for i in buyfromstudent %}
-                <div class="buy4student">
-                    <img onclick="propicclick(this)" data-id="{{i.id}}" src="{{i.profilepic.url}}" alt="">
+                <div data-id="{{i.id}}" class="buy4student">
+                    <img onclick="propicclick(this)" src="{{i.profilepic.url}}" alt="">
                     <p style="color: white;"><i class="fa fa-male"></i><i class="fa fa-female"></i>{{i.gender}}</p>
                     <h6 style="color: white;">{{i.about}}</h6>
                 </div>
@@ -485,8 +485,8 @@
         </div>
         <br><br><br><br>
         <div id="contactSeller">
-
         </div>
+
         <div id="advertImg">
         </div>
 
@@ -828,6 +828,19 @@
             })
     }
 
+    function suggest() {
+        fetch('{% url "suggest" %}', {
+                headers: {
+                    'Accept': 'application/json',
+                    'X-Requested-With': 'XMLHttpRequest', //Necessary to work with request.is_ajax()
+                },
+            })
+            .then(response => {
+                return response.json().then(data => {
+                        suggestproduct(data)
+                    }) //Convert response to JSON
+            })
+    }
 
     function submitSearcsignals(signal) {
         event.preventDefault()
