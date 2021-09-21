@@ -435,7 +435,7 @@
         let = descriptopdeals = document.getElementById('descriptopdeals');
         data1.forEach(data=>{
             slidedivImg.innerHTML += `
-            <img data=${data.id} class="topdealimg" src="media/${data.product_img}" alt="">
+            <img data=${data.id} style="z-index:2;" onclick="product_spec(this)" class="topdealimg" src="media/${data.product_img}" alt="">
             `
         data2.forEach(data=>{
             descriptopdeals.innerHTML += `
