@@ -26,25 +26,25 @@ def formsdispaly(request):
     form2 = UserDetailForm(request.POST or request.FILES or None)
     loged_in_user= request.user
     
-    userstore1 = User_Detail.objects.get(username = 'Dees fashion plug')
-    userstore1products = User_product.objects.filter(user = userstore1)[:10]
-    userstore1productsImg = [userstore1.username]
-    for i in userstore1products:
-        userstore1productsImg.append(Product_image.objects.filter(product=i)[0])
-    context['userstore1products'] = userstore1products
-    context['userstore1productsImg'] = userstore1productsImg
+    # userstore1 = User_Detail.objects.get(username = 'Dees fashion plug')
+    # userstore1products = User_product.objects.filter(user = userstore1)[:10]
+    # userstore1productsImg = [userstore1.username]
+    # for i in userstore1products:
+    #     userstore1productsImg.append(Product_image.objects.filter(product=i)[0])
+    # context['userstore1products'] = userstore1products
+    # context['userstore1productsImg'] = userstore1productsImg
     
     
-    topdealsNDstudent1 = User_Detail.objects.get(username = 'Solanke')
-    topdealsNDstudent2 = User_Detail.objects.get(username = 'THaLES')
-    topdealsNDstudent3 = User_Detail.objects.get(username = 'Oyindamola')
-    topdealsNDstudent4 = User_Detail.objects.get(username = 'Charlies Spag')
+    # topdealsNDstudent1 = User_Detail.objects.get(username = 'Solanke')
+    # topdealsNDstudent2 = User_Detail.objects.get(username = 'THaLES')
+    # topdealsNDstudent3 = User_Detail.objects.get(username = 'Oyindamola')
+    # topdealsNDstudent4 = User_Detail.objects.get(username = 'Charlies Spag')
     
    
     
   
-    topdealsNDstudent = [topdealsNDstudent1,topdealsNDstudent2,topdealsNDstudent3,topdealsNDstudent4]
-    context['buyfromstudent'] = topdealsNDstudent
+    # topdealsNDstudent = [topdealsNDstudent1,topdealsNDstudent2,topdealsNDstudent3,topdealsNDstudent4]
+    # context['buyfromstudent'] = topdealsNDstudent
     
     
     if loged_in_user.is_authenticated:
