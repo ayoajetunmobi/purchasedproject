@@ -184,7 +184,7 @@
                      </article>  `
          })
          let contctdiv = document.getElementById('contctdiv');
-         if(contctdiv.style.display != 'none'){
+         if(contctdiv != null){
          contctdiv.innerHTML = ''
             contctdiv.innerHTML = `
               <h3 class="contactnumber" style='display:none; text-align:center;'>${contact}<br>
