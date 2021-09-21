@@ -25,7 +25,7 @@ env = environ.Env()
 environ.Env.read_env()
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
 ALLOWED_HOSTS = ['wwww.shopatpurchased.com','shopatpurchased.com']
 
@@ -82,15 +82,17 @@ WSGI_APPLICATION = 'purchased.wsgi.application'
 # https://docs.djangoproject.com/en/3.1/ref/settings/#databases
 
 
-if DEBUG:
-    DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': 'mydatabase',
-    }
-}
-else:
-    DATABASES = {
+# if DEBUG:
+#     DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.sqlite3',
+#         'NAME': 'mydatabase',
+#     }
+# }
+# else:
+    
+# }
+DATABASES = {
         'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
         'NAME':env('NAME'),
@@ -99,7 +101,6 @@ else:
         'HOST': 'localhost',
         'PORT': ''
     }
-}
 
 SECRET_KEY = env('SECRET_KEY')
 
