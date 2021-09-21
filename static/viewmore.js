@@ -127,7 +127,7 @@
         specPropic = document.getElementById("specPropic"),
         specDescription = document.getElementById('specDescription'),
         specImgs = document.getElementById('specImgs'),
-        productSpecsugest = document.getElementById('productSpecsugest')
+        productSpecsugest = document.getElementById('productSpecsugest');
 
         spec.style.opacity = 1
         spec.style.zIndex = 5
@@ -183,7 +183,7 @@
                      </span>
                      </article>  `
          })
-         contctdiv = document.getElementById('contctdiv');
+         let contctdiv = document.getElementById('contctdiv');
          if(contctdiv.style.display != 'none'){
          contctdiv.innerHTML = ''
             contctdiv.innerHTML = `
