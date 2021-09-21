@@ -89,7 +89,7 @@ def formsdispaly(request):
             review[:8].delete()
     else:
         images =[]
-        products = User_product.objects.all().order_by('-id')[:9]
+        products = User_product.objects.all().order_by('-id')[:15]
         context['products']= products
         for i in products:
             if  Product_image.objects.filter(product=i)[0] != None:

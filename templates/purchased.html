@@ -248,7 +248,7 @@
         <h4 style="margin-left: 40px;">{{userstore2productsImg.0}}</h4><br>
         <h6 style="margin-left: 40px;"> market</h6>
         <div style=" overflow-y:hidden;">
-            <div style="display: grid; grid-template-columns: repeat(8, 1fr);">
+            <div style="display: grid; grid-template-columns: repeat(10, 1fr);">
                 {% for i in userstore2products%}
                 <article data="{{i.id}}" onclick="product_spec(this)" class="post4store">
                     {%for j in userstore2productsImg %}{%if i.id == j.product_id %}
@@ -266,7 +266,7 @@
         <h4 style="margin-left: 40px;">{{userstore3productsImg.0}}</h4><br>
         <h6 style="margin-left: 40px;"> market</h6>
         <div style=" overflow-y:hidden;">
-            <div style="display: grid; grid-template-columns: repeat(8, 1fr);">
+            <div style="display: grid; grid-template-columns: repeat(10, 1fr);">
                 {% for i in userstore3products%}
                 <article data="{{i.id}}" onclick="product_spec(this)" class="post4store">
                     {%for j in userstore3productsImg %}{%if i.id == j.product_id %}
@@ -280,13 +280,13 @@
     </div> <br>
     <div style="width: 100%; height:350px; position:relative;top:-70px; z-index:1; background-color:rgb(255,
         255, 255); overflow-y:hidden; box-shadow: 0px 15px 15px rgba(12, 12, 0.55, 0.55);">
-        <h4 style="margin-left: 40px;">{{userstore4productsImg.0}}</h4><br>
+        <h4 style="margin-left: 40px;">{{userstore1productsImg.0}}</h4><br>
         <h6 style="margin-left: 40px;"> market</h6>
         <div style=" overflow-y:hidden;">
             <div style="display: grid; grid-template-columns: repeat(8, 1fr);">
-                {% for i in userstore4products%}
+                {% for i in userstore1products%}
                 <article data="{{i.id}}" onclick="product_spec(this)" class="post4store">
-                    {%for j in userstore4productsImg %}{%if i.id == j.product_id %}
+                    {%for j in userstore1productsImg %}{%if i.id == j.product_id %}
                     <img class="postimg" src="{{j.product_img.url}}" alt=""> {% endif %}{%endfor%}
                     <p class="postdesc">{{i.searchTag}}</p>
                     <p style="color:gold;">N{{i.price}}</p>
