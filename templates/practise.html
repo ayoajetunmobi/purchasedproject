@@ -9,7 +9,8 @@
     <style>
         .login {
             position: fixed;
-            background: grey;
+            background: linear-gradient(#0005, #0005),
+            url("{%static 'wardrope.jpg'%}");
             width: 100%;
             height: 100vh;
             left: 0;
@@ -28,8 +29,9 @@
             width: 300px;
             height: fit-content;
             transform: translate(-50%, -50%);
-            background: linear-gradient(#0005, #0005),
-            url("{% static 'background.jpeg' %}");
+            background: linear-gradient(#0005,
+            #0005),
+            url("{%static 'wardrope.jpg'%}");
             color: white;
             text-align: center;
             z-index: 2;
@@ -104,9 +106,8 @@
                 <input type="submit" class="inputs" value="submit" />
             </form>
             <br />
-            <a style="color: white;" href="{% url 'home' %}">dont have an account? <span style="color: #ffc107;">join
-                    up</span> </a><br><br>
-            <a style="color: white;" href="{% url 'reset' %}" id="forgotten">forgotten password</a><br><br>
+            <a href="{% url 'home' %}">dont have an account? <span style="color: #ffc107;">join up</span> </a><br><br>
+            <a href="{% url 'reset' %}" id="forgotten">forgotten password</a><br><br>
             <br><br><br>
         </div>
     </div>

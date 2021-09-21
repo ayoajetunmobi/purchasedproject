@@ -12,8 +12,7 @@ let i = 0,
     apimyStore = document.getElementById('apimyStore'),
     wrapper = document.getElementById('wrapper'),
     img = [],
-    productSpec = document.querySelector('.productSpec'),
-    mysite = document.getElementById('mysite');
+    productSpec = document.querySelector('.productSpec');
 
 img[0] = document.getElementById('img1')
 img[1] = document.getElementById('img2')
@@ -28,17 +27,16 @@ function callslide() {
         header.src = img[0].src;
         i = 1
         h1[0].style.opacity = 1
-        h1[1].style.opacity = 1
     } else if (i == 1) {
         header.src = img[1].src;
         i = 2
         h1[0].style.opacity = 0
-        h1[1].style.opacity = 0
+
     } else {
         header.src = img[2].src;
         i = 0
         h1[0].style.opacity = 0
-        h1[1].style.opacity = 0
+
     }
     setTimeout("callslide()", 9000)
 }
@@ -58,16 +56,13 @@ function displayRemove() {
     searchcover.style.display = "none"
     productSpec.style.zIndex = -5
     productSpec.style.opacity = 0
-    mysite.style.opacity = 0
-    mysite.style.zIndex = -1
-
 }
 
 function homebt() {
-    displayRemove()
-    mysite.style.opacity = 1
-    mysite.style.zIndex = 1
+    profile.style.opacity = 0
+    profile.style.zIndex = -2
 }
+
 
 function secdisplay() {
     let section = document.getElementById('section');

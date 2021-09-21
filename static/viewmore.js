@@ -4,14 +4,18 @@
     let viewpostt = document.querySelector("#forpost");
     let documentss = document.body;
     let a = [...document.getElementsByClassName("a")];
-    let slidebyone = 0
-    let ammountscrolled = ''
+    let slidebyone = 0;
+    let slidebytopdealone = 0;
+    let ammountscrolled = '';
+    let check = true;
+
 
     document.addEventListener("DOMContentLoaded", () => {
         //  yhandler()
         enter()
         callslide()
         suggest()
+
     })
 
     // function displaypost(posts, images) {
@@ -123,7 +127,8 @@
         specPropic = document.getElementById("specPropic"),
         specDescription = document.getElementById('specDescription'),
         specImgs = document.getElementById('specImgs'),
-        productSpecsugest = document.getElementById('productSpecsugest');
+        productSpecsugest = document.getElementById('productSpecsugest')
+        contctdiv = document.getElementById('contctdiv');
 
         spec.style.opacity = 1
         spec.style.zIndex = 5
@@ -144,7 +149,7 @@
             specDescription.innerHTML=""
             specDescription.innerHTML= `
                   <h5 style="padding:0px 10px;">${product.description}</h5><br>
-                  <h4 style="padding:0px 10px;">N${product.price}</h4>
+                  <h4 style="padding:0px 10px; color:gold;">N${product.price}</h4>
                    <br><br> <span style="font-size: medium; color:black; text-align:center;">  search tag : <span style="background-color: azure; color:blue; padding:2px; border-radius:1px;"> ${product.searchTag} </span> </span>
                    `
             specImgs.innerHTML= ""  
@@ -161,6 +166,16 @@
                 ` 
             })
               specImgs.appendChild(li) 
+
+            contctdiv.innerHTML = ''
+            contctdiv.innerHTML = `
+              <h3 class="contactnumber" style='display:none; text-align:center;'>${contact}<br>
+                    <span style="color:red; font-size:medium;margin:20px;"> please drop a review on user after product
+                        delivery </span>
+                </h3><br><br>
+                 <a href="tel:${contact}"> <button onclick="msg(this)" seller=${seller} style="width: 100%; margin-bottom:30px; color:white;height:30px; border-radius:15px; background-image: linear-gradient(to bottom right, rgb(0, 255, 34), rgb(52, 107, 59));">
+                   contact seller </button></a> 
+            `
            
             productSpecsugest.innerHTML= ""
             sproduct.forEach(pro => {
@@ -209,7 +224,7 @@
                     </h4>
                     <div class="links">
                         <a class="view" onclick="viewmore(event)"> market place </a>
-                        ${(update == true)?'':`<a onclick="producappear()" id="producbtn" class="view"> create product </a> <a id="mystoreBtn" onclick= "mystoredisplay()" class="view"> My Store </a>`}
+                        ${(update == true)?'':`<a onclick="producappear()" id="producbtn" class="view"> create post </a> <a id="mystoreBtn" onclick= "mystoredisplay()" class="view"> My Store </a>`}
                     </div>
                 </div>`
 
@@ -225,9 +240,15 @@
             contactseller.innerHTML =`<h3 style= "display:none;" class="contactnumber">${profile.contact}<br>
                 <span style="color:red; font-size:small;"> please drop a review on user after product delivery </span>
                 </h3>
-                <button  onclick= "msg(this)" seller = ${profile.username} style="background-image: linear-gradient(to bottom right, rgb(0, 255, 34), rgb(52, 107, 59))" > CONTACT SELLER </button>
+                <a href="tel:${profile.contact}"><button  onclick= "msg(this)" seller = ${profile.username} style="background-image: linear-gradient(to bottom right, rgb(0, 255, 34), rgb(52, 107, 59))" >CONTACT SELLER</button></a>
             `
-          
+            if(update== true){
+                let changedp = document.getElementById('changedp');
+                changedp.style.display = 'none'
+            }else{
+               let changedp = document.getElementById('changedp');
+                changedp.style.display = 'block'  
+            }
             advertImg.style.display = "block"
             advertImg.innerHTML=''
             advertImg.innerHTML = `<img style="display:block;" src="media/${advert}" alt=""/>`
@@ -286,7 +307,7 @@
      moveright.addEventListener('click', function(){
          let lastChild = mainspecimgs.length;
          if(slidebyone < lastChild - 1){ 
-             moveSlides(mainspecimgs, "forward");
+             moveSlidesProspec(mainspecimgs, "forward");
               moveright.style.opacity=1;
               slidebyone++
          }else{
@@ -298,16 +319,73 @@
        let lastChild = mainspecimgs.length;
          if(slidebyone > 0){ 
               moveleft.style.opacity=1;
-             moveSlides(mainspecimgs, "backward");
+             moveSlidesProspec(mainspecimgs, "backward",);
              slidebyone--
          }else{
              moveleft.style.opacity=0;
              moveright.style.opacity=1;
          }
     }) 
+
     }
 
-    function moveSlides(move, direction) {
+    function moveslidetopdeals(){
+
+     let mainspecimgs = [...document.getElementsByClassName('topdealimg')],
+      topdealdescrip = [...document.getElementsByClassName('topdealdescrip')],
+      slideWidth = 200;
+
+     if(mainspecimgs.length > 1){
+       for (let i = 0; i < mainspecimgs.length; i++){ 
+           mainspecimgs[i].style.left = slideWidth * i + "px";
+        }
+    }
+    if(topdealdescrip.length > 1){
+       for (let i = 0; i < topdealdescrip.length; i++){ 
+           topdealdescrip[i].style.left = slideWidth * i + "px";
+        }
+    }
+    }
+    
+    function callaction(){
+        let mainspecimgs = [...document.getElementsByClassName('topdealimg')]
+         topdealdescrip = [...document.getElementsByClassName('topdealdescrip')],
+        slideWidth = 200;
+      
+
+        let lastChild = mainspecimgs.length;
+        if(check == true){
+            if(slidebytopdealone < lastChild-1){ 
+             moveSlides(mainspecimgs, "forward", slideWidth);
+             moveSlides(topdealdescrip, "forward", slideWidth);
+            slidebytopdealone++
+            }
+            if(slidebytopdealone == lastChild-1){
+                check = false
+            }
+        }else{
+              moveSlides(mainspecimgs, "backward", slideWidth);
+              moveSlides(topdealdescrip, "backward", slideWidth);
+              slidebytopdealone--
+              if(slidebytopdealone == 0){
+                check = true
+            }
+        }
+
+         setTimeout( "callaction()", 2500)
+    }
+
+
+    function moveSlides(move, direction, slidewidth) {
+            for (var j = 0; j < move.length; j++) {
+                if (direction == "backward") {
+                    move[j].style.left = +move[j].style.left.replace(/[^-\d\.]/g, "") + slidewidth + "px";
+                } else if (direction == "forward") {
+                    move[j].style.left = +move[j].style.left.replace(/[^-\d\.]/g, "") - slidewidth + "px";
+                }
+            }
+    }
+     function moveSlidesProspec(move, direction) {
             for (var j = 0; j < move.length; j++) {
                 if (direction == "backward") {
                     move[j].style.left = +move[j].style.left.replace(/[^-\d\.]/g, "") + 350 + "px";
@@ -325,7 +403,6 @@
         let suggest4 = data['suggestion4'];
 
         let suggestImg = data['suggestionImg'];
-        console.log(suggest1[0].id)
         suggestproduct.innerHTML= ""
         suggestproduct.innerHTML= `
          <article data="${suggest1[0].id}" onclick="product_spec(this)" class="post">
@@ -352,4 +429,27 @@
              <p>N${suggest4[0].price}</p>
              </article>
         `
+    }
+    function topdealdiv(data1,data2){
+        let slidedivImg = document.getElementById('slidedivImg');
+        let = descriptopdeals = document.getElementById('descriptopdeals');
+        data1.forEach(data=>{
+            slidedivImg.innerHTML += `
+            <img class="topdealimg" src="media/${data.product_img}" alt="">
+            `
+        data2.forEach(data=>{
+            descriptopdeals.innerHTML += `
+               <div class="topdealdescrip" style="width:200px; position:absolute;height:100%;">
+                            <p style="text-align:start; margin-left:20px; width:50%; height:20%;padding:2px">
+                                ${data.searchTag} <br> <span style="color: gold;">N${data.price}</span>
+                            </p>
+                        </div>
+                `
+        })
+
+        })
+
+        moveslidetopdeals()
+        callaction()
+
     }
