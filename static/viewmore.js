@@ -128,7 +128,6 @@
         specDescription = document.getElementById('specDescription'),
         specImgs = document.getElementById('specImgs'),
         productSpecsugest = document.getElementById('productSpecsugest')
-        contctdiv = document.getElementById('contctdiv');
 
         spec.style.opacity = 1
         spec.style.zIndex = 5
@@ -167,15 +166,7 @@
             })
               specImgs.appendChild(li) 
 
-            contctdiv.innerHTML = ''
-            contctdiv.innerHTML = `
-              <h3 class="contactnumber" style='display:none; text-align:center;'>${contact}<br>
-                    <span style="color:red; font-size:medium;margin:20px;"> please drop a review on user after product
-                        delivery </span>
-                </h3><br><br>
-                 <a href="tel:${contact}"> <button onclick="msg(this)" seller=${seller} style="width: 100%; margin-bottom:30px; color:white;height:30px; border-radius:15px; background-image: linear-gradient(to bottom right, rgb(0, 255, 34), rgb(52, 107, 59));">
-                   contact seller </button></a> 
-            `
+            
            
             productSpecsugest.innerHTML= ""
             sproduct.forEach(pro => {
@@ -192,7 +183,18 @@
                      </span>
                      </article>  `
          })
-
+         contctdiv = document.getElementById('contctdiv');
+         if(contctdiv.style.display != 'none'){
+         contctdiv.innerHTML = ''
+            contctdiv.innerHTML = `
+              <h3 class="contactnumber" style='display:none; text-align:center;'>${contact}<br>
+                    <span style="color:red; font-size:medium;margin:20px;"> please drop a review on user after product
+                        delivery </span>
+                </h3><br><br>
+                <a href="tel:${contact}"> <button onclick="msg(this)" seller=${seller} style="width: 100%; margin-bottom:30px; color:white;height:30px; border-radius:15px; background-image: linear-gradient(to bottom right, rgb(0, 255, 34), rgb(52, 107, 59));">
+                contact seller </button></a> 
+            `
+ }
         }
         moveslide()
     }
@@ -435,7 +437,7 @@
         let = descriptopdeals = document.getElementById('descriptopdeals');
         data1.forEach(data=>{
             slidedivImg.innerHTML += `
-            <img data=${data.product} style="z-index:2;" onclick="product_spec(this)" class="topdealimg" src="media/${data.product_img}" alt="">
+            <img data=${data.product_id} style="z-index:2;" onclick="product_spec(this)" class="topdealimg" src="media/${data.product_img}" alt="">
             `
         data2.forEach(data=>{
             descriptopdeals.innerHTML += `
