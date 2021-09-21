@@ -61,6 +61,8 @@ function displayRemove() {
 function homebt() {
     profile.style.opacity = 0
     profile.style.zIndex = -2
+    section.style.display = 'none'
+
 }
 
 

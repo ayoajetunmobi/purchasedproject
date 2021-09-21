@@ -359,7 +359,7 @@
                     {%else%}
                     <div class="offline"></div>
                     {%endif%}
-                    <img class="propicp" onclick="propicclick(this)" data-id="{{i.user_id}}" src="{{i.profile_pic.url}}" alt="" />
+                    <img class="propicp" onclick="propicclick(this)" {% if user.is_authenticated %} data-id="{{i.user_id}}" {%endif%} src="{{i.profile_pic.url}}" alt="" />
                 </div>
                 <div class='article' data=5>
                     {% if i.matricverified %}
