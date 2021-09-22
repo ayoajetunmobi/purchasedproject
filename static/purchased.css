@@ -5,6 +5,7 @@
         width: 100%;
         overflow-x: hidden;
         position: absolute;
+        left: 0%;
     }
     
     #searchcover {
