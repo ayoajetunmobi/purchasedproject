@@ -131,7 +131,7 @@
         z-index: 1;
         padding-top: 35px;
         top: 450px;
-        overflow: auto;
+        overflow-x: hidden;
         opacity: 1;
         scroll-behavior: smooth;
     }
@@ -145,6 +145,7 @@
         opacity: 1;
         z-index: 1;
         margin-top: 5px;
+        overflow-x: hidden;
     }
     
     .pos1 {
