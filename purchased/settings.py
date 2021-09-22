@@ -28,7 +28,7 @@ environ.Env.read_env()
 DEBUG = False
 
 ALLOWED_HOSTS = ['wwww.shopatpurchased.com','shopatpurchased.com']
-
+ALLOWED_HOSTS +=  ['127.0.0.1','wwww.shopatpurchased.com','shopatpurchased.com']
 
 # Application definition
 
