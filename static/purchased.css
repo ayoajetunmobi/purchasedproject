@@ -3,7 +3,7 @@
         scroll-behavior: smooth;
         width: 100%;
         overflow-x: hidden;
-        position: absolute;
+        position: fixed;
         left: 0%;
     }
     
