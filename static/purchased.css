@@ -1,6 +1,9 @@
     body {
         font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
         scroll-behavior: smooth;
+        width: 90%;
+        margin: 0 auto;
+        overflow-x: hidden;
     }
     
     #searchcover {
