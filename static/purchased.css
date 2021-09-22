@@ -2,9 +2,10 @@
         font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
         scroll-behavior: smooth;
         width: 100%;
-        overflow-x: hidden;
-        position: fixed;
+        position: absolute;
         left: 0%;
+        padding: 0%;
+        overflow: hidden;
     }
     
     #searchcover {
