@@ -25,7 +25,7 @@ env = environ.Env()
 environ.Env.read_env()
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = Fals
+DEBUG = False
 
 
 ALLOWED_HOSTS = ['wwww.shopatpurchased.com','shopatpurchased.com']
