@@ -72,7 +72,7 @@ function secdisplay() {
 }
 
 function closesearch() {
-    searchcover.style.display = none;
+    searchcover.style.display = 'none';
     document.getElementById('searchcover').innerHTML = ""
 
 }
