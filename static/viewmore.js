@@ -52,8 +52,7 @@
     function searchengine(data, yes = false, images) {
 
         let searchcover = document.getElementById('searchcover');
-        searchcover.style.opacity = 1;
-        searchcover.style.zIndex = 4
+        searchcover.style.display = 'none'
 
         searchcover.innerHTML = ""
 
