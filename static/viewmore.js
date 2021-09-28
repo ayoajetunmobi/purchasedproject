@@ -388,6 +388,7 @@ function buy4seller(){
 
     if (buy4studentcontrol == 0){
         buystucover.style.backgroundColor = '#ff99cc';
+        buystucover.style.color= 'white'
         buy4student.forEach(stu=> stu.style.backgroundColor = '#336699')
         buytxt.forEach(stu=> stu.style.color = 'white')
         buy4studentcontrol = 1
