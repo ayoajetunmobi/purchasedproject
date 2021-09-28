@@ -52,7 +52,8 @@
     function searchengine(data, yes = false, images) {
 
         let searchcover = document.getElementById('searchcover');
-        searchcover.style.display = "block"
+        searchcover.style.opacity = 1;
+        searchcover.style.zIndex = 4
 
         searchcover.innerHTML = ""
 
@@ -388,15 +389,15 @@ function buy4seller(){
     if (buy4studentcontrol == 0){
         buystucover.style.backgroundColor = '#ff99cc';
         buy4student.forEach(stu=> stu.style.backgroundColor = '#336699')
+        buytxt.forEach(stu=> stu.style.color = 'white')
         buy4studentcontrol = 1
-        console.log('yes1')
     }
     else if (buy4studentcontrol == 1){
         buystucover.style.backgroundColor = 'yellow';
+        buystucover.style.color= 'black'
         buy4student.forEach(stu=> stu.style.backgroundColor = '#006600')
-         buytxt.forEach(stu=> stu.style.color = 'white')
+        buytxt.forEach(stu=> stu.style.color = 'white')
         buy4studentcontrol = 2
-        console.log('yes2')
     }else{
         buystucover.style.backgroundColor = '#ff0033';
         buy4student.forEach(stu=> stu.style.backgroundColor = 'white')

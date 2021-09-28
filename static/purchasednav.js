@@ -72,7 +72,8 @@ function secdisplay() {
 }
 
 function closesearch() {
-    searchcover.style.display = 'none'
+    searchcover.style.zIndex = -4;
+    searchcover.style.opacity = 0;
     document.getElementById('searchcover').innerHTML = ""
 
 }

@@ -325,7 +325,7 @@
         <h6 style="margin-left:10px"> contact a seller </h6>
         <div style="display: grid; grid-template-columns: repeat(2, 2fr); overflow-x:hidden; width:100%;">
             {% for i in buyfromstudent %}
-            <div data-id="{{i.id}}" onclick="propicclick(this)" class="buy4student">
+            <div {%if request.user.is_authenticated%} data-id='{{i.id}}' {%endif%} onclick="propicclick(this)" class="buy4student">
                 <img src="{{i.profilepic.url}}" alt="">
                 <p class="buytxt" style="color: white;"><i class="fa fa-male"></i><i class="fa fa-female"></i>{{i.gender}}</p>
                 <h6 class="buytxt" style="color: white;">{{i.about}}</h6>
@@ -394,7 +394,7 @@
         </div>
         <h3 id="specDescription" class="productSpecDescription">
         </h3>
-        <div id="contactView" style="margin: 0px auto; width:100%; padding:6px; ">
+        <div id="contactView" style="margin: 0px auto; width:100%;">
             {% if user.is_authenticated %}
             <div id="contctdiv">
             </div>
@@ -408,7 +408,7 @@
 
         </div>
 
-        <div style="margin-top : 40px; display:grid; grid-template-columns:repeat(2,2f);">
+        <div style="margin-top : 40px; display:grid; grid-template-columns:repeat(2,2f); width:100%;overflow:hidden;">
             <span class="productSpecsStags" style="color:rgb(51, 5, 5);">frequent searched Tags : </span>
             <span class="productSpecsStags">Bedsheets</span>
             <span class="productSpecsStags">Food</span>
@@ -416,9 +416,7 @@
             <span class="productSpecsStags"> leggings </span>
         </div>
         <br>
-        <h2>Suggestions</h2> <br> {% if user.is_authenticated%} {%else%}
-        <p style="color: brown;"> Kindly JOIN UP / LOGIN to view product details </p>
-        {% endif %}
+        <h2>Suggestions</h2> <br>
         <br>
         <br>
         <div class="productSpecsugest" id="productSpecsugest">
