@@ -8,12 +8,14 @@
     let slidebytopdealone = 0;
     let ammountscrolled = '';
     let check = true;
+    let buy4studentcontrol = 0;
 
 
     document.addEventListener("DOMContentLoaded", () => {
         //  yhandler()
         enter()
         callslide()
+        buy4seller()
         suggest()
 
     })
@@ -377,6 +379,33 @@
          setTimeout( "callaction()", 2500)
     }
 
+
+function buy4seller(){
+    let buystucover = document.getElementById('buystucover'),
+    buy4student= [...document.getElementsByClassName('buy4student')],
+    buytxt = [...document.getElementsByClassName('buytxt')];
+
+    if (buy4studentcontrol == 0){
+        buystucover.style.backgroundColor = '#ff99cc';
+        buy4student.forEach(stu=> stu.style.backgroundColor = '#336699')
+        buy4studentcontrol = 1
+        console.log('yes1')
+    }
+    else if (buy4studentcontrol == 1){
+        buystucover.style.backgroundColor = 'yellow';
+        buy4student.forEach(stu=> stu.style.backgroundColor = '#006600')
+        buy4studentcontrol = 2
+        console.log('yes2')
+    }else{
+        buystucover.style.backgroundColor = '#ff0033';
+        buy4student.forEach(stu=> stu.style.backgroundColor = 'white')
+        buytxt.forEach(stu=> stu.style.color = 'black')
+        buy4studentcontrol = 0
+    }
+
+    setTimeout( "buy4seller()", 4000)
+
+}
 
     function moveSlides(move, direction, slidewidth) {
             for (var j = 0; j < move.length; j++) {

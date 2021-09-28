@@ -21,7 +21,7 @@
         }
         
         .form {
-            margin-top: 20%;
+            margin-top: 10%;
         }
         
         #section {
@@ -204,7 +204,7 @@
                 <div id="slidedivImg" style="width: 65%; z-index:1; height:300px; overflow-x:hidden; position:relative; top:-2%; left:0%; background-color:rgb(255, 255, 255);border-radius:24px 24px;">
 
                 </div>
-                <div style="width: 45%; z-index:1; height:300px; overflow-x:hidden; position:absolute; top:0%; right:0%; background-color:rgb(255, 255, 255);;border-radius:25.5px 25.5px;">
+                <div style="width: 45%; z-index:1; height:305px; overflow-x:hidden; position:absolute; top:-1%; right:0%; background-color:rgb(255, 255, 255);;border-radius:25.5px 25.5px;">
                     <br>
 
                     <div id="descriptopdeals" style="position:relative; height:70%; top:0%; left:0%; width:100%;overflow:hidden;background-color:rgb(255, 255, 255);">
@@ -319,7 +319,7 @@
         </p>
     </div>
 
-    <div style="width: 100%; color:white; height:200px; position:relative; top:-40px; z-index:1; background-color:rgb(15, 185, 29); box-shadow: 0px 15px 15px rgba(12, 12, 0.55, 0.55);">
+    <div id="buystucover" style="width: 100%; color:white; height:200px; position:relative; top:-40px; z-index:1; background-color:rgb(15, 185, 29); box-shadow: 0px 15px 15px rgba(12, 12, 0.55, 0.55);">
         <br>
         <h3 style="margin-left:10px"> BUY FROM A STUDENT </h3><br>
         <h6 style="margin-left:10px"> contact a seller </h6>
@@ -327,8 +327,8 @@
             {% for i in buyfromstudent %}
             <div data-id="{{i.id}}" onclick="propicclick(this)" class="buy4student">
                 <img src="{{i.profilepic.url}}" alt="">
-                <p style="color: white;"><i class="fa fa-male"></i><i class="fa fa-female"></i>{{i.gender}}</p>
-                <h6 style="color: white;">{{i.about}}</h6>
+                <p class="buytxt" style="color: white;"><i class="fa fa-male"></i><i class="fa fa-female"></i>{{i.gender}}</p>
+                <h6 class="buytxt" style="color: white;">{{i.about}}</h6>
             </div>
             {% endfor %}
         </div>
