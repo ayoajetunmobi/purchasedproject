@@ -42,8 +42,7 @@ function callslide() {
 }
 
 function displayRemove() {
-    profile.style.opacity = 0
-    profile.style.zIndex = -2
+    profile.style.display = 'none'
     product.style.opacity = 0
     product.style.zIndex = -3
     viewpost.style.opacity = 0;
@@ -53,18 +52,24 @@ function displayRemove() {
     mystore.style.opacity = 0
     mystore.style.zIndex = -4
     section.style.display = 'none'
-    searchcover.style.display = "none"
-    productSpec.style.zIndex = -5
-    productSpec.style.opacity = 0
+    productSpec.style.display = 'none'
 }
 
 function homebt() {
-    profile.style.opacity = 0
-    profile.style.zIndex = -2
+    profile.style.display = 'none'
     section.style.display = 'none'
 
 }
 
+function spinner() {
+    let spinnerdiv = document.getElementById('spinnerdiv');
+    spinnerdiv.style.display = 'block';
+}
+
+function closespinner() {
+    let spinnerdiv = document.getElementById('spinnerdiv');
+    spinnerdiv.style.display = 'none';
+}
 
 function secdisplay() {
     let section = document.getElementById('section');
@@ -78,8 +83,7 @@ function closesearch() {
 }
 
 function closespec() {
-    productSpec.style.zIndex = -5
-    productSpec.style.opacity = 0
+    productSpec.style.display = 'none'
 }
 
 function closemsgDisplay() {

@@ -48,8 +48,8 @@ function disapp() {
     viewmore.style.zIndex = -3;
     product.style.opacity = 0;
     product.style.zIndex = -3;
-    profile.style.opacity = 1;
     profile.style.zIndex = 2;
+    profile.style.display = 'block';
     apimyStore.style.zIndex = -4
     apimyStore.style.opacity = 0
 }

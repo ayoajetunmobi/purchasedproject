@@ -76,6 +76,11 @@
     <img id="img3" src="{% static 'PURCHASED.jpg' %}" alt="">
 </div>
 
+<div id="spinnerdiv">
+    <div class="loader"></div>
+</div>
+
+
 <body draggable="true">
     <!--header nav and search-->
     <nav class="navbar navbar-light bg-light navbar-expand-lg">
@@ -653,35 +658,37 @@
         let target = parseInt(elem.getAttribute('data-id'));
 
         fetch('{% url "profileUpdate" %}', {
-                method: 'POST',
-                credentials: 'same-origin',
-                headers: {
-                    'Accept': 'application/json',
-                    'X-Requested-With': 'XMLHttpRequest', //Necessary to work with request.is_ajax()
-                    'X-CSRFToken': csrftoken,
-                },
-                body: JSON.stringify({
-                        'post_data': {
-                            target
-                        }
-                    }) //JavaScript object of data to POST
-            })
-            .then(response => {
-                return response.json().then(data => {
-                        if (!data.profileupdate) {
-                            return false
-                        }
-                        if (data.profileupdate) {
-                            addtoMyProfile(data.userdetail, data.data1, data.images, data.reviews, update =
-                                true, data.advert)
-                            addtoMyproduct(data.data1, data.images)
-                        }
-                        displayRemove()
-                        profile.style.opacity = 1;
-                        profile.style.zIndex = 2;
+            method: 'POST',
+            credentials: 'same-origin',
+            headers: {
+                'Accept': 'application/json',
+                'X-Requested-With': 'XMLHttpRequest', //Necessary to work with request.is_ajax()
+                'X-CSRFToken': csrftoken,
+            },
+            body: JSON.stringify({
+                    'post_data': {
+                        target
+                    }
+                }) //JavaScript object of data to POST
+        }).then(
+            spinner()
+        ).then(response => {
+            return response.json().then(data => {
+                    if (!data.profileupdate) {
+                        return false
+                    }
+                    if (data.profileupdate) {
+                        addtoMyProfile(data.userdetail, data.data1, data.images, data.reviews, update =
+                            true, data.advert)
+                        addtoMyproduct(data.data1, data.images)
+                    }
+                    displayRemove()
+                    profile.style.display = 'block'
+                    closespinner()
 
-                    }) //Convert response to JSON
-            })
+
+                }) //Convert response to JSON
+        })
     }
 
     function probt() {
@@ -690,14 +697,15 @@
             alert("please login to view user's profile")
             return false
         }
-        displayRemove()
         fetch('{% url "myprofile" %}', {
                 headers: {
                     'Accept': 'application/json',
                     'X-Requested-With': 'XMLHttpRequest', //Necessary to work with request.is_ajax()
                 },
 
-            })
+            }).then(
+                spinner()
+            )
             .then(response => {
                 return response.json().then(data => {
                         if (data) {
@@ -707,8 +715,11 @@
                             addtoMyProfile(data.userdetail, data.data1, data.images, data.reviews, update =
                                 false, data.advert)
                             addtoMyproduct(data.data1, data.images, update = true)
-                            profile.style.opacity = 1;
-                            profile.style.zIndex = 2;
+
+                            displayRemove()
+                            profile.style.display = 'block'
+                            closespinner()
+
                         }
                     }) //Convert response to JSON
             })
@@ -738,10 +749,7 @@
     // }
 
     function product_spec(elem) {
-        let searchcover = document.getElementById("searchcover");
-        searchcover.style.display = "none"
         let data = parseInt(elem.getAttribute('data'));
-
         fetch('{% url "productspec" %}', {
                 method: 'POST',
                 credentials: 'same-origin',
@@ -755,11 +763,14 @@
                             data
                         }
                     }) //JavaScript object of data to POST
-            })
+            }).then(
+                spinner()
+            )
             .then(response => {
                 return response.json().then(data => {
                         updateProductspec(data.data1, data.images, data.Sproduct, data.Simages, data.contact,
                             data.userthatwascontacted)
+                        closespinner()
                     }) //Convert response to JSON
             })
     }
@@ -772,23 +783,26 @@
             contact.style.display = 'block'
         })
         fetch('{% url "contacted" %}', {
-            method: 'POST',
-            credentials: 'same-origin',
-            headers: {
-                'Accept': 'application/json',
-                'X-Requested-With': 'XMLHttpRequest', //Necessary to work with request.is_ajax()
-                'X-CSRFToken': csrftoken,
-            },
-            body: JSON.stringify({
-                    'post_data': {
-                        seler
-                    }
-                }) //JavaScript object of data to POST
-        }).then(response => {
-            return response.json().then(data => {
-
-                }) //Convert response to JSON
-        })
+                method: 'POST',
+                credentials: 'same-origin',
+                headers: {
+                    'Accept': 'application/json',
+                    'X-Requested-With': 'XMLHttpRequest', //Necessary to work with request.is_ajax()
+                    'X-CSRFToken': csrftoken,
+                },
+                body: JSON.stringify({
+                        'post_data': {
+                            seler
+                        }
+                    }) //JavaScript object of data to POST
+            }).then(
+                spinner()
+            )
+            .then(response => {
+                return response.json().then(data => {
+                        closespinner()
+                    }) //Convert response to JSON
+            })
 
     }
 
@@ -808,7 +822,9 @@
                             target
                         }
                     }) //JavaScript object of data to POST
-            })
+            }).then(
+                spinner()
+            )
             .then(response => {
                 return response.json().then(data => {
                         let deleteMsg = [...document.getElementsByClassName('deleteMsg')];
@@ -818,6 +834,7 @@
                         div.parentNode.removeChild(div)
                         let marpicDelete = document.getElementById('marpicDelete');
                         marpicDelete.style.display = 'none'
+                        closespinner()
                     }) //Convert response to JSON
             })
     }
@@ -846,12 +863,15 @@
                             msgid
                         }
                     }) //JavaScript object of data to POST
-            })
+            }).then(
+                spinner()
+            )
             .then(response => {
                 return response.json().then(data => {
                         let msgDisplay = document.getElementById('msgDisplay');
                         msgDisplay.style.display = 'none'
                         msgDisplay.style.zIndex = -5
+                        closespinner()
                     }) //Convert response to JSON
             })
     }
@@ -864,10 +884,13 @@
                     'X-Requested-With': 'XMLHttpRequest', //Necessary to work with request.is_ajax()
                 },
 
-            })
+            }).then(
+                spinner()
+            )
             .then(response => {
                 return response.json().then(data => {
                         getmsg(data.message)
+                        closespinner()
                     }) //Convert response to JSON
             })
     }
@@ -925,15 +948,18 @@
                             target2
                         }
                     }) //JavaScript object of data to POST
-            })
+            }).then(
+                spinner()
+            )
             .then(response => {
                 return response.json().then((data) => {
+                    console.log(data)
                     if (data.yes) {
                         searchengine(data, yes = true, data.images)
                     } else {
                         searchengine(data)
-
                     }
+                    closespinner()
                 })
             }) //Convert response to JSON
     }

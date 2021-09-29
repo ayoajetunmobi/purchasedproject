@@ -5,14 +5,13 @@
     width: 70%;
     height: 90%;
     transform: translate(-50%, -50%);
-    display: block;
     background-color: white;
     border-left: 2px solid rgb(255, 255, 255);
     overflow: scroll;
     overflow-x: hidden;
     transition: 0.4s ease-in;
-    opacity: 0;
-    z-index: -2;
+    z-index: 2;
+    display: none;
 }
 
 #bigpic-overlay {

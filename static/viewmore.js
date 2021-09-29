@@ -9,6 +9,7 @@
     let ammountscrolled = '';
     let check = true;
     let buy4studentcontrol = 0;
+    let body = document.getElementsByTagName('body');
 
 
     document.addEventListener("DOMContentLoaded", () => {
@@ -50,9 +51,7 @@
     // }
 
     function searchengine(data, yes = false, images) {
-
         let searchcover = document.getElementById('searchcover');
-        searchcover.style.display = 'none'
 
         searchcover.innerHTML = ""
 
@@ -67,6 +66,7 @@
             `
 
         if (data1) {
+            searchcover.style.display = 'block';
             searchcover.innerHTML += `
             <img onclick="propicclick(this)" data-id=${data1[2]} style="width: 100px; height:100px;overflow:hidden; border-radius:100px;" src="media/${data1[1]}" alt="">
             <p style="text-align: center;"> ${data1[0]} </p`
@@ -88,6 +88,7 @@
         }
 
         if (data3) {
+            searchcover.style.display = 'block';
             searchcover.innerHTML +=
                 `
          <h2>   "${data3}</h2>`
@@ -95,6 +96,8 @@
     }
 
     function addtoMyproduct(product, images, update = false) {
+        let searchcover = document.getElementById('searchcover');
+        searchcover.style.display = 'none'
         let i = 0;
         viewpostt.innerHTML = "";
         if (product == null || product == -1 || images == -1 || images == -null) {
@@ -130,13 +133,10 @@
         specDescription = document.getElementById('specDescription'),
         specImgs = document.getElementById('specImgs'),
         productSpecsugest = document.getElementById('productSpecsugest');
-
-        spec.style.opacity = 1
-        spec.style.zIndex = 5
+        spec.style.display = 'block'
         spec.scrollTop = '0px'
-
-
-         if (product == null || product == -1 || productImg == -1 || productImg  == null, contact == -1 || contact  == null) {
+                       
+        if (product == null || product == -1 || productImg == -1 || productImg  == null, contact == -1 || contact  == null) {
             return false
         } else {
             specPropic.innerHTML = ''
@@ -211,7 +211,6 @@
         let i = 0;
         let ii = 0;
         let profilecover = document.getElementById('profile');
-
         profilecover.scrollTop = "0px";
 
         cover.innerHTML = "";
