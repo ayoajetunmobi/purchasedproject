@@ -649,6 +649,9 @@
         let tabcontents = document.querySelectorAll('.tab-cotents li');
         let target = parseInt(elem.getAttribute('data-id'));
 
+        profile.scrollTop = '0px'
+        profile.style.display = 'none'
+
         fetch('{% url "profileUpdate" %}', {
             method: 'POST',
             credentials: 'same-origin',
@@ -682,6 +685,8 @@
     }
 
     function probt() {
+        profile.scrollTop = '0px'
+        profile.style.display = 'none'
         let upldpro_form = document.getElementById('upldpro_form')
         if (upldpro_form == -1 || upldpro_form == null) {
             alert("please login to view user's profile")

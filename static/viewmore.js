@@ -179,7 +179,7 @@
                  if(pro.id == img.product_id){
                        a = img.product_img
                 }})
-                 productSpecsugest.innerHTML += `
+             productSpecsugest.innerHTML += `
                    <article data="">
                    <img data=${pro.id} onclick="product_spec(this)" style="max-width: 120px; height:140px; margin-left:20px;border:1px groove yellow;" src="media/${a}" alt="">
                      <span>
@@ -217,8 +217,9 @@
         let i = 0;
         let ii = 0;
         let profilecover = document.getElementById('profile');
-        profilecover.scrollTop = "0px";
-
+        profilecover.style.display= 'none'
+        spinner()
+        spinner()
         cover.innerHTML = "";
 
         if (profile == null || profile == -1) {
@@ -297,6 +298,8 @@
                 }
             }
         }
+        profilecover.style.display = 'block'
+        closespinner()
     }
 
     function moveslide(){
