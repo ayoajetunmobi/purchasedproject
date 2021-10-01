@@ -1,8 +1,9 @@
     body {
         font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
         scroll-behavior: smooth;
+        position: absolute;
+        top: 0%;
         width: 100%;
-        height: fit-content;
     }
     
     #spinnerdiv {
@@ -238,6 +239,7 @@
         height: 350px;
         margin: 0px auto;
         overflow: hidden;
+        list-style: none;
     }
     
     .productSpecsugest {
@@ -247,12 +249,6 @@
         margin-bottom: 50px;
         width: 100%;
         overflow: scroll;
-    }
-    
-    .productSpecsStags {
-        padding: 10px;
-        color: rgb(255, 0, 0);
-        margin-left: 23px
     }
     
     .a {
