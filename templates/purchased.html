@@ -748,6 +748,8 @@
 
     function product_spec(elem) {
         let data = parseInt(elem.getAttribute('data'));
+        let spec = document.getElementById('productSpec');
+        spec.style.display = 'none'
         fetch('{% url "productspec" %}', {
                 method: 'POST',
                 credentials: 'same-origin',
