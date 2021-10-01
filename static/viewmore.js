@@ -200,10 +200,10 @@
             `
     }
      }
-     setTimeout(updateProductspec,1000)
       spec.style.display = 'block'
       closespinner()
         moveslide()
+         setTimeout(updateProductspec,1000)
     }
 
     function addtoMyProfile(profile, product, images, reviews, update = false, advert){
