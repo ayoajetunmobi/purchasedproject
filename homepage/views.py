@@ -60,14 +60,15 @@ def formsdispaly(request):
     
     topdealsNDstudent1 = User_Detail.objects.get(username = 'Solanke')
     topdealsNDstudent2 = User_Detail.objects.get(username = 'THaLES')
-    topdealsNDstudent3 = User_Detail.objects.get(username = 'Oyindamola')
-    topdealsNDstudent4 = User_Detail.objects.get(username = 'Charlies Spag')
+    topdealsNDstudent3 = User_Detail.objects.get(username = 'DO Empire')
+    topdealsNDstudent4 = User_Detail.objects.get(username = 'Mamuzo')
   
     topdealsNDstudent = [topdealsNDstudent1,topdealsNDstudent2,topdealsNDstudent3,topdealsNDstudent4]
     context['buyfromstudent'] = topdealsNDstudent
     
     
     if loged_in_user.is_authenticated:
+        print(loged_in_user)
         review = Reviews.objects.all()
         user_details = User_Detail.objects.get(user=loged_in_user)
         products = User_product.objects.filter(campus = user_details.campus).order_by('-id')[:12]
@@ -96,7 +97,6 @@ def formsdispaly(request):
                 i.delete()
         context['images']= images
 
-           
     if form1.is_valid() and form2.is_valid():
         code =  str(random.random())[14:]
         email= form1.save(commit=False)
@@ -107,14 +107,14 @@ def formsdispaly(request):
         profile.user=email
         profile.profilepic = Images
         profile.save()
-        
+
         user = User_Detail.objects.get(user=email)
         user.answer = code
         user.save()
-        
-        mesageUser = Messages.objects.create(message=('hi '+user.username+' !!! welcome to purchased start exploring our online market place by searching for your desired product or services' ) , my_messages = user)
-        return HttpResponseRedirect('/login/') 
-       
+
+        mesageUser = Messages.objects.create(message=('hi '+user.username+' !!! welcome to purchased start exploring our online market place by searching for your desired product or service. Become a seller by just create=ing post with detailed product description'),my_messages =user )
+        return HttpResponseRedirect('/login/')
+
        
     # context["product"]=products
     context["form1"]=form1
@@ -555,9 +555,9 @@ def msgDisplay(request):
 
 def suggestproduct(request):
     context={}
-    products = User_product.objects.all()[25:35]
+    products = User_product.objects.all()[15:26]
     suggestions  = []
-    suggestions1 = User_product.objects.filter(Q(searchTag__contains = 'food') | Q(searchTag__contains = 'ofada')).order_by("-id")[:1]
+    suggestions1 = User_product.objects.filter(Q(searchTag__contains = 'food') | Q(searchTag__contains = 'rice')).order_by("-id")[:1]
     suggestions2 = User_product.objects.filter(Q(searchTag__contains = 'google') | Q(searchTag__contains = 'phone')).order_by("-id")[:1]
     suggestions3 = User_product.objects.filter(Q(searchTag__contains = 'beuty') | Q(searchTag__contains = 'wig')).order_by("-id")[:1]
     suggestions4 =  User_product.objects.filter(Q(searchTag__contains = 'jewel') | Q(searchTag__contains = 'necklace')).order_by("-id")[:1]

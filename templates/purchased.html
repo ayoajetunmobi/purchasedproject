@@ -17,7 +17,7 @@
         header {
             min-height: 55vh;
             align-items: center;
-            width: auto;
+            width: 100%;
         }
         
         .form {
@@ -674,6 +674,7 @@
             spinner()
         ).then(response => {
             return response.json().then(data => {
+                    closespinner()
                     if (!data.profileupdate) {
                         return false
                     }
@@ -684,9 +685,6 @@
                     }
                     displayRemove()
                     profile.style.display = 'block'
-                    closespinner()
-
-
                 }) //Convert response to JSON
         })
     }
