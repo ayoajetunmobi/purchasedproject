@@ -200,6 +200,7 @@
             `
     }
      }
+     setTimeout(updateProductspec,1000)
       spec.style.display = 'block'
       closespinner()
         moveslide()
