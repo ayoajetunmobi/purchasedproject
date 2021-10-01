@@ -572,7 +572,7 @@ def suggestproduct(request):
     for i in products:
          productsrotateImg.append(Product_image.objects.filter(product = i).values()[0])
          
-    context['products'] =  list(User_product.objects.all().values()[25:35])
+    context['products'] =  list(User_product.objects.all().values()[15:26])
     context['productsrotateImg'] = list(productsrotateImg)
         
     context['suggestion1'] = list((suggestions1).values())
