@@ -404,7 +404,7 @@ function buy4seller(){
         buy4studentcontrol = 0
     }
 
-    setTimeout( "buy4seller()", 6000)
+    setTimeout( "buy4seller()", 4900)
 
 }
 
