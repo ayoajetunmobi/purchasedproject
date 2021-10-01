@@ -12,6 +12,7 @@
     transition: 0.4s ease-in;
     z-index: 2;
     display: none;
+    scroll-behavior: smooth;
 }
 
 #bigpic-overlay {

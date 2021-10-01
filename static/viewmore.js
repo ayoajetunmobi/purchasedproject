@@ -81,7 +81,7 @@
                    <article class="post4store"  data = "${data2.id}" onclick= "product_spec(this)">
                         <img class="postimg" src="media/${images[i].product_img}" alt="">
                         <p class="postdesc">${data2.searchTag}</p>
-                        <p>${data2.price}</p>
+                        <p style="color:gold">N${data2.price}</p>
                     </article>`
                 i++
             })

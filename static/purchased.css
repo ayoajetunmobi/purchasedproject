@@ -2,7 +2,6 @@
         font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
         scroll-behavior: smooth;
         width: 100%;
-        margin: 0 auto;
         height: fit-content;
     }
     
@@ -223,7 +222,7 @@
         width: 74%;
         height: 110%;
         overflow-x: hidden;
-        transition: 0.4s ease-in;
+        scroll-behavior: smooth;
     }
     
     #specImgs {
