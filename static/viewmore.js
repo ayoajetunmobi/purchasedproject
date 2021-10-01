@@ -103,7 +103,7 @@
         if (product == null || product == -1 || images == -1 || images == -null) {
             return false
         } else {
-            product.forEach(product => {
+            product.forEach((product) => {
                         viewpostt.innerHTML +=
                             `
                     <article style="display:grid; grid-template-columns:repeat(1,3fr); max-width:130px; margin:13px;  margin-bottom:13px;" data="">
@@ -133,8 +133,10 @@
         specDescription = document.getElementById('specDescription'),
         specImgs = document.getElementById('specImgs'),
         productSpecsugest = document.getElementById('productSpecsugest');
-        spec.style.display = 'block'
         spec.scrollTop = '0px'
+
+        spec.style.display = 'none'
+        spinner()
                        
         if (product == null || product == -1 || productImg == -1 || productImg  == null, contact == -1 || contact  == null) {
             return false
@@ -196,8 +198,10 @@
                 <a href="tel:${contact}"> <button onclick="msg(this)" seller=${seller} style="width: 100%; margin-bottom:30px; color:white;height:30px; border-radius:15px; background-image: linear-gradient(to bottom right, rgb(0, 255, 34), rgb(52, 107, 59));">
                 contact seller </button></a> 
             `
- }
-        }
+    }
+     }
+      spec.style.display = 'block'
+      closespinner()
         moveslide()
     }
 
