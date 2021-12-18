@@ -1,332 +1,389 @@
-    body {
-        font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
-        scroll-behavior: smooth;
-        position: absolute;
-        top: 0%;
-        width: 100%;
-        margin: 0px auto;
-    }
-    
-    #spinnerdiv {
-        position: fixed;
-        width: 100%;
-        height: 100%;
-        top: 0%;
-        z-index: 6;
-        display: none;
-    }
-    
-    .loader {
-        border: 10px solid #f3f3f3;
-        /* Light grey */
-        border-top: 10px solid #000000;
-        border-radius: 50%;
-        margin: 30% auto;
-        width: 110px;
-        height: 110px;
-        animation: spin 2s linear infinite;
-    }
-    
-    #searchcover {
-        position: fixed;
-        top: 0%;
-        display: none;
-        z-index: 4;
-        background-color: white;
-        width: 100%;
-        height: 110%;
-        overflow-x: hidden;
-        transition: 1.5s ease-in;
-    }
-    
-    .topdealsdiv {
-        width: 100%;
-        height: 300px;
-        position: relative;
-        top: -90px;
-        z-index: 1;
-        text-align: center;
-        overflow: hidden;
-    }
-    
-    .topdealimg {
-        width: 200px;
-        z-index: 1;
-        height: 180px;
-        overflow-x: hidden;
-        position: absolute;
-        left: 0%;
-        border-radius: 24px 24px;
-    }
-    
-    .Fprodisplay {
-        height: 170px;
-        width: 290px;
-        margin-top: 25px;
-        border-radius: 5px 5px 8px 8px;
-        margin-left: 10px
-    }
-    
-    .Fprodisplay img {
-        width: 100%;
-        border-radius: 5px;
-        height: 100%;
-    }
-    
-    .post {
-        margin: 0px auto;
-        width: 200px;
-        height: 250px;
-        overflow: hidden;
-    }
-    
-    .postimg {
-        width: 100px;
-        height: 100px
-    }
-    
-    .postdesc {
-        width: 70%;
-    }
-    
-    .post4store {
-        width: 120px;
-    }
-    
-    .buy4student {
-        text-align: center;
-        width: 150px;
-        height: 230px;
-        background-color: rgb(0, 255, 21);
-        border-radius: 9px;
-        margin: 10px auto;
-    }
-    
-    .buy4student img {
-        width: 75%;
-        margin: 4px 20px;
-        height: 45%;
-        border-radius: 100px;
-    }
-    
-    #closesearch {
-        position: absolute;
-        margin-top: 10px;
-        left: 90%;
-        font-size: large;
-        color: red;
-    }
-    
-    .account .inputs {
-        display: grid;
-        grid-template-columns: repeat(1, 10fr);
-        border: none;
-        margin-bottom: 44px;
-        border-bottom: 1px solid black;
-        font-size: 16px;
-        height: 20px;
-        padding: 10px;
-        width: 90%;
-    }
-    
-    .account input:last-child {
-        border-bottom: none;
-        margin-bottom: 30px;
-        border: none;
-        width: 90%;
-        text-align: center;
-        height: 30px;
-        background: rgb(0, 255, 76);
-        color: #fff;
-        margin-left: 12px;
-        font-size: 16px;
-        border-radius: 5px;
-    }
-    
-    #wrapper {
-        position: relative;
-        width: 100%;
-        left: 0;
-        background-color: #fff;
-        z-index: 1;
-        padding-top: 35px;
-        top: 450px;
-        overflow-x: hidden;
-        opacity: 1;
-        scroll-behavior: smooth;
-    }
-    
-    #wrap {
-        width: 100%;
-        text-align: center;
-        display: grid;
-        grid-template-columns: repeat(4, 1fr);
-        background-color: #fff;
-        opacity: 1;
-        z-index: 1;
-        margin-top: 5px;
-        overflow-x: hidden;
-    }
-    
-    .pos1 {
-        box-shadow: 0 29px 29px rgba(29, 29, 25, 0.25);
-        background: white;
-        min-width: 100px;
-        min-height: 140px;
-        max-height: 340px;
-        margin: 3px;
-        display: grid;
-        margin-bottom: 9;
-        grid-template-columns: repeat(1, 3fr);
-        text-align: center;
-    }
-    
-    .offline {
-        position: absolute;
-        z-index: 2;
-        border-radius: 30px;
-        width: 10px;
-        height: 10px;
-        background-color: rgb(29, 44, 29);
-        border: 1px solid white;
-    }
-    
-    .online {
-        position: absolute;
-        z-index: 2;
-        border-radius: 30px;
-        width: 10px;
-        height: 10px;
-        background-color: green;
-        border: 1px solid white;
-    }
-    
-    .propicp {
-        width: 20px;
-        height: 20px;
-        border: 1px groove rgb(0, 0, 0);
-        border-radius: 150px;
-        left: 0;
-        cursor: pointer;
-        margin: 7px 0px;
-        z-index: 1;
-        overflow: hidden;
-    }
-    
-    .productSpec {
-        z-Index: 5;
-        display: none;
-        background-color: rgb(255, 255, 255);
-        position: fixed;
-        top: 0vh;
-        left: 14%;
-        width: 74%;
-        height: 110%;
-        overflow-x: hidden;
-        scroll-behavior: smooth;
-    }
-    
-    #specImgs {
-        position: relative;
-        width: 100%;
-        height: 300px;
-        overflow: hidden;
-    }
-    
-    .productSpecpiclist {
-        position: relative;
-        width: 350px;
-        height: 350px;
-        margin: 0px auto;
-        overflow: hidden;
-        list-style: none;
-    }
-    
-    .productSpecsugest {
-        display: grid;
-        grid-template-columns: repeat(5, 1fr);
-        text-align: center;
-        margin-bottom: 50px;
-        width: 100%;
-        overflow: scroll;
-    }
-    
-    .a {
-        text-decoration: none;
-        color: blue;
-        cursor: none;
-        font-size: x-small;
-        font-weight: lighter;
-        letter-spacing: 1px;
-        margin-top: 10px;
-    }
-    
-    .article {
-        position: relative;
-        background: #ffffff;
-        height: 155px;
-        overflow: hidden;
-        max-height: 100px;
-    }
-    
-    .slidep {
-        max-width: 99px;
-        max-height: 150px;
-        z-index: 1;
-        overflow: hidden;
-    }
-    
-    .slidep img {
-        max-height: 100px;
-    }
-    
-    .pricinp {
-        background-color: #ffffff;
-        font-size: small;
-        color: #91792b;
-        letter-spacing: 1px;
-        max-height: 50px;
-        z-index: 1;
-    }
-    
-    .describe {
-        position: relative;
-        width: 100%;
-        text-align: center;
-        letter-spacing: 1px;
-        font-size: 9pt;
-        font-family: Arial, Helvetica, sans-serif;
-        font-weight: lighter;
-        background: #ffffff;
-        z-index: 1;
-        overflow: hidden;
-    }
-    
-    @media screen and (max-width: 964px) {
-        .artic {
-            height: 70vh;
-        }
-    }
-    
-    @media screen and (max-width: 590px) {
-        .productSpec {
-            left: 0%;
-            width: 100%;
-            height: 100%;
-        }
-        #wrap {
-            grid-template-columns: repeat(3, 1fr);
-        }
-        .loader {
-            margin: 80% auto;
-        }
-    }
-    
-    @keyframes spin {
-        0% {
-            transform: rotate(0deg);
-        }
-        100% {
-            transform: rotate(360deg);
-        }
-    }
+ body {
+     width: 100%;
+     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+     height: 100%;
+ }
+ 
+ #body {
+     position: absolute;
+     top: 0%;
+     left: 0%;
+     width: 100%;
+     overflow-x: hidden;
+     height: fit-content;
+     transition: all .2s;
+ }
+ 
+ #spinnerdiv {
+     position: fixed;
+     width: 100%;
+     height: 100%;
+     top: 0%;
+     z-index: 6;
+     display: none;
+ }
+ 
+ .loader {
+     border: 10px solid #f3f3f3;
+     /* Light grey */
+     border-top: 10px solid #000000;
+     border-radius: 50%;
+     margin: 30% auto;
+     width: 110px;
+     height: 110px;
+     animation: spin 2s linear infinite;
+ }
+ 
+ #navbarScroll {
+     position: relative;
+ }
+ 
+ #navlinkul {
+     display: flex;
+     justify-content: center;
+     list-style: none;
+ }
+ 
+ .navlink {
+     margin: 20px;
+     text-decoration: none;
+     color: rgb(255, 255, 255);
+     cursor: pointer;
+ }
+ 
+ .navbarclick {
+     display: none;
+     height: 104px;
+     width: 60px;
+     cursor: pointer;
+ }
+ 
+ .sidebar {
+     position: fixed;
+     width: 80%;
+     left: -81%;
+     z-index: 4;
+     height: 100%;
+     background-image: linear-gradient(#2a0518, #ff0084);
+     margin: 0px;
+     overflow: hidden;
+     transition: all .2s ease-in;
+ }
+ 
+ .sidebar header {
+     background-color: #2a0518;
+     height: 120px;
+     overflow: hidden;
+     width: 100%;
+     user-select: none;
+     margin-left: 25%;
+ }
+ 
+ .sidebar ul li {
+     width: 100%;
+     height: 100%;
+     line-height: 50px;
+     font-size: 26px;
+     border-top: 2px solid rgba(70, 51, 67, 0.356);
+     border-bottom: 1px solid black;
+     margin-left: 25%;
+ }
+ 
+ .sidebar ul a {
+     text-decoration: none;
+     margin: 30px;
+     color: white;
+     transition: .4s;
+ }
+ 
+ #searchcover {
+     position: fixed;
+     top: 0%;
+     display: none;
+     z-index: 4;
+     background-color: white;
+     width: 100%;
+     height: 100%;
+     overflow-x: hidden;
+     transition: 1.5s ease-in;
+ }
+ 
+ #searchinput {
+     width: 70%;
+     height: 40px;
+     margin-top: 34px;
+     border-radius: 10px 10px 5px 5px;
+     margin-left: 10%;
+ }
+ 
+ #submitttsearch {
+     height: 43px;
+     color: white;
+     background-color: aqua;
+     border-radius: 10px 10px 5px 5px;
+     width: 15%;
+ }
+ 
+ .Fprodisplay {
+     height: 170px;
+     width: 290px;
+     margin: 13px 12px;
+     border-radius: 8px 8px 8px 8px;
+     border: 2px groove rgb(255, 255, 255);
+ }
+ 
+ .Fprodisplay img {
+     width: 100%;
+     border-radius: 5px;
+     height: 100%;
+ }
+ 
+ .post {
+     margin: 20px auto;
+     width: 150px;
+     height: 255px;
+     overflow: hidden;
+     box-shadow: 0 10px 10px rgba(10, 10, 10, 0.10);
+ }
+ 
+ .postimg {
+     margin: 0px auto;
+     width: 150px;
+     height: 150px
+ }
+ 
+ .pricesugg {
+     color: rgb(145, 125, 15);
+     margin-top: 0px;
+     font-weight: 700;
+     letter-spacing: 1px;
+ }
+ 
+ .postdesc {
+     font-size: smaller;
+     font-weight: 400;
+ }
+ 
+ .post4store {
+     width: 130px;
+     height: fit-content;
+     padding: 30px;
+ }
+ 
+ .post4store img {
+     width: 130px;
+     border-radius: 150px;
+ }
+ 
+ #closesearch {
+     position: absolute;
+     margin-top: 10px;
+     left: 90%;
+     font-size: large;
+     color: red;
+ }
+ 
+ #wrapper {
+     position: relative;
+     width: 100%;
+     left: 0;
+     background-color: #fff;
+     z-index: 1;
+     padding-top: 35px;
+     overflow-x: hidden;
+     opacity: 1;
+     scroll-behavior: smooth;
+ }
+ 
+ #wrap {
+     width: 100%;
+     text-align: center;
+     display: grid;
+     grid-template-columns: repeat(4, 1fr);
+     background-color: #fff;
+     opacity: 1;
+     z-index: 1;
+     margin-top: 5px;
+     overflow-x: hidden;
+ }
+ 
+ .pos1 {
+     box-shadow: 0 29px 29px rgba(29, 29, 25, 0.25);
+     background: white;
+     min-width: 100px;
+     min-height: 140px;
+     max-height: 340px;
+     margin: 3px;
+     display: grid;
+     margin-bottom: 9;
+     grid-template-columns: repeat(1, 3fr);
+     text-align: center;
+ }
+ 
+ .offline {
+     position: absolute;
+     z-index: 2;
+     border-radius: 30px;
+     width: 10px;
+     height: 10px;
+     background-color: rgb(29, 44, 29);
+     border: 1px solid white;
+ }
+ 
+ .online {
+     position: absolute;
+     z-index: 2;
+     border-radius: 30px;
+     width: 10px;
+     height: 10px;
+     background-color: green;
+     border: 1px solid white;
+ }
+ 
+ .propicp {
+     width: 20px;
+     height: 20px;
+     border: 1px groove rgb(0, 0, 0);
+     border-radius: 150px;
+     left: 0;
+     cursor: pointer;
+     margin: 7px 0px;
+     z-index: 1;
+     overflow: hidden;
+ }
+ 
+ .productSpec {
+     z-Index: 5;
+     display: none;
+     background-color: rgb(255, 255, 255);
+     position: fixed;
+     top: 0vh;
+     left: 14%;
+     width: 74%;
+     height: 100%;
+     overflow-x: hidden;
+     scroll-behavior: smooth;
+ }
+ 
+ #specImgs {
+     position: relative;
+     width: 100%;
+     height: 300px;
+     overflow: hidden;
+ }
+ 
+ .productSpecpiclist {
+     position: relative;
+     width: 350px;
+     height: 350px;
+     margin: 0px auto;
+     overflow: hidden;
+     list-style: none;
+ }
+ 
+ .productSpecsugest {
+     display: grid;
+     grid-template-columns: repeat(5, 1fr);
+     text-align: center;
+     margin-bottom: 50px;
+     width: 100%;
+     overflow: scroll;
+ }
+ 
+ .productSpecsugest img {
+     border-radius: 60px;
+ }
+ 
+ .tipswriteup {
+     font-size: x-small;
+     font-weight: 100;
+ }
+ 
+ .a {
+     text-decoration: none;
+     color: blue;
+     cursor: none;
+     font-size: x-small;
+     font-weight: lighter;
+     letter-spacing: 1px;
+     margin-top: 10px;
+ }
+ 
+ .article {
+     position: relative;
+     background: #ffffff;
+     height: 155px;
+     overflow: hidden;
+     max-height: 100px;
+ }
+ 
+ .slidep {
+     max-width: 99px;
+     max-height: 150px;
+     z-index: 1;
+     overflow: hidden;
+ }
+ 
+ .slidep img {
+     max-height: 100px;
+ }
+ 
+ .pricinp {
+     background-color: #ffffff;
+     font-size: small;
+     color: #91792b;
+     letter-spacing: 1px;
+     max-height: 50px;
+     z-index: 1;
+ }
+ 
+ .describe {
+     position: relative;
+     width: 100%;
+     text-align: center;
+     letter-spacing: 1px;
+     font-size: 9pt;
+     font-family: Arial, Helvetica, sans-serif;
+     font-weight: lighter;
+     background: #ffffff;
+     z-index: 1;
+     overflow: hidden;
+ }
+ 
+ @media screen and (max-width: 964px) {
+     .artic {
+         height: 70vh;
+     }
+ }
+ 
+ @media screen and (max-width: 590px) {
+     .productSpec {
+         left: 0%;
+         width: 100%;
+         height: 100%;
+     }
+     .post {
+         margin: 20px -9px;
+     }
+     #navbarScroll {
+         display: none;
+     }
+     #wrap {
+         grid-template-columns: repeat(3, 1fr);
+     }
+     .loader {
+         margin: 80% auto;
+     }
+     .navbarclick {
+         display: block;
+     }
+ }
+ 
+ @keyframes spin {
+     0% {
+         transform: rotate(0deg);
+     }
+     100% {
+         transform: rotate(360deg);
+     }
+ }

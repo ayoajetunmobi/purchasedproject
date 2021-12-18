@@ -1,0 +1,138 @@
+{%load static%}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        .login {
+            position: absolute;
+            background-color: grey;
+            width: 100%;
+            left: 0%;
+            top: 0%;
+            display: block;
+            z-index: 1;
+            background: linear-gradient(#0005, #0005),
+            url("{% static 'background.jpg' %}");
+        }
+        
+        .background {
+            border-radius: 20px;
+            margin: 0px auto;
+            width: 37%;
+            height: fit-content;
+            background: linear-gradient(#0005,
+            #0005),
+            url("{% static 'background.jpg' %}");
+            color: white;
+            text-align: center;
+            z-index: 2;
+            margin-bottom: 24px;
+        }
+        
+        .close {
+            position: absolute;
+            right: 6%;
+            font-size: larger;
+            margin-top: 10px;
+        }
+        
+        .background input {
+            width: 98%;
+            z-index: 1;
+        }
+        
+        .background .inputs {
+            border: none;
+            border-bottom: 1px solid white;
+            outline: none;
+            font-size: 18px;
+            margin-bottom: 30px;
+            background: none;
+            color: rgb(0, 0, 0);
+        }
+        
+        .background input[type='submit'] {
+            border-radius: 6px;
+            background: rgb(0, 255, 76);
+            outline: none;
+            color: white;
+            cursor: pointer;
+            font-weight: bolder;
+            margin-bottom: 40px;
+        }
+        
+        .background a {
+            color: darkgray;
+            text-decoration: none;
+        }
+        
+        @media screen and (max-width: 1080px) {
+            .background {
+                width: 50%;
+            }
+        }
+        
+        @media screen and (max-width: 700px) {
+            .background {
+                width: 60%;
+            }
+        }
+        
+        @media screen and (max-width: 500px) {
+            .background {
+                width: 65%;
+            }
+        }
+        
+        @media screen and (max-width: 425px) {
+            .background {
+                width: 70%;
+            }
+        }
+        
+        @media screen and (max-width: 360px) {
+            .background {
+                width: 75%;
+            }
+        }
+    </style>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
+    </head>
+
+    <body>
+        <div class="login">
+            <div class="background">
+                <a href="{% url 'home' %}"><span class="close" draggable="true"><i style="color: rgb(0, 0, 0);"
+                            class="fa fa-arrow-left"></i></span></a><br><br>
+                <img src="{% static 'logopurchase.png' %}" alt="" width="fit-content" height="104px" />
+                <h6 style="font-family: Arial, Helvetica, sans-serif; color:rgb(0, 0, 0);">Register</h6>
+                <form method="POST" class="getdetails" enctype="multipart/form-data">{% csrf_token %} {{form1}} {{form2}}
+
+                    <label for="file"> CHOOSE PROFILE PICTURE</label><br>
+                    <input type="file" name="eproimages" accept=".jpg,.png,.PNG,.JPG" required>
+                    <br><br><br />
+                    <input type="submit" value="CREATE" />
+                </form>
+
+            </div>
+        </div>
+    </body>
+    <script src="https:/code.jquery.com/jquery-3.3.1.js "></script>
+
+</html>
+
+</body>
+
+</html>

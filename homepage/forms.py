@@ -1,28 +1,30 @@
 from django import forms
 from django.core.exceptions import ValidationError
-from .models import  User_Detail , User_product , Product_image ,  Customer_care
+from .models import  User_Detail , User_product , Product_image
 from django.contrib.auth import get_user_model
 
 
 User=get_user_model()
 
 class RegistrationForm(forms.ModelForm):
-    email= forms.EmailField(required=True , widget=forms.TextInput(attrs={
-        "class":"inputs","placeholder":"Enter email "
+    email= forms.EmailField(required=True , label="EMAIL ADDRESS", widget=forms.TextInput(attrs={
+        "class":"inputs","placeholder":"Enter email",
     }))
-    password1= forms.CharField(label= 'password',widget= forms.PasswordInput(
+    password1= forms.CharField(label= "PASSWORD", widget= forms.PasswordInput(
       attrs={
           "name":"Password", "placeholder":"Enter password","class":"inputs"
       }
     ))
-    password2= forms.CharField(label= 'verifypassword',widget= forms.PasswordInput(
+    password2= forms.CharField(label= "CONFIRM PASSWORD" , widget= forms.PasswordInput(
       attrs={
           "name":"Confirm password", "placeholder":"Confirm password","class":"inputs"
       }
     ))
+    
     class Meta:
         model = User
         fields = ('email',)
+        
     
     def clean_password(self):
         password1 = self.cleaned_data.get("password1")
@@ -30,6 +32,7 @@ class RegistrationForm(forms.ModelForm):
         if password1 and password2 and password1 != password2:
             raise forms.ValidationError('passwords don"t match')
         return password2
+    
     
     def clean_email(self):
         email= self.cleaned_data.get('email')
@@ -52,15 +55,15 @@ class RegistrationForm(forms.ModelForm):
 User=get_user_model()
 
 class UserDetailForm (forms.ModelForm): 
-    username          = forms.CharField(max_length = 150 ,widget=forms.TextInput(
+    username          = forms.CharField(max_length = 150 , label = "USERNAME", widget=forms.TextInput(
         attrs={
             "placeholder":"Enter username","class":"inputs"
         }))
-    firstname          = forms.CharField(max_length = 150 ,widget=forms.TextInput(
+    firstname          = forms.CharField(max_length = 150 , label = "FIRST NAME", widget=forms.TextInput(
         attrs={
             "placeholder":"Enter firstname","class":"inputs"
         }))
-    lastname           = forms.CharField(max_length = 150,widget=forms.TextInput(
+    lastname           = forms.CharField(max_length = 150, label = "LAST NAME",widget=forms.TextInput(
         attrs={
             "placeholder":"Enter lastname","class":"inputs"
         }))
@@ -68,23 +71,23 @@ class UserDetailForm (forms.ModelForm):
     gender             = forms.SelectDateWidget(attrs={
        "class":"inputs"
     })
-    contact            = forms.IntegerField(widget=forms.TextInput(
+    contact            = forms.IntegerField( label = "CONTACT", widget=forms.TextInput(
         attrs={
             "placeholder":"Enter contact no.","class":"inputs", "maxlength":"15"
         }))
-    about             = forms.CharField( max_length=80,widget=forms.TextInput(
+    about             = forms.CharField( label = "ABOUT YOURSELF", max_length=500,widget=forms.TextInput(
         attrs={
             "placeholder":"About user" , "maxlength":"70","class":"inputs"
         }))
-    quote             = forms.CharField(max_length = 60, required=True, widget=forms.TextInput(
+    quote             = forms.CharField( label = "A QUOTE YOU CANNOT FORGET", max_length = 500, required=True, widget=forms.TextInput(
         attrs={
             "placeholder":"Favorite Quote","maxlength":"60","class":"inputs"
         }))
-    matricNo         = forms.CharField(max_length = 60,required=False,widget=forms.TextInput(
+    matricNo         = forms.CharField( label = "MATRIC NO", max_length = 60,required=False,widget=forms.TextInput(
         attrs={
             "placeholder":"matric number(optional)","maxlength":"60","class":"inputs"
         }))
-    campus   = forms.SelectDateWidget(  attrs={
+    campus   = forms.SelectDateWidget( attrs={
        "class":"inputs"
     })
     
@@ -103,16 +106,3 @@ class UserDetailForm (forms.ModelForm):
         return username
 
 
-class Customer_care_form(forms.ModelForm):
-    report_problem         = forms.CharField(max_length = 10000 ,widget=forms.Textarea(
-        attrs={
-            "placeholder":"we are here for you","cols":"20" ,"rows":"3"
-        }))
-    suggestion_box        = forms.CharField(max_length = 10000 ,widget=forms.Textarea(
-        attrs={
-            "placeholder":"we are here for you","cols":"20" ,"rows":"3"
-        }))
-    class Meta:
-      model= Customer_care
-      fields= ('report_problem','suggestion_box')
-      

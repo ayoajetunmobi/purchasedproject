@@ -16,5 +16,7 @@ urlpatterns = [
   path('msg/',views.msgDisplay,name= 'getMsgs'),
   path('signals/',views.Signals,name= 'signals'),
   path('suggest/',views.suggestproduct, name='suggest'),
-    path('changedp/',views.changedp, name='changedp'),
+  path('changedp/',views.changedp, name='changedp'),
+  path('register/', views.register, name = 'register'),
+  path('settingsapi/', views.settingsfunctionality, name = 'settings'),
 ]

@@ -11,56 +11,14 @@
     <link rel="stylesheet" href="{% static 'purchased.css' %}" />
     <link rel="stylesheet" href="{% static 'profile.css' %}" />
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We" crossorigin="anonymous">
     <title>purchased</title>
+
     <style>
         header {
-            min-height: 55vh;
+            height: 40vh;
             align-items: center;
             width: 100%;
-        }
-        
-        .form {
-            margin-top: 10%;
-        }
-        
-        #section {
-            position: fixed;
-            top: 0vh;
-            left: 0%;
-            display: none;
-            opacity: 1;
-            width: 100%;
-            height: 100%;
-            z-index: 3;
-            margin: 0px auto;
-            background-color: grey;
-            overflow-x: hidden;
-        }
-        
-        #section h4 {
-            border-bottom: 1px groove #ffffff;
-            padding: 10px;
-        }
-        
-        .account {
-            width: 37%;
-            margin: 0px auto;
-            height: fit-content;
-            opacity: 1;
-            color: rgba(255, 255, 255, 0.952);
-            margin-bottom: 60px;
-            border-radius: 5px;
-            box-shadow: 0 7px 7px rgba(0, 0, 0, 0.25);
-            background: linear-gradient(#0005, #0005),
-            url("{% static 'background.jpeg' %}");
-            text-align: center;
-        }
-        
-        @media screen and (max-width: 800px) {
-            .account {
-                width: 80%;
-            }
+            margin-bottom: 10px;
         }
         
         @media screen and (max-width: 380px) {
@@ -70,329 +28,268 @@
         }
     </style>
 </head>
-<div style="display: none; width:100%;overflow:hidden; position:absolute;">
-    <img id="img1" src="{% static 'background.jpeg' %}" alt="">
-    <img id="img2" src="{% static 'wardrope.jpg' %}" alt="">
-    <img id="img3" src="{% static 'PURCHASED.jpg' %}" alt="">
-</div>
-
-<div id="spinnerdiv">
-    <div class="loader"></div>
-</div>
-
 
 <body draggable="true">
-    <!--header nav and search-->
-
-    <nav class="navbar navbar-light bg-light navbar-expand-lg">
-        <div class="container-fluid">
-            <img src="{% static 'logopurchase.png' %}" alt="" width="30" height="24" />
-            <a class="navbar-brand" href="#">SHOPATPURCHASED</a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarScroll" aria-controls="navbarScroll" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarScroll">
-                <ul class="navbar-nav ml-auto my-2 my-lg-0 navbar-nav-scroll" style="--bs-scroll-height: 100px;">
-                    <li class="nav-item">
-                        <a class="nav-link" onclick="secdisplay()" href="#">JOIN UP</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" onclick="probt()" href="#">MY PROFILE</a>
-                    </li>
-                    {% if user.is_authenticated %}
-                    <li class="nav-item">
-                        <a class="nav-link" href="{% url 'logout' %}"> SIGN OUT</a>
-                    </li>
-                    {% else %}
-                    <li class="nav-item">
-                        <a class="nav-link" href="{% url 'login' %}"> SIGN IN</a>
-                    </li>
-                    {% endif %}
-                </ul>
-            </div>
+    <div id="body">
+        <div style="display: none; z-index:-10; width:100px; overflow:hidden; position:absolute;">
+            <img id="img1" src="{% static 'backgd.png' %}" alt="">
+            <img id="img2" src="{% static 'wadrope.png' %}" alt="">
+            <img id="img3" src="{% static 'PURCHASED.jpg' %}" alt="">
         </div>
-    </nav>
-    <header>
-        <img id="header" style="width:100%; height:49vh; position:absolute; z-index:-1; left:0;" src="" alt="">
-        <div class="container">
-            <h1 style="color :rgba(20, 87, 6, 0.726);padding-top:60px; font-size: medium; text-align:center;" class="h1">
-                Find Products and Services around your campus </h1>
-            <form class="form">
-                <div class="row">
-                    <div class="col-md-4">
-                        <input class="form-control" id="searchinput" placeholder="search product / services">
-                    </div>
-                    <div class="col-md-4">
-                        <select class="form-select" aria-label="Default select example">
-                            <option selected> All categories </option>
-                            <option value="1"> Asun Ofada </option>
-                            <option value="11"> Bags </option>
-                            <option value="6"> Bedsheets </option>
-                            <option value="5"> Crotchet Wears </option>
-                            <option value="2"> Food </option>
-                            <option value="3"> Graphics and Design </option>
-                            <option value="7"> Google Voice </option>
-                            <option value="4"> Jeans </option>
-                            <option value="10"> Leggings </option>
-                            <option value="5"> Necklace and Jewelries </option>
-                            <option value="8"> Senator Materials </option>
-                            <option value="9"> Shirt Gown </option>
-                            <option value="6"> Women Suits </option>
-                            <option value="9"> Wigs </option>
-                        </select>
-                    </div>
-                    <div class="col-md-4">
-                        <button style="z-index: 6;" id="submitttsearch" onclick="submitSearcsignals(1)" class="btn btn-outline-success">Search</button>
-                    </div>
+
+        <div id="spinnerdiv">
+            <div class="loader"></div>
+        </div>
+        <div class="sidebar">
+            <header>
+                <div style="display:grid; grid-template-columns:repeat(2,1fr)">
+                    <img src="{% static 'logopurchase.png' %}" alt="" width="210px" height="100px" />
+                    <img src="{% static 'closebar.png' %}" alt="" id="closesidebar" class="navbarclick" />
                 </div>
-            </form>
+            </header>
+            <ul style="position:relative;left:-12%; width:112%">
+                <li> <a href="{% url 'register' %}"> SIGN UP </a></li>
+                <li><a href="#" onclick="probt()"> MY PROFILE </a> </li>
+                <li> <a href="#"> BLOG </a></li>
+                <li> <a href="tel:09079681347"> CONTACT SUPPORT </a></li>
+                {% if user.is_authenticated %}
+                <li>
+                    <a href="{% url 'logout' %}"> SIGN OUT </a>
+                </li>
+                {% else %}
+                <li>
+                    <a href="{% url 'login' %}"> SIGN IN </a>
+                </li>
+                {% endif %}
+            </ul>
         </div>
-    </header>
+        <!--header nav and search-->
 
-    <!--head bar-->
-    <div id="searchcover">
+        <nav style="background-image: linear-gradient(#ff0084, #2a0518); width: 100%;   padding-bottom: 20px;">
+            <div style="width: 100%;">
 
-    </div>
-    <!--head bar-->
-    <!-- end header nav and search-->
-
-
-
-    <!--create aacount-->
-    <section id="section">
-        <div class="close">
-            <a href="#" onclick="homebt()"> <i style="color: black;" class="fa fa-arrow-left"></i></a>
-        </div>
-        <div class="account">
-
-            <h4> Create an<span style="color: rgb(21, 255, 0);"> Account</span> <i class="fa fa-user-circle"></i>
-            </h4>
-            <form method="POST" class="getdetails" enctype="multipart/form-data">{% csrf_token %} {{form1}} {{form2}}
-
-                <label for="file"> upload profile picture</label><br>
-                <input type="file" name="eproimages" accept=".jpg,.png,.PNG,.JPG" required>
-                <br><br><br />
-                <input type="submit" value="CREATE" />
-            </form>
-        </div>
-    </section>
-    <!-- end create account-->
-
-
-    <!-- Product suggestions-->
-
-    <div class="category" style="position:relative; top:-90px; height:200px; width:100%;overflow-x:hidden; z-index:2;">
-        <div class="firstproductdisplay" style="display:grid; grid-template-columns: repeat(5, 5fr); overflow-x:scroll;">
-            <div class="Fprodisplay" onclick="submitSearcsignals(2)">
-                <img src="{% static 'fashion.jpg' %}" alt="">
-            </div>
-            <div class="Fprodisplay" onclick="submitSearcsignals(3)">
-                <img src="{% static 'food.jpg' %}" alt="">
-            </div>
-            <div class="Fprodisplay" onclick="submitSearcsignals(4)">
-                <img src="{% static 'cereals.jpg' %}" alt="">
-            </div>
-            <div style="border: 2px groove rgb(255, 255, 255);" class="Fprodisplay" onclick="submitSearcsignals(5)">
-                <img src="{% static 'phones.jpg' %}" alt="">
-            </div>
-            <div style="border: 2px groove rgb(255, 255, 255);" onclick="secdisplay()" class="Fprodisplay">
-                <img src="{% static 'signin.jpg' %}" alt="">
-            </div>
-        </div>
-    </div>
-
-    <!-- Top Deals-->
-    <div id="topdealsdiv" class="topdealsdiv">
-        <div style="overflow:hidden; position: absolute; width:100%;height:100%; z-index:2;">
-            <br><br><br>
-            <h3> TOP DEALS </h3> <br>
-            <div style="width: 85%; height:300px; overflow-x:hidden; position:relative; background-color:rgb(255, 255, 255); margin:0px auto;border-radius:24px 24px;">
-                <div id="slidedivImg" style="width: 65%; z-index:1; height:300px; overflow-x:hidden; position:relative; top:-2%; left:0%; background-color:rgb(255, 255, 255);border-radius:24px 24px;">
-
+                <div style="display:grid; grid-template-columns:repeat(2,1fr)">
+                    <img src="{% static 'logopurchase.png' %}" alt="" width="fit-content" height="104px" />
+                    <img src="{% static 'navbar.png' %}" alt="" id="opensidebar" class="navbarclick" />
                 </div>
-                <div style="width: 45%; z-index:1; height:305px; overflow-x:hidden; position:absolute; top:-1%; right:0%; background-color:rgb(255, 255, 255);;border-radius:25.5px 25.5px;">
-                    <br>
+                <div id="navbarScroll">
+                    <ul id="navlinkul">
+                        <li>
+                            <a class="navlink" href="{% url 'register' %}"> SIGN UP </a>
+                        </li>
+                        {% if user.is_authenticated %}
+                        <li>
+                            <a class="navlink" href="{% url 'logout' %}"> SIGN OUT </a>
+                        </li>
+                        {% else %}
+                        <li>
+                            <a class="navlink" href="{% url 'login' %}"> SIGN IN </a>
+                        </li>
+                        {% endif %}
+                        <li>
+                            <a class="navlink" onclick="probt()" href="#"> MY PROFILE </a>
+                        </li>
 
-                    <div id="descriptopdeals" style="position:relative; height:70%; top:0%; left:0%; width:100%;overflow:hidden;background-color:rgb(255, 255, 255);">
-                    </div>
-                    <br>
+                        <li>
+                            <a class="navlink"> BLOG </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            <input id="searchinput" placeholder="   search product / services / username         ">
+
+            <button style="z-index: 6;" id="submitttsearch" onclick="submitSearcsignals(1)" class="btn btn-outline-success">Search</button>
+
+        </nav>
+
+        <header>
+            <img id="header" style="width:100%; height:40vh; position:absolute;" src="" alt="">
+        </header>
+
+        <!--head bar-->
+        <div id="searchcover">
+
+        </div>
+        <!--head bar-->
+        <!-- end header nav and search-->
+
+
+        <!-- Product suggestions-->
+
+        <div class="category" style="position:relative; height:200px; width:104%; border-radius:6px; left:2%; overflow-x:hidden; z-index:2; border:0.3px solid rgb(139, 139, 139);">
+            <div class="firstproductdisplay" style="display:grid; grid-template-columns: repeat(5, 5fr); overflow-x:scroll;">
+                <div class="Fprodisplay" onclick="submitSearcsignals(2)">
+                    <img src="{% static 'fashion.jpg' %}" alt="">
+                </div>
+                <div class="Fprodisplay" onclick="submitSearcsignals(3)">
+                    <img src="{% static 'food.jpg' %}" alt="">
+                </div>
+                <div class="Fprodisplay" onclick="submitSearcsignals(4)">
+                    <img src="{% static 'cereals.jpg' %}" alt="">
+                </div>
+                <div style="border: 2px groove rgb(255, 255, 255);" class="Fprodisplay" onclick="submitSearcsignals(5)">
+                    <img src="{% static 'phones.jpg' %}" alt="">
+                </div>
+                <div style="border: 2px groove rgb(255, 255, 255); padding-right:35px;" class="Fprodisplay">
+                    <a href="{% url 'register' %}">
+                        <img src="{% static 'signin.jpg' %}" alt="">
+                    </a>
                 </div>
             </div>
         </div>
 
-    </div>
-    <!-- End Top Deals -->
+        <!-- Top Deals-->
+        <!-- End Top Deals -->
 
-    <!--Random suggestions-->
-    <div style="width: 100%; height:700px; position:relative;top:-80px; z-index:1; background-color:rgb(243, 243, 243); padding-left:30px; padding-bottom: 40px;">
+        <!--Random suggestions-->
+        <div style="width: 100%; height:800px; position:relative;top:10px; z-index:1; background-color:rgb(243, 243, 243); padding-left:30px; padding-bottom: 40px;">
+            <br>
+            <h4 style="text-align: center;">SUGGESTED CHECK NOW </h4><br>
+            <h6 style="text-align: center;"> Products and Services </h6> <br><br>
+            <div id="suggestproduct" style="display: grid; grid-template-columns: repeat(2, 2fr); margin:0 auto; width:100%">
+            </div>
+        </div>
+        <!-- end Random suggestions-->
+
+        <!--USER STORE -->
+        <div style="width: 100%; height:fit-content; position:relative; z-index:1; background-color:rgb(255, 255, 255); overflow-y:hidden; box-shadow: 0px 15px 15px rgba(12, 12, 0.55, 0.55);">
+            <h4 style="margin-left: 10px;">{{userstore2productsImg.0}}</h4><br>
+            <h6 style="margin-left: 40px;"> market</h6>
+            <div style=" overflow-y:hidden;">
+                <div style="display: grid; grid-template-columns: repeat(15, 1fr);">
+                    {% for i in userstore2products%}
+                    <article data="{{i.id}}" onclick="product_spec(this)" class="post4store">
+                        {%for j in userstore2productsImg %}{%if i.id == j.product_id %}
+                        <img class="postimg" src="{{j.product_img.url}}" alt=""> {% endif %}{%endfor%}
+                        <p class="postdesc"> {{i.description|slice:"0:40"}} ... </p>
+                        <p class="pricesugg">N{{i.price}}</p>
+                    </article>
+                    {%endfor%}
+                </div>
+            </div>
+        </div>
         <br>
-        <h4 style="text-align: center;">SUGGESTED CHECK NOW </h4><br>
-        <h6 style="text-align: center;"> Products and Services </h6> <br><br>
-        <div id="suggestproduct" style="display: grid; grid-template-columns: repeat(2, 2fr); margin:0 auto; width:100%">
-            {% for i in suggestions %}
-            <article data="{{i.id}}" onclick="product_spec(this)" class="post">
-                {% for j in suggestionImg %} {% if j.product_id == i.id %}
-                <img class="postimg" src="{{ j.product_img.url }}" alt=""> {% endif %} {% endfor %}
-                <p class="postdesc">{{i.searchTag}}</p>
-                <p>N{{i.price}}</p>
-            </article>
-            {% endfor %}
-        </div>
-    </div>
-    <!-- end Random suggestions-->
-
-    <!--USER STORE -->
-    <div style="width: 100%; height:350px; position:relative;top:-70px; z-index:1; background-color:rgb(255,
-        255, 255); overflow-y:hidden; box-shadow: 0px 15px 15px rgba(12, 12, 0.55, 0.55);">
-        <h4 style="margin-left: 10px;">{{userstore2productsImg.0}}</h4><br>
-        <h6 style="margin-left: 40px;"> market</h6>
-        <div style=" overflow-y:hidden;">
-            <div style="display: grid; grid-template-columns: repeat(15, 1fr);">
-                {% for i in userstore2products%}
-                <article data="{{i.id}}" onclick="product_spec(this)" class="post4store">
-                    {%for j in userstore2productsImg %}{%if i.id == j.product_id %}
-                    <img class="postimg" src="{{j.product_img.url}}" alt=""> {% endif %}{%endfor%}
-                    <p class="postdesc">{{i.searchTag}}</p>
-                    <p style="color:gold;">N{{i.price}}</p>
-                </article>
-                {%endfor%}
-            </div>
-        </div>
-    </div>
-    <br>
-    <div style="width: 100%; height:350px; position:relative;top:-70px; z-index:1; background-color:rgb(255,
-        255, 255); overflow-y:hidden; box-shadow: 0px 15px 15px rgba(12, 12, 0.55, 0.55);">
-        <h4 style="margin-left: 10px;">{{userstore3productsImg.0}}</h4><br>
-        <h6 style="margin-left: 40px;"> market</h6>
-        <div style=" overflow-y:hidden;">
-            <div style="display: grid; grid-template-columns: repeat(15, 1fr);">
-                {% for i in userstore3products%}
-                <article data="{{i.id}}" onclick="product_spec(this)" class="post4store">
-                    {%for j in userstore3productsImg %}{%if i.id == j.product_id %}
-                    <img class="postimg" src="{{j.product_img.url}}" alt=""> {% endif %}{%endfor%}
-                    <p class="postdesc">{{i.searchTag}}</p>
-                    <p style="color:gold;">N{{i.price}}</p>
-                </article>
-                {%endfor%}
-            </div>
-        </div>
-    </div> <br>
-    <div style="width: 100%; height:350px; position:relative;top:-70px; z-index:1; background-color:rgb(255,
-        255, 255); overflow-y:hidden; box-shadow: 0px 15px 15px rgba(12, 12, 0.55, 0.55);">
-        <h4 style="margin-left: 10px;">{{userstore1productsImg.0}}</h4><br>
-        <h6 style="margin-left: 40px;"> market</h6>
-        <div style=" overflow-y:hidden;">
-            <div style="display: grid; grid-template-columns: repeat(15, 1fr);">
-                {% for i in userstore1products%}
-                <article data="{{i.id}}" onclick="product_spec(this)" class="post4store">
-                    {%for j in userstore1productsImg %}{%if i.id == j.product_id %}
-                    <img class="postimg" src="{{j.product_img.url}}" alt=""> {% endif %}{%endfor%}
-                    <p class="postdesc">{{i.searchTag}}</p>
-                    <p style="color:gold;">N{{i.price}}</p>
-                </article>
-                {%endfor%}
-            </div>
-        </div>
-    </div>
-    <div style="width: 100%; height:350px; position:relative;top:-50px; z-index:1; background-color:rgb(255,
-        255, 255); overflow-y:hidden; box-shadow: 0px 15px 15px rgba(12, 12, 0.55, 0.55);">
-        <h4 style="margin-left: 10px;">{{userstore4productsImg.0}}</h4><br>
-        <h6 style="margin-left: 40px;"> market</h6>
-        <div style=" overflow:scroll;">
-            <div style="display: grid; grid-template-columns: repeat(15, 1fr); height:330px;">
-                {% for i in userstore4products%}
-                <article data="{{i.id}}" onclick="product_spec(this)" class="post4store">
-                    {%for j in userstore4productsImg %}{%if i.id == j.product_id %}
-                    <img class="postimg" src="{{j.product_img.url}}" alt=""> {% endif %}{%endfor%}
-                    <p class="postdesc">{{i.searchTag}}</p>
-                    <p style="color:gold;">N{{i.price}}</p>
-                </article>
-                {%endfor%}
-            </div>
-        </div>
-    </div>
-
-
-    <!-- End User Store-->
-
-
-    <div style=" position:relative;height:200px; width:100%; overflow:hidden;" onclick="submitSearcsignals(6)">
-        <img style="width:60%; height:300px; position:absolute; top:-40%; left:-5%;" src="{% static 'graphicdesigng.jpg' %}" alt="">
-        <p style="position: absolute; right:0%;"> NEED A GRAPHIC ARTIST ?<br> CONTACT ONE TODAY..<br>
-            <button style="color:rgb(255, 255, 255); border-radius:4px; background-color:green;">
-                CLICK ME
-            </button>
-        </p>
-    </div>
-
-    <div id="buystucover" style="width: 100%; color:white; height:200px; position:relative; top:-40px; z-index:1; background-color:rgb(15, 185, 29); box-shadow: 0px 15px 15px rgba(12, 12, 0.55, 0.55);">
-        <br>
-        <h3 style="margin-left:10px"> BUY FROM A STUDENT </h3><br>
-        <h6 style="margin-left:10px"> contact a seller </h6>
-        <div style="display: grid; grid-template-columns: repeat(2, 2fr); overflow-x:hidden; width:100%;">
-            {% for i in buyfromstudent %}
-            <div {%if request.user.is_authenticated%} data-id='{{i.id}}' {%endif%} onclick="propicclick(this)" class="buy4student">
-                <img src="{{i.profilepic.url}}" alt="">
-                <p class="buytxt" style="color: white;"><i class="fa fa-male"></i><i class="fa fa-female"></i>{{i.gender}}</p>
-                <h6 class="buytxt" style="color: white;">{{i.about}}</h6>
-            </div>
-            {% endfor %}
-        </div>
-    </div>
-    <!-- Product suggestions-->
-
-
-    <h2 style="position:relative; top:450px;"> RECENT ADS </h2>
-
-
-    <!--all post-->
-    <div id="wrapper">
-        <br>
-        <div id="wrap" draggable="true">
-            {% for i in products %}
-            <div class="pos1" data=5>
-                <a href="#" class="a">{{i.username}}</a>
-                <div style="margin:0px auto">
-                    {% if i.online %}
-                    <div class="online"></div>
-                    {%else%}
-                    <div class="offline"></div>
-                    {%endif%}
-                    <img class="propicp" onclick="propicclick(this)" {% if user.is_authenticated %} data-id="{{i.user_id}}" {%endif%} src="{{i.profile_pic.url}}" alt="" />
-                </div>
-                <div class='article' data=5>
-                    {% if i.matricverified %}
-                    <h5 style="position: absolute; top:-5%; right:7%; color:rgb(47, 0, 255);"> <i class="fa fa-star"></i></h5>
-                    {%endif%} {% if i.topuser %}
-                    <h5 style="position: absolute; top:-5%; right:7%; color:gold;"> <i class="fa fa-star"></i></h5>
-                    {%endif%} {% for j in images %} {% if i.id == j.product_id %}
-                    <img class="slidep" onclick="product_spec(this)" data={{i.id}} src="{{ j.product_img.url }}" alt="">{% endif %}{% endfor %}
-                </div>
-                <div class="describe">
-                    {{i.searchTag}}...
-                </div>
-                <div class="pricinp">
-                    N{{i.price}}
+        <div style="width: 100%; height:fit-content; position:relative; top:-23px; z-index:1; background-color:rgb(255, 255, 255); overflow-y:hidden; box-shadow: 0px 15px 15px rgba(12, 12, 0.55, 0.55);">
+            <br>
+            <h4 style="margin-left: 10px;">{{userstore3productsImg.0}}</h4><br>
+            <h6 style="margin-left: 40px;"> market </h6>
+            <div style=" overflow-y:hidden;">
+                <div style="display: grid; grid-template-columns: repeat(15, 1fr);">
+                    {% for i in userstore3products%}
+                    <article data="{{i.id}}" onclick="product_spec(this)" class="post4store">
+                        {%for j in userstore3productsImg %}{%if i.id == j.product_id %}
+                        <img class="postimg" src="{{j.product_img.url}}" alt=""> {% endif %}{%endfor%}
+                        <p class="postdesc"> {{i.description|slice:"0:40"}} ... </p>
+                        <p class="pricesugg">N{{i.price}}</p>
+                    </article>
+                    {%endfor%}
                 </div>
             </div>
-            {%endfor%}
         </div>
-        <footer style="width: 100%; margin-top:60px; background-color:green; color:white;border-radius:10px 10px; padding:20px;">
-            <a style="color: white;" href="tel:09079681347"><i class="fa fa-phone"
-                    style="font-size: 40px; margin-right:100%; position:absolute; left:70%;"></i></a>
-            <a style="color: white;" href="https://www.instagram.com/purchased.tech/"><i class="fa fa-instagram"
-                    style="font-size: 40px;"></i></a>
-            <p style="text-align: center;">All Rights© shopatpurchased.com</p>
-        </footer>
+        <div style=" position:relative;height:200px; width:100%; margin-top:30px; overflow:hidden;" onclick="submitSearcsignals(6)">
+            <img style="width:60%; height:300px; position:absolute; top:-40%; left:-5%;" src="{% static 'graphicdesigng.jpg' %}" alt="">
+            <p style="position: absolute; right:0%;"> NEED A GRAPHIC ARTIST ?<br> CONTACT ONE TODAY..<br>
+                <button style="color:rgb(255, 255, 255); border-radius:4px; background-color:green;">
+                    CLICK ME
+                </button>
+            </p>
+        </div> <br>
+        <div style="width: 100%; height:fit-content; position:relative;top:-70px; z-index:1; background-color:rgb(255,
+        255, 255); overflow-y:hidden; box-shadow: 0px 15px 15px rgba(12, 12, 0.55, 0.55);">
+            <h4 style="margin-left: 10px;">{{userstore1productsImg.0}}</h4><br>
+            <h6 style="margin-left: 40px;"> market</h6>
+            <div style=" overflow-y:hidden;">
+                <div style="display: grid; grid-template-columns: repeat(15, 1fr);">
+                    {% for i in userstore1products%}
+                    <article data="{{i.id}}" onclick="product_spec(this)" class="post4store">
+                        {%for j in userstore1productsImg %}{%if i.id == j.product_id %}
+                        <img class="postimg" src="{{j.product_img.url}}" alt=""> {% endif %}{%endfor%}
+                        <p class="postdesc"> {{i.description|slice:"0:40"}} ... </p>
+                        <p class="pricesugg">N{{i.price}}</p>
+                    </article>
+                    {%endfor%}
+                </div>
+            </div>
+        </div>
+        <div style="width: 100%; height:fit-content; position:relative;top:-70px; z-index:1;overflow:hidden; background-color:rgb(255, 255, 255);box-shadow: 0px 15px 15px rgba(12, 12, 0.55, 0.55);">
+            <h4 style="margin-left: 10px;">{{userstore4productsImg.0}}</h4><br>
+            <h6 style="margin-left: 40px;"> market</h6>
+            <div style=" overflow:scroll;">
+                <div style="display: grid; grid-template-columns: repeat(15, 1fr); height:330px;">
+                    {% for i in userstore4products%}
+                    <article data="{{i.id}}" onclick="product_spec(this)" class="post4store">
+                        {%for j in userstore4productsImg %}{%if i.id == j.product_id %}
+                        <img class="postimg" src="{{j.product_img.url}}" alt=""> {% endif %}{%endfor%}
+                        <p class="postdesc"> {{i.description|slice:"0:40"}} ... </p>
+                        <p class="pricesugg">N{{i.price}}</p>
+                    </article>
+                    {%endfor%}
+                </div>
+            </div>
+        </div>
+
+        <!-- End User Store-->
+
+        <!--all post-->
+        <div id="wrapper">
+            <h1 style="margin-left: 20px;"> RECENT ADS</h1>
+            <br>
+            <div id="wrap" draggable="true">
+                {% for i in products %}
+                <div class="pos1" data=5>
+                    <a href="#" class="a">{{i.username}}</a>
+                    <div style="margin:0px auto">
+                        {% if i.online %}
+                        <div class="online"></div>
+                        {%else%}
+                        <div class="offline"></div>
+                        {%endif%}
+                        <img class="propicp" onclick="propicclick(this)" {% if user.is_authenticated %} data-id="{{i.user_id}}" {%endif%} src="{{i.profile_pic.url}}" alt="" />
+                    </div>
+                    <div class='article' data=5>
+                        {% if i.matricverified %}
+                        <h5 style="position: absolute; top:-5%; right:7%; color:rgb(47, 0, 255);"> <i class="fa fa-star"></i>
+                        </h5>
+                        {%endif%} {% if i.topuser %}
+                        <h5 style="position: absolute; top:-5%; right:7%; color:gold;"> <i class="fa fa-star"></i>
+                        </h5>
+                        {%endif%} {% for j in images %} {% if i.id == j.product_id %}
+                        <img class="slidep" onclick="product_spec(this)" data={{i.id}} src="{{ j.product_img.url }}" alt="">{% endif %}{% endfor %}
+                    </div>
+                    <div class="describe">
+                        {{i.searchTag}}...
+                    </div>
+                    <div class="pricinp">
+                        N{{i.price}}
+                    </div>
+                </div>
+                {%endfor%}
+            </div>
+            <footer style="width: 100%;text-align: center; margin-top:60px; background-image: linear-gradient(#ff0084, #2a0518); color:white; padding:20px;">
+
+                <p style="text-align: center;"> ALL RIGHTS©SHOPATPURCHASED </p>
+                <a style="text-align: center; text-decoration:none; color:rgb(52, 52, 165);" href="#body"> BACK TO TOP
+                </a>
+            </footer>
+        </div>
     </div>
-    <!--all post-->
+    <!-- end all post-->
+
 
 
     <!--view product spec-->
     <div class="productSpec" id="productSpec">
-        <div class="close">
-            <a href="#" onclick="closespec()"><i style="color: black;" class="fa fa-arrow-left"></i></a>
+        <div class="settingsHeader">
+            <br>
+            <br>
+            <div class="close">
+                <a href="#" onclick="closespec()"><i style="color: rgb(255, 255, 255);"
+                        class="fa fa-arrow-left"></i></a>
+            </div>
+            <h3 style="color: white;"> SHOPATPURCHASED </h3>
         </div>
+        <br><br><br>
         <div id="specPropic" style="margin:50px 60%; width:100%;">
         </div>
         <div id="specImgs" style="height: fit-content;">
@@ -420,33 +317,41 @@
         </div>
         <br><br>
         <div>
-            <h3 style=" padding:0px">
+            <h3 style="padding:0px;">
                 <span style="color: brown;">TIPs to succeed</span><br><br>
-                <p>
+                <p class="tipswriteup">
                     payment should be made after concrete agreement with seller.
                 </p>
-                <p>
+                <p class="tipswriteup">
                     meeting and delivering point should always be in an open place within the school premises.
                 </p>
-                <p>
+                <p class="tipswriteup">
                     remember to always drop a review on user after buying or selling.
                 </p>
-                <p>
+                <p class="tipswriteup">
                     read reviews on user and be convinced enough before making any contact.
                 </p>
+                <p class="tipswriteup">
+                    remember to always delete unavailable products.
+                </p>
 
-                <p>
+                <p class="tipswriteup">
                     it is adviseable to transact with users who have been verified by matric number for better security.
                 </p>
-                <p>
+                <p class="tipswriteup">
                     <span style="color: red;"> NOTE </span> Users who can be identified by their profile picture maybe more trust worthy than the others.
                 </p>
-                <p>
+                <p class="tipswriteup">
                     <span style="color: red;"> purchased </span> your online market place.
                 </p>
             </h3>
         </div>
         <br>
+        <br>
+        <h3> Top Deals </h3>
+
+        <div id="topdealsp" class="topdeals">
+        </div>
         <br>
 
         <div class="footer" style="width:100%; height:30px;  border-top:1px solid grey; text-align:center;">
@@ -458,17 +363,45 @@
 
 
     <!--MY STORE API DISPLAY-->
+
     <div id="apimyStore">
     </div>
-    <!--END MY STORE API DISPLAY-->
+
+    <!-- END MY STORE API DISPLAY-->
+
+    <!--settings-->
+    <div id="settings">
+        <div class="settingsHeader">
+            <br>
+            <div class="close">
+                <br>
+                <a style="margin-top: 29px;" href="#" onclick="closesettings()"><i style="color: rgb(255, 255, 255);"
+                        class="fa fa-arrow-left"></i></a>
+            </div>
+            <h3 style="color: white;"> SHOPATPURCHASED </h3>
+        </div>
+        <div class="settingsList">
+            <p class="settingsworks" onclick="settingfunc(2)"> Change Password </p>
+            <p class="settingsworks" onclick="settingfunc(3)"> Edit About </p>
+            <p class="settingsworks" onclick="settingfunc(4)"> Edit Contact </p>
+            <p class="settingsworks" onclick="settingfunc(5)"> Make Suggestion </p>
+            <p class="settingsworks" onclick="settingfunc(6)"> Report User </p>
+            <p class="settingsworks" onclick="settingfunc(7)"> Terms and Conditions </p>
+            <p class="settingsworks" onclick="settingfunc(9)"> Deactive Account </p>
+        </div>
+        <div id="editpagetofserver">
+
+        </div>
+    </div>
+    <!--end settings-->
 
     <!-- Dsiplay review message-->
-    <div id="msgDisplay" style="display:none; background-color:white; top:0%; left:0%; position: absolute; width:100%; height:100%; z-index:-5; overflow-x:hidden;">
+    <div id="msgDisplay" style="display:none; background-color:white; top:0%; left:0%; position: fixed; width:100%; height:100%; z-index:-5; overflow-x:hidden;">
         <div class="close" onclick=" closemsgDisplay()">
             <a href="#"><i style="color: black;" class="fa fa-arrow-left"></i></a>
         </div>
 
-        <div id="msgplace" style="margin-top:24%; height: 18%;">
+        <div id="msgplace" style="margin-top:14%; height: 18%;">
         </div>
         <div id="reviewplace" style="position: absolute; top:35%; margin:0px auto; height:40%;text-align:center; width:100%;">
         </div>
@@ -479,36 +412,6 @@
     <div id="profile" draggable="true">
         <div class="close">
             <a href="#" id="close" onclick="homebt()"><i style="color: black;" class="fa fa-arrow-left"></i></a>
-        </div>
-        <div class="mystore" id="mystore">
-            <a class="mystoreLinks" href="" id="advertBtn">
-                Advertisements
-            </a>
-
-            <br>
-            <br>
-            <a class="mystoreLinks" href="#" onclick="ApiDisMsg(this)" id="msgBtn">
-                Message
-            </a>
-            <br>
-            <br>
-            <a class="mystoreLinks" href="" id="reportbugBtn">
-                Report Bug or Suggestions
-            </a><br><br>
-            <a class="mystoreLinks" href="" id="reportusaBtn">
-                Report User
-            </a>
-            <br>
-            <br>
-            <a class="mystoreLinks" href="" id="termscdBtn">
-                Terms and conditions
-            </a><br> <br>
-            <a class="mystoreLinks" href="" id="tipsBtn">
-                Tips to Succeed
-            </a><br> <br>
-            <a class="mystoreLinks" href="" id="deactBtn">
-                Deactivate Account
-            </a><br> <br>
         </div>
 
         <div id="bigpic-overlay" onclick="propicture(event)">
@@ -521,34 +424,52 @@
         </div>
         <div id="contactSeller">
         </div>
+        <h3 style="width:100%; text-align:center;" id="uploadpostbtn">
+            <a href="#" style="width: 80%;">
+                <button onclick="producappear()" style="width: 70%; height:40px; border-radius:40px; border: 5px groove rgb(0, 255, 21); background-color:white; color:black;">
+                    POST AD
+                </button>
+            </a>
+        </h3>
+        <br><br>
         <div id="changedp">
-            <form action="/changedp/" method="POST" enctype="multipart/form-data">{%csrf_token%}
-                <label for="uppropic">change profile picture<i class="fa fa-upload"></i></label>
+            <h5 style="text-align: center; color:red;"> change DP </h5><br>
+            <form action="/changedp/" method="POST" enctype="multipart/form-data">{% csrf_token %}
+                <div style="height: 70%; width:100%">
+
+                    <input type="file" name="imagesdp" style="width:98%; height:100%; background-color:rgb(255, 255, 255);border:none;" required accept=".jpg, .png, .JPG, .PNG">
+
+                </div>
                 <br>
-                <br>
-                <input type="file" name="imagesdp" accept=".jpg,.png,.PNG,.JPG" required>
-                <input type="submit" value="change">
+                <div style="width: 100%; text-align:center; background-color:#ffffff; border-top:0.3px solid black; color:rgb(255, 0, 0);
+                font-weight:700">
+                    <input type="submit" value=SUBMIT>
+                </div>
             </form>
         </div>
-        <div id="advertImg">
-        </div>
-
-
+        <br><br>
         <div class="recentpost">
-            <h3>Recent Post</h3>
+            <h3> Recent Post </h3>
             <div id="recentpost">
             </div>
         </div>
+
+        <h3> Top Deals </h3>
+        <div id="topdeals" class="topdeals">
+
+        </div>
+
         <div class="review">
-            <h3>Reviews</h3>
+            <h3>Reviews</h3><br>
             <br>
             <h5> <i style="font-size:nedium;" class="fa fa-arrow-right"></i> <i style="font-size:nedium;" class="fa fa-arrow-right"></i></h5>
             <div id="reviewP">
             </div>
+
         </div>
 
     </div>
-    <!--profile-->
+    <!-- end profile-->
 
 
     <div id="viewpost" draggable="true">
@@ -608,7 +529,6 @@
         </div>
     </div>
     <!--end upload products-->
-    </div>
 </body>
 
 </html>
@@ -616,8 +536,6 @@
 <script src="{% static 'purchasednav.js' %} "></script>
 <script src="{% static 'profile.js' %} "></script>
 <script src="{% static 'viewmore.js' %} "></script>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-U1DAWAznBHeqEIlVSCgzq+c9gqGAJn5c/t99JyeKa9xxaYpSvHU5awsuZVVFIhvj" crossorigin="anonymous">
-</script>
 
 <script>
     let submittsearch = document.getElementById("submitttsearch");
@@ -639,6 +557,10 @@
         return cookieValue;
     }
     const csrftoken = getCookie('csrftoken');
+    const headersAPi = {
+        'Accept': 'application/json',
+        'X-Requested-With': 'XMLHttpRequest', //Necessary to work with request.is_ajax()
+    }
 
     function propicclick(elem) {
         if (elem.getAttribute('data-id') == null || elem.getAttribute('data-id') == -1) {
@@ -670,6 +592,8 @@
         ).then(response => {
             return response.json().then(data => {
                     closespinner()
+                    let uploadpostbtn = document.getElementById('uploadpostbtn');
+                    uploadpostbtn.style.display = "none"
                     if (!data.profileupdate) {
                         return false
                     }
@@ -685,7 +609,6 @@
     }
 
     function probt() {
-        profile.scrollTop = '0px'
         profile.style.display = 'none'
         let upldpro_form = document.getElementById('upldpro_form')
         if (upldpro_form == -1 || upldpro_form == null) {
@@ -693,16 +616,20 @@
             return false
         }
         fetch('{% url "myprofile" %}', {
-                headers: {
-                    'Accept': 'application/json',
-                    'X-Requested-With': 'XMLHttpRequest', //Necessary to work with request.is_ajax()
-                },
+                headers: headersAPi,
 
             }).then(
                 spinner()
             )
             .then(response => {
                 return response.json().then(data => {
+                        let sidebar = document.querySelector('.sidebar'),
+                            body = document.getElementById("body");
+                        let uploadpostbtn = document.getElementById('uploadpostbtn');
+                        uploadpostbtn.style.display = "block"
+
+                        sidebar.style.left = "-80%"
+                        body.style.left = "0%"
                         if (data) {
                             if (data == null || data == -1) {
                                 return false
@@ -876,10 +803,7 @@
 
     function ApiDisMsg(elem) {
         fetch('{% url "getMsgs" %}', {
-                headers: {
-                    'Accept': 'application/json',
-                    'X-Requested-With': 'XMLHttpRequest', //Necessary to work with request.is_ajax()
-                },
+                headers: headersAPi,
 
             }).then(
                 spinner()
@@ -901,8 +825,8 @@
             })
             .then(response => {
                 return response.json().then(data => {
-                        topdealdiv(data.productsrotateImg, data.products)
                         suggestproduct(data)
+                        window.localStorage.setItem('user', JSON.stringify(data))
                     }) //Convert response to JSON
             })
     }
@@ -958,5 +882,60 @@
                     closespinner()
                 })
             }) //Convert response to JSON
+    }
+
+
+    function apisettings(sig) {
+        event.preventDefault()
+        let target = "";
+        let target1 = "";
+
+        if (sig == 2 || sig == 6) {
+            target = document.getElementById('settingactionInput').value;
+            target1 = document.getElementById('settingactionInput2').value;
+        }
+
+
+        if (sig == 3 || sig == 4 || sig == 5 || sig == 9) {
+            target = document.getElementById('settingactionInput').value;
+        }
+
+
+        fetch('{% url "settings" %}', {
+                method: 'POST',
+                credentials: 'same-origin',
+                headers: {
+                    'Accept': 'application/json',
+                    'X-Requested-With': 'XMLHttpRequest', //Necessary to work with request.is_ajax()
+                    'X-CSRFToken': csrftoken,
+                },
+                body: JSON.stringify({
+                        'post_data': {
+                            target,
+                            sig,
+                            target1
+
+                        }
+                    }) //JavaScript object of data to POST
+            }).then(
+                spinner()
+            )
+            .then(response => {
+                return response.json().then((data) => {
+                    editpagetofserver.innerHTML = ""
+                    console.log(data.data)
+                    editpagetofserver.innerHTML =
+                        `
+                    <a href="#" onclick="settingeditoserverclose()"><i style="color: rgb(0, 0, 0);"
+                            class="fa fa-arrow-left"></i>
+                    </a>
+                    <div style="height: 70%; width:100%">
+                        <h1 style="text-align:center;"> ${data.data} </h1>
+                    </div>
+                    `
+                    closespinner()
+                })
+            })
+
     }
 </script>

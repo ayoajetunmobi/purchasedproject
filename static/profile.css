@@ -1,549 +1,620 @@
-#profile {
-    position: fixed;
-    top: 50%;
-    left: 50%;
-    width: 70%;
-    height: 90%;
-    transform: translate(-50%, -50%);
-    background-color: white;
-    border-left: 2px solid rgb(255, 255, 255);
-    overflow: scroll;
-    overflow-x: hidden;
-    transition: 0.4s ease-in;
-    z-index: 2;
-    display: none;
-    scroll-behavior: smooth;
-}
-
-#bigpic-overlay {
-    opacity: 0;
-    pointer-events: none;
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    top: 0;
-    left: 0;
-    background-color: rgba(0, 0, 0, 0.95);
-    transition: opacity 0.9s ease-in;
-    z-index: 1;
-}
-
-#bigpic-overlay.visible {
-    opacity: 1;
-    pointer-events: auto;
-}
-
-#bigpropic {
-    max-height: 90%;
-    position: absolute;
-    left: 50%;
-    top: 45%;
-    transform: translate(-50%, -50%);
-    max-width: 90%;
-}
-
-.cover {
-    position: relative;
-    background: rgb(255, 255, 255);
-    width: 80%;
-    left: 0%;
-    margin: 0px auto;
-    top: 9%;
-    border-radius: 30px;
-    padding: 20px 0px;
-    box-shadow: 0 20px 20px rgba(0, 0, 0, 0.25);
-}
-
-.username {
-    color: rgb(51, 18, 18);
-    text-align: center;
-    padding: 2px;
-}
-
-#propicc {
-    position: relative;
-    width: 100px;
-    height: 100px;
-    border: 1px groove rgb(213, 224, 48);
-    border-radius: 50px;
-    left: 47%;
-    top: 10px;
-    margin: 2px;
-    cursor: pointer;
-    box-shadow: 4px 4px 7px;
-    overflow: hidden;
-}
-
-* {
-    scrollbar-width: initial;
-    scroll-behavior: smooth;
-    transition: 1s ease-out;
-}
-
- ::-webkit-scrollbar {
-    width: 8px;
-    height: 8px;
-    z-index: 2;
-}
-
- ::-webkit-scrollbar-track {
-    background: #f5f5f5;
-    border-radius: 10px;
-}
-
- ::-webkit-scrollbar-thumb {
-    background: rgba(71, 71, 71, 0.25);
-    border-radius: 10px;
-}
-
-.mystore {
-    position: absolute;
-    top: 17%;
-    right: 23%;
-    width: 40%px;
-    z-index: -4;
-    opacity: 0;
-    text-align: center;
-    background-color: rgb(255, 255, 255);
-    -moz-window-shadow: inset 0 0 10px;
-    -webkit-box--shadow: inset 0 0 10px;
-    box-shadow: inset 0 0 10px;
-    border-radius: 15px 15px 15px 15px;
-    height: fit-content;
-    padding: 10px;
-}
-
-.mystore .mystoreLinks {
-    text-decoration: none;
-    width: 100%;
-    margin-bottom: 15px;
-    width: 100%;
-    text-align: center;
-    color: #3f2626;
-    margin-bottom: 20px;
-}
-
-.mesageliststyle {
-    border-bottom: 1px solid grey;
-    border-top: 1px solid grey;
-    list-style: none;
-    padding: 30px;
-    border-radius: 100px;
-    text-align: center;
-    background-color: greenyellow;
-}
-
-.links {
-    padding: 10px;
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    text-align: center;
-    margin-left: 20%;
-}
-
-.view {
-    height: 7em;
-    width: 6em;
-    margin-top: 14px;
-    margin-left: 5px;
-    padding: 6px;
-    font-size: xx-small;
-    font-weight: bolder;
-    font-family: Arial, Helvetica, sans-serif;
-    box-shadow: 0 5px 5px rgba(8, 8, 0.25, 0.25);
-    letter-spacing: 1px;
-    border-radius: 20px;
-    background-color: #ffffff;
-    border: 1px groove rgb(0, 255, 21);
-    color: rgb(0, 88, 7);
-    text-decoration: none;
-    cursor: pointer;
-}
-
-.view:hover {
-    color: #ffc107;
-}
-
-.allinfo {
-    text-align: center;
-    width: 100%;
-    padding: 10px;
-    height: 30%;
-    margin: 80px 0px;
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-}
-
-.allinfo a,
-.allinfo h5 {
-    font-weight: 200;
-    font-size: 16px;
-    text-decoration: none;
-    color: #8d8d8d;
-    margin: 20px;
-}
-
-#contactSeller {
-    width: 100%;
-    text-align: center;
-}
-
-#contactSeller button {
-    background-color: rgb(0, 255, 76);
-    width: 70%;
-    color: antiquewhite;
-    height: 40px;
-    border-radius: 20px;
-    margin-bottom: 40px;
-    cursor: pointer;
-}
-
-.allinfo a.activated {
-    border-bottom: 3px solid rgb(0, 255, 76);
-}
-
-.content {
-    position: relative;
-}
-
-.tab-cotents li {
-    position: absolute;
-    left: 0;
-    opacity: 0;
-    padding-bottom: 20px;
-    list-style: none;
-    width: 100%;
-    border-bottom: 1px groove rgb(29, 28, 28);
-}
-
-.tab-cotents li.visible {
-    width: 100%;
-    text-align: center;
-    opacity: 1;
-    pointer-events: auto;
-    font-size: 25px;
-    font-weight: bolder;
-    font-size: larger;
-}
-
-#advertImg {
-    position: relative;
-    top: 7%;
-    width: 90%;
-    height: 40%;
-    border: 1px groove grey;
-    margin: 19px auto;
-}
-
-#advertImg img {
-    width: 100%;
-    height: 100%;
-    border-bottom: 1px solid black;
-}
-
-.recentpost {
-    position: relative;
-    top: 14%;
-    background-color: rgb(255, 255, 255);
-    padding-bottom: 80px;
-    text-align: center;
-    padding-top: 1px;
-}
-
-.recentpost h3 {
-    font-size: x-large;
-    font-weight: 1000;
-    color: rgb(0, 0, 0);
-}
-
-#recentpost {
-    left: 0%;
-    top: -8%;
-    width: 100%;
-    transform: translate(0%, 0%);
-    margin-bottom: 10px;
-    display: grid;
-    max-height: 400px;
-    grid-template-columns: repeat(5, 1fr);
-    overflow: scroll;
-    overflow-y: hidden;
-}
-
-#recentpost article {
-    max-height: 250px;
-    width: 150px;
-    text-align: center;
-    margin-right: 10px;
-    text-align: center;
-    margin: 20px 10px;
-}
-
-#recentpost article img {
-    width: 100%;
-    height: 150px;
-    margin-bottom: 6px;
-}
-
-.review {
-    position: relative;
-    background-color: #ffffff;
-    height: 280px;
-    text-align: center;
-    color: black;
-}
-
-#reviewP {
-    display: grid;
-    grid-template-columns: repeat(5, 1fr);
-    color: #bdc018;
-    height: 240px;
-    width: 100%;
-    margin-bottom: 0px;
-    overflow-x: scroll;
-}
-
-#reviewP article {
-    width: 250px;
-    height: 80%;
-    border-radius: 60% 40% 40% 20%;
-    background-image: linear-gradient(to bottom right, rgb(231, 17, 17), rgb(112, 15, 15));
-    box-shadow: 0 13px 13px rgba(0, 0, 0, 0.15);
-    margin: 30px;
-    padding: 0px;
-}
-
-
-/* apimyStore*/
-
-#apimyStore {
-    position: fixed;
-    width: 100%;
-    height: 100%;
-    top: 0vh;
-    left: 0%;
-    border-left: 2px solid white;
-    background-color: rgb(255, 255, 255);
-    opacity: 0;
-    z-index: -4;
-    transition: 0.4s ease-in;
-    text-align: center;
-    overflow-y: scroll;
-}
-
-
-/*products*/
-
-#products {
-    position: fixed;
-    top: 50%;
-    left: 50%;
-    width: 70%;
-    height: 90%;
-    transform: translate(-50%, -50%);
-    border-left: 2px solid white;
-    background-color: rgb(255, 255, 255);
-    opacity: 0;
-    z-index: -3;
-    transition: 0.4s ease-in;
-}
-
-.upldpro {
-    background: rgb(255, 255, 255);
-    text-align: center;
-    border: 1px solid grey;
-    overflow-x: hidden;
-    overflow-y: scroll;
-    width: 80%;
-    margin-left: 10%;
-    height: 90%;
-}
-
-.upldpro form {
-    padding: 63px 0 0 0;
-    color: #3f2626;
-}
-
-#addImage {
-    background: rgb(74, 74, 247);
-    border-radius: 10px;
-    color: white;
-    padding: 4px;
-}
-
-#price {
-    position: absolute;
-    left: 50%;
-    top: 35.5%;
-}
-
-.p {
-    position: absolute;
-    left: 50%;
-    top: 17.5%;
-}
-
-#submit {
-    position: relative;
-    top: 8%;
-    width: 40%;
-    background-color: rgb(0, 255, 21);
-    color: white;
-    border: none;
-    padding: 5px;
-    margin-top: 1rem;
-    margin-bottom: 1rem;
-    font-weight: bolder;
-    border-radius: 2px;
-}
-
-#post {
-    text-align: center;
-}
-
-.slider {
-    top: -3%;
-    position: relative;
-    height: 220px;
-    width: 200px;
-    border-radius: 6px;
-    overflow: hidden;
-    cursor: default;
-}
-
-.slider img {
-    max-width: 200px;
-    height: 200px;
-    border-radius: 6px;
-}
-
-.slide {
-    position: absolute;
-    width: 200px;
-    height: 200px;
-    text-align: center;
-    list-style: none;
-    z-index: 1;
-    align-self: center;
-}
-
-#submit:hover {
-    background-color: #8d8d8d;
-    color: #424242;
-}
-
-
-/* viewpost*/
-
-#viewpost {
-    position: fixed;
-    top: 50%;
-    left: 50%;
-    width: 70%;
-    height: 90%;
-    transform: translate(-50%, -50%);
-    border-radius: 6px;
-    opacity: 0;
-    z-index: -3;
-    background: white;
-    overflow: scroll;
-    overflow-x: hidden;
-    padding-bottom: 20px;
-}
-
-#forpost {
-    text-align: center;
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    position: relative;
-    width: 100%;
-    left: 0;
-    margin: 5%;
-}
-
-.close {
-    position: relative;
-    top: 10%;
-    left: 92%;
-    font-weight: bolder;
-    font-size: large;
-    color: red;
-}
-
-#marpicDelete {
-    width: 98%;
-    padding: 30px;
-    background-color: rgb(247, 243, 37);
-    text-align: center;
-    z-index: 2;
-    border-radius: 20px;
-    position: fixed;
-    top: 30%;
-    display: none;
-}
-
-.deleteDot {
-    position: absolute;
-    margin-left: 10px;
-    margin-top: -4px;
-    cursor: pointer;
-    color: rgb(0, 0, 0);
-    z-index: 1;
-    background-color: white;
-    border: 1px groove greenyellow;
-}
-
-.deleteMsg {
-    position: absolute;
-    margin-left: 36px;
-    padding: 2px;
-    background-color: white;
-    color: rgb(224, 82, 82);
-    display: none;
-    transition: 1s ease-in;
-    z-index: 1;
-    text-decoration: none;
-}
-
-#close {
-    color: red;
-}
-
-.pricin {
-    position: absolute;
-    top: 70%;
-    left: 0%;
-    z-index: 2;
-    width: 100%;
-    transition: 0.5s linear;
-    text-decoration: underline;
-    font-weight: bolder;
-    color: white;
-    font-size: large;
-    transform: translateY(200%);
-}
-
-@media screen and (max-width: 590px) {
-     ::-webkit-scrollbar {
+    #profile {
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        width: 70%;
+        height: 100%;
+        transform: translate(-50%, -50%);
+        background-color: white;
+        border-left: 2px solid rgb(255, 255, 255);
+        overflow: scroll;
+        overflow-x: hidden;
+        transition: 0.4s ease-in;
+        z-index: 3;
         display: none;
+        scroll-behavior: smooth;
     }
+    
+    #bigpic-overlay {
+        opacity: 0;
+        pointer-events: none;
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        top: 0;
+        left: 0;
+        background-color: rgba(0, 0, 0, 0.95);
+        transition: opacity 0.9s ease-in;
+        z-index: 1;
+    }
+    
+    #bigpic-overlay.visible {
+        opacity: 1;
+        pointer-events: auto;
+    }
+    
+    #bigpropic {
+        max-height: 90%;
+        position: absolute;
+        left: 50%;
+        top: 45%;
+        transform: translate(-50%, -50%);
+        max-width: 90%;
+    }
+    
+    .cover {
+        position: relative;
+        background: rgb(255, 255, 255);
+        width: 80%;
+        left: 0%;
+        margin: 0px auto;
+        top: 9%;
+        border-radius: 30px;
+        padding: 20px 0px;
+        box-shadow: 0 10px 10px rgba(0, 0, 0, 0.25);
+    }
+    
+    .cover2 {
+        position: relative;
+        background: rgb(255, 255, 255);
+        width: 95%;
+        left: 0%;
+        margin: 0px auto;
+        top: 0%;
+        border-radius: 30px;
+        padding: 20px 0px;
+        box-shadow: 0 10px 10px rgba(0, 0, 0, 0.25);
+    }
+    
+    .username {
+        color: rgb(51, 18, 18);
+        text-align: center;
+        padding: 2px;
+    }
+    
+    #propicc {
+        position: relative;
+        width: 100px;
+        height: 100px;
+        border: 1px groove rgb(213, 224, 48);
+        border-radius: 50px;
+        left: 47%;
+        top: 10px;
+        margin: 2px;
+        cursor: pointer;
+        box-shadow: 4px 4px 7px;
+        overflow: hidden;
+    }
+    
     * {
-        scrollbar-width: none;
+        scrollbar-width: initial;
         scroll-behavior: smooth;
         transition: 1s ease-out;
     }
+    
+     ::-webkit-scrollbar {
+        width: 8px;
+        height: 8px;
+        z-index: 2;
+    }
+    
+     ::-webkit-scrollbar-track {
+        background: #f5f5f5;
+        border-radius: 10px;
+    }
+    
+     ::-webkit-scrollbar-thumb {
+        background: rgba(71, 71, 71, 0.25);
+        border-radius: 10px;
+    }
+    
+    .mystore {
+        position: absolute;
+        top: 17%;
+        right: 23%;
+        width: 40%px;
+        z-index: -4;
+        opacity: 0;
+        text-align: center;
+        background-color: rgb(255, 255, 255);
+        -moz-window-shadow: inset 0 0 10px;
+        -webkit-box--shadow: inset 0 0 10px;
+        box-shadow: inset 0 0 10px;
+        border-radius: 15px 15px 15px 15px;
+        height: fit-content;
+        padding: 10px;
+    }
+    
+    .mystore .mystoreLinks {
+        text-decoration: none;
+        width: 100%;
+        margin-bottom: 15px;
+        width: 100%;
+        text-align: center;
+        color: #3f2626;
+        margin-bottom: 20px;
+    }
+    
+    .mesageliststyle {
+        border-bottom: 1px solid grey;
+        border-top: 1px solid grey;
+        list-style: none;
+        padding: 30px;
+        border-radius: 100px;
+        text-align: center;
+        background-color: greenyellow;
+    }
+    
     .links {
-        margin-left: 4%;
+        padding: 10px;
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        text-align: center;
+        margin-left: 20%;
     }
-    #profile {
+    
+    .view {
+        height: 3em;
+        width: 6em;
+        margin-top: 14px;
+        margin-left: 5px;
+        padding: 6px;
+        font-size: xx-small;
+        font-weight: bolder;
+        font-family: Arial, Helvetica, sans-serif;
+        box-shadow: 0 5px 5px rgba(8, 8, 0.25, 0.25);
+        letter-spacing: 1px;
+        border-radius: 20px;
+        background-color: #ffffff;
+        border: 5px groove rgb(0, 255, 21);
+        color: rgb(0, 88, 7);
+        text-decoration: none;
+        cursor: pointer;
+    }
+    
+    .view:hover {
+        color: #ffc107;
+    }
+    
+    .allinfo {
+        text-align: center;
         width: 100%;
-        height: 110%;
+        padding: 5px;
+        margin-top: 140px;
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
     }
+    
+    .allinfo a,
+    .allinfo h5 {
+        font-weight: 200;
+        font-size: 16px;
+        text-decoration: none;
+        color: #8d8d8d;
+        margin: 14px;
+    }
+    
+    #contactSeller {
+        width: 100%;
+        text-align: center;
+        height: fit-content;
+    }
+    
+    #contactSeller button {
+        background-color: rgb(0, 255, 76);
+        width: 70%;
+        color: antiquewhite;
+        height: 40px;
+        border-radius: 20px;
+        margin-bottom: 40px;
+        cursor: pointer;
+    }
+    
+    .allinfo a.activated {
+        border-bottom: 3px solid rgb(0, 255, 76);
+    }
+    
+    .content {
+        position: relative;
+    }
+    
+    .tab-cotents li {
+        position: absolute;
+        left: 0;
+        opacity: 0;
+        padding-bottom: 20px;
+        list-style: none;
+        width: 100%;
+        border-bottom: 1px groove rgb(29, 28, 28);
+    }
+    
+    .tab-cotents li.visible {
+        width: 100%;
+        text-align: center;
+        opacity: 1;
+        pointer-events: auto;
+        font-size: 25px;
+        font-weight: bolder;
+        font-size: larger;
+    }
+    
+    .recentpost {
+        position: relative;
+        background-color: rgb(255, 255, 255);
+        padding-bottom: 80px;
+        padding-top: 1px;
+    }
+    
+    .recentpost h3 {
+        font-size: x-large;
+        font-weight: 1000;
+        color: rgb(0, 0, 0);
+    }
+    
+    #recentpost {
+        left: 0%;
+        top: -8%;
+        width: 100%;
+        transform: translate(0%, 0%);
+        margin-bottom: 2px;
+        display: grid;
+        max-height: 400px;
+        grid-template-columns: repeat(5, 1fr);
+        overflow: scroll;
+        overflow-y: hidden;
+    }
+    
+    #recentpost article {
+        max-height: 200px;
+        width: 150px;
+        border-radius: 70px;
+        margin: 10px 20px;
+        font-size: smaller;
+    }
+    
+    #recentpost article img {
+        width: 100%;
+        border-radius: 70px;
+        height: 150px;
+        margin-bottom: 6px;
+    }
+    
+    .topdeals {
+        display: grid;
+        grid-template-columns: repeat(10, 1fr);
+        height: 300PX;
+        width: 100%;
+        overflow-x: scroll;
+        overflow-y: hidden;
+    }
+    
+    .topdeals article {
+        width: 200px;
+        height: 200px;
+        overflow: hidden;
+        text-align: center;
+        margin: 5px;
+        color: #ffc107;
+    }
+    
+    .review {
+        position: relative;
+        background-color: white;
+        text-align: center;
+        color: black;
+        padding-bottom: 140px;
+    }
+    
+    #reviewP {
+        color: #bdc018;
+        height: fit-content;
+        width: 100%;
+        display: grid;
+        grid-template-columns: repeat(10, 1fr);
+        overflow-x: scroll;
+    }
+    
+    #reviewP article {
+        width: 300px;
+        height: 300px;
+        border-radius: 5% 5% 5% 5%;
+        background-image: linear-gradient(to bottom right, rgba(240, 226, 226, 0.582), rgba(106, 232, 248, 0.808));
+        box-shadow: 0 13px 13px rgba(0, 0, 0, 0.15);
+        border: 4px groove rgb(0, 255, 0);
+        margin: 10px auto;
+        padding: 0px;
+    }
+    /* apimyStore*/
+    
+    #apimyStore {
+        position: fixed;
+        width: 100%;
+        height: 100%;
+        top: 0vh;
+        left: 0%;
+        border-left: 2px solid white;
+        background-color: rgb(255, 255, 255);
+        opacity: 0;
+        z-index: -4;
+        transition: 0.4s ease-in;
+        text-align: center;
+        overflow-y: scroll;
+    }
+    /*products*/
+    
     #products {
-        width: 100%;
-        height: 110%;
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        width: 70%;
+        height: 100%;
+        transform: translate(-50%, -50%);
+        border-left: 2px solid white;
+        background-color: rgb(255, 255, 255);
+        opacity: 0;
+        z-index: -3;
+        transition: 0.4s ease-in;
     }
+    
+    .upldpro {
+        background: rgb(255, 255, 255);
+        text-align: center;
+        border: 1px solid grey;
+        overflow-x: hidden;
+        overflow-y: scroll;
+        width: 80%;
+        margin-left: 10%;
+        height: 90%;
+    }
+    
+    .upldpro form {
+        padding: 63px 0 0 0;
+        color: #3f2626;
+    }
+    
+    #addImage {
+        background: rgb(74, 74, 247);
+        border-radius: 10px;
+        color: white;
+        padding: 4px;
+    }
+    
+    #price {
+        position: absolute;
+        left: 50%;
+        top: 35.5%;
+    }
+    
+    .p {
+        position: absolute;
+        left: 50%;
+        top: 17.5%;
+    }
+    
+    #submit {
+        position: relative;
+        top: 8%;
+        width: 40%;
+        background-color: rgb(0, 255, 21);
+        color: white;
+        border: none;
+        padding: 5px;
+        margin-top: 1rem;
+        margin-bottom: 1rem;
+        font-weight: bolder;
+        border-radius: 2px;
+    }
+    
+    #post {
+        text-align: center;
+    }
+    
+    .slider {
+        top: -3%;
+        position: relative;
+        height: 220px;
+        width: 200px;
+        border-radius: 6px;
+        overflow: hidden;
+        cursor: default;
+    }
+    
+    .slider img {
+        max-width: 200px;
+        height: 200px;
+        border-radius: 6px;
+    }
+    
+    .slide {
+        position: absolute;
+        width: 200px;
+        height: 200px;
+        text-align: center;
+        list-style: none;
+        z-index: 1;
+        align-self: center;
+    }
+    
+    #submit:hover {
+        background-color: #8d8d8d;
+        color: #424242;
+    }
+    /* viewpost*/
+    
     #viewpost {
-        width: 100%;
-        height: 110%;
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        width: 70%;
+        height: 100%;
+        transform: translate(-50%, -50%);
+        border-radius: 6px;
+        opacity: 0;
+        z-index: -3;
+        background: white;
+        overflow: scroll;
+        overflow-x: hidden;
+        padding-bottom: 20px;
     }
-}
+    
+    #forpost {
+        text-align: center;
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        position: relative;
+        width: 100%;
+        left: 0;
+        margin: 5%;
+    }
+    
+    .close {
+        position: relative;
+        top: 10%;
+        left: 92%;
+        font-weight: bolder;
+        font-size: large;
+        color: red;
+    }
+    
+    #marpicDelete {
+        width: 98%;
+        padding: 30px;
+        background-color: rgb(247, 243, 37);
+        text-align: center;
+        z-index: 2;
+        border-radius: 20px;
+        position: fixed;
+        top: 30%;
+        display: none;
+    }
+    
+    .deleteDot {
+        position: absolute;
+        margin-left: 10px;
+        margin-top: -4px;
+        cursor: pointer;
+        color: rgb(0, 0, 0);
+        z-index: 1;
+        background-color: white;
+        border: 1px groove greenyellow;
+    }
+    
+    .deleteMsg {
+        position: absolute;
+        margin-left: 36px;
+        padding: 2px;
+        background-color: white;
+        color: rgb(224, 82, 82);
+        display: none;
+        transition: 1s ease-in;
+        z-index: 1;
+        text-decoration: none;
+    }
+    
+    #close {
+        color: red;
+    }
+    
+    .pricin {
+        position: absolute;
+        top: 70%;
+        left: 0%;
+        z-index: 2;
+        width: 100%;
+        transition: 0.5s linear;
+        text-decoration: underline;
+        font-weight: bolder;
+        color: white;
+        font-size: large;
+        transform: translateY(200%);
+    }
+    
+    #settings {
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        width: 70%;
+        height: 100%;
+        transform: translate(-50%, -50%);
+        background-color: white;
+        border-left: 2px solid rgb(255, 255, 255);
+        overflow: scroll;
+        overflow-x: hidden;
+        transition: 0.4s ease-in;
+        z-index: 4;
+        display: none;
+        scroll-behavior: smooth;
+    }
+    
+    .settingsHeader {
+        background-color: #2a0518;
+        overflow: hidden;
+        height: 7%;
+        position: fixed;
+        width: 74%;
+        z-index: 6;
+        padding-top: 30px;
+        display: flex;
+    }
+    
+    .settingsList {
+        position: relative;
+        z-index: 1;
+        top: 17%;
+    }
+    
+    .settingsworks {
+        font-weight: 900;
+        font-size: smaller;
+        color: #2a0518;
+        margin-left: 20px;
+        margin-bottom: 30px;
+        cursor: pointer;
+        font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    }
+    
+    #editpagetofserver {
+        width: 90%;
+        height: 200px;
+        position: absolute;
+        margin-left: 20px;
+        top: 27%;
+        border-radius: 30px;
+        background-color: #ffffff;
+        box-shadow: 0 10px 10px 10px rgba(10, 10, 10, 0.10);
+        z-index: 2;
+        display: none;
+    }
+    
+    @media screen and (max-width: 590px) {
+         ::-webkit-scrollbar {
+            display: none;
+        }
+        * {
+            scrollbar-width: none;
+            scroll-behavior: smooth;
+            transition: 1s ease-out;
+        }
+        .links {
+            margin-left: 4%;
+        }
+        #profile {
+            width: 100%;
+            height: 110%;
+        }
+        #products {
+            width: 100%;
+            height: 110%;
+        }
+        #viewpost {
+            width: 100%;
+            height: 110%;
+        }
+        #settings {
+            width: 100%;
+            height: 110%;
+        }
+        .settingsHeader {
+            width: 100%;
+        }
+    }

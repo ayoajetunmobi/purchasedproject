@@ -3,7 +3,6 @@ let i = 0,
     producbtn = document.querySelector("#producbtn"),
     mystoreBtn = document.getElementById('mystoreBtn'),
     /*not buttons*/
-    sections = document.getElementById('section'),
     searchcover = document.getElementById("searchcover"),
     profile = document.querySelector("#profile"),
     mystore = document.getElementById("mystore"),
@@ -12,7 +11,9 @@ let i = 0,
     apimyStore = document.getElementById('apimyStore'),
     wrapper = document.getElementById('wrapper'),
     img = [],
-    productSpec = document.querySelector('.productSpec');
+    productSpec = document.querySelector('.productSpec'),
+    closesidebar = document.getElementById("closesidebar"),
+    opensidebar = document.getElementById("opensidebar");
 
 img[0] = document.getElementById('img1')
 img[1] = document.getElementById('img2')
@@ -20,25 +21,22 @@ img[2] = document.getElementById('img3')
 
 
 function callslide() {
-    let header = document.getElementById('header'),
-        h1 = document.getElementsByClassName('h1');
+    let header = document.getElementById('header');
 
     if (i == 0) {
         header.src = img[0].src;
         i = 1
-        h1[0].style.opacity = 1
+
     } else if (i == 1) {
         header.src = img[1].src;
         i = 2
-        h1[0].style.opacity = 0
 
     } else {
         header.src = img[2].src;
         i = 0
-        h1[0].style.opacity = 0
 
     }
-    setTimeout("callslide()", 9000)
+    setTimeout("callslide()", 2000)
 }
 
 function displayRemove() {
@@ -49,15 +47,11 @@ function displayRemove() {
     viewpost.style.zIndex = -3
     apimyStore.style.opacity = 0
     apimyStore.style.zIndex = -4
-    mystore.style.opacity = 0
-    mystore.style.zIndex = -4
-    section.style.display = 'none'
     productSpec.style.display = 'none'
 }
 
 function homebt() {
     profile.style.display = 'none'
-    section.style.display = 'none'
 
 }
 
@@ -69,11 +63,6 @@ function spinner() {
 function closespinner() {
     let spinnerdiv = document.getElementById('spinnerdiv');
     spinnerdiv.style.display = 'none';
-}
-
-function secdisplay() {
-    let section = document.getElementById('section');
-    section.style.display = 'block'
 }
 
 function closesearch() {
@@ -104,3 +93,15 @@ function enter() {
         }
     })
 }
+closesidebar.addEventListener('click', () => {
+    let sidebar = document.querySelector('.sidebar'),
+        body = document.getElementById("body");
+    sidebar.style.left = "-80%"
+    body.style.left = "0%"
+})
+opensidebar.addEventListener('click', () => {
+    let body = document.getElementById("body"),
+        sidebar = document.querySelector('.sidebar');
+    body.style.left = "50%"
+    sidebar.style.left = "-20%"
+})

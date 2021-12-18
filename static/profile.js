@@ -65,10 +65,9 @@ function myclick() {
     image.appendChild(br)
 }
 
-function mystoredisplay() {
-    let mystore = document.getElementById("mystore");
-    mystore.style.zIndex = 4
-    mystore.style.opacity = 1
+function mysetting() {
+    let settings = document.getElementById("settings");
+    settings.style.display = "block"
 }
 
 function apimyStoreDispay() {
@@ -88,35 +87,6 @@ let advertBtn = document.getElementById("advertBtn"),
     deactBtn = document.getElementById("deactBtn"),
     cover = document.getElementById('cover');
 
-
-advertBtn.addEventListener('click', function(e) {
-    e.preventDefault()
-    apimyStore.innerHTML = ""
-    apimyStore.innerHTML = `
-            <div class="close" style="position: absolute; top:6%">
-                <a href="#" id="close" onclick="disapp()"><i style="color: black;" class="fa fa-arrow-left"></i></a>
-            </div>
-            <h2 style="color:red;letter-spacing:2px;">Purchased ...</h2>
-            <br>
-            <h3> advertisement plan </h3>
-
-            <p>
-               Advertising your product is a great way of reaching out to people, <span style="color:red;"> Purchased </span> offers
-            different ways a user can gain more reach on our platform.
-]
-               <li> 1) Let us create a custom flyer design for your business and advertise your business 
-               on users profile page and top user section
-               contact us on 09079681347 </li>
-               <br>
-             
-               <li> 2) Create your own custom high quality flyer to advertise your business and 
-               contact us on 09079681347... jpg image should be less than 2mb </li> 
-
-               <li> 2) contact support for more tips </li> 
-            </p>
-    `
-    apimyStoreDispay()
-})
 
 function getmsg(data) {
     let apimyStore = document.getElementById('apimyStore');
@@ -140,7 +110,7 @@ function li(data) {
     while (i < data.length) {
         div.innerHTML +=
             `
-          <li onclick="displayMsg(this)" msgid=${data[i].id} data="${data[i].message}" Rview = "${data[i].user_to_review}" contacted = ${data[i].contacted} class ="mesageliststyle">${data[i].message}...... </li> <br>
+          <li onclick="displayMsg(this)" msgid=${data[i].id} data="${data[i].message}" Rview = "${data[i].user_to_review}" contacted = ${data[i].contacted} class ="mesageliststyle">${data[i].message.substring(0,30)}  ... </li> <br>
           `
         i++
     }
@@ -172,168 +142,6 @@ function displayMsg(elem) {
 
 }
 
-reportbugBtn.addEventListener("click", function(e) {
-    e.preventDefault()
-    apimyStore.innerHTML = ""
-    apimyStore.innerHTML = `
-  <div class="close" style="position: absolute; top:6%">
-                <a href="#" id="close" onclick="disapp()"><i style="color: black;" class="fa fa-arrow-left"></i></a>
-            </div>
-            <h2 style="color:red;letter-spacing:2px;">Purchased ...</h2>
-            <br>
-
-            <h6 style="letter-spacing:2px; text-align: center; color:rgb(0, 255, 34); font-weight:500;">REPORT BUG or SUGESTION</h6>
-            <div style="position: absolute; height:100%; width:80%; left:2% ;top:0%; overflow:scroll;">
-                <div style="position:fixed; top:40%; height:50%; width:99%;margin:0px auto; ">
-                    <textarea name="reportUser" id="reportUser" cols="30" rows="10"></textarea><br><br><br>
-                    <input type="submit" style="text-align:center;color:white;background-color:rgb(66, 223, 66); border-radius:5px;" value="REPORT BUG">
-                    <input type="submit" style="text-align:center;color:white;background-color:rgb(66, 223, 66); border-radius:5px;" value="SUGEST">
-                </div>
-            </div>
-            `
-    apimyStoreDispay()
-})
-reportusaBtn.addEventListener('click', function(e) {
-    e.preventDefault()
-    apimyStore.innerHTML = ''
-    apimyStore.innerHTML = `
-     <div class="close" style="position: absolute; top:6%">
-                <a href="#" id="close" onclick="disapp()"><i style="color: black;" class="fa fa-arrow-left"></i></a>
-            </div>
-            <h2 style="color:red;letter-spacing:2px;">Purchased ...</h2>
-            <br>
-
-            <h6 style="letter-spacing:2px; text-align: center; color:rgb(0, 255, 34); font-weight:500;"> REPORT USER </h6>
-            <div style="position: absolute; height:100%; width:80%; left:2% ;top:0%; overflow:scroll;">
-                <div style="position:fixed; top:40%; height:50%; width:99%;margin:0px auto; ">
-                <input type= "text" placeholder="Culprit Username"><br><br>
-
-                    <textarea name="reportUser" id="reportUser" cols="30" placeholder="report user" rows="10"></textarea><br><br><br>
-                    <input type="submit" style="text-align:center;color:white;background-color:rgb(66, 223, 66); border-radius:5px;" value="REPORT USER">
-                </div>
-            </div>
-            `
-    apimyStoreDispay()
-})
-termscdBtn.addEventListener('click', function(e) {
-    e.preventDefault()
-    apimyStore.innerHTML = ""
-    apimyStore.innerHTML = `
-            <div class="close" style="position: absolute; top:6%">
-                <a href="#" id="close" onclick="disapp()"><i style="color: black;" class="fa fa-arrow-left"></i></a>
-            </div>
-            <h2 style="color:red;letter-spacing:2px;">Purchased ...</h2>
-            <br>
-            <p style = "font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;"> Purchased is a web app aimed at connecting students who have services to render or products to sell
-            to students and other interested users who want this product or service.
-            Purchased promises to go the extra mile as to the security of user data and transactions. 
-            We the backend team advise all users to stay save and follow the tips to succed as we are doing our best
-            to ensure that any user can be properly traced and found if need be. 
-            </p>
-            <br>
-             PURCHASED would not be held accountable for any user after contact has been collected.
-            <br>
-            <p>
-            if you like the app and wish to donate you can contact us on 09079681347
-            </p>
-            <br>
-            <br>
-            <br>
-            <br>
-            <p style = "font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;">copyright 2021<p>
-    `
-    apimyStoreDispay()
-})
-tipsBtn.addEventListener('click', function(e) {
-    e.preventDefault()
-    apimyStore.innerHTML = ""
-    apimyStore.innerHTML = `
-            <div class="close" style="position: absolute; top:6%">
-                <a href="#" id="close" onclick="disapp()"><i style="color: black;" class="fa fa-arrow-left"></i></a>
-            </div>
-            <h2 style="color:red;letter-spacing:2px;">Purchased ...</h2>
-            <br>
-
-            <div>
-            <h3 style=" padding:20px;border-left:5px groove aqua; border-right:5px groove aqua; background-color:rgb(204, 197, 197);border-radius:10px;">
-                <span style="color: brown;">TIPs to succeed</span><br><br>
-                <li>
-                    payment should be made after concrete agreement with seller.
-                </li>
-                <li>
-                    meeting and delivering point should always be in an open place within the school premises.
-                </li>
-                <li>
-                    remember to always drop a review on user after buying or selling.
-                </li>
-                <li>
-                    read reviews on user and be convinced enough before making any contact.
-                </li>
-
-                <li>
-                    it is adviseable to transact with users who have been verified by matric number for better security.
-                </li>
-                <li>
-                    <span style="color: red;"> NOTE </span> Users who can be identified by their profile picture maybe more trust worthy than the others.
-                </li>
-                 <li>
-                   consider advertising your products with us and on your social media platforms for more reach.
-                </li>
-                 <li>
-                   online users would sell more(sharp sharp business).
-                </li>
-                <li>
-                   it is adviseable to create multiple post with less images than a single post with so much images.
-                </li>
-                <li>
-                   remember to delete product or service if it is no longer available , you don't want
-                   potential buyers asking for a product you do not have . I mean that can cause you a bad review.
-                </li>
-                 <li>
-                   Always drop a review on user after business meetings or end of transaction.
-                </li>
-                  <li>
-                   safety first, safety first, safety first.
-                </li>
-                <li>
-                    <span style="color: red;"> purchased  </span> your online market place.
-                </li>
-            </h3>
-
-            
-        </div>
-    `
-    apimyStoreDispay()
-})
-deactBtn.addEventListener('click', function(e) {
-    e.preventDefault()
-    apimyStore.innerHTML = ''
-    apimyStore.innerHTML = `
-     <div class="close" style="position: absolute; top:6%">
-                <a href="#" id="close" onclick="disapp()"><i style="color: black;" class="fa fa-arrow-left"></i></a>
-            </div>
-            <h2 style="color:red;letter-spacing:2px;">Purchased ...</h2>
-            <br>
-
-            <div style="position: absolute; height:100%; width:80%; left:2% ;top:0%; overflow:scroll;">
-                <div style="position:fixed; top:40%; height:50%; width:99%;margin:0px auto; ">
-                <label> why are you deactivating your account ? </label>
-                    <textarea name="reportUser" id="reportUser" cols="30" rows="10"></textarea><br><br><br>
-                    <input type="submit" style="text-align:center;color:white;background-color:rgb(66, 223, 66); border-radius:5px;" value="DEACTIVATE">
-                </div>
-            </div>
-            `
-    apimyStoreDispay()
-})
-cover.addEventListener('click', function(e) {
-    let mystoreBtn = document.getElementById('mystoreBtn');
-
-    if (e.target != mystoreBtn) {
-        mystore.style.opacity = 0
-        mystore.style.zIndex = -4
-    }
-})
-
 /**delete product functionality */
 function dot(e) {
     let ls = [];
@@ -355,4 +163,172 @@ function delmsg(e) {
 function closedel() {
     let marpicDelete = document.getElementById('marpicDelete');
     marpicDelete.style.display = 'none'
+}
+
+function closesettings() {
+    let settings = document.getElementById('settings');
+    settings.style.display = 'none'
+}
+
+function settingfunc(event) {
+    let data = event;
+
+    if (data == 2) {
+        settingDiscontrol()
+        editpagetofserver.innerHTML =
+            `
+            <a href="#" onclick = "settingeditoserverclose()"><i style="color: rgb(0, 0, 0);" class="fa fa-arrow-left"></i>
+            </a>
+            <h5 style="text-align: center; color:red;"> Change Password </h5><br>
+            <div style="height: 70%; width:100%">             
+                <input id="settingactionInput" type="password" style="width:98%; height:40%; background-color:rgb(255, 255, 255);border:none;" placeholder= "new password">
+                <input id="settingactionInput2" type="password" style="width:98%; height:40%; background-color:rgb(255, 255, 255);border:none;" placeholder= "confirm password"">
+            </div>
+            <br>
+            <div style="width: 100%; text-align:center; background-color:#ffffff; border-top:0.3px solid black; color:rgb(255, 0, 0);
+            font-weight:700">
+                <input type = "submit" value = SUBMIT onclick = "apisettings(2)">
+            </div>
+            `
+        editpagetofserver.style.display = 'block'
+    }
+
+    if (data == 3) {
+        settingDiscontrol()
+        editpagetofserver.innerHTML =
+            `
+            <a href="#" onclick = "settingeditoserverclose()"><i style="color: rgb(0, 0, 0);" class="fa fa-arrow-left"></i>
+            </a>
+            <h5 style="text-align: center; color:red;"> Edit About </h5><br>
+            <div style="height: 70%; width:100%">             
+                <textarea id="settingactionInput" style="width:98%; height:40%; background-color:rgb(255, 255, 255);border:none;" placeholder= "edit about"></textarea>
+            </div>
+            <br>
+            <div style="width: 100%; text-align:center; background-color:#ffffff; border-top:0.3px solid black; color:rgb(255, 0, 0);
+                font-weight:700">
+               <input type = "submit" value = SUBMIT onclick = "apisettings(3)">
+            </div>
+            `
+        editpagetofserver.style.display = 'block'
+    }
+    if (data == 4) {
+        settingDiscontrol()
+        editpagetofserver.innerHTML =
+            `
+            <a href="#" onclick = "settingeditoserverclose()"><i style="color: rgb(0, 0, 0);" class="fa fa-arrow-left"></i>
+            </a>
+            <h5 style="text-align: center; color:red;"> Edit Contact </h5><br>
+            <div style="height: 70%; width:100%">             
+                <input  id="settingactionInput" type = "number" style="width:98%; height:40%; background-color:rgb(255, 255, 255);border:none;" placeholder= "new number">
+            </div>
+            <br>
+            <div style="width: 100%; text-align:center; background-color:#ffffff; border-top:0.3px solid black; color:rgb(255, 0, 0);
+                font-weight:700">
+               <input type = "submit" value = SUBMIT onclick = "apisettings(4)">
+            </div>
+            `
+        editpagetofserver.style.display = 'block'
+    }
+
+    if (data == 5) {
+        settingDiscontrol()
+        editpagetofserver.innerHTML =
+            `
+            <a href="#" onclick = "settingeditoserverclose()"><i style="color: rgb(0, 0, 0);" class="fa fa-arrow-left"></i>
+            </a>
+            <h5 style="text-align: center; color:red;"> Make Suggestion </h5><br>
+            <div style="height: 70%; width:100%">             
+                <textarea id="settingactionInput" style="width:98%; height:40%; background-color:rgb(255, 255, 255);border:none;" placeholder= "suggest something"></textarea>
+            </div>
+            <br>
+            <div style="width: 100%; text-align:center; background-color:#ffffff; border-top:0.3px solid black; color:rgb(255, 0, 0);
+                font-weight:700">
+               <input type = "submit" value = SUBMIT onclick = "apisettings(5)">
+            </div>
+            `
+        editpagetofserver.style.display = 'block'
+    }
+    if (data == 6) {
+        settingDiscontrol()
+        editpagetofserver.innerHTML =
+            `<a href="#" onclick = "settingeditoserverclose()"><i style="color: rgb(0, 0, 0);" class="fa fa-arrow-left"></i>
+            </a>
+            <h5 style="text-align: center; color:red;"> Report User </h5><br>
+            <div style="height: 70%; width:100%"> 
+                <textarea id="settingactionInput" style="width:98%; height:40%; background-color:rgb(255, 255, 255);border:none;" placeholder= "culprit username"></textarea>         
+                <textarea id="settingactionInput2" style="width:98%; height:40%; background-color:rgb(255, 255, 255);border:none;" placeholder= "report user"></textarea>
+            </div>
+            <div style="width: 100%; text-align:center; background-color:#ffffff; border-top:0.3px solid black; color:rgb(255, 0, 0);
+                font-weight:700">
+               <input type = "submit" value = SUBMIT onclick = "apisettings(6)">
+            </div>
+            <br>
+            `
+        editpagetofserver.style.display = 'block'
+    }
+    if (data == 7) {
+        settingDiscontrol()
+        editpagetofserver.innerHTML =
+            `
+            <a href="#" onclick = "settingeditoserverclose()"><i style="color: rgb(0, 0, 0);" class="fa fa-arrow-left"></i>
+            </a>
+            <h5 style="text-align: center; color:red;"> Terms and Conditions </h5><br>
+            <h6> shopatpurchased is a product that looks to shorten the bridge between buyers and 
+            sellers around LASU.
+            It is aimed at giving more preference to student enterpreneurs. We try to encourage them
+            by getting your products out to potential buyers.
+            we are doing our best to keep the platform safe, clearly read the tips to succed and stay safe as
+            we would not be held responsible for any damages after user has been contacted. </h6>
+            `
+        editpagetofserver.style.display = 'block'
+    }
+
+    if (data == 9) {
+        settingDiscontrol()
+
+        editpagetofserver.innerHTML =
+            `
+            <a href="#" onclick = "settingeditoserverclose()"><i style="color: rgb(0, 0, 0);" class="fa fa-arrow-left"></i>
+            </a>
+            <h5 style="text-align: center; color:red;"> Deactive Account </h5><br>
+            <div style="height: 70%; width:100%">             
+                <textarea id="settingactionInput" style="width:98%; height:40%; background-color:rgb(255, 255, 255);border:none;" placeholder= "why are you deactivating your account"></textarea>
+            </div>
+            <br>
+            <div style="width: 100%; text-align:center; background-color:#ffffff; border-top:0.3px solid black; color:rgb(255, 0, 0);
+                font-weight:700">
+               <input type = "submit" value = SUBMIT onclick = "apisettings(9)">
+            </div>
+            `
+        editpagetofserver.style.display = 'block'
+    }
+
+
+}
+
+function settingDiscontrol() {
+
+    let settingsList = document.querySelector('.settingsList');
+    let settingsHeader = document.querySelector('.settingsHeader');
+    let editpagetofserver = document.getElementById('editpagetofserver');
+
+
+    settingsList.style.display = 'none'
+    settingsHeader.style.display = 'none'
+
+    editpagetofserver.innerHTML = ""
+}
+
+function settingeditoserverclose() {
+
+    let settingsList = document.querySelector('.settingsList');
+    let settingsHeader = document.querySelector('.settingsHeader');
+    let editpagetofserver = document.getElementById('editpagetofserver');
+
+
+    settingsList.style.display = 'block'
+    settingsHeader.style.display = 'block'
+    editpagetofserver.style.display = 'none'
+
+    editpagetofserver.innerHTML = ""
 }

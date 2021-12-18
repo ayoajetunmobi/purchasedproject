@@ -16,7 +16,7 @@
         //  yhandler()
         enter()
         callslide()
-        buy4seller()
+            // buy4seller()
         suggest()
 
     })
@@ -59,11 +59,8 @@
         data2 = data.product
         data3 = data.noData
 
-        searchcover.innerHTML = `<i onclick="closesearch()" id="closesearch" style="color: black; margin-top:20px;" class="fa fa-arrow-left"></i><br>
-            <h3 style="text-align: center;">
-                your search result
-            </h3><br>
-            `
+        searchcover.innerHTML = `<i onclick="closesearch()" id="closesearch" style="color: black; margin-top:30px; margin-right:160px " class="fa fa-arrow-left"></i>
+        `
 
         if (data1) {
             searchcover.style.display = 'block';
@@ -75,7 +72,7 @@
         let i = 0;
         if (data2) {
             searchcover.style.display = 'grid';
-            searchcover.style.gridTemplateColumns = "repeat(3,1fr)";
+            searchcover.style.gridTemplateColumns = "repeat(2,1fr)";
             data2.forEach((data2) => {
                 searchcover.innerHTML += `
                    <article class="post4store"  data = "${data2.id}" onclick= "product_spec(this)">
@@ -132,8 +129,13 @@
         specPropic = document.getElementById("specPropic"),
         specDescription = document.getElementById('specDescription'),
         specImgs = document.getElementById('specImgs'),
+        topdealsp = document.getElementById('topdealsp'),
         productSpecsugest = document.getElementById('productSpecsugest');
-        spec.scrollTop = '0px'
+        let data = JSON.parse(window.localStorage.getItem('user'));
+        let dataofpro = data.products;
+        let dataofproimg = data.productsrotateImg;
+
+
 
         spec.style.display = 'none'
         spinner()
@@ -149,11 +151,24 @@
                   <h6>${product.username}</h6>
                   `
 
+            topdealsp.innerHTML = ""
+             let itop =0;
+            while(itop < dataofpro.length){
+            topdealsp.innerHTML +=
+             ` <article >
+                    <img onclick="product_spec(this)" data="${dataofpro[itop].id}" style="width: 100%;height:80%;  margin-right: 15px;" src="media/${dataofproimg[itop].product_img}" alt="">
+                    <p style="z-index:1; font-size:small;">${dataofpro[itop].description.substring(0,37)} .. </p>
+                </article> 
+            `
+            itop++
+            }
+            
+
             specDescription.innerHTML=""
             specDescription.innerHTML= `
-                  <h5 style="padding:0px 10px;">${product.description}</h5><br>
-                  <h4 style="padding:0px 10px; color:gold;">N${product.price}</h4>
-                   <br><br> <span style="font-size: medium; color:black; text-align:center;">  search tag : <span style="background-color: azure; color:blue; padding:2px; border-radius:1px;"> ${product.searchTag} </span> </span>
+                  <h6 style="padding:0px 3px;">${product.description}</h6>
+                  <h5 style="padding:0px 3px; color:gold;">N${product.price}</h5>
+                 <span style="font-size: small; color:black; text-align:center;">  search tag : <span style="background-color: azure; color:blue; padding:2px; border-radius:1px;"> ${product.searchTag} </span> </span>
                    `
             specImgs.innerHTML= ""  
             specImgs.innerHTML= `<button id="moveleft" style="position: absolute; left: 4%; top:40%; font-size:larger; cusor:pointer;  z-index:1; background-color:grey; color:white;"> <
@@ -181,9 +196,12 @@
                 }})
              productSpecsugest.innerHTML += `
                    <article data="">
-                   <img data=${pro.id} onclick="product_spec(this)" style="max-width: 120px; height:140px; margin-left:20px;border:1px groove yellow;" src="media/${a}" alt="">
+                   <img data=${pro.id} onclick="product_spec(this)" style="max-width: 120px; height:140px; margin-left:20px;" src="media/${a}" alt="">
                      <span>
-                       ${pro.searchTag}....... <br>
+                       ${pro.description.substring(0,37)} ... <br>
+                     </span>
+                      <span style="color:gold;">
+                       N ${pro.price} <br>
                      </span>
                      </article>  `
          })
@@ -198,27 +216,32 @@
                 <a href="tel:${contact}"> <button onclick="msg(this)" seller=${seller} style="width: 100%; margin-bottom:30px; color:white;height:30px; border-radius:15px; background-image: linear-gradient(to bottom right, rgb(0, 255, 34), rgb(52, 107, 59));">
                 contact seller </button></a> 
             `
-    }
+        }
      }
        
        spec.style.display = 'block'
        closespinner()
-        moveslide()
+       moveslide()
 
     }
 
     function addtoMyProfile(profile, product, images, reviews, update = false, advert){
         let cover = document.getElementById('cover');
-        let advertImg = document.getElementById('advertImg');
         let allinfo = document.getElementById('allinfo');
         let review = document.querySelector('#reviewP');
         let recentPost = document.querySelector("#recentpost");
         let contactseller = document.getElementById('contactSeller');
+        let topdeals = document.getElementById('topdeals');
         let i = 0;
         let ii = 0;
         let profilecover = document.getElementById('profile');
+        let data = JSON.parse(window.localStorage.getItem('user'));
+        let dataofpro = data.products;
+        let dataofproimg = data.productsrotateImg;
+        let changedp = document.getElementById('changedp');
+
+
         profilecover.style.display= 'none'
-        spinner()
         spinner()
         cover.innerHTML = "";
 
@@ -234,9 +257,16 @@
                     </h4>
                     <div class="links">
                         <a class="view" onclick="viewmore(event)"> market place </a>
-                        ${(update == true)?'':`<a onclick="producappear()" id="producbtn" class="view"> create post </a> <a id="mystoreBtn" onclick= "mystoredisplay()" class="view"> My Store </a>`}
+                        ${(update == true)?'':`<a onclick="ApiDisMsg(this)" id="msgBtn" class="view"> my messages </a> <a id="mystoreBtn" onclick= "mysetting()" class="view"> SETTINGS </a>`}
                     </div>
                 </div>`
+
+                if(update == true){
+                    changedp.style.display = "none"
+                }else{
+                     changedp.style.display = "block"
+                }
+
 
             allinfo.innerHTML = `
                 <a> matric verification</a>
@@ -250,35 +280,41 @@
             contactseller.innerHTML =`<h3 style= "display:none;" class="contactnumber">${profile.contact}<br>
                 <span style="color:red; font-size:small;"> please drop a review on user after product delivery </span>
                 </h3>
-                <a href="tel:${profile.contact}"><button  onclick= "msg(this)" seller = ${profile.username} style="background-image: linear-gradient(to bottom right, rgb(0, 255, 34), rgb(52, 107, 59))" >CONTACT SELLER</button></a>
+                <a href="tel:${profile.contact}"><button  onclick= "msg(this)" seller = ${profile.username} style="border: 5px groove rgb(0, 255, 21); background-color:white; color:black;" >CONTACT SELLER</button></a><br>
             `
-            if(update== true){
-                let changedp = document.getElementById('changedp');
-                changedp.style.display = 'none'
-            }else{
-               let changedp = document.getElementById('changedp');
-                changedp.style.display = 'block'  
-            }
-            advertImg.style.display = "block"
-            advertImg.innerHTML=''
-            advertImg.innerHTML = `<img style="display:block;" src="media/${advert}" alt=""/>`
-
             recentPost.innerHTML = ""
             if (product.length > 0) {
                 while (i < product.length &&  i != 4) {
                     recentPost.innerHTML += `
                     <article data="">
-                      ${(product[i].id == images[i].product_id)?`<img onclick="product_spec(this)" style= " border:1px solid yellow" data= ${product[i].id} src = "media/${images[i].product_img}" alt="">`:""}
+                      ${(product[i].id == images[i].product_id)?`<img onclick="product_spec(this)" data= ${product[i].id} src = "media/${images[i].product_img}" alt="">`:""}
                       <span>
-                        ${product[i].searchTag}  
+                        ${(product[i].description).substring(0,37)}  ...
+                      </span>
+                      <br>
+                      <span class="pricesugg">
+                        N${product[i].price}  
                       </span>
                       <br><br>
                     <article>`;
                         i++
                 }       
             }
+
+            topdeals.innerHTML =""
+            let itop =0;
+            while(itop < dataofpro.length){
+            topdeals.innerHTML +=
+             ` <article >
+                    <img onclick="product_spec(this)" data="${dataofpro[itop].id}" style="width: 100%;height:80%;  margin-right: 15px;" src="media/${dataofproimg[itop].product_img}" alt="">
+                    <p style="z-index:1; font-size:small;">${dataofpro[itop].description.substring(0,37)} .. </p>
+                </article> 
+            `
+            itop++
+            }
+
             review.innerHTML=""
-            if (reviews.length > 0) {
+            if (reviews.length > 0 ) {
                 while (ii < reviews.length && ii!= 5) {
                     review.innerHTML += ` 
                       <article>
@@ -341,81 +377,34 @@
 
     }
 
-    function moveslidetopdeals(){
+// function buy4seller(){
+//     let buystucover = document.getElementById('buystucover'),
+//     buy4student= [...document.getElementsByClassName('buy4student')],
+//     buytxt = [...document.getElementsByClassName('buytxt')];
 
-     let mainspecimgs = [...document.getElementsByClassName('topdealimg')],
-      topdealdescrip = [...document.getElementsByClassName('topdealdescrip')],
-      slideWidth = 200;
+//     if (buy4studentcontrol == 0){
+//         buystucover.style.backgroundColor = '#ff99cc';
+//         buystucover.style.color= 'white'
+//         buy4student.forEach(stu=> stu.style.backgroundColor = '#336699')
+//         buytxt.forEach(stu=> stu.style.color = 'white')
+//         buy4studentcontrol = 1
+//     }
+//     else if (buy4studentcontrol == 1){
+//         buystucover.style.backgroundColor = 'yellow';
+//         buystucover.style.color= 'black'
+//         buy4student.forEach(stu=> stu.style.backgroundColor = '#006600')
+//         buytxt.forEach(stu=> stu.style.color = 'white')
+//         buy4studentcontrol = 2
+//     }else{
+//         buystucover.style.backgroundColor = '#ff0033';
+//         buy4student.forEach(stu=> stu.style.backgroundColor = 'white')
+//         buytxt.forEach(stu=> stu.style.color = 'black')
+//         buy4studentcontrol = 0
+//     }
 
-     if(mainspecimgs.length > 1){
-       for (let i = 0; i < mainspecimgs.length; i++){ 
-           mainspecimgs[i].style.left = slideWidth * i + "px";
-        }
-    }
-    if(topdealdescrip.length > 1){
-       for (let i = 0; i < topdealdescrip.length; i++){ 
-           topdealdescrip[i].style.left = slideWidth * i + "px";
-        }
-    }
-    }
-    
-    function callaction(){
-        let mainspecimgs = [...document.getElementsByClassName('topdealimg')]
-         topdealdescrip = [...document.getElementsByClassName('topdealdescrip')],
-        slideWidth = 200;
-      
+//     setTimeout( "buy4seller()", 4900)
 
-        let lastChild = mainspecimgs.length;
-        if(check == true){
-            if(slidebytopdealone < lastChild-1){ 
-             moveSlides(mainspecimgs, "forward", slideWidth);
-             moveSlides(topdealdescrip, "forward", slideWidth);
-            slidebytopdealone++
-            }
-            if(slidebytopdealone == lastChild-1){
-                check = false
-            }
-        }else{
-              moveSlides(mainspecimgs, "backward", slideWidth);
-              moveSlides(topdealdescrip, "backward", slideWidth);
-              slidebytopdealone--
-              if(slidebytopdealone == 0){
-                check = true
-            }
-        }
-
-         setTimeout( "callaction()", 2500)
-    }
-
-
-function buy4seller(){
-    let buystucover = document.getElementById('buystucover'),
-    buy4student= [...document.getElementsByClassName('buy4student')],
-    buytxt = [...document.getElementsByClassName('buytxt')];
-
-    if (buy4studentcontrol == 0){
-        buystucover.style.backgroundColor = '#ff99cc';
-        buystucover.style.color= 'white'
-        buy4student.forEach(stu=> stu.style.backgroundColor = '#336699')
-        buytxt.forEach(stu=> stu.style.color = 'white')
-        buy4studentcontrol = 1
-    }
-    else if (buy4studentcontrol == 1){
-        buystucover.style.backgroundColor = 'yellow';
-        buystucover.style.color= 'black'
-        buy4student.forEach(stu=> stu.style.backgroundColor = '#006600')
-        buytxt.forEach(stu=> stu.style.color = 'white')
-        buy4studentcontrol = 2
-    }else{
-        buystucover.style.backgroundColor = '#ff0033';
-        buy4student.forEach(stu=> stu.style.backgroundColor = 'white')
-        buytxt.forEach(stu=> stu.style.color = 'black')
-        buy4studentcontrol = 0
-    }
-
-    setTimeout( "buy4seller()", 4900)
-
-}
+// }
 
     function moveSlides(move, direction, slidewidth) {
             for (var j = 0; j < move.length; j++) {
@@ -446,51 +435,54 @@ function buy4seller(){
         let suggestImg = data['suggestionImg'];
         suggestproduct.innerHTML= ""
         suggestproduct.innerHTML= `
-         <article data="${suggest1[0].id}" onclick="product_spec(this)" class="post">
+
+             <article data="${suggest1[0].id}" onclick="product_spec(this)" class="post">
              <img class="postimg" src="media/${suggestImg[0].product_img}" alt="">
-             <p class="postdesc">${suggest1[0].searchTag}</p>
-             <p>N${suggest1[0].price}</p>
+             <p class="postdesc">${suggest1[0].description.substring(0,33)}..</p>
+             <p class="pricesugg">N${suggest1[0].price}</p> 
              </article>
 
-              <article data="${suggest2[0].id}" onclick="product_spec(this)" class="post">
+             <article data="${suggest2[0].id}" onclick="product_spec(this)" class="post">
              <img class="postimg" src="media/${suggestImg[1].product_img}" alt="">
-             <p class="postdesc">${suggest2[0].searchTag}</p>
-             <p>N${suggest2[0].price}</p>
+             <p class="postdesc">${suggest2[0].description.substring(0,33)}..</p>
+             <p  class="pricesugg" >N${suggest2[0].price}</p>
              </article>
 
              <article data="${suggest3[0].id}" onclick="product_spec(this)" class="post">
              <img class="postimg" src="media/${suggestImg[2].product_img}" alt="">
-             <p class="postdesc">${suggest3[0].searchTag}</p>
-             <p>N${suggest3[0].price}</p>
+             <p class="postdesc">${suggest3[0].description.substring(0,33)}..</p>
+             <p class="pricesugg">N${suggest3[0].price}</p>
              </article>
 
-            <article data="${suggest4[0].id}" onclick="product_spec(this)" class="post">
+             <article data="${suggest4[0].id}" onclick="product_spec(this)" class="post">
              <img class="postimg" src="media/${suggestImg[3].product_img}" alt="">
-             <p class="postdesc">${suggest4[0].searchTag}</p>
-             <p>N${suggest4[0].price}</p>
+             <p class="postdesc">${suggest4[0].description.substring(0,33)}..</p>
+             <p  class="pricesugg">N${suggest4[0].price}</p>
              </article>
+
         `
+          
     }
-    function topdealdiv(data1,data2){
-        let slidedivImg = document.getElementById('slidedivImg');
-        let = descriptopdeals = document.getElementById('descriptopdeals');
-        data1.forEach(data=>{
-            slidedivImg.innerHTML += `
-            <img data=${data.product_id} style="z-index:2;" onclick="product_spec(this)" class="topdealimg" src="media/${data.product_img}" alt="">
-            `
-        data2.forEach(data=>{
-            descriptopdeals.innerHTML += `
-               <div class="topdealdescrip" style="width:200px; position:absolute;height:100%;">
-                            <p style="text-align:start; margin-left:20px; width:50%; height:20%;padding:2px">
-                                ${data.searchTag} <br> <span style="color: gold;">N${data.price}</span>
-                            </p>
-                        </div>
-                `
-        })
+    // function topdealdiv(data1,data2){
+    //     let slidedivImg = document.getElementById('slidedivImg');
+    //     let = descriptopdeals = document.getElementById('descriptopdeals');
+    //     data1.forEach(data=>{
+    //         slidedivImg.innerHTML += `
+    //         <img data=${data.product_id} style="z-index:2;" onclick="product_spec(this)" class="topdealimg" src="media/${data.product_img}" alt="">
+    //         `
+    //     data2.forEach(data=>{
+    //         descriptopdeals.innerHTML += `
+    //            <div class="topdealdescrip" style="width:200px; position:absolute;height:100%;">
+    //                         <p style="text-align:start; margin-left:20px; width:50%; height:20%;padding:2px">
+    //                             ${data.searchTag} <br> <span style="color: gold;">N${data.price}</span>
+    //                         </p>
+    //                     </div>
+    //             `
+    //     })
 
-        })
+    //     })
 
-        moveslidetopdeals()
-        callaction()
+    //     moveslidetopdeals()
+    //     callaction()
 
-    }
+    // }

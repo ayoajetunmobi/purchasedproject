@@ -3,15 +3,16 @@ from django.http import HttpResponseRedirect
 from django.core.files.storage import FileSystemStorage
 from django.core.paginator import Paginator, EmptyPage,PageNotAnInteger
 from django.core import serializers
+from django.contrib.auth.hashers import make_password
 from django.shortcuts import get_object_or_404
 from django.db.models import Q
 from django.http import JsonResponse
 from django.contrib.auth.signals import user_logged_in, user_logged_out
 from django.dispatch import receiver
 import json
-from .models import  User_Detail , User_product , Product_image , Advertisment,Messages,Contacted, Reviews,Searchdata
+from .models import   User_Detail , User_product , Product_image ,  Customer_care , Messages , Searchdata , Contacted, Reviews
 from django.contrib.auth import get_user_model
-from .forms import ( RegistrationForm, UserDetailForm, Customer_care_form ) 
+from .forms import ( RegistrationForm, UserDetailForm ) 
 from pygments.formatters import img
 from numpy import random
 
@@ -22,11 +23,9 @@ page_num = 1
 
 def formsdispaly(request):
     context={}
-    form1 = RegistrationForm(request.POST or None)
-    form2 = UserDetailForm(request.POST or request.FILES or None)
     loged_in_user= request.user
     
-    userstore1 = User_Detail.objects.get(username = 'Dees fashion plug')
+    userstore1 = User_Detail.objects.get(username = 'Ola Flourish')
     userstore1products = User_product.objects.filter(user = userstore1)[:15]
     userstore1productsImg = [userstore1.username]
     for i in userstore1products:
@@ -34,7 +33,7 @@ def formsdispaly(request):
     context['userstore1products'] = userstore1products
     context['userstore1productsImg'] = userstore1productsImg
 
-    userstore2 = User_Detail.objects.get(username = 'Ola Flourish')
+    userstore2 = User_Detail.objects.get(username = 'Abusummayyah')
     userstore2products = User_product.objects.filter(user = userstore2)[:15]
     userstore2productsImg = [userstore2.username]
     for i in userstore2products:
@@ -58,20 +57,10 @@ def formsdispaly(request):
     context['userstore4products'] = userstore4products
     context['userstore4productsImg'] = userstore4productsImg
     
-    topdealsNDstudent1 = User_Detail.objects.get(username = 'Solanke')
-    topdealsNDstudent2 = User_Detail.objects.get(username = 'THaLES')
-    topdealsNDstudent3 = User_Detail.objects.get(username = 'DO Empire')
-    topdealsNDstudent4 = User_Detail.objects.get(username = 'Mamuzo')
-  
-    topdealsNDstudent = [topdealsNDstudent1,topdealsNDstudent2,topdealsNDstudent3,topdealsNDstudent4]
-    context['buyfromstudent'] = topdealsNDstudent
-    
-    
     if loged_in_user.is_authenticated:
-        print(loged_in_user)
         review = Reviews.objects.all()
         user_details = User_Detail.objects.get(user=loged_in_user)
-        products = User_product.objects.filter(campus = user_details.campus).order_by('-id')[:12]
+        products = User_product.objects.filter(campus = user_details.campus).order_by('-id')[:24]
         context['products']= products
         images=[]
         for i in products:
@@ -87,7 +76,7 @@ def formsdispaly(request):
             review[:8].delete()
     else:
         images =[]
-        products = User_product.objects.all().order_by('-id')[:12]
+        products = User_product.objects.all().order_by('-id')[:24]
         context['products']= products
         for i in products:
             if  Product_image.objects.filter(product=i)[0] != None:
@@ -97,6 +86,20 @@ def formsdispaly(request):
                 i.delete()
         context['images']= images
 
+    # context["product"]=products
+    
+    
+    return render(request,'purchased.html', context)
+
+
+def register(request):
+    context={}
+    form1 = RegistrationForm(request.POST or None)
+    form2 = UserDetailForm(request.POST or request.FILES or None)
+    
+    context["form1"]=form1
+    context["form2"]=form2
+    
     if form1.is_valid() and form2.is_valid():
         code =  str(random.random())[14:]
         email= form1.save(commit=False)
@@ -112,16 +115,11 @@ def formsdispaly(request):
         user.answer = code
         user.save()
 
-        mesageUser = Messages.objects.create(message=('hi '+user.username+' !!! welcome to purchased start exploring our online market place by searching for your desired product or service. Become a seller by just create=ing post with detailed product description'),my_messages =user )
+        mesageUser = Messages.objects.create(message=('hi '+user.username+' !!! welcome to purchased start exploring our online market place by searching for your desired product or service. Become a seller by creating post with detailed product description'),my_messages =user )
         return HttpResponseRedirect('/login/')
-
-       
-    # context["product"]=products
-    context["form1"]=form1
-    context["form2"]=form2
     
     
-    return render(request,'purchased.html', context)
+    return render(request, 'register.html',context)
             
             
 def getting_post(request):
@@ -190,14 +188,6 @@ def Prof_Update(request):
                 context['images'] = [{"product_img":""}] 
                 context['data1']  =  [{"searchTag":"no product yet"}] 
                 
-                  
-            if Advertisment.objects.filter(id=2).exists(): 
-               id_advert= random.randint(2,5)
-               picture = Advertisment.objects.get(id=id_advert)
-               context['advert'] = str(picture.picture)
-            else:
-                 context['advert'] = str("")
-                 
                  
             if Reviews.objects.filter(user=user).exists(): 
                 context['reviews']= list(Reviews.objects.filter(user=user).order_by('-id').values())
@@ -230,13 +220,6 @@ def get_profile(request):
                 context['images'] = [{"product_img":""}] 
                 context['data1']  =  [{"searchTag":"no product yet"}] 
                 
-                  
-            if Advertisment.objects.filter(id=2).exists(): 
-               id_advert=random.randint(2,5)
-               picture = Advertisment.objects.get(id=id_advert)
-               context['advert'] = str(picture.picture)
-            else:
-                 context['advert'] = str("")
                  
                  
             if Reviews.objects.filter(user=user).exists(): 
@@ -521,7 +504,7 @@ def msgDisplay(request):
                 
             user = User_Detail.objects.get(user = request.user)
             if Messages.objects.filter(my_messages = user).exists:
-                message= list( Messages.objects.filter(my_messages =user).values())
+                message = list( Messages.objects.filter(my_messages =user).values())
                 context['message'] = message
     return JsonResponse(context , safe=False)   
 
@@ -555,12 +538,12 @@ def msgDisplay(request):
 
 def suggestproduct(request):
     context={}
-    products = User_product.objects.all()[15:26]
+    products = User_product.objects.all()[1:13]
     suggestions  = []
-    suggestions1 = User_product.objects.filter(Q(searchTag__contains = 'food') | Q(searchTag__contains = 'rice')).order_by("-id")[:1]
-    suggestions2 = User_product.objects.filter(Q(searchTag__contains = 'google') | Q(searchTag__contains = 'phone')).order_by("-id")[:1]
-    suggestions3 = User_product.objects.filter(Q(searchTag__contains = 'beuty') | Q(searchTag__contains = 'wig')).order_by("-id")[:1]
-    suggestions4 =  User_product.objects.filter(Q(searchTag__contains = 'jewel') | Q(searchTag__contains = 'necklace')).order_by("-id")[:1]
+    suggestions1 = User_product.objects.filter(Q(searchTag__contains = 'food') | Q(description__contains = 'rice')).order_by("-id")[:1]
+    suggestions2 = User_product.objects.filter(Q(searchTag__contains = 'laptop') | Q(description__contains = 'laptop') | Q(description__contains = 'phone')).order_by("-id")[:1]
+    suggestions3 = User_product.objects.filter(Q(searchTag__contains = 'wear') | Q(description__contains = 'wear')).order_by("-id")[:1]
+    suggestions4 =  User_product.objects.filter(Q(searchTag__contains = 'wig') | Q(description__contains = 'wig')).order_by("-id")[:1]
     
     suggestions = [suggestions1,suggestions2,suggestions3,suggestions4]
     suggestionImg = []
@@ -572,7 +555,7 @@ def suggestproduct(request):
     for i in products:
          productsrotateImg.append(Product_image.objects.filter(product = i).values()[0])
          
-    context['products'] =  list(User_product.objects.all().values()[15:26])
+    context['products'] =  list(User_product.objects.all().values()[1:13])
     context['productsrotateImg'] = list(productsrotateImg)
         
     context['suggestion1'] = list((suggestions1).values())
@@ -583,3 +566,64 @@ def suggestproduct(request):
     context['suggestionImg'] = list(suggestionImg)
     
     return JsonResponse(context , safe=False)
+
+def settingsfunctionality(request):
+    context={}
+    if request.user.is_authenticated:
+        if request.headers.get('x-requested-with') == 'XMLHttpRequest':
+            response = json.load(request)['post_data']
+            sig = response['sig']
+            target = response['target']
+            target1 = response['target1']    
+                
+            if target == "":
+                   context["data"] = "not successful" 
+            else:
+                if sig == 2:
+                    if target == target1:
+                        data = User_Detail.objects.get(user = request.user)
+                        user = data.user
+                        user.password = make_password(target)
+                        user.save()
+                  
+                        context['data']= "successful"
+                    else:
+                          context['data']= "not successful"
+                   
+                  
+                if sig == 3:
+                    data = User_Detail.objects.get(user = request.user)
+                    data.about = str(target)
+                    data.save()
+                    context['data']= "successful"
+            
+                if sig == 4:    
+                    data = User_Detail.objects.get(user = request.user)
+                    data.contact = int(target)
+                    data.save()
+                    context['data']= "successful"
+                    
+                if sig == 5:    
+                    data = User_Detail.objects.get(user = request.user)
+                    cus_care = Customer_care.objects.create(reportbug="",suggestionbox=str(target),deactivate_account='', reportuser= "", user = data)
+                    cus_care.save()
+                    context['data']= "successful"
+                
+                if sig == 6 and User_Detail.objects.filter(username = str(target)).exists():    
+                    data = User_Detail.objects.get(username = str(target))
+                    cus_care = Customer_care.objects.create(reportbug="", suggestionbox="", deactivate_account='', reportuser= str(target1), user = data)
+                    cus_care.save()
+                    context['data'] = "successful"
+                else: context['data'] = "not successful"
+                
+                if sig == 9:    
+                    data = User_Detail.objects.get(user = request.user)
+                    cus_care = Customer_care.objects.create(reportbug="", suggestionbox="", deactivate_account=str(target), reportuser= "", user = data)
+                    cus_care.save()
+                    context['data'] = "successful"
+                    
+            
+              
+                    
+                    
+    return JsonResponse(context,safe=False)

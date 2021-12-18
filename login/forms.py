@@ -7,10 +7,10 @@ from django.core.exceptions import ValidationError
 
 User= get_user_model()
 class UserLoginForm (forms.Form):
-    email= forms.EmailField(widget=forms.TextInput(attrs={  
+    email= forms.EmailField( label= "EMAIL" ,widget=forms.TextInput(attrs={  
         "placeholder":"Enter email" , "class":"inputs"
     }))
-    password= forms.CharField(widget = forms.PasswordInput(
+    password= forms.CharField( label= "PASSWORD" ,widget = forms.PasswordInput(
         attrs={
           "placeholder":"Enter password" ,"class":"inputs"
         }
@@ -31,7 +31,7 @@ class Password_resetform (forms.Form):
         "placeholder":"Enter email" , "class":"inputs"
     }))
     favourite_quote = forms.CharField(widget=forms.TextInput(attrs={  
-        "placeholder":"Enter username" , "class":"inputs"
+        "placeholder":"favorite quote in need" , "class":"inputs"
     }))
     new_password = forms.CharField(widget = forms.PasswordInput(
         attrs={

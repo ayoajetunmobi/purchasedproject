@@ -82,8 +82,8 @@ class User_Detail(models.Model):
     lastname          = models.CharField(max_length = 150,blank=False)
     gender            = models.CharField(max_length = 50,choices=gender)
     contact           = models.CharField( max_length = 255, unique = True)
-    about             = models.CharField( max_length =150)
-    quote             = models.CharField(max_length = 60, blank=False, null=False)
+    about             = models.CharField( max_length =500)
+    quote             = models.CharField(max_length = 500, blank=False, null=False)
     university        = models.CharField(max_length=100, default="LASU") 
     campus            = models.CharField(max_length=100, choices= campus) 
     matricNo          = models.CharField(max_length=100,blank=True,null=True) 
@@ -210,14 +210,9 @@ class Contacted(models.Model):
     user = models.ForeignKey(User_Detail,on_delete=models.CASCADE)#user who made contact
     
 class Reviews(models.Model):
-    review = models.CharField(max_length=80)
+    review = models.CharField(max_length=500)
     as_buyer = models.BooleanField(default=False) #if contacted == True then user is seller
     username = models.CharField(max_length=100) #request.user
     user = models.ForeignKey(User_Detail,on_delete=models.CASCADE)# user to be reviewed gotten from msg table
-     
-class Advertisment(models.Model):
-    company_name = models.CharField(max_length=100)
-    picture = models.ImageField(upload_to= 'media')
-        
     
 ##python manage.py migrate admin zero  for cosnstraint foreign key error involving admin logtable
