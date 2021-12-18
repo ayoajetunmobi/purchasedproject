@@ -538,7 +538,7 @@ def msgDisplay(request):
 
 def suggestproduct(request):
     context={}
-    products = User_product.objects.all()[1:13]
+    products = User_product.objects.all()[1:10]
     suggestions  = []
     suggestions1 = User_product.objects.filter(Q(searchTag__contains = 'food') | Q(description__contains = 'rice')).order_by("-id")[:1]
     suggestions2 = User_product.objects.filter(Q(searchTag__contains = 'laptop') | Q(description__contains = 'laptop') | Q(description__contains = 'phone')).order_by("-id")[:1]
