@@ -132,11 +132,6 @@
         specImgs = document.getElementById('specImgs'),
         topdealsp = document.getElementById('topdealsp'),
         productSpecsugest = document.getElementById('productSpecsugest');
-        let data = JSON.parse(window.localStorage.getItem('user'));
-        let dataofpro = data.products;
-        let dataofproimg = data.productsrotateImg;
-
-
 
         spec.style.display = 'none'
         spinner()
@@ -151,19 +146,6 @@
                   <img class="propicp" style="width: 60px;  box-shadow: rgb(49, 49, 197) 2px 2px 5px; height:60px;" onclick="propicclick(this)" data-id=${product.id} src="media/${product.propic}" alt="" />
                   <h6>${product.username}</h6>
                   `
-
-            topdealsp.innerHTML = ""
-             let itop =0;
-            while(itop < dataofpro.length){
-            topdealsp.innerHTML +=
-             ` <article >
-                    <img onclick="product_spec(this)" data="${dataofpro[itop].id}" style="width: 100%;height:80%;  margin-right: 15px;" src="media/${dataofproimg[itop].product_img}" alt="">
-                    <p style="z-index:1; font-size:small;">${dataofpro[itop].description.substring(0,37)} .. </p>
-                </article> 
-            `
-            itop++
-            }
-            
 
             specDescription.innerHTML=""
             specDescription.innerHTML= `
@@ -236,16 +218,10 @@
         let i = 0;
         let ii = 0;
         let profilecover = document.getElementById('profile');
-        let data = JSON.parse(window.localStorage.getItem('user'));
-        let dataofproimg = "";
-        let dataofpro = "";
-        let changedp = document.getElementById('changedp');
+
        
 
-        if(data != -1 && data != null){
-           dataofpro = data.products;
-           dataofproimg = data.productsrotateImg
-        }
+        
 
         profilecover.style.display= 'none'
         spinner()
@@ -307,18 +283,6 @@
                     <article>`;
                     i++
                 }       
-            }
-
-            topdeals.innerHTML =""
-            let itop =0;
-            while(itop < dataofpro.length){
-            topdeals.innerHTML +=
-             ` <article >
-                    <img onclick="product_spec(this)" data="${dataofpro[itop].id}" style="width: 100%;height:80%;  margin-right: 15px;" src="media/${dataofproimg[itop].product_img}" alt="">
-                    <p style="z-index:1; font-size:small;">${dataofpro[itop].description.substring(0,37)} .. </p>
-                </article> 
-            `
-            itop++
             }
 
             review.innerHTML=""

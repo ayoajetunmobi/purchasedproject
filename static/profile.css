@@ -282,10 +282,11 @@
     .topdeals {
         display: grid;
         grid-template-columns: repeat(10, 1fr);
-        height: 300PX;
+        height: 300px;
         width: 100%;
         overflow-x: scroll;
         overflow-y: hidden;
+        display: none;
     }
     
     .topdeals article {
