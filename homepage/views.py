@@ -12,7 +12,7 @@ from django.dispatch import receiver
 import json
 from .models import   User_Detail , User_product , Product_image ,  Customer_care , Messages , Searchdata , Contacted, Reviews
 from django.contrib.auth import get_user_model
-from .forms import ( RegistrationForm, UserDetailForm ) 
+from .forms import (RegistrationForm, UserDetailForm) 
 from pygments.formatters import img
 from numpy import random
 
@@ -25,37 +25,37 @@ def formsdispaly(request):
     context={}
     loged_in_user= request.user
     
-    userstore1 = User_Detail.objects.get(username = 'Ola Flourish')
-    userstore1products = User_product.objects.filter(user = userstore1)[:15]
-    userstore1productsImg = [userstore1.username]
-    for i in userstore1products:
-        userstore1productsImg.append(Product_image.objects.filter(product=i)[0])
-    context['userstore1products'] = userstore1products
-    context['userstore1productsImg'] = userstore1productsImg
+    # userstore1 = User_Detail.objects.get(username = 'Ola Flourish')
+    # userstore1products = User_product.objects.filter(user = userstore1)[:15]
+    # userstore1productsImg = [userstore1.username]
+    # for i in userstore1products:
+    #     userstore1productsImg.append(Product_image.objects.filter(product=i)[0])
+    # context['userstore1products'] = userstore1products
+    # context['userstore1productsImg'] = userstore1productsImg
 
-    userstore2 = User_Detail.objects.get(username = 'Abusummayyah')
-    userstore2products = User_product.objects.filter(user = userstore2)[:15]
-    userstore2productsImg = [userstore2.username]
-    for i in userstore2products:
-        userstore2productsImg.append(Product_image.objects.filter(product=i)[0])
-    context['userstore2products'] = userstore2products
-    context['userstore2productsImg'] = userstore2productsImg
+    # userstore2 = User_Detail.objects.get(username = 'Abusummayyah')
+    # userstore2products = User_product.objects.filter(user = userstore2)[:15]
+    # userstore2productsImg = [userstore2.username]
+    # for i in userstore2products:
+    #     userstore2productsImg.append(Product_image.objects.filter(product=i)[0])
+    # context['userstore2products'] = userstore2products
+    # context['userstore2productsImg'] = userstore2productsImg
     
-    userstore3 = User_Detail.objects.get(username = 'Estee D Enterprises')
-    userstore3products = User_product.objects.filter(user = userstore3)[:15]
-    userstore3productsImg = [userstore3.username]
-    for i in userstore3products:
-        userstore3productsImg.append(Product_image.objects.filter(product=i)[0])
-    context['userstore3products'] = userstore3products
-    context['userstore3productsImg'] = userstore3productsImg
+    # userstore3 = User_Detail.objects.get(username = 'Estee D Enterprises')
+    # userstore3products = User_product.objects.filter(user = userstore3)[:15]
+    # userstore3productsImg = [userstore3.username]
+    # for i in userstore3products:
+    #     userstore3productsImg.append(Product_image.objects.filter(product=i)[0])
+    # context['userstore3products'] = userstore3products
+    # context['userstore3productsImg'] = userstore3productsImg
     
-    userstore4 = User_Detail.objects.get(username = 'MAY-YUMS')
-    userstore4products = User_product.objects.filter(user = userstore4)[:15]
-    userstore4productsImg = [userstore4.username]
-    for i in userstore4products:
-        userstore4productsImg.append(Product_image.objects.filter(product=i)[0])
-    context['userstore4products'] = userstore4products
-    context['userstore4productsImg'] = userstore4productsImg
+    # userstore4 = User_Detail.objects.get(username = 'MAY-YUMS')
+    # userstore4products = User_product.objects.filter(user = userstore4)[:15]
+    # userstore4productsImg = [userstore4.username]
+    # for i in userstore4products:
+    #     userstore4productsImg.append(Product_image.objects.filter(product=i)[0])
+    # context['userstore4products'] = userstore4products
+    # context['userstore4productsImg'] = userstore4productsImg
     
     if loged_in_user.is_authenticated:
         review = Reviews.objects.all()
@@ -218,7 +218,7 @@ def get_profile(request):
                     context['images'] = list(imagefill)
             else:
                 context['images'] = [{"product_img":""}] 
-                context['data1']  =  [{"searchTag":"no product yet"}] 
+                context['data1']  =  [{"description":"no product yet"}] 
                 
                  
                  

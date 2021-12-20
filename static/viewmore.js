@@ -74,12 +74,13 @@
             searchcover.style.display = 'grid';
             searchcover.style.gridTemplateColumns = "repeat(2,1fr)";
             data2.forEach((data2) => {
-                searchcover.innerHTML += `
-                   <article class="post4store"  data = "${data2.id}" onclick= "product_spec(this)">
+                searchcover.innerHTML +=
+                    `<article class="post4store"  data = "${data2.id}" onclick= "product_spec(this)">
                         <img class="postimg" src="media/${images[i].product_img}" alt="">
-                        <p class="postdesc">${data2.searchTag}</p>
-                        <p style="color:gold">N${data2.price}</p>
-                    </article>`
+                        <p class="postdesc">${data2.description.substring(0,37)} .. </p>
+                        <p style="color:rgb(145, 125, 15)"> N${data2.price} </p>
+                 </article>
+                `
                 i++
             })
         }
@@ -97,7 +98,7 @@
         searchcover.style.display = 'none'
         let i = 0;
         viewpostt.innerHTML = "";
-        if (product == null || product == -1 || images == -1 || images == -null) {
+        if (product == null || product == -1 || images == -1 || images == -null || product[0].description == "no product yet") {
             return false
         } else {
             product.forEach((product) => {
@@ -111,7 +112,7 @@
                            ${(product.id == images[i].product_id)?`<img onclick="product_spec(this)" data=${product.id} class="productImg" style="width:100%; height:auto;" src="media/${images[i].product_img}" alt="">`:""}
                         </div> 
                         <span>
-                       ${product.searchTag} .....
+                       ${product.description.substring(0,37)} .....
                         </span>
                         <span style="color: #91792b; text-align:center;">
                               N${product.price}
@@ -236,10 +237,15 @@
         let ii = 0;
         let profilecover = document.getElementById('profile');
         let data = JSON.parse(window.localStorage.getItem('user'));
-        let dataofpro = data.products;
-        let dataofproimg = data.productsrotateImg;
+        let dataofproimg = "";
+        let dataofpro = "";
         let changedp = document.getElementById('changedp');
+       
 
+        if(data != -1 && data != null){
+           dataofpro = data.products;
+           dataofproimg = data.productsrotateImg
+        }
 
         profilecover.style.display= 'none'
         spinner()
@@ -283,13 +289,15 @@
                 <a href="tel:${profile.contact}"><button  onclick= "msg(this)" seller = ${profile.username} style="border: 5px groove rgb(0, 255, 21); background-color:white; color:black;" >CONTACT SELLER</button></a><br>
             `
             recentPost.innerHTML = ""
-            if (product.length > 0) {
+            if (product.length = 1 && product[i].description == "no product yet"){
+            }
+            else{ 
                 while (i < product.length &&  i != 4) {
                     recentPost.innerHTML += `
                     <article data="">
                       ${(product[i].id == images[i].product_id)?`<img onclick="product_spec(this)" data= ${product[i].id} src = "media/${images[i].product_img}" alt="">`:""}
                       <span>
-                        ${(product[i].description).substring(0,37)}  ...
+                        ${product[i].description.substring(0,37)} ...
                       </span>
                       <br>
                       <span class="pricesugg">
@@ -297,7 +305,7 @@
                       </span>
                       <br><br>
                     <article>`;
-                        i++
+                    i++
                 }       
             }
 
