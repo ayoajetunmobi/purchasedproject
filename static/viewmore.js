@@ -98,7 +98,8 @@
         searchcover.style.display = 'none'
         let i = 0;
         viewpostt.innerHTML = "";
-        if (product == null || product == -1 || images == -1 || images == -null || product[0].description == "no product yet") {
+
+        if (product == null || product == -1 || images == -1 || images == null || product[i].description == "no product yet") {
             return false
         } else {
             product.forEach((product) => {
@@ -264,12 +265,14 @@
                 </h3>
                 <a href="tel:${profile.contact}"><button  onclick= "msg(this)" seller = ${profile.username} style="border: 5px groove rgb(0, 255, 21); background-color:white; color:black;" >CONTACT SELLER</button></a><br>
             `
+
             recentPost.innerHTML = ""
-            if (product.length = 1 && product[i].description == "no product yet"){
+            if (product.length == 1 && product[i].description == "no product yet"){
             }
             else{ 
                 while (i < product.length &&  i != 4) {
-                    recentPost.innerHTML += `
+                    recentPost.innerHTML +=
+                    `
                     <article data="">
                       ${(product[i].id == images[i].product_id)?`<img onclick="product_spec(this)" data= ${product[i].id} src = "media/${images[i].product_img}" alt="">`:""}
                       <span>
@@ -282,9 +285,9 @@
                       <br><br>
                     <article>`;
                     i++
-                }       
-            }
-
+                }      
+            }   
+            
             review.innerHTML=""
             if (reviews.length > 0 ) {
                 while (ii < reviews.length && ii!= 5) {

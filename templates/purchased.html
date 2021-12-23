@@ -627,16 +627,22 @@
                             body = document.getElementById("body");
                         let uploadpostbtn = document.getElementById('uploadpostbtn');
                         uploadpostbtn.style.display = "block"
-
+                        let data1 = [];
+                        let product = data.data1;
+                        let i = 0;
+                        while (i < product.length) {
+                            data1.push(product[i])
+                            i++
+                        }
                         sidebar.style.left = "-80%"
                         body.style.left = "0%"
                         if (data) {
                             if (data == null || data == -1) {
                                 return false
                             }
-                            addtoMyProfile(data.userdetail, data.data1, data.images, data.reviews, update =
+                            addtoMyProfile(data.userdetail, data1, data.images, data.reviews, update =
                                 false, data.advert)
-                            addtoMyproduct(data.data1, data.images, update = true)
+                            addtoMyproduct(data1, data.images, update = true)
 
                             displayRemove()
                             profile.style.display = 'block'
