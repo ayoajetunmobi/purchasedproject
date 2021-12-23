@@ -282,7 +282,7 @@
     .topdeals {
         display: grid;
         grid-template-columns: repeat(10, 1fr);
-        height: 200px;
+        height: 240px;
         width: 100%;
         overflow-x: scroll;
         overflow-y: hidden;

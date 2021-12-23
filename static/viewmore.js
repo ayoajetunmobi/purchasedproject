@@ -345,25 +345,25 @@
         suggestproduct.innerHTML= ""
         suggestproduct.innerHTML= `
              <article data="${suggest1[0].id}" onclick="product_spec(this)" class="post">
-             <img style= "width:150px;height:150px" src="media/${suggestImg[0].product_img}" alt="">
+             <img style= "width:200px;height:150px" src="media/${suggestImg[0].product_img}" alt="">
              <p class="postdesc">${suggest1[0].description.substring(0,33)}..</p>
              <p class="pricesugg">N${suggest1[0].price}</p> 
              </article>
 
              <article data="${suggest2[0].id}" onclick="product_spec(this)" class="post">
-             <img style= "width:150px;height:150px" src="media/${suggestImg[1].product_img}" alt="">
+             <img style= "width:200px;height:150px" src="media/${suggestImg[1].product_img}" alt="">
              <p class="postdesc">${suggest2[0].description.substring(0,33)}..</p>
              <p  class="pricesugg" >N${suggest2[0].price}</p>
              </article>
 
              <article data="${suggest3[0].id}" onclick="product_spec(this)" class="post">
-             <img style= "width:150px;height:150px" src="media/${suggestImg[2].product_img}" alt="">
+             <img style= "width:200px;height:150px" src="media/${suggestImg[2].product_img}" alt="">
              <p class="postdesc">${suggest3[0].description.substring(0,33)}..</p>
              <p class="pricesugg">N${suggest3[0].price}</p>
              </article>
 
              <article data="${suggest4[0].id}" onclick="product_spec(this)" class="post">
-             <img style= "width:150px;height:150px" src="media/${suggestImg[3].product_img}" alt="">
+             <img style= "width:200px;height:150px" src="media/${suggestImg[3].product_img}" alt="">
              <p class="postdesc">${suggest4[0].description.substring(0,33)}..</p>
              <p  class="pricesugg">N${suggest4[0].price}</p>
              </article>
@@ -389,7 +389,7 @@
         `   
             <article data="${topdealcontainer[i].id}" onclick="product_spec(this)" class="post">
                <img class="postimg" src="media/${topdealcontainerImg[i].product_img}" alt="">
-               <p class="postdesc" style = "color:black" >${topdealcontainer[i].description.substring(0,33)}..</p>
+               <p class="postdesc" style = "color:black" >${topdealcontainer[i].description.substring(0,28)}..</p>
                <p  class="pricesugg" style = "color:yellow">N${topdealcontainer[i].price} </p>
             </article>
         `
