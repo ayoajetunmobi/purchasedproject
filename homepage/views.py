@@ -33,29 +33,29 @@ def formsdispaly(request):
     context['userstore1products'] = userstore1products
     context['userstore1productsImg'] = userstore1productsImg
 
-    userstore2 = User_Detail.objects.get(username = 'Abusummayyah')
-    userstore2products = User_product.objects.filter(user = userstore2)[:15]
-    userstore2productsImg = [userstore2.username]
-    for i in userstore2products:
-        userstore2productsImg.append(Product_image.objects.filter(product=i)[0])
-    context['userstore2products'] = userstore2products
-    context['userstore2productsImg'] = userstore2productsImg
+    # userstore2 = User_Detail.objects.get(username = 'Abusummayyah')
+    # userstore2products = User_product.objects.filter(user = userstore2)[:15]
+    # userstore2productsImg = [userstore2.username]
+    # for i in userstore2products:
+    #     userstore2productsImg.append(Product_image.objects.filter(product=i)[0])
+    # context['userstore2products'] = userstore2products
+    # context['userstore2productsImg'] = userstore2productsImg
     
-    userstore3 = User_Detail.objects.get(username = 'Estee D Enterprises')
-    userstore3products = User_product.objects.filter(user = userstore3)[:15]
-    userstore3productsImg = [userstore3.username]
-    for i in userstore3products:
-        userstore3productsImg.append(Product_image.objects.filter(product=i)[0])
-    context['userstore3products'] = userstore3products
-    context['userstore3productsImg'] = userstore3productsImg
+    # userstore3 = User_Detail.objects.get(username = 'Estee D Enterprises')
+    # userstore3products = User_product.objects.filter(user = userstore3)[:15]
+    # userstore3productsImg = [userstore3.username]
+    # for i in userstore3products:
+    #     userstore3productsImg.append(Product_image.objects.filter(product=i)[0])
+    # context['userstore3products'] = userstore3products
+    # context['userstore3productsImg'] = userstore3productsImg
     
-    userstore4 = User_Detail.objects.get(username = 'MAY-YUMS')
-    userstore4products = User_product.objects.filter(user = userstore4)[:15]
-    userstore4productsImg = [userstore4.username]
-    for i in userstore4products:
-        userstore4productsImg.append(Product_image.objects.filter(product=i)[0])
-    context['userstore4products'] = userstore4products
-    context['userstore4productsImg'] = userstore4productsImg
+    # userstore4 = User_Detail.objects.get(username = 'MAY-YUMS')
+    # userstore4products = User_product.objects.filter(user = userstore4)[:15]
+    # userstore4productsImg = [userstore4.username]
+    # for i in userstore4products:
+    #     userstore4productsImg.append(Product_image.objects.filter(product=i)[0])
+    # context['userstore4products'] = userstore4products
+    # context['userstore4productsImg'] = userstore4productsImg
     
     if loged_in_user.is_authenticated:
         review = Reviews.objects.all()
@@ -210,18 +210,19 @@ def get_profile(request):
             }
             
             if User_product.objects.filter(user=user).exists(): 
-                imagefill=[]               
+                imagefill = [] 
+                
                 data1  = User_product.objects.filter(user=user).order_by('-id')
-                context['data1']= list(User_product.objects.filter(user=user).order_by('-id').values())
+                context['data1'] = list(User_product.objects.filter(user=user).order_by('-id').values())
+                
                 for i in data1:
                     imagefill.append(Product_image.objects.filter(product = i).values()[0])
                     context['images'] = list(imagefill)
+
             else:
                 context['images'] = [{"product_img":""}] 
                 context['data1']  =  [{"description":"no product yet"}] 
-                
-                 
-                 
+                  
             if Reviews.objects.filter(user=user).exists(): 
                 context['reviews']= list(Reviews.objects.filter(user=user).order_by('-id').values())
             else:
@@ -555,15 +556,15 @@ def suggestproduct(request):
     for i in products:
          productsrotateImg.append(Product_image.objects.filter(product = i).values()[0])
          
-    context['products'] =  list(User_product.objects.all().values()[1:13])
+    context['products'] =  list(User_product.objects.all().values()[1:10])
     context['productsrotateImg'] = list(productsrotateImg)
         
-    context['suggestion1'] = list((suggestions1).values())
-    context['suggestion2'] = list((suggestions2).values())
-    context['suggestion3'] = list((suggestions3).values())
-    context['suggestion4'] = list((suggestions4).values())
+    # context['suggestion1'] = list((suggestions1).values())
+    # context['suggestion2'] = list((suggestions2).values())
+    # context['suggestion3'] = list((suggestions3).values())
+    # context['suggestion4'] = list((suggestions4).values())
         
-    context['suggestionImg'] = list(suggestionImg)
+    # context['suggestionImg'] = list(suggestionImg)
     
     return JsonResponse(context , safe=False)
 

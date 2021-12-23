@@ -832,7 +832,7 @@
             .then(response => {
                 return response.json().then(data => {
                         suggestproduct(data)
-                        window.localStorage.setItem('user', JSON.stringify(data))
+
                     }) //Convert response to JSON
             })
     }

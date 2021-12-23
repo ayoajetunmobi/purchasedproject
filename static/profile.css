@@ -266,7 +266,7 @@
     
     #recentpost article {
         max-height: 200px;
-        width: 150px;
+        width: 100px;
         border-radius: 70px;
         margin: 10px 20px;
         font-size: smaller;
@@ -275,22 +275,21 @@
     #recentpost article img {
         width: 100%;
         border-radius: 70px;
-        height: 150px;
+        height: 100px;
         margin-bottom: 6px;
     }
     
     .topdeals {
         display: grid;
         grid-template-columns: repeat(10, 1fr);
-        height: 300px;
+        height: 200px;
         width: 100%;
         overflow-x: scroll;
         overflow-y: hidden;
-        display: none;
     }
     
     .topdeals article {
-        width: 200px;
+        width: 100px;
         height: 200px;
         overflow: hidden;
         text-align: center;

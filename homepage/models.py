@@ -101,8 +101,8 @@ class User_Detail(models.Model):
     def save(self,*args, **kwargs):
         #open uploaded image
         img =  Image.open(self.profilepic)
-        if img.height > 400 or img.width > 400:
-            output_size = (150,150)
+        if img.height > 200 or img.width > 200:
+            output_size = (100,100)
             
             img.thumbnail(output_size)
             
@@ -110,7 +110,7 @@ class User_Detail(models.Model):
             img= img.convert('RGB')            
             output = BytesIO()
              
-            img.save(output, format ='JPEG', optimize = True , quality = 70)
+            img.save(output, format ='JPEG', optimize = True , quality = 20)
             output.seek(0)  
                   
             
@@ -151,8 +151,8 @@ class Product_image(models.Model):
      def save(self,*args, **kwargs):
             #open uploaded image
         img =  Image.open(self.product_img)
-        if img.height > 400 or img.width > 400:
-            output_size = (150,150)
+        if img.height > 200 or img.width > 200:
+            output_size = (100,100)
             
             img.thumbnail(output_size)
             
@@ -160,7 +160,7 @@ class Product_image(models.Model):
             img= img.convert('RGB')            
             output = BytesIO()
              
-            img.save(output, format ='JPEG', optimize = True , quality = 70)
+            img.save(output, format ='JPEG', optimize = True , quality = 20)
             output.seek(0)  
                   
             

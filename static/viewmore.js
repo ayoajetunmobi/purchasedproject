@@ -4,12 +4,10 @@
     let viewpostt = document.querySelector("#forpost");
     let documentss = document.body;
     let a = [...document.getElementsByClassName("a")];
-    let slidebyone = 0;
-    let slidebytopdealone = 0;
     let ammountscrolled = '';
     let check = true;
-    let buy4studentcontrol = 0;
     let body = document.getElementsByTagName('body');
+
 
 
     document.addEventListener("DOMContentLoaded", () => {
@@ -20,35 +18,6 @@
         suggest()
 
     })
-
-    // function displaypost(posts, images) {
-    //     let i = 0
-    //     result = ""
-    //     posts.forEach((post) => {
-    //                 result +=
-    //                     `<div class="pos1">
-    //             <a href="#" class="a">${post.username}</a>
-    //             <div style="margin:0px auto">
-    //                 ${(post.online)?`<div class="online"></div>`:`<div class="offline"></div>`}
-    //                 <img class="propicp" onclick="propicclick(this)" data-id=${post.user_id} src="media/${post.profile_pic}" alt="" />
-    //             </div>
-    //             <div class='article' data=5>
-    //                 ${(post.matricverified)?` <h5 style="position: absolute; top:-5%; right:7%; color:blue;"> <i class="fa fa-star" style = "color:blue;"></i></h5>`:''}
-    //                ${(post.topuser)?` <h5 style="position: absolute; top:-5%; right:7%; color:gold;"> <i class="fa fa-star"></i></h5>`:''}
-    //                 <img class="slidep" onclick="product_spec(this)" data=${post.id} src="media/${images[i].product_img}" alt="">
-    //             </div>
-    //             <div class="describe">
-    //                 <h4> ${post.searchTag}...</h4>
-    //             </div>
-    //             <div class="pricinp">
-    //                 <h5> N${post.price} </h5>
-    //             </div>
-    //         </div>
-    //             `;
-    //             i++
-    //     });
-    //     wrapone.innerHTML += result
-    // }
 
     function searchengine(data, yes = false, images) {
         let searchcover = document.getElementById('searchcover');
@@ -202,7 +171,7 @@
             `
         }
      }
-       
+
        spec.style.display = 'block'
        closespinner()
        moveslide()
@@ -314,20 +283,20 @@
     }
 
     function moveslide(){
-
-     let mainspecimgs = [...document.getElementsByClassName('mainspecimgs')]
-     productSpecpiclist= document.getElementsByClassName('productSpecpiclist'),
+     let mainspecimgs = [...document.getElementsByClassName('mainspecimgs')],
      moveleft =document.getElementById('moveleft'),
      moveright =document.getElementById('moveright'),
 
+     slidebyone = 0,
      slideWidth = 350;
 
      if(mainspecimgs.length > 1){
+       
        for (let i = 0; i < mainspecimgs.length; i++){ 
            mainspecimgs[i].style.left = slideWidth * i + "px";}
         }
            
-     moveright.addEventListener('click', function(){
+         moveright.addEventListener('click', function(){
          let lastChild = mainspecimgs.length;
          if(slidebyone < lastChild - 1){ 
              moveSlidesProspec(mainspecimgs, "forward");
@@ -339,7 +308,6 @@
          }
      }) 
      moveleft.addEventListener('click', function(){
-       let lastChild = mainspecimgs.length;
          if(slidebyone > 0){ 
               moveleft.style.opacity=1;
              moveSlidesProspec(mainspecimgs, "backward",);
@@ -352,45 +320,7 @@
 
     }
 
-// function buy4seller(){
-//     let buystucover = document.getElementById('buystucover'),
-//     buy4student= [...document.getElementsByClassName('buy4student')],
-//     buytxt = [...document.getElementsByClassName('buytxt')];
-
-//     if (buy4studentcontrol == 0){
-//         buystucover.style.backgroundColor = '#ff99cc';
-//         buystucover.style.color= 'white'
-//         buy4student.forEach(stu=> stu.style.backgroundColor = '#336699')
-//         buytxt.forEach(stu=> stu.style.color = 'white')
-//         buy4studentcontrol = 1
-//     }
-//     else if (buy4studentcontrol == 1){
-//         buystucover.style.backgroundColor = 'yellow';
-//         buystucover.style.color= 'black'
-//         buy4student.forEach(stu=> stu.style.backgroundColor = '#006600')
-//         buytxt.forEach(stu=> stu.style.color = 'white')
-//         buy4studentcontrol = 2
-//     }else{
-//         buystucover.style.backgroundColor = '#ff0033';
-//         buy4student.forEach(stu=> stu.style.backgroundColor = 'white')
-//         buytxt.forEach(stu=> stu.style.color = 'black')
-//         buy4studentcontrol = 0
-//     }
-
-//     setTimeout( "buy4seller()", 4900)
-
-// }
-
-    function moveSlides(move, direction, slidewidth) {
-            for (var j = 0; j < move.length; j++) {
-                if (direction == "backward") {
-                    move[j].style.left = +move[j].style.left.replace(/[^-\d\.]/g, "") + slidewidth + "px";
-                } else if (direction == "forward") {
-                    move[j].style.left = +move[j].style.left.replace(/[^-\d\.]/g, "") - slidewidth + "px";
-                }
-            }
-    }
-     function moveSlidesProspec(move, direction) {
+    function moveSlidesProspec(move, direction) {
             for (var j = 0; j < move.length; j++) {
                 if (direction == "backward") {
                     move[j].style.left = +move[j].style.left.replace(/[^-\d\.]/g, "") + 350 + "px";
@@ -406,11 +336,14 @@
         let suggest2 = data['suggestion2'];
         let suggest3 = data['suggestion3'];
         let suggest4 = data['suggestion4'];
-
+        
+        let topdealcontainer = data.products;
+        let topdealcontainerImg = data.productsrotateImg;
+    
+    
         let suggestImg = data['suggestionImg'];
         suggestproduct.innerHTML= ""
         suggestproduct.innerHTML= `
-
              <article data="${suggest1[0].id}" onclick="product_spec(this)" class="post">
              <img class="postimg" src="media/${suggestImg[0].product_img}" alt="">
              <p class="postdesc">${suggest1[0].description.substring(0,33)}..</p>
@@ -437,27 +370,28 @@
 
         `
           
+        let topdeals = document.getElementById('topdeals');
+        let topdealsp = document.getElementById('topdealsp');
+
+        for(let i = 0; i < topdealcontainer.length;i++){
+         topdeals.innerHTML +=
+        `   
+            <article data="${topdealcontainer[i].id}" onclick="product_spec(this)" class="post">
+               <img class="postimg" src="media/${topdealcontainerImg[i].product_img}" alt="">
+               <p class="postdesc" style = "color:black" >${topdealcontainer[i].description.substring(0,33)}..</p>
+               <p  class="pricesugg">N${topdealcontainer[i].price} </p>
+            </article>
+        `
+        } 
+
+        for(let i = 0; i < topdealcontainer.length;i++){
+         topdealsp.innerHTML +=
+        `   
+            <article data="${topdealcontainer[i].id}" onclick="product_spec(this)" class="post">
+               <img class="postimg" src="media/${topdealcontainerImg[i].product_img}" alt="">
+               <p class="postdesc" style = "color:black" >${topdealcontainer[i].description.substring(0,33)}..</p>
+               <p  class="pricesugg" style = "color:yellow">N${topdealcontainer[i].price} </p>
+            </article>
+        `
+        } 
     }
-    // function topdealdiv(data1,data2){
-    //     let slidedivImg = document.getElementById('slidedivImg');
-    //     let = descriptopdeals = document.getElementById('descriptopdeals');
-    //     data1.forEach(data=>{
-    //         slidedivImg.innerHTML += `
-    //         <img data=${data.product_id} style="z-index:2;" onclick="product_spec(this)" class="topdealimg" src="media/${data.product_img}" alt="">
-    //         `
-    //     data2.forEach(data=>{
-    //         descriptopdeals.innerHTML += `
-    //            <div class="topdealdescrip" style="width:200px; position:absolute;height:100%;">
-    //                         <p style="text-align:start; margin-left:20px; width:50%; height:20%;padding:2px">
-    //                             ${data.searchTag} <br> <span style="color: gold;">N${data.price}</span>
-    //                         </p>
-    //                     </div>
-    //             `
-    //     })
-
-    //     })
-
-    //     moveslidetopdeals()
-    //     callaction()
-
-    // }
