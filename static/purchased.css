@@ -140,7 +140,7 @@
  
  .post {
      margin: 20px auto;
-     width: 150px;
+     width: 100px;
      height: 255px;
      overflow: hidden;
      box-shadow: 0 10px 10px rgba(10, 10, 10, 0.10);
@@ -148,8 +148,8 @@
  
  .postimg {
      margin: 0px auto;
-     width: 150px;
-     height: 150px
+     width: 100px;
+     height: 100px
  }
  
  .pricesugg {
