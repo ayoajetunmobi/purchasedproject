@@ -126,7 +126,7 @@
  
  .Fprodisplay {
      height: 170px;
-     width: 200px;
+     width: 290px;
      margin: 13px 12px;
      border-radius: 8px 8px 8px 8px;
      border: 2px groove rgb(255, 255, 255);
@@ -140,7 +140,7 @@
  
  .post {
      margin: 20px auto;
-     width: 100px;
+     width: 150px;
      height: 255px;
      overflow: hidden;
      box-shadow: 0 10px 10px rgba(10, 10, 10, 0.10);
@@ -148,8 +148,8 @@
  
  .postimg {
      margin: 0px auto;
-     width: 100px;
-     height: 100px
+     width: 150px;
+     height: 150px
  }
  
  .pricesugg {
