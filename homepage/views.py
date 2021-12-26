@@ -17,7 +17,6 @@ from pygments.formatters import img
 from numpy import random
 
 
-
 User=get_user_model()
 page_num = 1
 
@@ -91,7 +90,6 @@ def formsdispaly(request):
     
     return render(request,'purchased.html', context)
 
-
 def register(request):
     context={}
     form1 = RegistrationForm(request.POST or None)
@@ -120,8 +118,7 @@ def register(request):
     
     
     return render(request, 'register.html',context)
-            
-            
+                        
 def getting_post(request):
     loged_in_user = request.user
     data= get_object_or_404(User_Detail,user=loged_in_user)
@@ -159,8 +156,7 @@ def delete(request):
             if product.user == User_Detail.objects.get(user=request.user):
                 product.delete()
     return JsonResponse(context , safe=False)
-     
-     
+       
 def Prof_Update(request):
     context={}
     if request.user.is_authenticated:
@@ -541,15 +537,15 @@ def suggestproduct(request):
     context={}
     products = User_product.objects.all()[1:10]
     suggestions  = []
-    suggestions1 = User_product.objects.filter(Q(searchTag__contains = 'food') | Q(description__contains = 'rice')).order_by("-id")[:1]
-    suggestions2 = User_product.objects.filter(Q(searchTag__contains = 'laptop') | Q(description__contains = 'laptop') | Q(description__contains = 'phone')).order_by("-id")[:1]
-    suggestions3 = User_product.objects.filter(Q(searchTag__contains = 'wear') | Q(description__contains = 'wear')).order_by("-id")[:1]
-    suggestions4 =  User_product.objects.filter(Q(searchTag__contains = 'wig') | Q(description__contains = 'wig')).order_by("-id")[:1]
+    # suggestions1 = User_product.objects.filter(Q(searchTag__contains = 'food') | Q(description__contains = 'rice')).order_by("-id")[:1]
+    # suggestions2 = User_product.objects.filter(Q(searchTag__contains = 'laptop') | Q(description__contains = 'laptop') | Q(description__contains = 'phone')).order_by("-id")[:1]
+    # suggestions3 = User_product.objects.filter(Q(searchTag__contains = 'wear') | Q(description__contains = 'wear')).order_by("-id")[:1]
+    # suggestions4 =  User_product.objects.filter(Q(searchTag__contains = 'wig') | Q(description__contains = 'wig')).order_by("-id")[:1]
     
-    suggestions = [suggestions1,suggestions2,suggestions3,suggestions4]
-    suggestionImg = []
-    for i in suggestions:
-        suggestionImg.append(Product_image.objects.filter(product = i).values()[0])
+    # suggestions = [suggestions1,suggestions2,suggestions3,suggestions4]
+    # suggestionImg = []
+    # for i in suggestions:
+    #     suggestionImg.append(Product_image.objects.filter(product = i).values()[0])
         
         
     productsrotateImg =[]
@@ -559,12 +555,12 @@ def suggestproduct(request):
     context['products'] =  list(User_product.objects.all().values()[1:10])
     context['productsrotateImg'] = list(productsrotateImg)
         
-    context['suggestion1'] = list((suggestions1).values())
-    context['suggestion2'] = list((suggestions2).values())
-    context['suggestion3'] = list((suggestions3).values())
-    context['suggestion4'] = list((suggestions4).values())
+    # context['suggestion1'] = list((suggestions1).values())
+    # context['suggestion2'] = list((suggestions2).values())
+    # context['suggestion3'] = list((suggestions3).values())
+    # context['suggestion4'] = list((suggestions4).values())
         
-    context['suggestionImg'] = list(suggestionImg)
+    # context['suggestionImg'] = list(suggestionImg)
     
     return JsonResponse(context , safe=False)
 
@@ -575,56 +571,58 @@ def settingsfunctionality(request):
             response = json.load(request)['post_data']
             sig = response['sig']
             target = response['target']
-            target1 = response['target1']    
-                
+            target1 = response['target1']
+            succmsg = "successful"
+            succmsg2 = "not successful"
+                            
             if target == "":
-                   context["data"] = "not successful" 
-            else:
-                if sig == 2:
-                    if target == target1:
-                        data = User_Detail.objects.get(user = request.user)
-                        user = data.user
-                        user.password = make_password(target)
-                        user.save()
-                  
-                        context['data']= "successful"
-                    else:
-                          context['data']= "not successful"
+                context["data"] = succmsg2 
+   
+
+            elif sig == 2:
+                if target == target1:
+                    data = User_Detail.objects.get(user = request.user)
+                    user = data.user
+                    user.password = make_password(target)
+                    context['data'] = succmsg
+                    user.save()
+                else:
+                     context['data'] = succmsg2
+               
+                      
+            elif sig == 3:
+                data = User_Detail.objects.get(user = request.user)
+                data.about = str(target)
+                context['data'] = succmsg
+                data.save()
                    
-                  
-                if sig == 3:
-                    data = User_Detail.objects.get(user = request.user)
-                    data.about = str(target)
-                    data.save()
-                    context['data']= "successful"
             
-                if sig == 4:    
-                    data = User_Detail.objects.get(user = request.user)
-                    data.contact = int(target)
-                    data.save()
-                    context['data']= "successful"
+            elif sig == 4:    
+                data = User_Detail.objects.get(user = request.user)
+                data.contact = int(target)
+                data.save()
+                context['data'] = succmsg
                     
-                if sig == 5:    
-                    data = User_Detail.objects.get(user = request.user)
-                    cus_care = Customer_care.objects.create(reportbug="",suggestionbox=str(target),deactivate_account='', reportuser= "", user = data)
-                    cus_care.save()
-                    context['data']= "successful"
+            elif sig == 5:    
+                data = User_Detail.objects.get(user = request.user)
+                cus_care = Customer_care.objects.create(reportbug="",suggestionbox=str(target),deactivate_account='', reportuser= "", user = data)
+                cus_care.save()
+                context['data'] = succmsg
                 
-                if sig == 6 and User_Detail.objects.filter(username = str(target)).exists():    
-                    data = User_Detail.objects.get(username = str(target))
-                    cus_care = Customer_care.objects.create(reportbug="", suggestionbox="", deactivate_account='', reportuser= str(target1), user = data)
-                    cus_care.save()
-                    context['data'] = "successful"
-                else: context['data'] = "not successful"
+            elif sig == 6 and User_Detail.objects.filter(username = str(target)).exists():    
+                data = User_Detail.objects.get(username = str(target))
+                cus_care = Customer_care.objects.create(reportbug="", suggestionbox="", deactivate_account='', reportuser= str(target1), user = data)
+                cus_care.save()
+                context['data'] = succmsg
+
                 
-                if sig == 9:    
-                    data = User_Detail.objects.get(user = request.user)
-                    cus_care = Customer_care.objects.create(reportbug="", suggestionbox="", deactivate_account=str(target), reportuser= "", user = data)
-                    cus_care.save()
-                    context['data'] = "successful"
-                    
-            
-              
-                    
-                    
+            elif sig == 9:    
+                data = User_Detail.objects.get(user = request.user)
+                cus_care = Customer_care.objects.create(reportbug="", suggestionbox="", deactivate_account=str(target), reportuser= "", user = data)
+                cus_care.save()
+                context['data'] = succmsg
+                
+            else:
+                context['data'] = succmsg2
+                      
     return JsonResponse(context,safe=False)
