@@ -537,15 +537,15 @@ def suggestproduct(request):
     context={}
     products = User_product.objects.all()[1:10]
     suggestions  = []
-    # suggestions1 = User_product.objects.filter(Q(searchTag__contains = 'food') | Q(description__contains = 'rice')).order_by("-id")[:1]
-    # suggestions2 = User_product.objects.filter(Q(searchTag__contains = 'laptop') | Q(description__contains = 'laptop') | Q(description__contains = 'phone')).order_by("-id")[:1]
-    # suggestions3 = User_product.objects.filter(Q(searchTag__contains = 'wear') | Q(description__contains = 'wear')).order_by("-id")[:1]
-    # suggestions4 =  User_product.objects.filter(Q(searchTag__contains = 'wig') | Q(description__contains = 'wig')).order_by("-id")[:1]
+    suggestions1 = User_product.objects.filter(Q(searchTag__contains = 'food') | Q(description__contains = 'rice')).order_by("-id")[:1]
+    suggestions2 = User_product.objects.filter(Q(searchTag__contains = 'laptop') | Q(description__contains = 'laptop') | Q(description__contains = 'phone')).order_by("-id")[:1]
+    suggestions3 = User_product.objects.filter(Q(searchTag__contains = 'wear') | Q(description__contains = 'wear')).order_by("-id")[:1]
+    suggestions4 =  User_product.objects.filter(Q(searchTag__contains = 'wig') | Q(description__contains = 'wig')).order_by("-id")[:1]
     
-    # suggestions = [suggestions1,suggestions2,suggestions3,suggestions4]
-    # suggestionImg = []
-    # for i in suggestions:
-    #     suggestionImg.append(Product_image.objects.filter(product = i).values()[0])
+    suggestions = [suggestions1,suggestions2,suggestions3,suggestions4]
+    suggestionImg = []
+    for i in suggestions:
+        suggestionImg.append(Product_image.objects.filter(product = i).values()[0])
         
         
     productsrotateImg =[]
@@ -555,12 +555,12 @@ def suggestproduct(request):
     context['products'] =  list(User_product.objects.all().values()[1:10])
     context['productsrotateImg'] = list(productsrotateImg)
         
-    # context['suggestion1'] = list((suggestions1).values())
-    # context['suggestion2'] = list((suggestions2).values())
-    # context['suggestion3'] = list((suggestions3).values())
-    # context['suggestion4'] = list((suggestions4).values())
+    context['suggestion1'] = list((suggestions1).values())
+    context['suggestion2'] = list((suggestions2).values())
+    context['suggestion3'] = list((suggestions3).values())
+    context['suggestion4'] = list((suggestions4).values())
         
-    # context['suggestionImg'] = list(suggestionImg)
+    context['suggestionImg'] = list(suggestionImg)
     
     return JsonResponse(context , safe=False)
 
