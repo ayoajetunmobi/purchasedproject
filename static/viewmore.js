@@ -45,7 +45,7 @@
             data2.forEach((data2) => {
                 searchcover.innerHTML +=
                     `<article class="post4store"  data = "${data2.id}" onclick= "product_spec(this)">
-                        <img class="postimg" src="media/${images[i].product_img}" alt="">
+                        <img class="postimg" src="media/${images[i].product_img}" alt="${data2.description.substring(0,37)}">
                         <p class="postdesc">${data2.description.substring(0,37)} .. </p>
                         <p style="color:rgb(145, 125, 15)"> N${data2.price} </p>
                  </article>
@@ -79,7 +79,7 @@
                         ${(update == true)?` <p class="deleteDot" onclick= "dot(this)" data= ${product.id} draggable="true">...</p><a href="#" class="deleteMsg" onclick= "delmsg(this)" data= ${product.id}> Delete Post </a>`:``}
                           
 
-                           ${(product.id == images[i].product_id)?`<img onclick="product_spec(this)" data=${product.id} class="productImg" style="width:100%; height:auto;" src="media/${images[i].product_img}" alt="">`:""}
+                           ${(product.id == images[i].product_id)?`<img onclick="product_spec(this)" data=${product.id} class="productImg" style="width:100%; height:auto;" src="media/${images[i].product_img}" alt="{product.description.substring(0,37)}">`:""}
                         </div> 
                         <span>
                        ${product.description.substring(0,37)} .....
@@ -100,7 +100,6 @@
         specPropic = document.getElementById("specPropic"),
         specDescription = document.getElementById('specDescription'),
         specImgs = document.getElementById('specImgs'),
-        topdealsp = document.getElementById('topdealsp'),
         productSpecsugest = document.getElementById('productSpecsugest');
 
         spec.style.display = 'none'
@@ -149,14 +148,15 @@
                 }})
              productSpecsugest.innerHTML += `
                    <article data="">
-                   <img data=${pro.id} onclick="product_spec(this)" style="max-width: 120px; height:140px; margin-left:20px;" src="media/${a}" alt="">
+                   <img data=${pro.id} onclick="product_spec(this)" style="max-width: 120px; height:140px; margin-left:20px;" src="media/${a}" alt=" ${pro.description.substring(0,37)}">
                      <span>
                        ${pro.description.substring(0,37)} ... <br>
                      </span>
                       <span style="color:gold;">
                        N ${pro.price} <br>
                      </span>
-                     </article>  `
+                     </article> 
+            `
          })
          let contctdiv = document.getElementById('contctdiv');
          if(contctdiv != null){
@@ -184,7 +184,6 @@
         let review = document.querySelector('#reviewP');
         let recentPost = document.querySelector("#recentpost");
         let contactseller = document.getElementById('contactSeller');
-        let topdeals = document.getElementById('topdeals');
         let i = 0;
         let ii = 0;
         let profilecover = document.getElementById('profile');
@@ -243,7 +242,7 @@
                     recentPost.innerHTML +=
                     `
                     <article data="">
-                      ${(product[i].id == images[i].product_id)?`<img onclick="product_spec(this)" data= ${product[i].id} src = "media/${images[i].product_img}" alt="">`:""}
+                      ${(product[i].id == images[i].product_id)?`<img onclick="product_spec(this)" data= ${product[i].id} src = "media/${images[i].product_img}" alt=" ${product[i].description.substring(0,37)}">`:""}
                       <span>
                         ${product[i].description.substring(0,37)} ...
                       </span>
@@ -345,29 +344,28 @@
         suggestproduct.innerHTML= ""
         suggestproduct.innerHTML= `
              <article style= "width:150px;" data="${suggest1[0].id}" onclick="product_spec(this)" class="post">
-             <img style= "width:150px;height:150px" src="media/${suggestImg[0].product_img}" alt="">
+             <img style= "width:150px;height:150px" src="media/${suggestImg[0].product_img}" alt="${suggest1[0].description.substring(0,33)}">
              <p class="postdesc">${suggest1[0].description.substring(0,33)}..</p>
              <p class="pricesugg">N${suggest1[0].price}</p> 
              </article>
 
              <article style= "width:150px;" data="${suggest2[0].id}" onclick="product_spec(this)" class="post">
-             <img style= "width:150px;height:150px" src="media/${suggestImg[1].product_img}" alt="">
+             <img style= "width:150px;height:150px" src="media/${suggestImg[1].product_img}" alt="${suggest1[0].description.substring(0,33)}">
              <p class="postdesc">${suggest2[0].description.substring(0,33)}..</p>
              <p  class="pricesugg" >N${suggest2[0].price}</p>
              </article>
 
              <article style= "width:150px;" data="${suggest3[0].id}" onclick="product_spec(this)" class="post">
-             <img style= "width:150px;height:150px" src="media/${suggestImg[2].product_img}" alt="">
+             <img style= "width:150px;height:150px" src="media/${suggestImg[2].product_img}" alt="${suggest1[0].description.substring(0,33)}">
              <p class="postdesc">${suggest3[0].description.substring(0,33)}..</p>
              <p class="pricesugg">N${suggest3[0].price}</p>
              </article>
 
              <article style= "width:150px;" data="${suggest4[0].id}" onclick="product_spec(this)" class="post">
-             <img style= "width:150px;height:150px" src="media/${suggestImg[3].product_img}" alt="">
+             <img style= "width:150px;height:150px" src="media/${suggestImg[3].product_img}" alt="${suggest1[0].description.substring(0,33)}">
              <p class="postdesc">${suggest4[0].description.substring(0,33)}..</p>
              <p  class="pricesugg">N${suggest4[0].price}</p>
              </article>
-
         `
           
         let topdeals = document.getElementById('topdeals');
@@ -377,7 +375,7 @@
          topdeals.innerHTML +=
         `   
             <article data="${topdealcontainer[i].id}" onclick="product_spec(this)" class="post">
-               <img class="postimg" src="media/${topdealcontainerImg[i].product_img}" alt="">
+               <img class="postimg" src="media/${topdealcontainerImg[i].product_img}" alt="${topdealcontainer[i].description.substring(0,33)}">
                <p class="postdesc" style = "color:black" >${topdealcontainer[i].description.substring(0,33)}..</p>
                <p  class="pricesugg">N${topdealcontainer[i].price} </p>
             </article>
@@ -388,7 +386,7 @@
          topdealsp.innerHTML +=
         `   
             <article data="${topdealcontainer[i].id}" onclick="product_spec(this)" class="post">
-               <img class="postimg" src="media/${topdealcontainerImg[i].product_img}" alt="">
+               <img class="postimg" src="media/${topdealcontainerImg[i].product_img}" alt="${topdealcontainer[i].description.substring(0,33)}">
                <p class="postdesc" style = "color:black" >${topdealcontainer[i].description.substring(0,28)}..</p>
                <p  class="pricesugg" style = "color:yellow">N${topdealcontainer[i].price} </p>
             </article>

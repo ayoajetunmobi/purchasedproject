@@ -11,7 +11,11 @@
     <link rel="stylesheet" href="{% static 'purchased.css' %}" />
     <link rel="stylesheet" href="{% static 'profile.css' %}" />
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
-    <title>purchased</title>
+    <title> ecommerce website for lasuites </title>
+    <meta name="description" content="These is a free platform for buying and selling products / services
+    around LAGOS STARTE UNIVERSITY, this ecommerce website for lasuites helps you find quality and affordable
+    goods and services to buy around LASU it also gives you an avenue to market your own store and reach out to potential clients" />
+    <link rel="canonical" href="http://shopatpurchased.com" />
 
     <style>
         header {
@@ -161,7 +165,7 @@
                     {% for i in userstore2products%}
                     <article data="{{i.id}}" onclick="product_spec(this)" class="post4store">
                         {%for j in userstore2productsImg %}{%if i.id == j.product_id %}
-                        <img class="postimg" src="{{j.product_img.url}}" alt=""> {% endif %}{%endfor%}
+                        <img class="postimg" src="{{j.product_img.url}}" alt="{{i.description|slice:'0:40'}}"> {% endif %}{%endfor%}
                         <p class="postdesc"> {{i.description|slice:"0:40"}} ... </p>
                         <p class="pricesugg">N{{i.price}}</p>
                     </article>
@@ -179,7 +183,7 @@
                     {% for i in userstore3products%}
                     <article data="{{i.id}}" onclick="product_spec(this)" class="post4store">
                         {%for j in userstore3productsImg %}{%if i.id == j.product_id %}
-                        <img class="postimg" src="{{j.product_img.url}}" alt=""> {% endif %}{%endfor%}
+                        <img class="postimg" src="{{j.product_img.url}}" alt="{{i.description|slice:'0:40'}}"> {% endif %}{%endfor%}
                         <p class="postdesc"> {{i.description|slice:"0:40"}} ... </p>
                         <p class="pricesugg">N{{i.price}}</p>
                     </article>
@@ -204,7 +208,7 @@
                     {% for i in userstore1products%}
                     <article data="{{i.id}}" onclick="product_spec(this)" class="post4store">
                         {%for j in userstore1productsImg %}{%if i.id == j.product_id %}
-                        <img class="postimg" src="{{j.product_img.url}}" alt=""> {% endif %}{%endfor%}
+                        <img class="postimg" src="{{j.product_img.url}}" alt="{{i.description|slice:'0:40'}}"> {% endif %}{%endfor%}
                         <p class="postdesc"> {{i.description|slice:"0:40"}} ... </p>
                         <p class="pricesugg">N{{i.price}}</p>
                     </article>
@@ -220,7 +224,7 @@
                     {% for i in userstore4products%}
                     <article data="{{i.id}}" onclick="product_spec(this)" class="post4store">
                         {%for j in userstore4productsImg %}{%if i.id == j.product_id %}
-                        <img class="postimg" src="{{j.product_img.url}}" alt=""> {% endif %}{%endfor%}
+                        <img class="postimg" src="{{j.product_img.url}}" alt="{{i.description|slice:'0:40'}}"> {% endif %}{%endfor%}
                         <p class="postdesc"> {{i.description|slice:"0:40"}} ... </p>
                         <p class="pricesugg">N{{i.price}}</p>
                     </article>
@@ -255,7 +259,7 @@
                         <h5 style="position: absolute; top:-5%; right:7%; color:gold;"> <i class="fa fa-star"></i>
                         </h5>
                         {%endif%} {% for j in images %} {% if i.id == j.product_id %}
-                        <img class="slidep" onclick="product_spec(this)" data={{i.id}} src="{{ j.product_img.url }}" alt="">{% endif %}{% endfor %}
+                        <img class="slidep" onclick="product_spec(this)" data={{i.id}} src="{{ j.product_img.url }}" alt="{{i.description|slice:'0:40'}}"> {% endif %} {% endfor %}
                     </div>
                     <div class="describe">
                         {{i.searchTag}}...
