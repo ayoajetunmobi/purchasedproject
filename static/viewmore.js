@@ -34,7 +34,7 @@
         if (data1) {
             searchcover.style.display = 'block';
             searchcover.innerHTML += `
-            <img onclick="propicclick(this)" data-id=${data1[2]} style="width: 100px; height:100px;overflow:hidden; border-radius:100px;" src="media/${data1[1]}" alt="">
+            <img onclick="propicclick(this)" data-id=${data1[2]} style="width: 100px; height:100px;overflow:hidden; border-radius:100px;" src="media/${data1[1]}" alt="profile pic">
             <p style="text-align: center;"> ${data1[0]} </p`
         }
 
@@ -112,7 +112,7 @@
             specPropic.innerHTML = `
                   ${(product.online == true)?`<div class= "online">`:`<div class= "offline">`}
                   </div>
-                  <img class="propicp" style="width: 60px;  box-shadow: rgb(49, 49, 197) 2px 2px 5px; height:60px;" onclick="propicclick(this)" data-id=${product.id} src="media/${product.propic}" alt="" />
+                  <img class="propicp" style="width: 60px;  box-shadow: rgb(49, 49, 197) 2px 2px 5px; height:60px;" onclick="propicclick(this)" data-id=${product.id} src="media/${product.propic}" alt= "profile picture" />
                   <h6>${product.username}</h6>
                   `
 
@@ -132,7 +132,7 @@
             li.classList.add('productSpecpiclist')
             productImg.forEach(img=>{
                 li.innerHTML += `
-                   <img class="mainspecimgs" style="width: 350px; height:350px; position:absolute;" src="media/${img.product_img}" alt="" />
+                   <img class="mainspecimgs" style="width: 350px; height:350px; position:absolute;" src="media/${img.product_img}" alt="products" />
                 ` 
             })
               specImgs.appendChild(li) 
@@ -148,7 +148,7 @@
                 }})
              productSpecsugest.innerHTML += `
                    <article data="">
-                   <img data=${pro.id} onclick="product_spec(this)" style="max-width: 120px; height:140px; margin-left:20px;" src="media/${a}" alt=" ${pro.description.substring(0,37)}">
+                   <img data=${pro.id} onclick="product_spec(this)" style="max-width: 120px; height:140px; margin-left:20px;" src="media/${a}" alt="${pro.description.substring(0,37)}">
                      <span>
                        ${pro.description.substring(0,37)} ... <br>
                      </span>

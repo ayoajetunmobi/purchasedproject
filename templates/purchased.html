@@ -1,7 +1,7 @@
 {% load static %}
 <!DOCTYPE html>
 <html lang="en">
-<!DOCTYPE html>
+
 
 <head>
     <meta charset="UTF-8" />
@@ -12,10 +12,10 @@
     <link rel="stylesheet" href="{% static 'profile.css' %}" />
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
     <title> ecommerce website for lasuites </title>
-    <meta name="description" content="These is a free platform for buying and selling products / services
-    around LAGOS STARTE UNIVERSITY, this ecommerce website for lasuites helps you find quality and affordable
-    goods and services to buy around LASU it also gives you an avenue to market your own store and reach out to potential clients" />
-    <link rel="canonical" href="http://shopatpurchased.com" />
+    <meta name="description" content="This is a free platform for buying and selling products / services
+    around LAGOS STARTE UNIVERSITY, ecommerce website for students,it helps you find quality and affordable
+    goods / services to buy or sell around your campus,create your own store now" />
+
 
     <style>
         header {
@@ -36,9 +36,9 @@
 <body draggable="true">
     <div id="body">
         <div style="display: none; z-index:-10; width:100px; overflow:hidden; position:absolute;">
-            <img id="img1" src="{% static 'backgd.png' %}" alt="">
-            <img id="img2" src="{% static 'wadrope.png' %}" alt="">
-            <img id="img3" src="{% static 'PURCHASED.jpg' %}" alt="">
+            <img id="img1" src="{% static 'backgd.png' %}" alt="buy from student">
+            <img id="img2" src="{% static 'wadrope.png' %}" alt="buy from student">
+            <img id="img3" src="{% static 'PURCHASED.jpg' %}" alt="buy from student">
         </div>
 
         <div id="spinnerdiv">
@@ -47,8 +47,8 @@
         <div class="sidebar">
             <header>
                 <div style="display:grid; grid-template-columns:repeat(2,1fr)">
-                    <img src="{% static 'logopurchase.png' %}" alt="" width="210px" height="100px" />
-                    <img src="{% static 'closebar.png' %}" alt="" id="closesidebar" class="navbarclick" />
+                    <img src="{% static 'logopurchase.png' %}" alt="shopatpurchased logo" width="210px" height="100px" />
+                    <img src="{% static 'closebar.png' %}" alt="closebar" id="closesidebar" class="navbarclick" />
                 </div>
             </header>
             <ul style="position:relative;left:-12%; width:112%">
@@ -73,8 +73,8 @@
             <div style="width: 100%;">
 
                 <div style="display:grid; grid-template-columns:repeat(2,1fr)">
-                    <img src="{% static 'logopurchase.png' %}" alt="" width="fit-content" height="104px" />
-                    <img src="{% static 'navbar.png' %}" alt="" id="opensidebar" class="navbarclick" />
+                    <img src="{% static 'logopurchase.png' %}" alt="shopatpurchased logo" width="fit-content" height="104px" />
+                    <img src="{% static 'navbar.png' %}" alt="navbar" id="opensidebar" class="navbarclick" />
                 </div>
                 <div id="navbarScroll">
                     <ul id="navlinkul">
@@ -108,45 +108,41 @@
         </nav>
 
         <header>
-            <img id="header" style="width:100%; height:40vh; position:absolute;" src="" alt="">
+            <img id="header" style="width:100%; height:40vh; position:absolute;" src="" alt="promo sales">
         </header>
 
         <!--head bar-->
         <div id="searchcover">
-
         </div>
         <!--head bar-->
         <!-- end header nav and search-->
 
 
         <!-- Product suggestions-->
-
         <div class="category" style="position:relative; height:200px; width:104%; border-radius:6px; left:2%; overflow-x:hidden; z-index:2; border:0.3px solid rgb(139, 139, 139);">
             <div class="firstproductdisplay" style="display:grid; grid-template-columns: repeat(5, 5fr); overflow-x:scroll;">
                 <div class="Fprodisplay" onclick="submitSearcsignals(2)">
-                    <img src="{% static 'fashion.jpg' %}" alt="">
+                    <img src="{% static 'fashion.jpg' %}" alt="fashion store">
                 </div>
                 <div class="Fprodisplay" onclick="submitSearcsignals(3)">
-                    <img src="{% static 'food.jpg' %}" alt="">
+                    <img src="{% static 'food.jpg' %}" alt="food store">
                 </div>
                 <div class="Fprodisplay" onclick="submitSearcsignals(4)">
-                    <img src="{% static 'cereals.jpg' %}" alt="">
+                    <img src="{% static 'cereals.jpg' %}" alt="cereals store">
                 </div>
                 <div style="border: 2px groove rgb(255, 255, 255);" class="Fprodisplay" onclick="submitSearcsignals(5)">
-                    <img src="{% static 'phones.jpg' %}" alt="">
+                    <img src="{% static 'phones.jpg' %}" alt="phone store">
                 </div>
                 <div style="border: 2px groove rgb(255, 255, 255); padding-right:35px;" class="Fprodisplay">
                     <a href="{% url 'register' %}">
-                        <img src="{% static 'signin.jpg' %}" alt="">
+                        <img src="{% static 'signin.jpg' %}" alt="register now">
                     </a>
                 </div>
             </div>
         </div>
 
-        <!-- Top Deals-->
-        <!-- End Top Deals -->
-
         <!--Random suggestions-->
+
         <div style="width: 100%; height:800px; position:relative;top:10px; z-index:1; background-color:rgb(243, 243, 243); padding-left:30px; padding-bottom: 40px;">
             <br>
             <h4 style="text-align: center;">SUGGESTED CHECK NOW </h4><br>
@@ -154,6 +150,7 @@
             <div id="suggestproduct" style="display: grid; grid-template-columns: repeat(2, 2fr); margin:0 auto; width:100%">
             </div>
         </div>
+
         <!-- end Random suggestions-->
 
         <!--USER STORE -->
@@ -174,6 +171,7 @@
             </div>
         </div>
         <br>
+
         <div style="width: 100%; height:fit-content; position:relative; top:-23px; z-index:1; background-color:rgb(255, 255, 255); overflow-y:hidden; box-shadow: 0px 15px 15px rgba(12, 12, 0.55, 0.55);">
             <br>
             <h4 style="margin-left: 10px;">{{userstore3productsImg.0}}</h4><br>
@@ -191,6 +189,7 @@
                 </div>
             </div>
         </div>
+
         <div style=" position:relative;height:200px; width:100%; margin-top:30px; overflow:hidden;" onclick="submitSearcsignals(6)">
             <img style="width:60%; height:300px; position:absolute; top:-40%; left:-5%;" src="{% static 'graphicdesigng.jpg' %}" alt="">
             <p style="position: absolute; right:0%;"> NEED A GRAPHIC ARTIST ?<br> CONTACT ONE TODAY..<br>
@@ -199,6 +198,7 @@
                 </button>
             </p>
         </div> <br>
+
         <div style="width: 100%; height:fit-content; position:relative;top:-70px; z-index:1; background-color:rgb(255,
         255, 255); overflow-y:hidden; box-shadow: 0px 15px 15px rgba(12, 12, 0.55, 0.55);">
             <h4 style="margin-left: 10px;">{{userstore1productsImg.0}}</h4><br>
@@ -216,6 +216,7 @@
                 </div>
             </div>
         </div>
+
         <div style="width: 100%; height:fit-content; position:relative;top:-70px; z-index:1;overflow:hidden; background-color:rgb(255, 255, 255);box-shadow: 0px 15px 15px rgba(12, 12, 0.55, 0.55);">
             <h4 style="margin-left: 10px;">{{userstore4productsImg.0}}</h4><br>
             <h6 style="margin-left: 40px;"> market</h6>
@@ -337,6 +338,9 @@
                 </p>
                 <p class="tipswriteup">
                     remember to always delete unavailable products.
+                </p>
+                <p class="tipswriteup">
+                    remember to tell a friend about your store on our platform.
                 </p>
 
                 <p class="tipswriteup">
@@ -561,10 +565,6 @@
         return cookieValue;
     }
     const csrftoken = getCookie('csrftoken');
-    const headersAPi = {
-        'Accept': 'application/json',
-        'X-Requested-With': 'XMLHttpRequest', //Necessary to work with request.is_ajax()
-    }
 
     function propicclick(elem) {
         if (elem.getAttribute('data-id') == null || elem.getAttribute('data-id') == -1) {
