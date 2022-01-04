@@ -616,10 +616,10 @@
             return false
         }
         fetch('{% url "myprofile" %}', {
-                'Accept': 'application/json',
-                'X-Requested-With': 'XMLHttpRequest', //Necessary to work with request.is_ajax()
-
-
+                headers: {
+                    'Accept': 'application/json',
+                    'X-Requested-With': 'XMLHttpRequest', //Necessary to work with request.is_ajax()
+                }
             }).then(
                 spinner()
             )
@@ -809,8 +809,10 @@
 
     function ApiDisMsg(elem) {
         fetch('{% url "getMsgs" %}', {
-                'Accept': 'application/json',
-                'X-Requested-With': 'XMLHttpRequest', //Necessary to work with request.is_ajax()
+                headers: {
+                    'Accept': 'application/json',
+                    'X-Requested-With': 'XMLHttpRequest', //Necessary to work with request.is_ajax()
+                }
             }).then(
                 spinner()
             )
