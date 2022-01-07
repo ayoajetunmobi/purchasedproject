@@ -1,0 +1,421 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title> load JavaScript </title>
+    <meta name="description" content=" improve response time">
+</head>
+
+<body>
+</body>
+
+</html>
+{% block content %}
+<script>
+    let submittsearch = document.getElementById("submitttsearch");
+
+    function getCookie(name) {
+        let cookieValue = null;
+        if (document.cookie && document.cookie !== '') {
+            const cookies = document.cookie.split(';');
+            for (let i = 0; i < cookies.length; i++) {
+                const cookie = cookies[i].trim();
+                // Does this cookie string begin with the name we want?
+                if (cookie.substring(0, name.length + 1) === (name + '=')) {
+                    cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                    break;
+                }
+            }
+        }
+        return cookieValue;
+    }
+    const csrftoken = getCookie('csrftoken');
+
+    function propicclick(elem) {
+        if (elem.getAttribute('data-id') == null || elem.getAttribute('data-id') == -1) {
+            alert('please login to view users profile or contact')
+            return false
+        }
+        let tabs = document.querySelectorAll('.tabs li a')
+        let tabcontents = document.querySelectorAll('.tab-cotents li');
+        let target = parseInt(elem.getAttribute('data-id'));
+
+        profile.scrollTop = '0px'
+        profile.style.display = 'none'
+
+        fetch('{% url "profileUpdate" %}', {
+            method: 'POST',
+            credentials: 'same-origin',
+            headers: {
+                'Accept': 'application/json',
+                'X-Requested-With': 'XMLHttpRequest', //Necessary to work with request.is_ajax()
+                'X-CSRFToken': csrftoken,
+            },
+            body: JSON.stringify({
+                    'post_data': {
+                        target
+                    }
+                }) //JavaScript object of data to POST
+        }).then(
+            spinner()
+        ).then(response => {
+            return response.json().then(data => {
+                    closespinner()
+                    let uploadpostbtn = document.getElementById('uploadpostbtn');
+                    uploadpostbtn.style.display = "none"
+                    if (!data.profileupdate) {
+                        return false
+                    }
+                    if (data.profileupdate) {
+                        addtoMyProfile(data.userdetail, data.data1, data.images, data.reviews, update =
+                            true, data.advert)
+                        addtoMyproduct(data.data1, data.images)
+                    }
+                    displayRemove()
+                    profile.style.display = 'block'
+                }) //Convert response to JSON
+        })
+    }
+
+    function probt() {
+        profile.style.display = 'none'
+        let upldpro_form = document.getElementById('upldpro_form')
+        if (upldpro_form == -1 || upldpro_form == null) {
+            alert("please login to view user's profile")
+            return false
+        }
+        fetch('{% url "myprofile" %}', {
+                headers: {
+                    'Accept': 'application/json',
+                    'X-Requested-With': 'XMLHttpRequest', //Necessary to work with request.is_ajax()
+                }
+            }).then(
+                spinner()
+            )
+            .then(response => {
+                return response.json().then(data => {
+                        let sidebar = document.querySelector('.sidebar'),
+                            body = document.getElementById("body");
+                        let uploadpostbtn = document.getElementById('uploadpostbtn');
+                        uploadpostbtn.style.display = "block"
+                        let data1 = [];
+                        let product = data.data1;
+                        let i = 0;
+                        while (i < product.length) {
+                            data1.push(product[i])
+                            i++
+                        }
+                        sidebar.style.left = "-80%"
+                        body.style.left = "0%"
+                        if (data) {
+                            if (data == null || data == -1) {
+                                return false
+                            }
+                            addtoMyProfile(data.userdetail, data1, data.images, data.reviews, update =
+                                false, data.advert)
+                            addtoMyproduct(data1, data.images, update = true)
+
+                            displayRemove()
+                            profile.style.display = 'block'
+                            closespinner()
+
+                        }
+                    }) //Convert response to JSON
+            })
+    }
+
+    //function yhandler() {
+    //  let wrap = document.getElementById('wrap');
+    //let wrapper = document.getElementById('wrapper');
+    //wrapper.onscroll = (event) => {
+    //  wrapper.style.scrollBehavior = 'smooth'
+
+    //if (wrapper.scrollTop + wrapper.offsetHeight + 100 > wrap.offsetHeight) {
+
+    //  fetch("{% url 'userList' %} ", {
+    //        headers: {
+    //          'Accept': 'application/json',
+    //        'X-Requested-With': 'XMLHttpRequest', //Necessary to work with request.is_ajax()
+    //  },
+    // })
+    // .then(response => {
+    // return response.json().then((data) => {
+    //   displaypost(data.data, data.pictures)
+    //})
+    // })
+    //  }
+    // }
+    // }
+
+    function product_spec(elem) {
+        let data = parseInt(elem.getAttribute('data'));
+        let spec = document.getElementById('productSpec');
+        spec.style.display = 'none'
+        fetch('{% url "productspec" %}', {
+                method: 'POST',
+                credentials: 'same-origin',
+                headers: {
+                    'Accept': 'application/json',
+                    'X-Requested-With': 'XMLHttpRequest', //Necessary to work with request.is_ajax()
+                    'X-CSRFToken': csrftoken,
+                },
+                body: JSON.stringify({
+                        'post_data': {
+                            data
+                        }
+                    }) //JavaScript object of data to POST
+            }).then(
+                spinner()
+            )
+            .then(response => {
+                return response.json().then(data => {
+                        updateProductspec(data.data1, data.images, data.Sproduct, data.Simages, data.contact,
+                            data.userthatwascontacted)
+                        closespinner()
+                    }) //Convert response to JSON
+            })
+    }
+
+    function msg(elem) {
+        let seler = elem.getAttribute('seller'),
+
+            contactnumber = [...document.getElementsByClassName('contactnumber')];
+        contactnumber.forEach(contact => {
+            contact.style.display = 'block'
+        })
+        fetch('{% url "contacted" %}', {
+                method: 'POST',
+                credentials: 'same-origin',
+                headers: {
+                    'Accept': 'application/json',
+                    'X-Requested-With': 'XMLHttpRequest', //Necessary to work with request.is_ajax()
+                    'X-CSRFToken': csrftoken,
+                },
+                body: JSON.stringify({
+                        'post_data': {
+                            seler
+                        }
+                    }) //JavaScript object of data to POST
+            }).then(
+                spinner()
+            )
+            .then(response => {
+                return response.json().then(data => {
+                        closespinner()
+                    }) //Convert response to JSON
+            })
+
+    }
+
+    function ApiDelete(elem) {
+        let target = parseInt(elem.getAttribute('data'));
+        fetch('{% url "delete" %}', {
+                method: 'POST',
+                credentials: 'same-origin',
+                headers: {
+                    'Accept': 'application/json',
+                    'X-Requested-With': 'XMLHttpRequest', //Necessary to work with request.is_ajax()
+                    'X-CSRFToken': csrftoken,
+                },
+                body: JSON.stringify({
+                        'post_data': {
+                            target
+                        }
+                    }) //JavaScript object of data to POST
+            }).then(
+                spinner()
+            )
+            .then(response => {
+                return response.json().then(data => {
+                        let deleteMsg = [...document.getElementsByClassName('deleteMsg')];
+                        let del = deleteMsg.find((item) => parseInt(item.getAttribute('data')) == target);
+                        let div = del.parentNode;
+                        div = div.parentNode
+                        div.parentNode.removeChild(div)
+                        let marpicDelete = document.getElementById('marpicDelete');
+                        marpicDelete.style.display = 'none'
+                        closespinner()
+                    }) //Convert response to JSON
+            })
+    }
+
+    function signals(elem) {
+        let target = elem.getAttribute('signal');
+        let contacted = elem.getAttribute('contacted'),
+            user_review = elem.getAttribute('user_review'),
+            reviewdata = document.getElementById('reviewdata').value,
+            msgid = elem.getAttribute('msgid');
+
+        fetch('{% url "signals" %}', {
+                method: 'POST',
+                credentials: 'same-origin',
+                headers: {
+                    'Accept': 'application/json',
+                    'X-Requested-With': 'XMLHttpRequest', //Necessary to work with request.is_ajax()
+                    'X-CSRFToken': csrftoken,
+                },
+                body: JSON.stringify({
+                        'post_data': {
+                            target,
+                            contacted,
+                            user_review,
+                            reviewdata,
+                            msgid
+                        }
+                    }) //JavaScript object of data to POST
+            }).then(
+                spinner()
+            )
+            .then(response => {
+                return response.json().then(data => {
+                        let msgDisplay = document.getElementById('msgDisplay');
+                        msgDisplay.style.display = 'none'
+                        msgDisplay.style.zIndex = -5
+                        closespinner()
+                    }) //Convert response to JSON
+            })
+    }
+
+    function ApiDisMsg(elem) {
+        fetch('{% url "getMsgs" %}', {
+                headers: {
+                    'Accept': 'application/json',
+                    'X-Requested-With': 'XMLHttpRequest', //Necessary to work with request.is_ajax()
+                }
+            }).then(
+                spinner()
+            )
+            .then(response => {
+                return response.json().then(data => {
+                        getmsg(data.message)
+                        closespinner()
+                    }) //Convert response to JSON
+            })
+    }
+
+    function suggest() {
+        fetch('{% url "suggest" %}', {
+                headers: {
+                    'Accept': 'application/json',
+                    'X-Requested-With': 'XMLHttpRequest', //Necessary to work with request.is_ajax()
+                },
+            })
+            .then(response => {
+                return response.json().then(data => {
+                        suggestproduct(data)
+
+                    }) //Convert response to JSON
+            })
+    }
+
+    function submitSearcsignals(signal) {
+        event.preventDefault()
+        let target = ''
+        let target2 = ''
+        if (signal == 1) {
+            target = 1
+            target2 = document.getElementById("searchinput").value;
+        }
+        if (signal == 2) {
+            target = 2
+        }
+        if (signal == 3) {
+            target = 3
+        }
+        if (signal == 4) {
+            target = 4
+        }
+        if (signal == 5) {
+            target = 5
+        }
+        if (signal == 6) {
+            target = 6
+        }
+
+        fetch('{% url "search" %}', {
+                method: 'POST',
+                credentials: 'same-origin',
+                headers: {
+                    'Accept': 'application/json',
+                    'X-Requested-With': 'XMLHttpRequest', //Necessary to work with request.is_ajax()
+                    'X-CSRFToken': csrftoken,
+                },
+                body: JSON.stringify({
+                        'post_data': {
+                            target,
+                            target2
+                        }
+                    }) //JavaScript object of data to POST
+            }).then(
+                spinner()
+            )
+            .then(response => {
+                return response.json().then((data) => {
+                    if (data.yes) {
+                        searchengine(data, yes = true, data.images)
+                    } else {
+                        searchengine(data)
+                    }
+                    closespinner()
+                })
+            }) //Convert response to JSON
+    }
+
+
+    function apisettings(sig) {
+        event.preventDefault()
+        let target = "";
+        let target1 = "";
+
+        if (sig == 2 || sig == 6) {
+            target = document.getElementById('settingactionInput').value;
+            target1 = document.getElementById('settingactionInput2').value;
+        }
+
+
+        if (sig == 3 || sig == 4 || sig == 5 || sig == 9) {
+            target = document.getElementById('settingactionInput').value;
+        }
+
+
+        fetch('{% url "settings" %}', {
+                method: 'POST',
+                credentials: 'same-origin',
+                headers: {
+                    'Accept': 'application/json',
+                    'X-Requested-With': 'XMLHttpRequest', //Necessary to work with request.is_ajax()
+                    'X-CSRFToken': csrftoken,
+                },
+                body: JSON.stringify({
+                        'post_data': {
+                            target,
+                            sig,
+                            target1
+
+                        }
+                    }) //JavaScript object of data to POST
+            }).then(
+                spinner()
+            )
+            .then(response => {
+                return response.json().then((data) => {
+                    editpagetofserver.innerHTML = ""
+                    editpagetofserver.innerHTML =
+                        `
+                    <a href="#" onclick="settingeditoserverclose()"><i style="color: rgb(0, 0, 0);"
+                            class="fa fa-arrow-left"></i>
+                    </a>
+                    <div style="height: 70%; width:100%">
+                        <h1 style="text-align:center;"> ${data.data} </h1>
+                    </div>
+                    `
+                    closespinner()
+                })
+            })
+
+    }
+</script>
+{% endblock %}
