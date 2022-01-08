@@ -62,8 +62,10 @@
         ).then(response => {
             return response.json().then(data => {
                     closespinner()
-                    let uploadpostbtn = document.getElementById('uploadpostbtn');
+                    let uploadpostbtn = document.getElementById('uploadpostbtn'),
+                        whatsapppromo = document.getElementById('whatsapppromo');
                     uploadpostbtn.style.display = "none"
+                    whatsapppromo.style.display = "none"
                     if (!data.profileupdate) {
                         return false
                     }
@@ -97,8 +99,11 @@
                 return response.json().then(data => {
                         let sidebar = document.querySelector('.sidebar'),
                             body = document.getElementById("body");
-                        let uploadpostbtn = document.getElementById('uploadpostbtn');
+                        let uploadpostbtn = document.getElementById('uploadpostbtn'),
+                            whatsapppromo = document.getElementById('whatsapppromo');
                         uploadpostbtn.style.display = "block"
+                        whatsapppromo.style.display = "block"
+
                         let data1 = [];
                         let product = data.data1;
                         let i = 0;
