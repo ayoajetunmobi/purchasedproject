@@ -75,13 +75,13 @@ class UserDetailForm (forms.ModelForm):
         attrs={
             "placeholder":"Enter contact no.","class":"inputs", "maxlength":"15"
         }))
-    about             = forms.CharField( label = "ABOUT YOURSELF", max_length=500,widget=forms.TextInput(
+    about             = forms.CharField( label = "ABOUT YOURSELF", max_length=250,widget=forms.TextInput(
         attrs={
-            "placeholder":"About user(max_length:500 words)" , "maxlength":"500","class":"inputs"
+            "placeholder":"About user(max_length:250 words)" , "maxlength":"250","class":"inputs"
         }))
-    quote             = forms.CharField( label = "A QUOTE YOU CANNOT FORGET", max_length = 500, required=True, widget=forms.TextInput(
+    quote             = forms.CharField( label = "A QUOTE YOU CANNOT FORGET", max_length = 250, required=True, widget=forms.TextInput(
         attrs={
-            "placeholder":"Favorite Quote(max_length:500 words)","maxlength":"500","class":"inputs"
+            "placeholder":"Favorite Quote(max_length:250 words)","maxlength":"250","class":"inputs"
         }))
     matricNo         = forms.CharField( label = "MATRIC NO", max_length = 60,required=False,widget=forms.TextInput(
         attrs={
