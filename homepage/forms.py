@@ -85,7 +85,7 @@ class UserDetailForm (forms.ModelForm):
         }))
     matricNo         = forms.CharField( label = "MATRIC NO", max_length = 60,required=False,widget=forms.TextInput(
         attrs={
-            "placeholder":"matric number(optional)","maxlength":"60","class":"inputs"
+            "placeholder":"matric number(optional)","maxlength":"70","class":"inputs"
         }))
     campus   = forms.SelectDateWidget( attrs={
        "class":"inputs"

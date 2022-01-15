@@ -82,8 +82,8 @@ class User_Detail(models.Model):
     lastname          = models.CharField(max_length = 150,blank=False)
     gender            = models.CharField(max_length = 50,choices=gender)
     contact           = models.CharField( max_length = 255, unique = True)
-    about             = models.CharField( max_length =500)
-    quote             = models.CharField(max_length = 500, blank=False, null=False)
+    about             = models.TextField( max_length =500)
+    quote             = models.TextField(max_length = 500, blank=False, null=False)
     university        = models.CharField(max_length=100, default="LASU") 
     campus            = models.CharField(max_length=100, choices= campus) 
     matricNo          = models.CharField(max_length=100,blank=True,null=True) 
@@ -124,7 +124,7 @@ class User_Detail(models.Model):
 class User_product(models.Model):
     id              = models.AutoField(primary_key=True)
     price           = models.IntegerField( blank=False,null=False)
-    description     = models.CharField(max_length=4000,blank=False,null=False) 
+    description     = models.TextField(max_length=4000,blank=False,null=False) 
     searchTag       = models.CharField(max_length=30,blank=False,null=False)
     profile_pic     = models.ImageField(upload_to='profilepic' ,blank=True)
     date_time       = models.DateField( default=django.utils.timezone.now)
@@ -197,11 +197,11 @@ class Searchdata(models.Model):
     
     
 class Customer_care(models.Model):
-    reportbug = models.CharField(max_length = 600 ,blank=True,null=True)
-    suggestionbox = models.CharField(max_length= 600,blank=True,null=True)
-    deactivate_account = models.CharField(max_length= 700,blank=True,null=True)  
+    reportbug =models.TextField(max_length = 600 ,blank=True,null=True)
+    suggestionbox =models.TextField(max_length= 600,blank=True,null=True)
+    deactivate_account =models.TextField(max_length= 700,blank=True,null=True)  
     # reportuser is what the user has done and user is the user who has been reported
-    reportuser = models.CharField(max_length= 700,blank=True,null=True)
+    reportuser =models.TextField(max_length= 700,blank=True,null=True)
     user = models.ForeignKey(User_Detail,on_delete=models.CASCADE)
     
 
@@ -210,7 +210,7 @@ class Contacted(models.Model):
     user = models.ForeignKey(User_Detail,on_delete=models.CASCADE)#user who made contact
     
 class Reviews(models.Model):
-    review = models.CharField(max_length=500)
+    review = models.TextField(max_length=500)
     as_buyer = models.BooleanField(default=False) #if contacted == True then user is seller
     username = models.CharField(max_length=100) #request.user
     user = models.ForeignKey(User_Detail,on_delete=models.CASCADE)# user to be reviewed gotten from msg table
