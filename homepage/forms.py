@@ -77,11 +77,11 @@ class UserDetailForm (forms.ModelForm):
         }))
     about             = forms.CharField( label = "ABOUT YOURSELF", max_length=500,widget=forms.TextInput(
         attrs={
-            "placeholder":"About user" , "maxlength":"70","class":"inputs"
+            "placeholder":"About user(max_length:500 words)" , "maxlength":"500","class":"inputs"
         }))
     quote             = forms.CharField( label = "A QUOTE YOU CANNOT FORGET", max_length = 500, required=True, widget=forms.TextInput(
         attrs={
-            "placeholder":"Favorite Quote","maxlength":"60","class":"inputs"
+            "placeholder":"Favorite Quote(max_length:500 words)","maxlength":"500","class":"inputs"
         }))
     matricNo         = forms.CharField( label = "MATRIC NO", max_length = 60,required=False,widget=forms.TextInput(
         attrs={

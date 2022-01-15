@@ -27,18 +27,18 @@ class UserLoginForm (forms.Form):
 
                    
 class Password_resetform (forms.Form):
-    email_address = forms.EmailField(widget=forms.TextInput(attrs={  
+    email_address = forms.EmailField(label = "email address", widget=forms.TextInput(attrs={  
         "placeholder":"Enter email" , "class":"inputs"
     }))
-    favourite_quote = forms.CharField(widget=forms.TextInput(attrs={  
-        "placeholder":"favorite quote in need" , "class":"inputs"
+    contact = forms.CharField(label = "phone no",widget=forms.TextInput(attrs={  
+        "placeholder":"phone number you registerd with" , "class":"inputs"
     }))
-    new_password = forms.CharField(widget = forms.PasswordInput(
+    new_password = forms.CharField(label = "new password",widget = forms.PasswordInput(
         attrs={
           "placeholder":"Enter password" ,"class":"inputs"
         }  
     ))
-    confirm_password = forms.CharField(widget = forms.PasswordInput(
+    confirm_password = forms.CharField(label = "confirm password",widget = forms.PasswordInput(
         attrs={
           "placeholder":"Confirm password" , "class":"inputs"
         }  
@@ -55,18 +55,18 @@ class Password_resetform (forms.Form):
         return email
     
     
-    def clean_favourite_quote(self):
-        favourite_quote = self.cleaned_data.get('favourite_quote')
+    def clean_contact(self):
+        contact = self.cleaned_data.get('contact')
         email = self.cleaned_data.get('email_address')
         
         err= User.objects.get(email=email)
-        quote= User_Detail.objects.get(user=err).quote 
+        database_contact = User_Detail.objects.get(user=err).contact
         
        
-        if str(quote).lower() != str(favourite_quote).lower():
-            raise forms.ValidationError('favorite quote did not match contact support 09079681347')
+        if contact != database_contact:
+            raise forms.ValidationError('contact does not match the one you registerd with')
         else:
-            return favourite_quote
+            return contact
             
             
             

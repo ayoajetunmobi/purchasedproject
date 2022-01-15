@@ -2,7 +2,7 @@ from django.conf import settings
 from django.db import models
 from django.core.validators import FileExtensionValidator
 from django.contrib.auth.models import AbstractBaseUser, BaseUserManager
-from django.utils import timezone
+import django
 from PIL import Image
 from io import BytesIO
 from django.core.files.uploadedfile import InMemoryUploadedFile
@@ -127,7 +127,7 @@ class User_product(models.Model):
     description     = models.CharField(max_length=4000,blank=False,null=False) 
     searchTag       = models.CharField(max_length=30,blank=False,null=False)
     profile_pic     = models.ImageField(upload_to='profilepic' ,blank=True)
-    date_time       = models.DateField( default=timezone.now())
+    date_time       = models.DateField( default=django.utils.timezone.now)
     username        = models.CharField(max_length=255)
     campus            = models.CharField(max_length=100)
     online          = models.BooleanField(default=False)

@@ -90,6 +90,7 @@ def formsdispaly(request):
     
     return render(request,'purchased.html', context)
 
+
 def register(request):
     context={}
     form1 = RegistrationForm(request.POST or None)
@@ -99,11 +100,11 @@ def register(request):
     context["form2"]=form2
     
     if form1.is_valid() and form2.is_valid():
+        Images = request.FILES.get('eproimages')
         code =  str(random.random())[14:]
         email= form1.save(commit=False)
         email.active = True
         email.save()
-        Images = request.FILES.get('eproimages')
         profile= form2.save(commit=False)
         profile.user=email
         profile.profilepic = Images
@@ -501,7 +502,8 @@ def msgDisplay(request):
                 
             user = User_Detail.objects.get(user = request.user)
             if Messages.objects.filter(my_messages = user).exists:
-                message = list( Messages.objects.filter(my_messages =user).values())
+                message = list( Messages.objects.filter(my_messages =user).order_by('-id').values())
+                
                 context['message'] = message
     return JsonResponse(context , safe=False)   
 
