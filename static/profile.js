@@ -201,7 +201,7 @@ function settingfunc(event) {
             </a>
             <h5 style="text-align: center; color:red;"> Edit About </h5><br>
             <div style="height: 70%; width:100%">             
-                <textarea id="settingactionInput" style="width:98%; height:40%; background-color:rgb(255, 255, 255);border:none;" maxlength="150" placeholder= "edit about"></textarea>
+                <textarea id="settingactionInput" style="width:98%; height:40%; background-color:rgb(255, 255, 255);border:none;" maxlength="150" placeholder= "edit about(150 words)"></textarea>
             </div>
             <br>
             <div style="width: 100%; text-align:center; background-color:#ffffff; border-top:0.3px solid black; color:rgb(255, 0, 0);
@@ -238,8 +238,7 @@ function settingfunc(event) {
             </a>
             <h5 style="text-align: center; color:red;"> Make Suggestion </h5><br>
             <div style="height: 70%; width:100%">             
-                <textarea id="settingactionInput" style="width:98%; height:40%; background-color:rgb(255, 255, 255);border:none;" maxlength="150" placeholder= "suggest something"></textarea>
-            </div>
+                <textarea id="settingactionInput" style="width:98%; height:40%; background-color:rgb(255, 255, 255);border:none;" maxlength="150" placeholder= "suggest something  (150 words)"></textarea>    </div>
             <br>
             <div style="width: 100%; text-align:center; background-color:#ffffff; border-top:0.3px solid black; color:rgb(255, 0, 0);
                 font-weight:700">
@@ -255,9 +254,8 @@ function settingfunc(event) {
             </a>
             <h5 style="text-align: center; color:red;"> Report User </h5><br>
             <div style="height: 70%; width:100%"> 
-                <textarea id="settingactionInput" style="width:98%; height:40%; background-color:rgb(255, 255, 255);border:none;" maxlength="150" placeholder= "culprit username"></textarea>         
-                <textarea id="settingactionInput2" style="width:98%; height:40%; background-color:rgb(255, 255, 255);border:none;" maxlength="150" placeholder= "report user"></textarea>
-            </div>
+                <textarea id="settingactionInput" style="width:98%; height:40%; background-color:rgb(255, 255, 255);border:none;" maxlength="150" placeholder= "culprit username"></textarea>        (150 words) 
+                <textarea id="settingactionInput2" style="width:98%; height:40%; background-color:rgb(255, 255, 255);border:none;" maxlength="150" placeholder= "report user (150 words)"></textarea></div>
             <div style="width: 100%; text-align:center; background-color:#ffffff; border-top:0.3px solid black; color:rgb(255, 0, 0);
                 font-weight:700">
                <input type = "submit" value = SUBMIT onclick = "apisettings(6)">
@@ -292,7 +290,7 @@ function settingfunc(event) {
             </a>
             <h5 style="text-align: center; color:red;"> Deactive Account </h5><br>
             <div style="height: 70%; width:100%">             
-                <textarea id="settingactionInput" style="width:98%; height:40%; background-color:rgb(255, 255, 255);border:none;" maxlength="150" placeholder= "why are you deactivating your account"></textarea>
+                <textarea id="settingactionInput" style="width:98%; height:40%; background-color:rgb(255, 255, 255);border:none;" maxlength="150" placeholder= "why are you deactivating your account(150 words)"></textarea>
             </div>
             <br>
             <div style="width: 100%; text-align:center; background-color:#ffffff; border-top:0.3px solid black; color:rgb(255, 0, 0);
