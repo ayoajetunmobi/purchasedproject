@@ -226,37 +226,37 @@ def get_profile(request):
                 context['reviews']= [{"review":"no reviews yet","username":"no reviews yet","as_buyer":"no reviews yet"}]
     return JsonResponse(context , safe=False)
 
-# def pagination_page(request):
-#     context={}
-#     picture=[]
+def pagination_page(request):
+    context={}
+    picture=[]
     
-#     global page_num
+    global page_num
     
-#     listt= User_product.objects.all().order_by("-id")
+    listt= User_product.objects.all().order_by("-id")
     
-#     page = request.GET.get('page', page_num)
+    page = request.GET.get('page', page_num)
     
-#     paginator = Paginator(listt, 4)
+    paginator = Paginator(listt, 4)
     
-#     try:
-#         users = paginator.page(page)
-#     except PageNotAnInteger:
-#         users = paginator.page(1)
+    try:
+        users = paginator.page(page)
+    except PageNotAnInteger:
+        users = paginator.page(1)
         
-#     for i in users.object_list:
-#         picture.append(list((Product_image.objects.filter(product=i.id)).values())[0])
+    for i in users.object_list:
+        picture.append(list((Product_image.objects.filter(product=i.id)).values())[0])
     
-#     if users.has_next() == True:
-#         page_num = users.next_page_number()
-#         context["pictures"] = picture
-#         context["data"]= list((users.object_list).values())
+    if users.has_next() == True:
+        page_num = users.next_page_number()
+        context["pictures"] = picture
+        context["data"]= list((users.object_list).values())
         
-#     if users.has_next() == False:
-#        context["pictures"] = picture
-#        context["data"]= list((users.object_list).values())
-#        page_num = 1
+    if users.has_next() == False:
+       context["pictures"] = picture
+       context["data"]= list((users.object_list).values())
+       page_num = 1
        
-#     return JsonResponse( context, safe=False)
+    return JsonResponse( context, safe=False)
 
 def search(request):
         context = {}
