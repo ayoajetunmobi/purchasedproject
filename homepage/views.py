@@ -32,7 +32,7 @@ def formsdispaly(request):
     context['userstore1products'] = userstore1products
     context['userstore1productsImg'] = userstore1productsImg
 
-    userstore2 = User_Detail.objects.get(username = 'Abusummayyah')
+    userstore2 = User_Detail.objects.get(username = 'BELOVED-DISHU')
     userstore2products = User_product.objects.filter(user = userstore2)[:15]
     userstore2productsImg = [userstore2.username]
     for i in userstore2products:
@@ -40,7 +40,7 @@ def formsdispaly(request):
     context['userstore2products'] = userstore2products
     context['userstore2productsImg'] = userstore2productsImg
     
-    userstore3 = User_Detail.objects.get(username = 'Estee D Enterprises')
+    userstore3 = User_Detail.objects.get(username = 'Happy Feet')
     userstore3products = User_product.objects.filter(user = userstore3)[:15]
     userstore3productsImg = [userstore3.username]
     for i in userstore3products:
@@ -48,7 +48,7 @@ def formsdispaly(request):
     context['userstore3products'] = userstore3products
     context['userstore3productsImg'] = userstore3productsImg
     
-    userstore4 = User_Detail.objects.get(username = 'MAY-YUMS')
+    userstore4 = User_Detail.objects.get(username = 'Abusummayyah')
     userstore4products = User_product.objects.filter(user = userstore4)[:15]
     userstore4productsImg = [userstore4.username]
     for i in userstore4products:
@@ -59,7 +59,7 @@ def formsdispaly(request):
     if loged_in_user.is_authenticated:
         review = Reviews.objects.all()
         user_details = User_Detail.objects.get(user=loged_in_user)
-        products = User_product.objects.filter(campus = user_details.campus).order_by('-id')[:24]
+        products = User_product.objects.filter(campus = user_details.campus).order_by('-id')[:15]
         context['products']= products
         images=[]
         for i in products:
@@ -75,7 +75,7 @@ def formsdispaly(request):
             review[:8].delete()
     else:
         images =[]
-        products = User_product.objects.all().order_by('-id')[:24]
+        products = User_product.objects.all().order_by('-id')[:15]
         context['products']= products
         for i in products:
             if  Product_image.objects.filter(product=i)[0] != None:
@@ -226,37 +226,37 @@ def get_profile(request):
                 context['reviews']= [{"review":"no reviews yet","username":"no reviews yet","as_buyer":"no reviews yet"}]
     return JsonResponse(context , safe=False)
 
-def pagination_page(request):
-    context={}
-    picture=[]
+# def pagination_page(request):
+#     context={}
+#     picture=[]
     
-    global page_num
+#     global page_num
     
-    listt= User_product.objects.all().order_by("-id")
+#     listt= User_product.objects.all().order_by("-id")
     
-    page = request.GET.get('page', page_num)
+#     page = request.GET.get('page', page_num)
     
-    paginator = Paginator(listt, 4)
+#     paginator = Paginator(listt, 4)
     
-    try:
-        users = paginator.page(page)
-    except PageNotAnInteger:
-        users = paginator.page(1)
+#     try:
+#         users = paginator.page(page)
+#     except PageNotAnInteger:
+#         users = paginator.page(1)
         
-    for i in users.object_list:
-        picture.append(list((Product_image.objects.filter(product=i.id)).values())[0])
+#     for i in users.object_list:
+#         picture.append(list((Product_image.objects.filter(product=i.id)).values())[0])
     
-    if users.has_next() == True:
-        page_num = users.next_page_number()
-        context["pictures"] = picture
-        context["data"]= list((users.object_list).values())
+#     if users.has_next() == True:
+#         page_num = users.next_page_number()
+#         context["pictures"] = picture
+#         context["data"]= list((users.object_list).values())
         
-    if users.has_next() == False:
-       context["pictures"] = picture
-       context["data"]= list((users.object_list).values())
-       page_num = 1
+#     if users.has_next() == False:
+#        context["pictures"] = picture
+#        context["data"]= list((users.object_list).values())
+#        page_num = 1
        
-    return JsonResponse( context, safe=False)
+#     return JsonResponse( context, safe=False)
 
 def search(request):
         context = {}
@@ -537,12 +537,12 @@ def msgDisplay(request):
 
 def suggestproduct(request):
     context={}
-    products = User_product.objects.all()[1:10]
+    products = User_product.objects.all()[30:45]
     suggestions  = []
     suggestions1 = User_product.objects.filter(Q(searchTag__contains = 'food') | Q(description__contains = 'rice')).order_by("-id")[:1]
     suggestions2 = User_product.objects.filter(Q(searchTag__contains = 'laptop') | Q(description__contains = 'laptop') | Q(description__contains = 'phone')).order_by("-id")[:1]
     suggestions3 = User_product.objects.filter(Q(searchTag__contains = 'wear') | Q(description__contains = 'wear')).order_by("-id")[:1]
-    suggestions4 =  User_product.objects.filter(Q(searchTag__contains = 'wig') | Q(description__contains = 'wig')).order_by("-id")[:1]
+    suggestions4 =  User_product.objects.filter(Q(searchTag__contains = 'hp') | Q(description__contains = 'games')).order_by("-id")[:1]
     
     suggestions = [suggestions1,suggestions2,suggestions3,suggestions4]
     suggestionImg = []
