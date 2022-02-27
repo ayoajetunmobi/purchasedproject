@@ -537,7 +537,7 @@ def msgDisplay(request):
 
 def suggestproduct(request):
     context={}
-    products = User_product.objects.all()[30:45]
+    products = User_product.objects.all()[30:40]
     suggestions  = []
     suggestions1 = User_product.objects.filter(Q(searchTag__contains = 'food') | Q(description__contains = 'rice')).order_by("-id")[:1]
     suggestions2 = User_product.objects.filter(Q(searchTag__contains = 'laptop') | Q(description__contains = 'laptop') | Q(description__contains = 'phone')).order_by("-id")[:1]
@@ -554,7 +554,7 @@ def suggestproduct(request):
     for i in products:
          productsrotateImg.append(Product_image.objects.filter(product = i).values()[0])
          
-    context['products'] =  list(User_product.objects.all().values()[30:45])
+    context['products'] =  list(User_product.objects.all().values()[30:40])
     context['productsrotateImg'] = list(productsrotateImg)
         
     context['suggestion1'] = list((suggestions1).values())
