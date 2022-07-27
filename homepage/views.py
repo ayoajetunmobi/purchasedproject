@@ -71,7 +71,9 @@ def index(request):
             
         product2 =User_product.objects.filter(
                 Q(description__contains = "henna") |
-                Q(searchTag__contains = "henna" ) 
+                Q(searchTag__contains = "henna" ) |
+                Q(description__contains = "jalab") |
+                Q(searchTag__contains = "jalab" ) 
                 ).order_by("-id")
         for i in product2:
             productlistImg.append(Product_image.objects.filter(product=i).values()[0])
