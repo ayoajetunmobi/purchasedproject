@@ -1,0 +1,99 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <link
+      rel="stylesheet"
+      href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css"
+    />
+    <title> Post an Ad here | shopatpurchased </title>
+
+    <meta
+      name="description"
+      content="sell and advertise your product here"
+    />
+   </head>
+
+  <body>
+    <div id="products" style="width:100%;height:fit-content;font-family:sans-serif;text-align:center;">
+        <div class="close">
+            <a href="{% url 'home' %}"><i style="color: black;" class="fa fa-arrow-left"></i></a>
+        </div>
+
+        <div class="upldpro" id="upldpro" style="width:fit-content; margin:0% auto;">
+
+      
+            <form style="" id="upldpro_form" action="/addPost/" method="POST" enctype="multipart/form-data" id="uploadproduct">
+                {% csrf_token %}
+                <h2 style="color: rgb(0, 0, 0); letter-spacing:1px; text-align:center;"> POST AD
+                </h2>
+                <br>
+                <label>Enter Price </i></label>
+                <br>
+                <br>
+                <input type="number" name=price required>
+                <br>
+                <br>
+                <label>Detailed Description <i class="fa fa-tag "></i></label> <br>
+                <br>
+                <textarea name="desc1" cols="24" rows="5" required maxlength="150" placeholder="Describe Product Properly, all it's specifications and why your product or service stands out... max 150 words"></textarea>
+                <br>
+                <br>
+                <label for="category">category : </label>
+
+                <select id="cartegories" name="categories">
+
+                
+                <option value="bag">BAG </option>
+                <option value="bedsheet" >BEDSHEET </option>
+                  <option value="cosmetics"> BEUTY | COSMETICS </option>
+                <option value="necklace" > CUBBAN | JEWELRIES| EARRINGS | BRACELET | BEADS  </option>
+                 <option value="drinks">DRINKS</option> 
+                <option value="meal">FAST MEALS</option>
+                <option value="cloth">FEMALE CLOTHING</option>
+                <option value="food">FOOD STUFF</option>
+                <option value="electronics"> ELECTRONICS</option> 
+                <option value="engineer" >ENGINEERING</option>
+                <option value="furniture"> HOME | FURNITURE | APPLIANCES </option> 
+                 <option value="gown"> GOWN AND DRESS </option> 
+                 <option value="graphics"> GRAPHICS </option> 
+                <option value="health"> HEALTH </option>  
+                 <option value="property"> HOUSE TO LET | SELL HOUSE </option> 
+                <option value="lasureg">LASU REGISTRATIONS,FEES AND FORMS</option> 
+                <option value="maleCTH"> MALE CLOTHING </option>  
+                <option value="services">OFFER SERVICE </option>
+                <option value="pef">PERFUME</option> 
+                  <option value="repairs">PLUMBER | CARPENTER | ELECTRICIAN</option>
+                <option value="phones">PHONES</option> 
+                 <option value="gadgets">'POWER BANK | CHARGER CORD | MUSIC </option>
+                <option value="shirt">SHIRT</option>
+                <option value="shoe">SHOE</option>
+                <option value="snack">SNACKS & PASTERIES</option>
+                <option value="sneak">SNEAKERS</option>
+                <option value="webapp">SOFTWARE ENGINEER</option> 
+                <option value="sport">SPORT | JERSY | FOOTBALL</option>
+                <option value="trouser" >TROUSER</option>                    
+                <option value="others">OTHERS</option>
+                </select>
+                <br><br>
+            <div id="image">
+                <label for="uppropic">Upload product Image <i class="fa fa-upload"></i></label>
+                <br>
+                <br>
+                <input type="file" name="images" accept=".jpg,.png,.PNG,.JPG" required>
+            </div><br>
+
+            <input style="width:200px;height:50px;" type="button" id="addImage" onclick="myclick()" value="Add"> <br><br>
+            <input  style="background-color:blue; color:white; border-radius:5px; width:200px;height:50px;" type="submit" value="post" id="submit" />
+          
+          
+          </form>
+
+ 
+    </div>
+</body>
+ <script src="{% static 'practise.js' %} "></script>
+</html>

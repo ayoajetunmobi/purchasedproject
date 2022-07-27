@@ -1,0 +1,585 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <link rel="stylesheet" href="{% static 'practise.css' %}" />
+    <link
+      rel="stylesheet"
+      href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css"
+    />
+    <title> shoatpurchased is an E-commerce website company </title>
+
+    <meta
+      name="description"
+      content="This is a free e-commerce platform where students and people staying around lagos state university campus can connect,
+    buy,sell, get contact of seller and advertise their products / services easily. "
+    />
+  </head>
+  <body>
+    <header>
+      <div class="headercontainer">
+        <img src="{% static 'logopurchase.png' %}" alt="image here" />
+        <div class="headernavigations">
+          {% if user.is_authenticated %}
+          <a href="#" onclick="display_profile()" class="sigin">
+            <i class="fa fa-user"></i></a
+          >
+          <a href="{% url 'logout' %}" class="sigin"> sign out </a>
+
+          {% else %}
+          <a href="{% url 'login' %}" class="sigin"> sign in </a>
+          {% endif %}
+          <a href="{% url 'register' %}" class="sigin"> sign up </a>
+        </div>
+      </div>
+      <div class="searchcontainer">
+        <input  id="searchinput" type="text" placeholder=" products /services / username " />
+        <button id="submitttsearch" onclick="submitSearcsignals(1)"> search </button>
+      </div>
+    </header>
+
+    <div class="aboutimagescontainer">
+      <div class="aboutdetail_img" id="aboutdetail_img1">
+        <img src="{% static 'aboutimg1.png' %}" alt="image here" onclick="location.href ='http://127.0.0.1:8000/shoprandom';" />
+         <h5 class='seokit'> polo shirt at an affordable price |quality shirt gown styles for adult wowen |beutiful fitted shirt gown for ladies | trouser and  polo top for ladies | quality men trouser and jean| juggers trouser and ripped jeans </h5>
+      </div>
+      <div class="aboutdetail_img" id="aboutdetail_img2" onclick="location.href ='http://127.0.0.1:8000/cookedfood';">
+        <img src="{% static 'aboutmeal.png' %}" alt="image here" />
+         <h5 class='seokit'> best nigerian food and dishes | energy giving food for kids | student jollof rice | ofada rice on campus | rice and stew | a plate of jollof rice and chicken | nigerian jollof rice </h5>
+      </div>
+    </div>
+
+    <div class="category">
+      <h5 style="margin-left: 10px">categories</h5>
+      <div class="categorycontainer">
+        <div>
+          <a href="{%url 'bagsPage' %}">
+            <div class="catImgContainer">
+              <img src="{% static 'bag.jpg' %}" alt="image here" />
+            </div>
+          </a>
+          BAGS
+          <h5 class='seokit'> quality tote bag | school bag for students resuming | hand bag for sale at discount price |  luggage bag for your next trip | cross bag for student that style </h5>
+        </div>
+        
+        <div>
+          <a href="{%url 'sneakers' %}">
+          <div class="catImgContainer">
+            <img src="{% static 'sneakers.jpg' %}" alt="image here" />
+          </div>
+          </a>
+          SNEAKERS
+          <h5 class='seokit'> half shoes for men of all age range | comfortable canvas shoes that fit | wedding shoes for grooms men | flat shoes for ladies | quality training shoes for sports  | ladies casual outting sneakers | original nike sneakers (unisex) | original white sneakers for men | original white sneakers for ladies | order a white nike sneakers from us | black sneakers for men and women (unisex)</h5>
+        </div>
+        <div>
+          <a href="{%url 'jewelries' %}">
+          <div class="catImgContainer">
+            <img src="{% static 'jewelries.jpg' %}" alt="image here" />
+          </div>
+           </a>
+          JEWELRIES
+           <h5 class='seokit'> back in school necklace for females | original gold necklace for men and women (unisex) | stainless chain necklace silver | cuban necklace in gold and silver (iceout necklace available) | original cuban gold chains and bracelets </h5>
+        </div>
+
+        <div>
+        <a href="{%url 'gown' %}">
+          <div class="catImgContainer">
+            <img src="{% static 'gown.jpg' %}" alt="image here" />
+          </div>
+        </a>
+          DRESS
+           <h5 class='seokit'> </h5>
+            <h5 class='seokit'> get a short gown for dinner | fashionable ankara gown in different styles | get gown styles for ladies at an affordable price | english short gown for females| classy corporate gown for women| different size and colored sexy night dress for women | ladies corset dress in different styles | buy your daughter a birthday dress from us .. | beutiful fitted shirt dress for ladies</h5>
+        </div>
+
+        <div>
+          <a href="{%url 'ladies_outfit' %}">
+          <div class="catImgContainer">
+            <img src="{% static 'ladieswear.jpg' %}" alt="image here" />
+          </div>
+            </a>
+          LADIES OUTFIT
+           <h5 class='seokit'> affordable fashion bags for ladies | quality fashion short crop top | wears and cool outfit for ladies | panty suit and short shirt gown | ladies up and down wears | palazzo trouser in different colors </h5>
+        </div>
+
+        <div>
+          <div class="catImgContainer" id="morecatBtn">
+            <img src="{% static 'MORE.jpg' %}" alt="image here" />
+          </div>
+          ALL CATEGORIES
+        </div>
+      </div>
+    </div>
+    
+    <div class="productlist" id="productlist">
+      <h3 style="margin-left: 20px">TRENDING ADS</h3>
+    <div id ="productConCov">
+      {% for i in product %}
+        <div class="productcover" onclick="location.href ='{% url 'productspec' i.id %}';">
+        {%for j in picture %}{%if i.id == j.product_id %}
+        <div class="productimg">
+          <img src="{{j.product_img.url}}" alt="image here" />
+        </div>
+        {%endif%} {%endfor%}
+        <div class="productdetails">
+          <h5>{{i.description|slice:"0:40"}} ...</h5>
+          <h5>{{i.searchTag}}</h5>
+          <h3>{{i.price}}</h3>
+          <h6 style="color: #ff9966">
+            <a
+              href="tel:{{i.user.contact}}" 
+              onclick="displayNum({{i.user.contact}})"
+              style="color: #66ff66; margin-left: 20px"
+              ><i class="fa fa-phone"></i> contact seller
+            </a>
+          </h6>
+        </div>
+       </div>
+      </a>
+      {%endfor%}
+      </div>
+      <footer id="footer">
+        <div
+          style="
+            display: inline-flex;
+            height: 10px;
+            position: absolute;
+            top: -10%;
+          "
+        >
+          <h6 style="margin-right: 30px">contact support</h6>
+          <h6 style="margin-right: 30px">about</h6>
+          <h6 style="margin-right: 30px">terms and conditions</h6>
+        </div>
+        <br />
+
+        <h5 style="text-align: center">ALL RIGHTS RESERVED ©SHOPATPURCHASED</h5>
+        <h5 style="text-align: center">
+          <a href="#"> back to top </a>
+        </h5>
+      </footer>
+    </div>
+
+    <div onclick='propicture(event)' id="bigpic-overlay" close="yes">
+            <img close="yes" src="{{userDetail.profilepic.url}}" title="Click anywhere to close" alt="image picture" id="bigpropic" />
+    </div>
+
+    <!--PROFILE START-->
+    <div id="profile" class="profile">
+      <div
+        id="closeprofilePage"
+        style="position: relative; left: 85%; margin: 20px"
+       >
+        <i
+          style="color: rgb(0, 0, 0); font-size: 20px"
+          class="fa fa-arrow-right"
+        ></i>
+      </div>
+
+      <div class="profilecover">
+        <div class="profiledetails">
+          <img  onclick="propicture(event)" bigpic = "{{userDetail.profilepic.url}}" src="{{userDetail.profilepic.url}}" alt="image here" />
+          <div>
+            <p>
+              <i class="fa fa-user"></i>
+              <span class="spacingspan"> </span> {{userDetail.username}}
+            </p>
+            <p id="aboutDetails">{{userDetail.about}}</p>
+            <p>
+              <i class="fa fa-male"></i><i class="fa fa-female"></i>
+              <span class="spacingspan"> </span> {{userDetail.gender}}
+            </p>
+            <p
+              style="cursor: pointer"
+              class="profiledetailsBtn"
+              id="settingbtn"
+            >
+              <i class="fa fa-gears"></i>
+              <span class="spacingspan"> </span>
+              SETTINGS
+            </p>
+            <p
+              style="cursor: pointer"
+              class="profiledetailsBtn"
+              id="viewAllProBtn"
+              onclick='viewall()'
+            >
+              <i class="fa fa-book"> </i> <span class="spacingspan"> </span>VIEW
+              ALL PRODUCTS
+            </p>
+          </div>
+        </div>
+        <div class="profilebuttons">
+          <a
+              href="tel:{{userDetail.contact}}"
+              style="text-decoration: none; color: black"
+              onclick="displayNum({{userDetail.contact}})"
+            >
+          <div class="buttons">
+              <h4><i class="fa fa-phone"></i> contact</h4>
+          </div>
+        </a>
+        <a href='addPost/'   style="text-decoration: none; color: black">
+          <div class="buttons"><h4>POST AD</h4></div>
+        </a>
+          <div class="buttons" onclick="reviewpagedis()">
+            <h4><i class="fa fa-book"></i>review</h4>
+          </div>
+        </div>
+        <div class="whatsapp">
+            <a style="text-decoration: none; color:green;" href="https://api.whatsapp.com/send?text= find my product and services by searching my username '{{ usersDetails.username }}' on shopatpurchased.com" data-action="share/whatsapp/share">
+                <i class="fa fa-whatsapp"></i> PROMOTE YOUR STORE ON WHATSAPP
+                </span>
+            </a>
+        </div>
+      </div>
+    </div>
+
+<!-- MORE CATEGORIES -->
+
+    <div class="morecatCover" id="morecatCover">
+      <i
+        style="
+          color: rgb(0, 0, 0);
+          font-size: 18px;
+          position: absolute;
+          top:0%;
+          right: 10%;
+          cursor: pointer;
+          margin: 15px;
+        "
+        class="fa fa-arrow-right close"
+      ></i>
+      <br />
+      <br />
+      <div class="morecategories">
+        <a href="{% url 'bedsheet' %}"> <h5> <i class="fa fa-bed"></i>  Bedsheets & Duvet </h5> </a>
+        <h5 class="seokit"> student bedsheet in different colors| quality bedsheet and duvet at affordable price | shop bedsheet here in lagos at our market place| cool bedsheet design and duvet covers </h5>
+        <a href="{% url 'clothing' %}"> <h5> <i class="fa fa-forumbee"></i>  Change your Wadrope </h5> </a>
+        <h5 class="seokit"> fashionable jogger for men | nike slides rubber slippers | quality white nike sneakers for males | shewing cum polo shirt | designers polo t shirt</h5>
+        <a href="{% url 'postutme' %}"> <h5> <i class="fa fa-book"></i>  Postutme </h5> </a>
+        <h5 class="seokit"> lasu registrations | lasu post utme | student course registration lasu | lasu part time school fees payment | fulltime payment of undergraduate fees </h5>
+        <a href="{% url 'fragrance' %}"> <h5> <i class="fa fa-fire"></i>  Perfumes & Oinment </h5> </a>
+        <h5 class="seokit">  affordable perfume oil for students | best smart collection perfume available | barakat perfume oil</h5>
+        <a href="{% url 'gadgets' %}"> <h5> <i class="fa fa-mobile">  </i>  Gadgets </h5> </a>
+        <h5 class="seokit"> iphone 11 pro max in nigeria uk used for students | iphone 7 plus in nigeria uk used | iphone xr price in nigeria uk used clean and affordable | iphone x price in nigeria uk used students price| affordable price uk used laptops | cheap uk used phones in different colors | second hand used ps4 with two pads | uk used iphones available in all types | iphone 8 plus price in nigeria uk used owned and would be sold by student </h5>
+        <a href="{% url 'graphics' %}"> <h5> <i class="fa fa-image">  </i>  Graphics </h5> </a>
+        <h5 class="seokit"> get a graphic design on your birthday | looking for professional graphic design flyer | do you need services of a graphic designer <h5>  
+        <a href="{% url 'food' %}"> <h5> <i class="fa fa-glass">  </i> Snacks & food </h5> </a>
+        <h5 class="seokit"> cornflakes price in nigeria| nasco cornflakes | quality milk | cornflakes for jihad members | golden mourn tasty cereal</h5>
+        <a href="{% url 'trousers' %}"> <h5> <i class="fa fa-sort-down"></i> Trousers</h5> </a>
+        <h5 class="seokit">  select boyfriend jeans | original jeans trousers for male and female | designers denim jeans for men |fashionable pant trouser for ladies | different size and colored palazzo trousers | buhari trouser for sale here | quality brown chinos trousers | colorful joggers trouser in large size | leather trouser, skirt and gown | plain trouser black trouser | designers short trouser black |  rock palazzo jean trouser anywhere in nigeria</h5>
+        <a href="{% url 'wig' %}"> <h5> <i class="fa fa-slideshare"></i> Wig  </h5> </a>
+        <h5 class="seokit">  original bone straight at discount price | wig stand for sale | buy your closure wig here | wig cap in different color and head size| long fringe wig in different shades | full lace wigs at an affordable price | affordable ponytail wig | different styled braided wig available |quality wig bob | black curling wig for sale  </h5>
+      </div>
+    </div>
+
+    <!--REVIEW SECTION-->
+
+    <div class="review_page" id="reviewpage">
+      <span
+        class="close"
+        style="position: absolute; right: 5%; top: 3%; margin-bottom: 30px"
+      >
+        <i
+          style="color: rgb(0, 0, 0); font-size: 23px"
+          class="fa fa-arrow-right"
+        ></i>
+      </span>
+      <br />
+      <br />
+      <br />
+      <div class="allReview">
+        {% for i in review %}
+        <div class="productdetails">
+          <h5>{{i.review}}</h5>
+          <h5>{{i.user.username}}</h5>
+        </div>
+        {% endfor%}
+      </div>
+    </div>
+
+<!-- SETTINGS PAGE -->
+
+    <div id="settings">
+      <div class="settingsHeader">
+        <br />
+        <div class="close" style="position: absolute; right: 5%">
+          <i
+            style="color: rgb(0, 0, 0); font-size: 23px"
+            class="fa fa-arrow-right"
+          ></i>
+        </div>
+      </div>
+      <div class="settingsList">
+        <p class="settingsworks" onclick="settingfunc(2)">Change Password</p>
+        <p class="settingsworks" onclick="openchangedpPage()">change dp</p>
+        <p class="settingsworks" onclick="settingfunc(3)">Edit About</p>
+        <p class="settingsworks" onclick="settingfunc(4)">Edit Contact</p>
+        <p class="settingsworks" onclick="settingfunc(5)">Make Suggestion</p>
+        <p class="settingsworks" onclick="settingfunc(6)">Report User</p>
+        <p class="settingsworks" onclick="settingfunc(7)">
+          Terms and Conditions
+        </p>
+        <p class="settingsworks" onclick="settingfunc(9)">Deactive Account</p>
+      </div>
+    </div>
+
+    <div id='settingsFunc'>
+    </div>
+
+  {% if user.is_authenticated %}
+  <div id='changedpPage'  style="position:fixed;width:100%;height:100%;left:0;z-index:3; display:none; background-color:white;">
+      <div onclick="closechangedpPage()" style="position: relative; left: 85%; margin: 20px">
+        <i
+          style="color: rgb(0, 0, 0); font-size: 20px"
+          class="fa fa-arrow-right"
+        ></i>
+      </div>
+    <h2 style="text-align: center; color:red;"> change DP </h2><br>
+        <form action="/changedp/" method="POST" enctype="multipart/form-data">{% csrf_token %}
+          <div style="height: 70%; width:100%">
+               <input type="file" name="imagesdp" style=" height:100%; background-color:rgb(255, 255, 255);border:none;" required accept=".jpg, .png, .JPG, .PNG">
+          </div>
+          <br>
+          <div style="width: 100%; text-align:center; background-color:#ffffff; border-top:0.3px solid black; color:rgb(255, 0, 0);
+                font-weight:700">
+              <input type="submit" value=SUBMIT>
+          </div>
+        </form>
+  </div>
+  {% endif %}
+
+    <!--display Num-->
+
+
+    <div class="numberDisp">
+        <p id="numberDisp">
+        </P>
+           <button onclick='closenumdisp()'>close</button>
+    </div>
+
+    <!--ALL USER PRODUCT-->
+
+    <div class="viewAllProdCov" id="viewAllProdCov">
+      <div id="deleteCov">
+            <p> Are you sure you want to delete this post ? </p><br>
+            <button id="delprod" onclick="ApiDelete(this)"> delete </button>
+            <button onclick="closedel()">cancel</button>
+      </div>
+      <div class="close" style="position: relative; right: -90%; margin: 20px">
+        <i
+          style="color: rgb(0, 0, 0); font-size: 20px"
+          class="fa fa-arrow-right"
+        ></i>
+      </div>
+
+      <div id="productDiv">
+            <div id ="productConCov">
+        {%for i in userProduct %}
+        <div class="productcover deleteMsg" data={{i.id}}  onclick="location.href ='{% url 'productspec' i.id %}';">
+          {% for j in userProductPic %}{%if i.id == j.product_id %}
+          <div class="productimg">
+            <img src="{{j.product_img.url}}" alt="image here" />
+          </div>
+          {%endif%} {% endfor %}
+          <div class="productdetails">
+             <h5>{{i.description|slice:"0:40"}} ...</h5>
+            <h5>{{i.searchTag}}</h5>
+            <h4>N{{i.price}}.00</h4>
+            <h6 style="color: #ff9966">
+              <a style="text-decoration:none; color:red;" href="#" data={{i.id}} onclick="delcovDisplay(this)"> delete post </a href="#">
+            </h6>
+          </div>
+        </div>
+        {%endfor%}
+         </div >
+      </div>
+    </div>
+     <div style="display:none;" id = "searchcover">
+
+     </div>
+     <div id="spinnerdiv">
+            <div class="loader"></div>
+        </div>
+  </body>
+  <script src="https:/code.jquery.com/jquery-3.3.1.js "></script>
+  <script src="{% static 'practise.js' %} "></script>
+
+  <script>
+    function getCookie(name) {
+      let cookieValue = null;
+      if (document.cookie && document.cookie !== "") {
+        const cookies = document.cookie.split(";");
+        for (let i = 0; i < cookies.length; i++) {
+          const cookie = cookies[i].trim();
+          // Does this cookie string begin with the name we want?
+          if (cookie.substring(0, name.length + 1) === name + "=") {
+            cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+            break;
+          }
+        }
+      }
+      return cookieValue;
+    }
+    const csrftoken = getCookie("csrftoken");
+
+    document.getElementsByTagName("body")[0].onscroll = function () {
+      if (window.scrollY >= 100 && window.scrollY <= 200) {
+        fetch('{% url "home" %}', {
+          headers: {
+            Accept: "application/json",
+            "X-Requested-With": "XMLHttpRequest", //Necessary to work with request.is_ajax()
+          },
+        }).then((response) => {
+          return response.json().then((data) => {
+            updatehomeProd(data.products, data.products2, data.productlistImg);
+          }); //Convert response to JSON
+        });
+      }
+
+      if (window.scrollY >= 200) {
+        let foot = document.getElementById("footer");
+        foot.style.display = "block";
+      } else {
+        let foot = document.getElementById("footer");
+        foot.style.display = "none";
+      }
+    };
+
+    function ApiDelete(elem) {
+        let target = parseInt(elem.getAttribute('data'));
+        fetch('{% url "delete" %}', {
+                method: 'POST',
+                credentials: 'same-origin',
+                headers: {
+                    'Accept': 'application/json',
+                    'X-Requested-With': 'XMLHttpRequest', //Necessary to work with request.is_ajax()
+                    'X-CSRFToken': csrftoken,
+                },
+                body: JSON.stringify({
+                        'post_data': {
+                            target
+                        }
+                    }) //JavaScript object of data to POST
+            }).then(
+            )
+            .then(response => {
+                return response.json().then(data => {
+                        let deleteMsg = [...document.getElementsByClassName('deleteMsg')];
+                        let del = deleteMsg.find((item) => parseInt(item.getAttribute('data')) == target);
+                        let div = del.parentNode;
+                        div.removeChild(del)
+                        let deleteCov = document.getElementById('deleteCov');
+                        deleteCov.style.display = 'none'
+                    }) //Convert response to JSON
+            })
+    }
+
+  function apisettings(sig) {
+        event.preventDefault()
+        let target = "";
+        let target1 = "";
+
+        if (sig == 2 || sig == 6) {
+            target = document.getElementById('settingactionInput').value;
+            target1 = document.getElementById('settingactionInput2').value;
+        }
+ 
+        if (sig == 1){
+            target1 = document.getElementById('reviewInput').value
+            target = document.getElementById('reviewInputID');
+            target = target.getAttribute('data')
+        }
+        if (sig == 3 || sig == 4 || sig == 5 || sig == 9) {
+            target = document.getElementById('settingactionInput').value;
+        }
+
+
+        fetch('{% url "settings" %}', {
+                method: 'POST',
+                credentials: 'same-origin',
+                headers: {
+                    'Accept': 'application/json',
+                    'X-Requested-With': 'XMLHttpRequest', //Necessary to work with request.is_ajax()
+                    'X-CSRFToken': csrftoken,
+                },
+                body: JSON.stringify({
+                        'post_data': {
+                            target,
+                            sig,
+                            target1
+
+                        }
+                    }) //JavaScript object of data to POST
+            }).then(
+              spinner()
+            )
+            .then(response => {
+                return response.json().then((data) => {
+                    settingsFunc.innerHTML = ""
+                    settingsFunc.innerHTML =
+                        `
+                    <a href="#" onclick="settingeditoserverclose()"><i style="color: rgb(0, 0, 0);"
+                            class="fa fa-arrow-left"></i>
+                    </a>
+                    <div style="height: 70%; width:100%">
+                        <h1 style="text-align:center;"> ${data.data} </h1>
+                    </div>
+                    `
+                    if(sig ==3){
+                       document.getElementById('aboutDetails').innerHTML = `${target}`
+                    }
+                    closespinner()
+                   
+                })
+            })
+
+    }
+
+    
+
+ 
+    function submitSearcsignals(signal) {
+    event.preventDefault()
+    let target = ''
+    let target2 = ''
+    if (signal == 1) {
+        target = 1
+        target2 = document.getElementById("searchinput").value;
+    }
+    fetch('{% url "search" %}', {
+          method: 'POST',
+          credentials: 'same-origin',
+          headers: {
+            'Accept': 'application/json',
+            'X-Requested-With': 'XMLHttpRequest', //Necessary to work with request.is_ajax()
+            'X-CSRFToken': csrftoken,
+    },
+             body: JSON.stringify({
+              'post_data': {
+               target,
+               target2
+            }
+         }) //JavaScript object of data to POST
+      })
+      .then(response => {
+          return response.json().then((data) => {
+          if (data.yes) {
+              searchengine(data, yes = true, data.images)
+          } else {
+              searchengine(data)
+          }
+          target2=""
+      })
+    }) //Convert response to JSON
+    
+  }
+
+  callslide()
+  enter()
+  </script>
+</html>

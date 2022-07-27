@@ -28,7 +28,7 @@ environ.Env.read_env()
 DEBUG = False
 
 ALLOWED_HOSTS = ['wwww.shopatpurchased.com','shopatpurchased.com']
-ALLOWED_HOSTS +=  [ '127.0.0.1','wwww.shopatpurchased.com','shopatpurchased.com']
+ALLOWED_HOSTS +=  [ 'wwww.shopatpurchased.com','shopatpurchased.com']
 
 # Application definition
 
@@ -39,11 +39,10 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-     'django_extensions',
+    'django_extensions',
     'homepage',
     'login',
 ]
-
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -100,7 +99,8 @@ else:
         'PORT': ''
     }
 }
-
+    
+DEFAULT_AUTO_FIELD='django.db.models.AutoField' 
 SECRET_KEY = env('SECRET_KEY')
 
 # Password validation

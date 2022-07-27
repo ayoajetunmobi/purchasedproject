@@ -1,0 +1,175 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <link rel="stylesheet" href="{% static 'practise.css' %}" />
+    <link
+      rel="stylesheet"
+      href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css"
+    />
+    <title>profile page | shopatpurchased</title>
+
+    <meta
+      name="description"
+      content="displays users details"
+    />
+  </head>
+</html>
+<body>
+  <div onclick="propicture(event)" id="bigpic-overlay" close="yes">
+    <img
+      close="yes"
+      src=""
+      title="Click anywhere to close"
+      alt="image picture"
+      id="bigpropic"
+    />
+  </div>
+
+  <div id="profile" class="profile" style="display: block">
+    <div
+      style="position: relative; left: 85%; margin: 20px"
+      onclick="location.href ='{% url 'productspec' productrec.id %}';"
+    >
+      <i
+        style="color: rgb(0, 0, 0); font-size: 20px"
+        class="fa fa-arrow-right"
+      ></i>
+    </div>
+
+    <div class="profilecover">
+      <div class="profiledetails">
+        <img
+          onclick="propicture(event)"
+          bigpic="{{user.profilepic.url}}"
+          src="{{user.profilepic.url}}"
+          alt="image here"
+        />
+        <div>
+          <p>
+            <i class="fa fa-user"></i>
+            <span class="spacingspan"> {{user.username}} </span>
+          </p>
+          <p>{{user.about|slice:"0:100"}} ...
+          <p>
+            <i class="fa fa-male"></i><i class="fa fa-female"></i>
+            <span class="spacingspan">{{user.gender}} </span>
+          </p>
+          <p
+            style="cursor: pointer"
+            class="profiledetailsBtn"
+            id="viewAllProBtn"
+            onclick="viewall()"
+          >
+            <i class="fa fa-book"> </i> <span class="spacingspan"> </span>VIEW
+            ALL PRODUCTS
+          </p>
+        </div>
+      </div>
+      <div class="profilebuttons">
+        <a
+          href="tel:{{user.contact}}"
+          style="text-decoration: none; color: black"
+          onclick="displayNum({{user.contact}})"
+        >
+          <div class="buttons">
+            <h4><i class="fa fa-phone"></i> contact</h4>
+          </div>
+        </a>
+
+        <div class="buttons" onclick="reviewpagedis()">
+          <h4><i class="fa fa-book"></i>review</h4>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="review_page" id="reviewpage">
+    <span
+      onclick="closeRevpage()"
+      style="position: absolute; right: 5%; top: 3%; margin-bottom: 30px"
+    >
+      <i
+        style="color: rgb(0, 0, 0); font-size: 23px"
+        class="fa fa-arrow-right"
+      ></i>
+    </span>
+    <br />
+    <br />
+    <br />
+
+    <form method="POST" action="/review/">{%csrf_token%}
+    <input name="review" id="reviewInput" type="text" placeholder="       review this user" />
+     <input style="display:none;"  name="user2review" id="reviewInput" type="text" value={{productrec.id}} />
+    <input
+      type="submit"
+      value="review"
+      name = "submit"
+    />
+    </form>
+    <div class="allReview">
+      {% for i in review %}
+      <div class="productdetails">
+        <h5>{{i.review}}</h5>
+        <h5>{{i.userReviewing}}</h5>
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+
+  <div class="numberDisp">
+    <p id="numberDisp"></p>
+    <button onclick="closenumdisp()">close</button>
+  </div>
+
+  <div class="viewAllProdCov" id="viewAllProdCov">
+    <div id="deleteCov">
+      <p>Are you sure you want to delete this post ?</p>
+      <br />
+      <button id="delprod" onclick="ApiDelete(this)">delete</button>
+      <button onclick="closedel()">cancel</button>
+    </div>
+    <div style="position: relative; right: -90%; margin: 20px" onclick="closeRevpage()">
+    <i
+      style="color: rgb(0, 0, 0); font-size: 20px"
+      class="fa fa-arrow-right"
+    ></i>
+  </div>
+
+  <div id="productDiv">
+   <div id ="productConCov">
+    {%for i in products %}
+    <div
+      class="productcover deleteMsg"
+      data="{{i.id}}"
+      onclick="location.href ='{% url 'productspec' i.id %}';"
+    >
+      {% for j in userPic %}{%if i.id == j.product_id %}
+      <div class="productimg">
+        <img src="{{j.product_img.url}}" alt="image here" />
+      </div>
+      {%endif%} {% endfor %}
+      <div class="productdetails">
+        <h5>{{i.description|slice:"0:40"}} ...</h5>
+        <h5>{{i.searchTag}}</h5>
+        <h4>N{{i.price}}.00</h4>
+      </div>
+    </div>
+    {%endfor%}
+  </div>
+  </div>
+</body>
+<script src="{% static 'practise.js' %} "></script>
+
+<script>
+
+  function closeRevpage() {
+    let reviewpage = document.getElementById("reviewpage"),
+      viewAllProdCov = document.getElementById("viewAllProdCov");
+
+    reviewpage.style.display = "none";
+    viewAllProdCov.style.display = "none";
+  }
+</script>

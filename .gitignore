@@ -5,3 +5,8 @@
     /static  
     .DS_Store  
     .env
+    .purchased.html
+    .purchased.css
+    .profile.js
+    .viewmore.js
+    .profile.css

@@ -48,28 +48,28 @@ def logout_user(request):
     return redirect('/login/')
 
 
-@receiver(user_logged_in)
-def is_online(sender, user, request,**kwargs):
-     my_user = User.objects.get(email = user)
-     if User_Detail.objects.filter(user=my_user).exists():
-         my_user =  User_Detail.objects.get(user=my_user)
-         my_user.online=True
-         my_user.save()
-         product = User_product.objects.filter(user=my_user)
-         for i in product:
-             i.online = True
-             i.save()
+# @receiver(user_logged_in)
+# def is_online(sender, user, request,**kwargs):
+#      my_user = User.objects.get(email = user)
+#      if User_Detail.objects.filter(user=my_user).exists():
+#          my_user =  User_Detail.objects.get(user=my_user)
+#          my_user.online=True
+#          my_user.save()
+#          product = User_product.objects.filter(user=my_user)
+#          for i in product:
+#              i.online = True
+#              i.save()
          
-@receiver(user_logged_out)
-def is_offline(sender, user, request,**kwargs):
+# @receiver(user_logged_out)
+# def is_offline(sender, user, request,**kwargs):
     
-     my_user= User.objects.get(email = user)
-     if User_Detail.objects.filter(user=my_user).exists():
-         my_user =  User_Detail.objects.get(user=my_user)
-         my_user.online=False
-         my_user.save()
-         product = User_product.objects.filter(user=my_user)
-         for i in product:
-             i.online = False
-             i.save()
+#      my_user= User.objects.get(email = user)
+#      if User_Detail.objects.filter(user=my_user).exists():
+#          my_user =  User_Detail.objects.get(user=my_user)
+#          my_user.online=False
+#          my_user.save()
+#          product = User_product.objects.filter(user=my_user)
+#          for i in product:
+#              i.online = False
+#              i.save()
 

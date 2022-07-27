@@ -1,0 +1,203 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <link rel="stylesheet" href="{% static 'practise.css' %}" />
+    <link
+      rel="stylesheet"
+      href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css"
+    />
+
+    <title> display product | shopatpurchased.com </title>
+
+    <meta
+      name="description"
+      content=" {{product.description}}"
+    />
+  </head>
+</html>
+
+<body>
+    <div style="height:10%;">
+       <div style="position:absolute;top:3%; right:4%;">
+        <a href="{% url 'home' %}"><i style="color: black;" class="fa fa-arrow-left"></i></a>
+       </div>
+    </div>
+
+    <div class="productPicture">
+       <button id ='moveleft'  style="position:absolute;top:40%; font-size:35px;font-weight:bolder;left:5%; height:50px;width:50px;">
+        <
+      </button>
+      <button  id= 'moveright' style="position:absolute;top:40%; font-size:35px;font-weight:bolder;right:5%; height:50px;width:50px;">
+        >
+      </button>
+      <div class="containerProduct">
+        <div class="productPictureCov">
+          {% for i in pictures %}
+            <img
+               class="productImg"
+               src="{{i.product_img.url}}"
+               alt="image here"
+             />
+          {% endfor %}
+        </div>
+      </div>
+    </div>
+      <div class="productInfo">
+        <h4>
+            {{product.description}}
+        </h4>
+         <h4>
+            {{product.searchTag}}
+        </h4>
+          <h3>N{{product.price}}.00</h3>
+          <a
+              href="{% url 'profileUpdate' product.id %}"
+              style="text-decoration: none; color: black"
+            >
+        <button>  <i class="fa fa-user"></i>   goto seller profile</button>
+        </a>
+        <a
+              href="tel:{{product.contact}}"
+              style="text-decoration: none; color: black"
+              onclick="displayNum({{product.contact}})"
+            > <button> <i class="fa fa-phone"></i>   contact seller</button></a>
+      </div>
+
+    <div class="suggestions">
+      <h4> frequently searched </h4>
+      <div class="suggestedProduct">
+        {%for i in suggest %}
+        <div onclick="location.href ='{% url 'productspec' i.id %}';">
+          {% for j in suggestPic %}
+          {%if i.id == j.product_id %}
+          <img src="{{j.product_img.url}}" alt="image here" />
+             {% endif %}{% endfor %}
+          <h4> {{i.searchTag}} <h4>
+        </div>
+        {% endfor %}
+    </div>
+    
+    <div style = "font-family:sans-serif;font-size:11px; margin:65px;" >
+       <h3 style="padding:0px;">
+          <span style="color: brown;">TIPs to succeed</span><br><br>
+       <p class="tipswriteup">
+            payment should be made after concrete agreement with seller.
+       </p>
+       <p class="tipswriteup">
+            meeting and delivering point should always be in an open place within the school premises.
+        </p>
+        <p class="tipswriteup">
+            remember to always drop a review on user after buying or selling.
+        </p>
+        <p class="tipswriteup">
+              read reviews on user and be convinced enough before making any contact.
+        </p>
+        <p class="tipswriteup">
+          remember to always delete unavailable products.
+        </p>
+
+         <p class="tipswriteup">
+           describe your product Properly with the right words and watch your product rank better 
+        </p>
+        <p class="tipswriteup">
+            <span style="color: red;"> NOTE </span> Users who can be identified by their profile picture maybe more trust worthy than the others.
+        </p>
+        <p class="tipswriteup">
+            <span style="color: red;"> purchased </span> your online market place.
+        </p>
+      </h3>
+    </div>
+
+    <div class="productlist" style="position:relative; width:100%; margin:0% auto;">
+      <h3 style="margin-left: 20px"> TRENDING ADS </h3>
+       <div id ="productConCov">
+       {% for i in trending %}
+        <div class="productcover" onclick="location.href ='{% url 'productspec' i.id %}';">
+        {%for j in trendingPic %}{%if i.id == j.product_id %}
+        <div class="productimg">
+          <img src="{{j.product_img.url}}" alt="image here" />
+        </div>
+        {%endif%} {%endfor%}
+        <div class="productdetails">
+          <h5>{{i.description|slice:"0:40"}} ...</h5>
+          <h5>{{i.searchTag}}</h5>
+          <h3>N{{i.price}}.00</h3>
+          <h6 style="color: #ff9966">
+            <a
+              href="tel:{{i.user.contact}}" 
+              onclick="displayNum({{i.user.contact}})"
+              style="color: #66ff66; margin-left: 20px"
+              ><i class="fa fa-phone"></i> contact seller
+            </a>
+          </h6>
+        </div>
+       </div>
+       {%endfor%}
+      </div>
+      </div>
+
+   <div class="numberDisp">
+        <p id="numberDisp">
+        </P>
+           <button onclick='closenumdisp()'>close</button>
+   </div>
+
+</body>
+<script src="{% static 'practise.js' %} ">
+</script>
+<script>
+   function moveslide(){
+     let mainspecimgs = [...document.getElementsByClassName('productImg')],
+     moveleft =  document.getElementById('moveleft'),
+     moveright = document.getElementById('moveright'),
+
+     slidebyone = 0,
+     slideWidth = 350;
+
+     if(mainspecimgs.length > 1){
+       
+       for (let i = 0; i < mainspecimgs.length; i++){ 
+           mainspecimgs[i].style.left = slideWidth * i + "px";}
+        }
+           
+         moveright.addEventListener('click', function(){
+         let lastChild = mainspecimgs.length;
+         if(slidebyone < lastChild - 1){ 
+             moveSlidesProspec(mainspecimgs, "forward");
+              moveright.style.opacity=1;
+              slidebyone++
+         }else{
+            moveright.style.opacity=0;
+            moveleft.style.opacity=1;
+         }
+     }) 
+     moveleft.addEventListener('click', function(){
+         if(slidebyone > 0){ 
+              moveleft.style.opacity=1;
+             moveSlidesProspec(mainspecimgs, "backward",);
+             slidebyone--
+         }else{
+             moveleft.style.opacity=0;
+             moveright.style.opacity=1;
+         }
+    }) 
+
+    }
+
+    function moveSlidesProspec(move, direction) {
+            for (var j = 0; j < move.length; j++) {
+                if (direction == "backward") {
+                    move[j].style.left = +move[j].style.left.replace(/[^-\d\.]/g, "") + 350 + "px";
+                } else if (direction == "forward") {
+                    move[j].style.left = +move[j].style.left.replace(/[^-\d\.]/g, "") - 350 + "px";
+                }
+            }
+    }
+    moveslide()
+</script>
+

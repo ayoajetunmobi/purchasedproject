@@ -8,6 +8,8 @@ from io import BytesIO
 from django.core.files.uploadedfile import InMemoryUploadedFile
 import sys
 
+# import strip,replace
+
 
 class UserManager(BaseUserManager):
     def create_user (self, email, password=None, is_active=True, is_staff=False, is_superuser=False):
@@ -77,26 +79,21 @@ class User_Detail(models.Model):
     
     
     active            = models.BooleanField(default=False)
-    username          = models.CharField(max_length = 255 ,blank=False ,unique=True)
+    username          = models.CharField(max_length = 150 ,blank=False ,unique=True)
     firstname         = models.CharField(max_length = 150 ,blank=False)
     lastname          = models.CharField(max_length = 150,blank=False)
     gender            = models.CharField(max_length = 50,choices=gender)
-    contact           = models.CharField( max_length = 255, unique = True)
-    about             = models.TextField( max_length =500)
+    contact           = models.CharField( max_length = 150, unique = True)
+    about             = models.TextField( max_length =150)
     quote             = models.TextField(max_length = 500, blank=False, null=False)
     university        = models.CharField(max_length=100, default="LASU") 
     campus            = models.CharField(max_length=100, choices= campus) 
-    matricNo          = models.CharField(max_length=100,blank=True,null=True) 
     profilepic        = models.ImageField(upload_to = 'profilepic', blank=True,null= True) 
-    securityQusetion  = models.CharField(max_length=100, blank=True, null=True)
-    answer            = models.CharField(max_length=100, blank=True, null=True)
-    matricverified    = models.BooleanField(default=False)
-    topuser           = models.BooleanField(default=False)
     online            = models.BooleanField(default=False)
     user              = models.OneToOneField(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
-    
+        
     def __str__(self):
-        return self.username
+        return (self.username).replace(" ","")
     
     def save(self,*args, **kwargs):
         #open uploaded image
@@ -122,23 +119,30 @@ class User_Detail(models.Model):
     
     
 class User_product(models.Model):
+    category = (('pef', 'PERFUME'),('lasureg', 'LASU REGISTRATIONS,FEES AND FORMS'),
+       ('shoe', 'SHOE'),('sneak', 'SNEAKERS'),('trouser', 'TROUSER'),('electronics', 'ELECTRONICS'),
+       ('shirt', 'SHIRT'),('bag', 'BAG'),('bedsheet', 'BEDSHEET'),('health', 'HEALTH'),
+       ('wig', 'WIG'),('graphics', 'GRAPHICS'),('phones', ''), ('furniture', 'HOME | FURNITURE | APPLIANCES') , 
+       ('laptop', 'LAPTOPS'),('engineer', 'ENGINEERING'),('property', 'HOUSE TO LET | HOUSE TO BUY'),('cosmetics', ' BEUTY | COSMETICS'), 
+       ('meal', 'FAST MEALS'),('food', 'FOOD STUFF'),('gadgets', 'POWER BANK | CHARGER CORD | MUSIC BOX | EAR PIECE |  PS4'),('snack', 'SNACKS & PASTERIES'),('necklace', 'CUBBAN | JEWELRIES| EARRINGS | BRACELET | BEADS'), ('sport', ' SPORT | JERSY | FOOTBALL'),
+       ('drinks', 'DRINKS'),  ('webapp', 'SOFTWARE ENGINEER'), ('cloth', 'FEMALE CLOTHING'), ('services', 'OFFER SERVICE'), ('gown', 'GOWN AND DRESS'),
+      ('maleCLTH', 'MALE CLOTHING'),('repairs', 'PLUMBER | CARPENTER | ELECTRICIAN'),('others', 'OTHERS'),
+                )
+    
     id              = models.AutoField(primary_key=True)
     price           = models.IntegerField( blank=False,null=False)
-    description     = models.TextField(max_length=4000,blank=False,null=False) 
-    searchTag       = models.CharField(max_length=30,blank=False,null=False)
-    profile_pic     = models.ImageField(upload_to='profilepic' ,blank=True)
+    description     = models.TextField(max_length=150,blank=False,null=False) 
+    searchTag       = models.CharField(max_length = 150, default="none")
+    category        = models.CharField(max_length=100 , choices= category)
     date_time       = models.DateField( default=django.utils.timezone.now)
-    username        = models.CharField(max_length=255)
+    contact         = models.CharField(max_length=150)
     campus            = models.CharField(max_length=100)
-    online          = models.BooleanField(default=False)
-    matricverified    = models.BooleanField(default=False)
-    topuser           = models.BooleanField(default=False)
     user            = models.ForeignKey(User_Detail, on_delete=models.CASCADE)
+    
     def __str__(self):
         return (self.description)
     
-
-    
+ 
 class Product_image(models.Model):
      id                = models.AutoField(primary_key=True)
      product           = models.ForeignKey(User_product, on_delete=models.CASCADE) 
@@ -177,31 +181,18 @@ class Product_image(models.Model):
         #after modifications , save it to the output
         
     
-class Messages(models.Model):
-    message= models.CharField(max_length= 1000,blank=True,null=True)
-    read =models.BooleanField(default=False)
-    contacted =models.BooleanField(default=False)# would be sent to review table
-    user_to_review = models.CharField(max_length= 100,blank=True,null=True)# would be sent to review table too
-    my_messages = models.ForeignKey(User_Detail,on_delete=models.CASCADE)
-    
-    def __str__(self):
-        return self.message
-    
-   
 class Searchdata(models.Model):
-    word= models.CharField(max_length= 1000,blank=True,null=True)
-    timesSearched = models.IntegerField()
-    user = models.ForeignKey(User_Detail,on_delete=models.CASCADE) 
+    word= models.CharField(max_length= 150,blank=True,null=True)
     def __str__(self):
         return self.word
     
     
 class Customer_care(models.Model):
-    reportbug =models.TextField(max_length = 600 ,blank=True,null=True)
-    suggestionbox =models.TextField(max_length= 600,blank=True,null=True)
-    deactivate_account =models.TextField(max_length= 700,blank=True,null=True)  
+    reportbug =models.TextField(max_length = 150 ,blank=True,null=True)
+    suggestionbox =models.TextField(max_length= 150,blank=True,null=True)
+    deactivate_account =models.TextField(max_length= 150,blank=True,null=True)  
     # reportuser is what the user has done and user is the user who has been reported
-    reportuser =models.TextField(max_length= 700,blank=True,null=True)
+    reportuser =models.TextField(max_length= 150,blank=True,null=True)
     user = models.ForeignKey(User_Detail,on_delete=models.CASCADE)
     
 
@@ -209,10 +200,11 @@ class Contacted(models.Model):
     username = models.CharField(max_length=100)#user contacted
     user = models.ForeignKey(User_Detail,on_delete=models.CASCADE)#user who made contact
     
+    
 class Reviews(models.Model):
-    review = models.TextField(max_length=500)
-    as_buyer = models.BooleanField(default=False) #if contacted == True then user is seller
-    username = models.CharField(max_length=100) #request.user
-    user = models.ForeignKey(User_Detail,on_delete=models.CASCADE)# user to be reviewed gotten from msg table
+    review = models.TextField(max_length=150, default= "no review yet")
+    userReviewing = models.CharField(max_length=150, default= "no review yet")
+    user = models.ForeignKey(User_Detail,on_delete=models.CASCADE)
+
     
 ##python manage.py migrate admin zero  for cosnstraint foreign key error involving admin logtable

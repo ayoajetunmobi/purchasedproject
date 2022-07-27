@@ -1,0 +1,111 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <link rel="stylesheet" href="{% static 'practise.css' %}" />
+    <link
+      rel="stylesheet"
+      href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css"
+    />
+
+    <title> shop Male and Female Clothing and fashion style | online | shopatpurchased </title>
+
+    <meta
+      name="description"
+      content=" different styles of crocs slippers , plain jean trouser , ladies cool fitted body suit , jump suit , play suit and quality senator material and sewed senator dress.
+      get quality for your money."
+    />
+  </head>
+</html>
+
+<body>
+    <div style="height:50px;">
+      <div style="position:absolute;top:3%; right:4%;">
+          <a href="{% url 'home' %}"><i style="color: black;" class="fa fa-arrow-left"></i></a>
+      </div>
+    </div>
+      <h5> Change Your Wadrope </h5>
+      <h5 class='seokit'> quality joggers trouser for men and women | quality men senator material </h5>
+    <div  style="position:relative; height:fit-content;">
+       <div id ="productConCov">
+      {% for i in products %}
+        <div class="productcover" onclick="location.href ='{% url 'productspec' i.id %}';">
+        {%for j in pictures %}{%if i.id == j.product_id %}
+        <div class="productimg">
+          <img src="{{j.product_img.url}}" alt="image here" />
+        </div>
+        {%endif%} {%endfor%}
+        <div class="productdetails">
+          <h5>{{i.description|slice:"0:40"}} ...</h5>
+          <h5>{{i.searchTag}}</h5>
+          <h3>N{{i.price}}.00</h3>
+          <h6 style="color: #ff9966">
+            <a
+              href="tel:{{i.user.contact}}" 
+              onclick="displayNum({{i.user.contact}})"
+              style="color: #66ff66; margin-left: 20px"
+              ><i class="fa fa-phone"></i> contact seller
+            </a>
+          </h6>
+        </div>
+       </div>
+       {%endfor%}
+      </div>
+    </div>
+
+   
+    <div class="suggestions">
+      <h4> frequently searched </h4>
+      <div class="suggestedProduct">
+        {%for i in suggest %}
+        <div onclick="location.href ='{% url 'productspec' i.id %}';">
+          {% for j in suggestPic %}
+          {%if i.id == j.product_id %}
+          <img src="{{j.product_img.url}}" alt="image here" />
+             {% endif %}{% endfor %}
+          <h4> {{i.searchTag}} <h4>
+        </div>
+        {% endfor %}
+    </div>
+    
+    
+    <div class="productlist" style="position:relative; width:100%; margin:0% auto;">
+      <h3 style="margin-left: 20px"> TRENDING ADS </h3>
+       {% for i in trending %}
+       <div id ="productConCov">
+        <div class="productcover" onclick="location.href ='{% url 'productspec' i.id %}';">
+        {%for j in trendingPic %}{%if i.id == j.product_id %}
+        <div class="productimg">
+          <img src="{{j.product_img.url}}" alt="image here" />
+        </div>
+        {%endif%} {%endfor%}
+        <div class="productdetails">
+          <h5>{{i.description|slice:"0:40"}} ... </h5>
+          <h5>{{i.searchTag}}</h5>
+          <h3>N{{i.price}}.00</h3>
+          <h6 style="color: #ff9966">
+            <a
+              href="tel:{{i.user.contact}}" 
+              onclick="displayNum({{i.user.contact}})"
+              style="color: #66ff66; margin-left: 20px"
+              ><i class="fa fa-phone"></i> contact seller
+            </a>
+          </h6>
+        </div>
+       </div>
+       {%endfor%}
+      </div>
+      </div>
+
+   <div class="numberDisp">
+        <p id="numberDisp">
+        </P>
+           <button onclick='closenumdisp()'>close</button>
+   </div>
+
+</body>
+<script src="{% static 'practise.js' %} ">
+</script>

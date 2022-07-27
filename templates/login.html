@@ -1,124 +1,130 @@
 {%load static%}
 <!DOCTYPE html>
 <html lang="en">
-
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title> sign in page</title>
-    <meta name="description" content="sign in on our platform and you can get your favorite vendors contact for free" />
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>sign in page</title>
+    <meta
+      name="description"
+      content="sign in on our platform and you can get your favorite vendors contact for free"
+    />
     <style>
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-        }
-        
-        .login {
-            position: fixed;
-            width: 100%;
-            height: 100vh;
-            left: 0;
-            top: 0%;
-            display: block;
-            z-index: 1;
-            background: linear-gradient(#0005, #0005),
-            url("{% static 'background.jpg' %}");
-            animation: 2s ease-in drop;
-        }
-        
-        .background {
-            opacity: 1;
-            position: absolute;
-            border-radius: 20px;
-            top: 50%;
-            left: 50%;
-            width: 300px;
-            height: fit-content;
-            transform: translate(-50%, -50%);
-            background: linear-gradient(#0005,
-            #0005),
-            url("{% static 'background.jpg' %}");
-            color: white;
-            text-align: center;
-            z-index: 2;
-            transition: 0.4s ease-in;
-        }
-        
-        .background h2 {
-            color: rgb(255, 0, 0);
-            font-size: x-large;
-            font-family: Verdana, Geneva, Tahoma, sans-serif;
-            color: rgb(0, 255, 76);
-        }
-        
-        .close {
-            position: absolute;
-            right: 6%;
-            font-size: larger;
-            margin-top: 10px;
-        }
-        
-        .background input {
-            width: 85%;
-            padding: 5px;
-        }
-        
-        .background .inputs {
-            border: none;
-            border-bottom: 1px solid white;
-            outline: none;
-            font-size: 18px;
-            margin-bottom: 10px;
-            background: none;
-            color: white;
-        }
-        
-        .background input[type='submit'] {
-            border-radius: 6px;
-            background: rgb(0, 255, 76);
-            outline: none;
-            color: white;
-            cursor: pointer;
-            font-weight: bolder;
-        }
-        
-        .background a {
-            color: darkgray;
-            text-decoration: none;
-        }
-        
-        @keyframes drop {
-            0% {
-                top: -120%;
-            }
-            100% {
-                top: 0%
-            }
-        }
-    </style>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
-</head>
+      body {
+        font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+      }
 
-<body>
+      .login {
+        position: fixed;
+        width: 100%;
+        height: 100vh;
+        left: 0;
+        top: 0%;
+        display: block;
+        z-index: 1;
+        background: url("{% static 'background.jpg' %}");
+        background-repeat: no-repeat;
+      }
+
+      .background {
+        opacity: 1;
+        position: absolute;
+        top: 60%;
+        left: 50%;
+        width: 350px;
+        height: fit-content;
+        transform: translate(-50%, -50%);
+        color: black;
+        text-align: center;
+        z-index: 2;
+        border: 2px solid #cccccc;
+        box-shadow: 0 15px 15px rgba(15, 15, 15, 0.15);
+      }
+
+      .close {
+        position: absolute;
+        top: 3%;
+        right: 6%;
+        font-size: 34px;
+      }
+
+      .background input {
+        width: 85%;
+        height: 50px;
+        padding: 0px 10px;
+      }
+
+      .background .inputs {
+        border: none;
+        border-bottom: 1px solid white;
+        outline: none;
+        font-size: 15px;
+        background: #cccccc;
+        color: black;
+      }
+
+      .background input[type="submit"] {
+        border-radius: 6px;
+        background: #000033;
+        outline: none;
+        color: white;
+        cursor: pointer;
+      }
+
+      .background a {
+        color: darkgray;
+        text-decoration: none;
+      }
+
+      @keyframes drop {
+        0% {
+          top: -120%;
+        }
+        100% {
+          top: 0%;
+        }
+      }
+    </style>
+    <link
+      rel="stylesheet"
+      href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css"
+    />
+  </head>
+
+  <body>
     <!--login-->
     <div class="login">
-        <div class="background" id="loggin">
-            <a href="{% url 'home' %}"><span class="close" draggable="true"><i style="color: rgb(0, 0, 0);"
-                        class="fa fa-arrow-left"></i></span></a><br><br>
-            <img src="{% static 'logopurchase.png' %}" alt="" width="fit-content" height="104px" />
-            <h6 style="font-family: Arial, Helvetica, sans-serif; color:rgb(0, 0, 0);">Login</h6>
-            <form method="POST">{% csrf_token %} {{form}}
-                <br><br>
-                <input type="submit" class="inputs" value="submit" />
-            </form>
-            <br />
-            <a style="color: white;" href="{% url 'register' %}">dont have an account? <span style="color: #ffc107;">
-                    SIGN UP NOW </span> </a><br><br>
-            <a style="color: white;" href="{% url 'reset' %}" id="forgotten">forgotten password</a><br><br>
-            <br><br><br>
-        </div>
+      <a href="{% url 'home' %}"
+        ><span class="close" draggable="true"
+          ><i
+            style="color: rgb(0, 0, 0); font-size: 23px"
+            class="fa fa-arrow-right"
+          ></i></span
+      ></a>
+      <div class="background" id="loggin">
+        <br />
+        <img
+          src="{% static 'logopurchase.png' %}"
+          alt=""
+          width="90%"
+          height="104px"
+        />
+        <form method="POST">
+          {% csrf_token %} {{form.as_p}} <br /><br />
+          <input type="submit" class="inputs" value="SIGN IN" />
+        </form>
+        <br />
+        <a style="color: black" href="{% url 'register' %}"
+          >dont have an account?
+          <span style="color: #ffc107"> SIGN UP NOW </span> </a
+        ><br /><br />
+        <a style="color: black" href="{% url 'reset' %}" id="forgotten">
+          forgotten password
+        </a>
+        <br /><br />
+        <br /><br /><br />
+      </div>
     </div>
-</body>
-<script src="https:/code.jquery.com/jquery-3.3.1.js "></script>
-
+  </body>
+  <script src="https:/code.jquery.com/jquery-3.3.1.js "></script>
 </html>

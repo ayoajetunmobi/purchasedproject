@@ -7,15 +7,15 @@ from django.contrib.auth import get_user_model
 User=get_user_model()
 
 class RegistrationForm(forms.ModelForm):
-    email= forms.EmailField(required=True , label="EMAIL ADDRESS", widget=forms.TextInput(attrs={
+    email= forms.EmailField(required=True , label = "",  widget=forms.TextInput(attrs={
         "class":"inputs","placeholder":"Enter email",
     }))
-    password1= forms.CharField(label= "PASSWORD", widget= forms.PasswordInput(
+    password1= forms.CharField( label = "", widget= forms.PasswordInput(
       attrs={
           "name":"Password", "placeholder":"Enter password","class":"inputs"
       }
     ))
-    password2= forms.CharField(label= "CONFIRM PASSWORD" , widget= forms.PasswordInput(
+    password2= forms.CharField(label = "", widget= forms.PasswordInput(
       attrs={
           "name":"Confirm password", "placeholder":"Confirm password","class":"inputs"
       }
@@ -50,20 +50,19 @@ class RegistrationForm(forms.ModelForm):
             user.save()
         return user
     
-    
-    
+   
 User=get_user_model()
 
 class UserDetailForm (forms.ModelForm): 
-    username          = forms.CharField(max_length = 150 , label = "USERNAME", widget=forms.TextInput(
+    username          = forms.CharField(max_length = 150 , label = "", widget=forms.TextInput(
         attrs={
             "placeholder":"Enter username","class":"inputs"
         }))
-    firstname          = forms.CharField(max_length = 150 , label = "FIRST NAME", widget=forms.TextInput(
+    firstname          = forms.CharField(max_length = 150 , label = "", widget=forms.TextInput(
         attrs={
             "placeholder":"Enter firstname","class":"inputs"
         }))
-    lastname           = forms.CharField(max_length = 150, label = "LAST NAME",widget=forms.TextInput(
+    lastname           = forms.CharField(max_length = 150, label = "",widget=forms.TextInput(
         attrs={
             "placeholder":"Enter lastname","class":"inputs"
         }))
@@ -71,21 +70,13 @@ class UserDetailForm (forms.ModelForm):
     gender             = forms.SelectDateWidget(attrs={
        "class":"inputs"
     })
-    contact            = forms.IntegerField( label = "CONTACT", widget=forms.TextInput(
+    contact            = forms.IntegerField( label = "", widget=forms.TextInput(
         attrs={
             "placeholder":"Enter contact no.","class":"inputs", "maxlength":"15"
         }))
-    about             = forms.CharField( label = "ABOUT YOURSELF", max_length=150,widget=forms.TextInput(
+    about             = forms.CharField( label = "", max_length=150,widget=forms.TextInput(
         attrs={
             "placeholder":"About user(max_length:150 words)" , "maxlength":"150","class":"inputs"
-        }))
-    quote             = forms.CharField( label = "A QUOTE YOU CANNOT FORGET", max_length = 150, required=True, widget=forms.TextInput(
-        attrs={
-            "placeholder":"Favorite Quote(max_length:150 words)","maxlength":"150","class":"inputs"
-        }))
-    matricNo         = forms.CharField( label = "MATRIC NO", max_length = 60,required=False,widget=forms.TextInput(
-        attrs={
-            "placeholder":"matric number(optional)","maxlength":"70","class":"inputs"
         }))
     campus   = forms.SelectDateWidget( attrs={
        "class":"inputs"
@@ -95,14 +86,15 @@ class UserDetailForm (forms.ModelForm):
     class Meta:
         model= User_Detail
         fields=('username','firstname','lastname',
-            'gender','contact','about','quote','matricNo','campus')
+            'gender','contact','about','campus')
         
         
     def clean_username(self):
         model=User_Detail
         username= self.cleaned_data.get('username')
+        username = str(username).replace(" ",'')
         if  model.objects.filter(username=username).exists():
-            raise ValidationError('this user is already taken')
+            raise ValidationError('this username is already taken')
         return username
 
 
