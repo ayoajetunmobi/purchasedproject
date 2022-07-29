@@ -23,7 +23,7 @@ function updatehomeProd(product1, product2, productImg) {
                 let vat = parseInt(product.id);
                 productConCov.innerHTML +=
                     ` 
-               <div class="productcover" onclick="location.href ='http://shopatpurchased/productspec/${vat}';">
+               <div class="productcover" onclick="location.href ='http://shopatpurchased.com/productspec/${vat}';">
                 <div class="productimg">
                     ${(product.id == img.product_id)?`<img src='media/${img.product_img}' alt='' />`:``}
                 </div>
@@ -47,7 +47,7 @@ function updatehomeProd(product1, product2, productImg) {
                 let vat1 = parseInt(product.id);
                 productConCov.innerHTML +=
                     ` 
-                <div class="productcover" onclick="location.href ='http://shopatpurchased/productspec/${vat1}';">
+                <div class="productcover" onclick="location.href ='http://shopatpurchased.com/productspec/${vat1}';">
                 <div class="productimg">
                     ${(product.id == img.product_id)?`<img src='media/${img.product_img}' alt='' />`:``}
                 </div>
@@ -97,7 +97,7 @@ function searchengine(data, yes = false, images) {
             searchcover.style.display = 'block';
             searchcover.innerHTML += `
             <i onclick="closesearch()" id="closesearch" style="color: black;" class="fa fa-arrow-left"></i><br><br>
-            <img style="width: 100px; height:100px;overflow:hidden; border-radius:100px;" src="media/${data1[1]}" onclick="location.href ='http://shopatpurchased/profileupdate/${parseInt(data1[2])}';">
+            <img style="width: 100px; height:100px;overflow:hidden; border-radius:100px;" src="media/${data1[1]}" onclick="location.href ='http://shopatpurchased.com/profileupdate/${parseInt(data1[2])}';">
             <p style="text-align: center;"> ${data1[0]} </p`
         }
 
@@ -108,7 +108,7 @@ function searchengine(data, yes = false, images) {
             data2.forEach((data2) => {
                 searchcover.innerHTML +=       
      `
-     <div class="productcover deleteMsg" data=${data2.id}  onclick="location.href ='http://shopatpurchased/productspec/${parseInt(data2.id)}';">
+     <div class="productcover deleteMsg" data=${data2.id}  onclick="location.href ='http://shopatpurchased.com/productspec/${parseInt(data2.id)}';">
           <div class="productimg">
             <img src="media/${images[i].product_img}" alt="image here" />
           </div>

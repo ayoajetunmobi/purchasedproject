@@ -43,10 +43,10 @@
 
     <div class="aboutimagescontainer">
       <div class="aboutdetail_img" id="aboutdetail_img1">
-        <img src="{% static 'aboutimg1.png' %}" alt="image here" onclick="location.href ='http://127.0.0.1:8000/shoprandom';" />
+        <img src="{% static 'aboutimg1.png' %}" alt="image here" onclick="location.href ='http://shopatpurchased.com/shoprandom';" />
          <h5 class='seokit'> polo shirt at an affordable price |quality shirt gown styles for adult wowen |beutiful fitted shirt gown for ladies | trouser and  polo top for ladies | quality men trouser and jean| juggers trouser and ripped jeans </h5>
       </div>
-      <div class="aboutdetail_img" id="aboutdetail_img2" onclick="location.href ='http://127.0.0.1:8000/cookedfood';">
+      <div class="aboutdetail_img" id="aboutdetail_img2" onclick="location.href ='http://shopatpurchased.com/cookedfood';">
         <img src="{% static 'aboutmeal.png' %}" alt="image here" />
          <h5 class='seokit'> best nigerian food and dishes | energy giving food for kids | student jollof rice | ofada rice on campus | rice and stew | a plate of jollof rice and chicken | nigerian jollof rice </h5>
       </div>
@@ -127,7 +127,7 @@
         <div class="productdetails">
           <h5>{{i.description|slice:"0:40"}} ...</h5>
           <h5>{{i.searchTag}}</h5>
-          <h3>{{i.price}}</h3>
+          <h3> N{{i.price}}.00 </h3>
           <h6 style="color: #ff9966">
             <a
               href="tel:{{i.user.contact}}" 
@@ -410,6 +410,8 @@
   <script src="{% static 'practise.js' %} "></script>
 
   <script>
+
+    let controlapi = 0;
     function getCookie(name) {
       let cookieValue = null;
       if (document.cookie && document.cookie !== "") {
@@ -428,7 +430,8 @@
     const csrftoken = getCookie("csrftoken");
 
     document.getElementsByTagName("body")[0].onscroll = function () {
-      if (window.scrollY >= 100 && window.scrollY <= 200) {
+      if (controlapi == 0){
+           if (window.scrollY >= 100 && window.scrollY <= 200) {
         fetch('{% url "home" %}', {
           headers: {
             Accept: "application/json",
@@ -440,6 +443,11 @@
           }); //Convert response to JSON
         });
       }
+      controlapi= 1;
+      }else{
+        return false
+      }
+      
 
       if (window.scrollY >= 200) {
         let foot = document.getElementById("footer");
