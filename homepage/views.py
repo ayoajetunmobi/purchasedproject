@@ -800,7 +800,7 @@ def getting_post(request):
                 desc   = str(request.POST.get("desc1")).lower()
                 Images = request.FILES.getlist('images')
                 if len(Images)>0 :
-                    product= User_product(user=data,price=price,description=str(desc),campus=data.campus,category =categories,contact=data.contact,searchTag =categories)
+                    product= User_product(user=data,price=price,description=str(desc),campus=data.campus,category =categories,searchTag =categories)
                     product.save()
                     for img in Images:
                         fs= FileSystemStorage()
