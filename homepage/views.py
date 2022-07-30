@@ -29,7 +29,15 @@ def index(request):
                                           Q(searchTag__contains = "ladie")   |
                                           Q(searchTag__contains = "avila")    |
                                           Q(description__contains = "soap")   |
-                                          Q(searchTag__contains = "box")
+                                          Q(searchTag__contains = "box")  |
+                                           Q(description__contains = "henna") |
+                                          Q(searchTag__contains = "henna" ) |
+                                           Q(description__contains = "jalab") |
+                                        Q(searchTag__contains = "jalab" ) |
+                                        Q(description__contains = "sho") |
+                                         Q(searchTag__contains = "sho" )  |
+                                        Q(description__contains = "jog")   |
+                                           Q(description__contains = "dlg") 
                                            ).order_by("-id")[:18]
     
     picarray = []
@@ -51,38 +59,38 @@ def index(request):
         context['review'] = review
         context['userDetail'] = user
             
-    if request.headers.get('x-requested-with') == 'XMLHttpRequest':
-        contextual={}
+    # if request.headers.get('x-requested-with') == 'XMLHttpRequest':
+    #     contextual={}
         
-        productlist = []
-        productlistImg = []
+    #     productlist = []
+    #     productlistImg = []
      
      
-        product =User_product.objects.filter(
-                Q(description__contains = "sho") |
-                Q(searchTag__contains = "sho" )  |
-                     Q(description__contains = "jog")   |
-                     Q(description__contains = "dlg") |
-                      Q(searchTag__contains = "wea" ) 
-                ).order_by("-id")
-        for i in product:
-            productlistImg.append(Product_image.objects.filter(product=i).values()[0])
+    #     product =User_product.objects.filter(
+    #             Q(description__contains = "sho") |
+    #             Q(searchTag__contains = "sho" )  |
+    #                  Q(description__contains = "jog")   |
+    #                  Q(description__contains = "dlg") |
+    #                   Q(searchTag__contains = "wea" ) 
+    #             ).order_by("-id")
+    #     for i in product:
+    #         productlistImg.append(Product_image.objects.filter(product=i).values()[0])
             
-        product2 =User_product.objects.filter(
-                Q(description__contains = "henna") |
-                Q(searchTag__contains = "henna" ) |
-                Q(description__contains = "jalab") |
-                Q(searchTag__contains = "jalab" ) 
-                ).order_by("-id")
-        for i in product2:
-            productlistImg.append(Product_image.objects.filter(product=i).values()[0])
+    #     product2 =User_product.objects.filter(
+    #             Q(description__contains = "henna") |
+    #             Q(searchTag__contains = "henna" ) |
+    #             Q(description__contains = "jalab") |
+    #             Q(searchTag__contains = "jalab" ) 
+    #             ).order_by("-id")
+    #     for i in product2:
+    #         productlistImg.append(Product_image.objects.filter(product=i).values()[0])
         
     
-        contextual['products']= list((product).values())
-        contextual['products2']= list((product2).values())
-        contextual['productlistImg']= list(productlistImg)
+    #     contextual['products']= list((product).values())
+    #     contextual['products2']= list((product2).values())
+    #     contextual['productlistImg']= list(productlistImg)
          
-        return JsonResponse(contextual, safe=False)
+    #     return JsonResponse(contextual, safe=False)
 
     return render(request,'practise.html', context)
 
@@ -110,14 +118,8 @@ def register(request):
 def bagsPage(request):
     context={}
     
-<<<<<<< HEAD
-    productList = User_product.objects.filter( Q(description__contains = "bag") | 
-                                          Q(searchTag__contains = "bag")
-                                         
-=======
     productList = User_product.objects.filter( Q(description__contains = "bag") |
                                               Q(searchTag__contains = "bag") 
->>>>>>> f279ac89be3b3f5000050c7dc65fa56dfbf62deb
                                            ).order_by("-id")
     pictures = []
     
@@ -231,15 +233,8 @@ def jewelries(request):
                
 def gown(request):
     context={}
-    
-<<<<<<< HEAD
-    productList = User_product.objects.filter( Q(description__contains = "gown") | 
-                                          Q(searchTag__contains = "gown")    
-                                         
-=======
     productList = productList = User_product.objects.filter( Q(description__contains = "gown") |
                                               Q(searchTag__contains = "gown") 
->>>>>>> f279ac89be3b3f5000050c7dc65fa56dfbf62deb
                                            ).order_by("-id")
     pictures = []
     
