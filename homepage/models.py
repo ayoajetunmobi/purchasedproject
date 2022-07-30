@@ -132,8 +132,14 @@ class User_product(models.Model):
     price           = models.IntegerField( blank=False,null=False)
     description     = models.TextField(max_length=150,blank=False,null=False) 
     searchTag       = models.CharField(max_length = 150, default="none")
+<<<<<<< HEAD
     category        = models.CharField(max_length=100 , choices= category, default="others")
     date_time       = models.DateField( default=django.utils.timezone.now)
+=======
+    category        = models.CharField(max_length=100 , choices= category, default= "others")
+    date_time       = models.DateField( default=django.utils.timezone.now)
+    contact         = models.CharField(max_length=150, blank=True,null= True,default= "0902nite")
+>>>>>>> f279ac89be3b3f5000050c7dc65fa56dfbf62deb
     campus            = models.CharField(max_length=100)
     user            = models.ForeignKey(User_Detail, on_delete=models.CASCADE)
     

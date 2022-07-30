@@ -127,7 +127,7 @@
         <div class="productdetails">
           <h5>{{i.description|slice:"0:40"}} ...</h5>
           <h5>{{i.searchTag}}</h5>
-          <h3>{{i.price}}</h3>
+          <h3> N{{i.price}}.00 </h3>
           <h6 style="color: #ff9966">
             <a
               href="tel:{{i.user.contact}}" 
@@ -410,7 +410,12 @@
   <script src="{% static 'practise.js' %} "></script>
 
   <script>
+<<<<<<< HEAD
     let apicontrol = 0;
+=======
+
+    let controlapi = 0;
+>>>>>>> f279ac89be3b3f5000050c7dc65fa56dfbf62deb
     function getCookie(name) {
       let cookieValue = null;
       if (document.cookie && document.cookie !== "") {
@@ -427,10 +432,17 @@
       return cookieValue;
     }
     const csrftoken = getCookie("csrftoken");
+<<<<<<< HEAD
     
     if (apicontrol == 0){
       document.getElementsByTagName("body")[0].onscroll = function () {
       if (window.scrollY >= 100 && window.scrollY <= 200) {
+=======
+
+    document.getElementsByTagName("body")[0].onscroll = function () {
+      if (controlapi == 0){
+           if (window.scrollY >= 100 && window.scrollY <= 200) {
+>>>>>>> f279ac89be3b3f5000050c7dc65fa56dfbf62deb
         fetch('{% url "home" %}', {
           headers: {
             Accept: "application/json",
@@ -444,9 +456,19 @@
           }); //Convert response to JSON
         });
       }
+<<<<<<< HEAD
      apicontrol = 1;
     }
     if (window.scrollY >= 200) {
+=======
+      controlapi= 1;
+      }else{
+        return false
+      }
+      
+
+      if (window.scrollY >= 200) {
+>>>>>>> f279ac89be3b3f5000050c7dc65fa56dfbf62deb
         let foot = document.getElementById("footer");
         foot.style.display = "block";
       } else {

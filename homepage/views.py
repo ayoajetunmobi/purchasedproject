@@ -21,7 +21,6 @@ from django.views.decorators.csrf import csrf_exempt
 
 User=get_user_model()
 page_num = 1
-
 def index(request):
     context={}
     loged_in_user = request.user
@@ -31,7 +30,7 @@ def index(request):
                                           Q(searchTag__contains = "avila")    |
                                           Q(description__contains = "soap")   |
                                           Q(searchTag__contains = "box")
-                                           ).order_by("-id")
+                                           ).order_by("-id")[:18]
     
     picarray = []
     for i in product:
@@ -111,9 +110,14 @@ def register(request):
 def bagsPage(request):
     context={}
     
+<<<<<<< HEAD
     productList = User_product.objects.filter( Q(description__contains = "bag") | 
                                           Q(searchTag__contains = "bag")
                                          
+=======
+    productList = User_product.objects.filter( Q(description__contains = "bag") |
+                                              Q(searchTag__contains = "bag") 
+>>>>>>> f279ac89be3b3f5000050c7dc65fa56dfbf62deb
                                            ).order_by("-id")
     pictures = []
     
@@ -228,9 +232,14 @@ def jewelries(request):
 def gown(request):
     context={}
     
+<<<<<<< HEAD
     productList = User_product.objects.filter( Q(description__contains = "gown") | 
                                           Q(searchTag__contains = "gown")    
                                          
+=======
+    productList = productList = User_product.objects.filter( Q(description__contains = "gown") |
+                                              Q(searchTag__contains = "gown") 
+>>>>>>> f279ac89be3b3f5000050c7dc65fa56dfbf62deb
                                            ).order_by("-id")
     pictures = []
     
