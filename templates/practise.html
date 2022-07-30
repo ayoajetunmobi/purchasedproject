@@ -43,10 +43,10 @@
 
     <div class="aboutimagescontainer">
       <div class="aboutdetail_img" id="aboutdetail_img1">
-        <img src="{% static 'aboutimg1.png' %}" alt="image here" onclick="location.href ='http://127.0.0.1:8000/shoprandom';" />
+        <img src="{% static 'aboutimg1.png' %}" alt="image here" onclick="location.href ='http://shopatpurchased.com/shoprandom';" />
          <h5 class='seokit'> polo shirt at an affordable price |quality shirt gown styles for adult wowen |beutiful fitted shirt gown for ladies | trouser and  polo top for ladies | quality men trouser and jean| juggers trouser and ripped jeans </h5>
       </div>
-      <div class="aboutdetail_img" id="aboutdetail_img2" onclick="location.href ='http://127.0.0.1:8000/cookedfood';">
+      <div class="aboutdetail_img" id="aboutdetail_img2" onclick="location.href ='http://shopatpurchased.com/cookedfood';">
         <img src="{% static 'aboutmeal.png' %}" alt="image here" />
          <h5 class='seokit'> best nigerian food and dishes | energy giving food for kids | student jollof rice | ofada rice on campus | rice and stew | a plate of jollof rice and chicken | nigerian jollof rice </h5>
       </div>
@@ -410,6 +410,7 @@
   <script src="{% static 'practise.js' %} "></script>
 
   <script>
+    let apicontrol = 0;
     function getCookie(name) {
       let cookieValue = null;
       if (document.cookie && document.cookie !== "") {
@@ -426,22 +427,26 @@
       return cookieValue;
     }
     const csrftoken = getCookie("csrftoken");
-
-    document.getElementsByTagName("body")[0].onscroll = function () {
+    
+    if (apicontrol == 0){
+      document.getElementsByTagName("body")[0].onscroll = function () {
       if (window.scrollY >= 100 && window.scrollY <= 200) {
         fetch('{% url "home" %}', {
           headers: {
             Accept: "application/json",
             "X-Requested-With": "XMLHttpRequest", //Necessary to work with request.is_ajax()
           },
-        }).then((response) => {
+        }).then(
+          spinner()
+        ).then((response) => {
           return response.json().then((data) => {
             updatehomeProd(data.products, data.products2, data.productlistImg);
           }); //Convert response to JSON
         });
       }
-
-      if (window.scrollY >= 200) {
+     apicontrol = 1;
+    }
+    if (window.scrollY >= 200) {
         let foot = document.getElementById("footer");
         foot.style.display = "block";
       } else {
@@ -449,7 +454,7 @@
         foot.style.display = "none";
       }
     };
-
+   
     function ApiDelete(elem) {
         let target = parseInt(elem.getAttribute('data'));
         fetch('{% url "delete" %}', {
@@ -466,6 +471,7 @@
                         }
                     }) //JavaScript object of data to POST
             }).then(
+                   spinner()
             )
             .then(response => {
                 return response.json().then(data => {
@@ -476,6 +482,7 @@
                         let deleteCov = document.getElementById('deleteCov');
                         deleteCov.style.display = 'none'
                     }) //Convert response to JSON
+                    closespinner()
             })
     }
 
@@ -565,7 +572,9 @@
                target2
             }
          }) //JavaScript object of data to POST
-      })
+      }).then(
+        spinner()
+      )
       .then(response => {
           return response.json().then((data) => {
           if (data.yes) {
@@ -576,9 +585,9 @@
           target2=""
       })
     }) //Convert response to JSON
-    
-  }
+    closespinner()
 
+  }
   callslide()
   enter()
   </script>

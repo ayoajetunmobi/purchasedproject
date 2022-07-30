@@ -111,7 +111,10 @@ def register(request):
 def bagsPage(request):
     context={}
     
-    productList = User_product.objects.filter(searchTag = "bag")
+    productList = User_product.objects.filter( Q(description__contains = "bag") | 
+                                          Q(searchTag__contains = "bag")
+                                         
+                                           ).order_by("-id")
     pictures = []
     
     for i in productList:
@@ -225,7 +228,10 @@ def jewelries(request):
 def gown(request):
     context={}
     
-    productList = User_product.objects.filter(searchTag = "gown")
+    productList = User_product.objects.filter( Q(description__contains = "gown") | 
+                                          Q(searchTag__contains = "gown")    
+                                         
+                                           ).order_by("-id")
     pictures = []
     
     for i in productList:
@@ -387,7 +393,13 @@ def clothing(request):
 def cookedfood(request):
     context={}
     
-    productList = User_product.objects.filter(searchTag = "food")
+    productList = User_product.objects.filter( Q(description__contains = "food") | 
+                                          Q(searchTag__contains = "food")    |
+                                          Q(description__contains = "rice")   |
+                                          Q(searchTag__contains = "rice")  |
+                                           Q(description__contains = "spaghet")   |
+                                          Q(searchTag__contains = "spaghet")
+                                           ).order_by("-id")
     pictures = []
     
     for i in productList:
@@ -520,7 +532,9 @@ def food(request):
 def fragrance(request):
     context={}
     
-    productList = User_product.objects.filter(searchTag = "perfume")
+    productList =User_product.objects.filter(
+                                          Q(description__contains = "perfum") | 
+                                          Q(searchTag__contains = "perfum")  ).order_by["-id"]
     pictures = []
     
     for i in productList:

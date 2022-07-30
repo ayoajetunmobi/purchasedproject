@@ -89,7 +89,6 @@ class User_Detail(models.Model):
     university        = models.CharField(max_length=100, default="LASU") 
     campus            = models.CharField(max_length=100, choices= campus) 
     profilepic        = models.ImageField(upload_to = 'profilepic', blank=True,null= True) 
-    online            = models.BooleanField(default=False)
     user              = models.OneToOneField(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
         
     def __str__(self):
@@ -133,9 +132,8 @@ class User_product(models.Model):
     price           = models.IntegerField( blank=False,null=False)
     description     = models.TextField(max_length=150,blank=False,null=False) 
     searchTag       = models.CharField(max_length = 150, default="none")
-    category        = models.CharField(max_length=100 , choices= category)
+    category        = models.CharField(max_length=100 , choices= category, default="others")
     date_time       = models.DateField( default=django.utils.timezone.now)
-    contact         = models.CharField(max_length=150)
     campus            = models.CharField(max_length=100)
     user            = models.ForeignKey(User_Detail, on_delete=models.CASCADE)
     
@@ -202,8 +200,8 @@ class Contacted(models.Model):
     
     
 class Reviews(models.Model):
-    review = models.TextField(max_length=150, default= "no review yet")
-    userReviewing = models.CharField(max_length=150, default= "no review yet")
+    review = models.TextField(max_length=80, default= "no review yet")
+    userReviewing = models.CharField(max_length=100, default= "no review yet")
     user = models.ForeignKey(User_Detail,on_delete=models.CASCADE)
 
     
