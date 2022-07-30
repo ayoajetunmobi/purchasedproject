@@ -34,9 +34,8 @@ def index(request):
                                           Q(searchTag__contains = "henna" ) |
                                            Q(description__contains = "jalab") |
                                         Q(searchTag__contains = "jalab" ) |
-                                        Q(description__contains = "sho") |
-                                         Q(searchTag__contains = "sho" )  |
                                         Q(description__contains = "jog")   |
+                                         Q(searchTag__contains = "shoe")   |
                                            Q(description__contains = "dlg") 
                                            ).order_by("-id")[:18]
     
@@ -1215,7 +1214,7 @@ def Product_spec(request ,id = id):
         context['pictures']= pictures
         
         trendingPic = []
-        trending = User_product.objects.all().order_by('-id')[:5]
+        trending = User_product.objects.all().order_by('-id')[:8]
         
         for i in trending:
              trendingPic.append(Product_image.objects.filter(product= i)[0])
@@ -1224,7 +1223,7 @@ def Product_spec(request ,id = id):
         context['trendingPic']= trendingPic
         
         suggestPic = []
-        suggest = User_product.objects.all().order_by('id')[:5]
+        suggest = User_product.objects.all().order_by('id')[:7]
         
         for i in suggest:
              suggestPic.append(Product_image.objects.filter(product= i)[0])
