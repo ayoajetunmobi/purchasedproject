@@ -344,21 +344,21 @@ function settingfunc(event) {
             </a>
             <h5 style="text-align: center; color:red;"> about us </h5><br>
             <h5> Purchased is an online market that
-operates within LASU. Purchased focuses
-most on customer satisfaction. It aims to
-be the best online market in LASU.
+operates within LASU.<br> Purchased focuses
+most on customer satisfaction.<br> It aims to
+be the best online market in LASU.<br>
 On our online store we have a wide
-selection of products and services. Our
+selection of products and services.<br> Our
 website has hundreds of buyers and
-sellers. You can contact a seller to get a
-product on the site. Sellers make delivery
-only within the campus. Site users can give
-good or bad reviews about other users.
+sellers.<br> You can contact a seller to get a
+product on the site. <br>Sellers make delivery
+only within the campus.<br> Site users can give
+good or bad reviews about other users.<br>
 Contact our admin on any issue you might
-be having.
-Follow us on;
-Instagram : www.instagram.com/
-purchased.tech </h5>
+be having.<br>
+Follow us on Instagram;<br>
+<a href="https://instagram.com/purchased.tech">purchased.tech </a>
+ </h5>
             `
         settingsFunc.style.display = 'block'
     }
