@@ -235,6 +235,25 @@
     border-bottom: 2px solid #00ffff;
 }
 
+.productdetails h5 {
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 10.4px;
+    margin: 8px;
+    margin-top: 2px;
+}
+
+.productdetails h3 {
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    font-size: small;
+    margin: 8px;
+}
+
+.productdetails h6 {
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    font-size: small;
+    margin: 8px;
+}
+
 footer {
     position: fixed;
     bottom: 0%;
@@ -612,22 +631,6 @@ footer {
         font-style: inherit;
         margin-bottom: 5px;
         overflow: hidden;
-    }
-    .productdetails h5 {
-        font-family: Arial, Helvetica, sans-serif;
-        font-size: 10.4px;
-        margin: 8px;
-        margin-top: 2px;
-    }
-    .productdetails h3 {
-        font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
-        font-size: small;
-        margin: 8px;
-    }
-    .productdetails h6 {
-        font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
-        font-size: small;
-        margin: 8px;
     }
     .profile {
         position: fixed;
