@@ -546,7 +546,7 @@ def fragrance(request):
     context['pictures'] = pictures
     
     trendingPic = []
-    trending = User_product.objects.all().order_by('-id')[30:30]
+    trending = User_product.objects.all().order_by('-id')[40:65]
         
     for i in trending:
         trendingPic.append(Product_image.objects.filter(product= i)[0])
