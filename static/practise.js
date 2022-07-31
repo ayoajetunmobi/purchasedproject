@@ -16,57 +16,57 @@ function closespinner() {
     spinnerdiv.style.display = 'none';
 }
 
-function updatehomeProd(product1, product2, productImg) {
-    let productConCov = document.getElementById('productConCov');
-    product1.forEach((product) => {
-                let img = productImg.find(img => img.product_id == product.id);
-                let vat = parseInt(product.id);
-                productConCov.innerHTML +=
-                    ` 
-               <div class="productcover" onclick="location.href ='http://shopatpurchased.com/productspec/${vat}';">
-                <div class="productimg">
-                    ${(product.id == img.product_id)?`<img src='media/${img.product_img}' alt='' />`:``}
-                </div>
-                <div class="productdetails">
-                <h5>${(product.description).substring(0, 50)} ... </h5>
-                <h5>${product.searchTag}</h5>
-                <h3>${product.price}</h3>
-                <h6 style="color: #ff9966" data=${product.id}>
-                           
-                            <a href="tel:${product.conduct}" onclick="displayNum(${product.contact})" style="color: #66ff66; margin-left: 20px">
-                            <i class="fa fa-phone"></i> contact seller
-                            </a>
-                </h6>
-                </div>
-             </div>
-            `
-    })
+// function updatehomeProd(product1, product2, productImg) {
+//     let productConCov = document.getElementById('productConCov');
+//     product1.forEach((product) => {
+//                 let img = productImg.find(img => img.product_id == product.id);
+//                 let vat = parseInt(product.id);
+//                 productConCov.innerHTML +=
+//                     ` 
+//                <div class="productcover" onclick="location.href ='http://shopatpurchased.com/productspec/${vat}';">
+//                 <div class="productimg">
+//                     ${(product.id == img.product_id)?`<img src='media/${img.product_img}' alt='' />`:``}
+//                 </div>
+//                 <div class="productdetails">
+//                 <h5>${(product.description).substring(0, 50)} ... </h5>
+//                 <h5>${product.searchTag}</h5>
+//                 <h3>${product.price}</h3>
+//                 <h6 style="color: #ff9966" data=${product.id}>
 
-    product2.forEach((product) => {
-                let img = productImg.find(img => img.product_id == product.id);
-                let vat1 = parseInt(product.id);
-                productConCov.innerHTML +=
-                    ` 
-                <div class="productcover" onclick="location.href ='http://shopatpurchased.com/productspec/${vat1}';">
-                <div class="productimg">
-                    ${(product.id == img.product_id)?`<img src='media/${img.product_img}' alt='' />`:``}
-                </div>
-                <div class="productdetails">
-                <h5>$${(product.description).substring(0, 50)}...</h5>
-                <h5>${product.searchTag}</h5>
-                <h3>${product.price}</h3>
-                <h6 style="color: #ff9966" data=${product.id}>
-                         
-                            <a href="tel:${product.contact}" onclick="displayNum(${product.contact})" style="color: #66ff66; margin-left: 20px">
-                            <i class="fa fa-phone"></i> contact seller
-                            </a>
-                </h6>
-                </div>
-             </div>
-            `
-    })
-    
-  }
+//                             <a href="tel:${product.conduct}" onclick="displayNum(${product.contact})" style="color: #66ff66; margin-left: 20px">
+//                             <i class="fa fa-phone"></i> contact seller
+//                             </a>
+//                 </h6>
+//                 </div>
+//              </div>
+//             `
+//     })
+
+//     product2.forEach((product) => {
+//                 let img = productImg.find(img => img.product_id == product.id);
+//                 let vat1 = parseInt(product.id);
+//                 productConCov.innerHTML +=
+//                     ` 
+//                 <div class="productcover" onclick="location.href ='http://shopatpurchased.com/productspec/${vat1}';">
+//                 <div class="productimg">
+//                     ${(product.id == img.product_id)?`<img src='media/${img.product_img}' alt='' />`:``}
+//                 </div>
+//                 <div class="productdetails">
+//                 <h5>$${(product.description).substring(0, 50)}...</h5>
+//                 <h5>${product.searchTag}</h5>
+//                 <h3>${product.price}</h3>
+//                 <h6 style="color: #ff9966" data=${product.id}>
+
+//                             <a href="tel:${product.contact}" onclick="displayNum(${product.contact})" style="color: #66ff66; margin-left: 20px">
+//                             <i class="fa fa-phone"></i> contact seller
+//                             </a>
+//                 </h6>
+//                 </div>
+//              </div>
+//             `
+//     })
+
+//   }
 
 function callslide() {
     let displayimg = document.getElementById("aboutdetail_img1");
@@ -85,29 +85,29 @@ function callslide() {
 }
 
 function searchengine(data, yes = false, images) {
-        let searchcover = document.getElementById('searchcover');
+    let searchcover = document.getElementById('searchcover');
 
-        searchcover.innerHTML = ""
+    searchcover.innerHTML = ""
 
-        data1 = data.username
-        data2 = data.product
-        data3 = data.noData
+    data1 = data.username
+    data2 = data.product
+    data3 = data.noData
 
-        if (data1) {
-            searchcover.style.display = 'block';
-            searchcover.innerHTML += `
+    if (data1) {
+        searchcover.style.display = 'block';
+        searchcover.innerHTML += `
             <i onclick="closesearch()" id="closesearch" style="color: black;" class="fa fa-arrow-left"></i><br><br>
             <img style="width: 100px; height:100px;overflow:hidden; border-radius:100px;" src="media/${data1[1]}" onclick="location.href ='http://shopatpurchased.com/profileupdate/${parseInt(data1[2])}';">
             <p style="text-align: center;"> ${data1[0]} </p`
-        }
+    }
 
-        let i = 0;
-        if (data2) {
-            searchcover.style.display = 'block';
-              searchcover.innerHTML=`<i onclick="closesearch()" id="closesearch" style="color: black;" class="fa fa-arrow-left"></i><br><br>`
-            data2.forEach((data2) => {
-                searchcover.innerHTML +=       
-     `
+    let i = 0;
+    if (data2) {
+        searchcover.style.display = 'block';
+        searchcover.innerHTML = `,br><br><i onclick="closesearch()" id="closesearch" style="color: black;" class="fa fa-arrow-left"></i><br><br>`
+        data2.forEach((data2) => {
+            searchcover.innerHTML +=
+                `
      <div class="productcover deleteMsg" data=${data2.id}  onclick="location.href ='http://shopatpurchased.com/productspec/${parseInt(data2.id)}';">
           <div class="productimg">
             <img src="media/${images[i].product_img}" alt="image here" />
@@ -118,23 +118,25 @@ function searchengine(data, yes = false, images) {
             <h4> N${data2.price}.00</h4>
           </div>
         </div>`
-             i++
-            })
-        }
+            i++
+        })
+    }
 
-        if (data3) {
-            searchcover.style.display = 'block';
-            searchcover.innerHTML +=
-                `
+    if (data3) {
+        searchcover.style.display = 'block';
+        searchcover.innerHTML +=
+            `
                 <i onclick="closesearch()" id="closesearch" style="color: black;" class="fa fa-arrow-left"></i><br><br>
          <h2>   "${data3}</h2>`
-        }
+    }
 }
+
 function closesearch() {
     searchcover.style.display = 'none';
-    document.getElementById("searchinput").value=""
+    document.getElementById("searchinput").value = ""
 
 }
+
 function enter() {
     let searchbox = document.getElementById("searchinput");
     let submitttsearch = document.getElementById("submitttsearch");
@@ -148,6 +150,7 @@ function enter() {
         }
     })
 }
+
 function display_profile(e) {
     let profile = document.getElementById('profile');
     profile.style.display = "block"
@@ -178,7 +181,7 @@ settingbtn.addEventListener('click', function(event) {
 
 
 
- function viewall() {
+function viewall() {
     let viewAllProdCov = document.getElementById('viewAllProdCov');
     viewAllProdCov.style.display = "block";
     viewAllProdCov.style.zIndex = 2;
@@ -227,10 +230,11 @@ function delcovDisplay(e) {
     let data = e.getAttribute('data');
     let del = document.getElementById('delprod');
     del.setAttribute("data", data)
-    let deleteCov= document.getElementById('deleteCov');
+    let deleteCov = document.getElementById('deleteCov');
     deleteCov.style.display = 'block'
-    
+
 }
+
 function closedel() {
     let deleteCov = document.getElementById('deleteCov');
     deleteCov.style.display = 'none'
@@ -238,10 +242,10 @@ function closedel() {
 
 function settingfunc(event) {
     let data = event;
-    let settingsFunc= document.getElementById('settingsFunc');
+    let settingsFunc = document.getElementById('settingsFunc');
 
     if (data == 2) {
-        
+
         settingsFunc.innerHTML =
             `<br><br><br>
             <a href="#" onclick = "settingeditoserverclose()"><i style="color: rgb(0, 0, 0);" class="fa fa-arrow-left"></i>
@@ -261,7 +265,7 @@ function settingfunc(event) {
     }
 
     if (data == 3) {
-        
+
         settingsFunc.innerHTML =
             `<br><br><br>
             <a href="#" onclick = "settingeditoserverclose()"><i style="color: rgb(0, 0, 0);" class="fa fa-arrow-left"></i>
@@ -279,7 +283,7 @@ function settingfunc(event) {
         settingsFunc.style.display = 'block'
     }
     if (data == 4) {
-        
+
         settingsFunc.innerHTML =
             `<br><br><br>
             <a href="#" onclick = "settingeditoserverclose()"><i style="color: rgb(0, 0, 0);" class="fa fa-arrow-left"></i>
@@ -298,7 +302,7 @@ function settingfunc(event) {
     }
 
     if (data == 5) {
-        
+
         settingsFunc.innerHTML =
             `<br><br><br>
             <a href="#" onclick = "settingeditoserverclose()"><i style="color: rgb(0, 0, 0);" class="fa fa-arrow-left"></i>
@@ -315,7 +319,7 @@ function settingfunc(event) {
         settingsFunc.style.display = 'block'
     }
     if (data == 6) {
-        
+
         settingsFunc.innerHTML =
             `<br><br><br>
             <a href="#" onclick = "settingeditoserverclose()"><i style="color: rgb(0, 0, 0);" class="fa fa-arrow-left"></i>
@@ -333,7 +337,7 @@ function settingfunc(event) {
         settingsFunc.style.display = 'block'
     }
     if (data == 7) {
-        
+
         settingsFunc.innerHTML =
             `<br><br><br>
             <a href="#" onclick = "settingeditoserverclose()"><i style="color: rgb(0, 0, 0);" class="fa fa-arrow-left"></i>
@@ -360,7 +364,7 @@ purchased.tech </h5>
     }
 
     if (data == 9) {
-        
+
 
         settingsFunc.innerHTML =
             `<br>
@@ -381,18 +385,20 @@ purchased.tech </h5>
         settingsFunc.style.display = 'block'
     }
 }
+
 function settingeditoserverclose() {
     let settingsFunc = document.getElementById('settingsFunc');
     settingsFunc.style.display = 'none'
 }
 
-function openchangedpPage(){
+function openchangedpPage() {
     let changedpPage = document.getElementById('changedpPage');
-changedpPage.style.display='block'
+    changedpPage.style.display = 'block'
 }
-function closechangedpPage(){
+
+function closechangedpPage() {
     let changedpPage = document.getElementById('changedpPage');
-changedpPage.style.display='none'
+    changedpPage.style.display = 'none'
 }
 
 function propicture(event) {
@@ -401,7 +407,7 @@ function propicture(event) {
         bigoverlay = document.getElementById("bigpic-overlay"),
         newImg = new Image();
 
- 
+
     // If we click an element with the attribute "bigpic", show a bigger bigpicture
     if (elem.hasAttribute('bigpic')) {
         event.preventDefault();
@@ -411,24 +417,24 @@ function propicture(event) {
         }
         bigpropic.src = '';
         newImg.src = elem.getAttribute('bigpic');
-        bigoverlay.style.display='block';
+        bigoverlay.style.display = 'block';
 
     }
     // If we click any of these 2 elements, close the lightbox
-    if (elem.hasAttribute('close') || elem.getAttribute('close')== 'yes') {
+    if (elem.hasAttribute('close') || elem.getAttribute('close') == 'yes') {
         event.preventDefault();
-        bigoverlay.style.display='none';
+        bigoverlay.style.display = 'none';
     }
 }
 
-function displayNum(event){
-    let numberDisp= document.querySelector('.numberDisp'),
+function displayNum(event) {
+    let numberDisp = document.querySelector('.numberDisp'),
         numberDispNUm = document.getElementById('numberDisp');
-        numberDispNUm.innerHTML = `${event}`
-        numberDisp.style.display='block'
+    numberDispNUm.innerHTML = `${event}`
+    numberDisp.style.display = 'block'
 }
 
-function closenumdisp(){
-    let numberDisp= document.querySelector('.numberDisp');
-     numberDisp.style.display='none'
+function closenumdisp() {
+    let numberDisp = document.querySelector('.numberDisp');
+    numberDisp.style.display = 'none'
 }
