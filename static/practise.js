@@ -104,7 +104,7 @@ function searchengine(data, yes = false, images) {
     let i = 0;
     if (data2) {
         searchcover.style.display = 'block';
-        searchcover.innerHTML = `,br><br><i onclick="closesearch()" id="closesearch" style="color: black;" class="fa fa-arrow-left"></i><br><br>`
+        searchcover.innerHTML = `<br><br><i onclick="closesearch()" id="closesearch" style="color: black;" class="fa fa-arrow-left"></i><br><br>`
         data2.forEach((data2) => {
             searchcover.innerHTML +=
                 `
