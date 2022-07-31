@@ -129,8 +129,7 @@
           <h5>{{i.searchTag}}</h5>
           <h3> N{{i.price}}.00 </h3>
           <h6 style="color: #ff9966">
-            <a
-              href="tel:{{i.user.contact}}" 
+            <a href="tel:{{i.user.contact}}" 
               style="color: #66ff66; margin-left: 20px"
               onclick="displayNum({{i.user.contact}})"
               ><i class="fa fa-phone"></i> contact seller
@@ -138,7 +137,6 @@
           </h6>
         </div>
        </div>
-      </a>
       {%endfor%}
       </div>
       <footer id="footer">
@@ -380,14 +378,14 @@
       <div id="productDiv">
             <div id ="productConCov">
         {%for i in userProduct %}
-        <div class="productcover deleteMsg" data={{i.id}}  onclick="location.href ='{% url 'productspec' i.id %}';">
+        <div class="productcover deleteMsg" data={{i.id}}>
           {% for j in userProductPic %}{%if i.id == j.product_id %}
           <div class="productimg">
             <img src="{{j.product_img.url}}" alt="image here" />
           </div>
           {%endif%} {% endfor %}
           <div class="productdetails">
-             <h5>{{i.description|slice:"0:40"}} ...</h5>
+             <h5>{{i.description|slice:"0:150"}}</h5>
             <h5>{{i.searchTag}}</h5>
             <h4>N{{i.price}}.00</h4>
             <h6 style="color: #ff9966">

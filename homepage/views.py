@@ -537,7 +537,7 @@ def fragrance(request):
     
     productList =User_product.objects.filter(
                                           Q(description__contains = "perfum") | 
-                                          Q(searchTag__contains = "perfum")  ).order_by["-id"]
+                                          Q(searchTag__contains = "perfum")).order_by("-id")
     pictures = []
     
     for i in productList:
@@ -712,7 +712,11 @@ def postutme(request):
 def trousers(request):
     context={}
     
-    productList = User_product.objects.filter(searchTag = "trouser")
+    productList =  User_product.objects.filter(
+                                         Q(description__contains = "trouser") | 
+                                          Q(searchTag__contains = "trouser")  |
+                                           Q(description__contains = "jean") | 
+                                          Q(searchTag__contains = "jean") )
     pictures = []
     
     for i in productList:
@@ -731,9 +735,8 @@ def trousers(request):
         
     suggestPic = []
     suggest = User_product.objects.filter(
-                                         Q(description__contains = "jalab")  | 
-                                          Q(searchTag__contains = "jalab")   |
-                                           Q(description__contains = "wea")  | 
+                                         Q(description__contains = "jalab") |                                          Q(searchTag__contains = "jalab")   |
+                                           Q(description__contains = "wea") | 
                                           Q(searchTag__contains = "wea")     |
                                           Q(description__contains = "ladie") | 
                                           Q(searchTag__contains = "ladie")   | 
