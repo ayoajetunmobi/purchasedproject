@@ -148,9 +148,8 @@
             top: -10%;
           "
         >
-          <h6 style="margin-right: 30px">contact support</h6>
-          <h6 style="margin-right: 30px">about</h6>
-          <h6 style="margin-right: 30px">terms and conditions</h6>
+          <a href = "tel:09079681347" style="margin-right: 30px"> contact support </a>
+          <h6 style="margin-right: 30px" onclick="settingfunc(7)">about</h6>
         </div>
         <br />
 
@@ -319,9 +318,6 @@
         <p class="settingsworks" onclick="settingfunc(4)">Edit Contact</p>
         <p class="settingsworks" onclick="settingfunc(5)">Make Suggestion</p>
         <p class="settingsworks" onclick="settingfunc(6)">Report User</p>
-        <p class="settingsworks" onclick="settingfunc(7)">
-          Terms and Conditions
-        </p>
         <p class="settingsworks" onclick="settingfunc(9)">Deactive Account</p>
       </div>
     </div>
@@ -424,9 +420,8 @@
     }
     const csrftoken = getCookie("csrftoken");
 
-    /*document.getElementsByTagName("body")[0].onscroll = function () {
-      if (controlapi == 0){
-           if (window.scrollY >= 100 && window.scrollY <= 200) {
+    document.getElementsByTagName("body")[0].onscroll = function () {
+      /*if (window.scrollY >= 100 && window.scrollY <= 200) {
         fetch('{% url "home" %}', {
           headers: {
             Accept: "application/json",
@@ -440,13 +435,15 @@
           }); //Convert response to JSON
         });
       }*/
-    if (window.scrollY >= 200) {
+      if (window.scrollY >= 1000) {
       let foot = document.getElementById("footer");
         foot.style.display = "block";
       } else {
         let foot = document.getElementById("footer");
         foot.style.display = "none";
       }
+    }
+    
    
     function ApiDelete(elem) {
         let target = parseInt(elem.getAttribute('data'));
@@ -474,8 +471,8 @@
                         div.removeChild(del)
                         let deleteCov = document.getElementById('deleteCov');
                         deleteCov.style.display = 'none'
+                        closespinner()
                     }) //Convert response to JSON
-                    closespinner()
             })
     }
 

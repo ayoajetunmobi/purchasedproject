@@ -338,13 +338,23 @@ function settingfunc(event) {
             `<br><br><br>
             <a href="#" onclick = "settingeditoserverclose()"><i style="color: rgb(0, 0, 0);" class="fa fa-arrow-left"></i>
             </a>
-            <h5 style="text-align: center; color:red;"> Terms and Conditions </h5><br>
-            <h6> shopatpurchased is a product that looks to shorten the bridge between buyers and 
-            sellers around LASU.
-            It is aimed at giving more preference to student enterpreneurs. We try to encourage them
-            by getting your products out to potential buyers.
-            we are doing our best to keep the platform safe, clearly read the tips to succed and stay safe as
-            we would not be held responsible for any damages after user has been contacted. </h6>
+            <h5 style="text-align: center; color:red;"> about us </h5><br>
+            <h5> Purchased is an online market that
+operates within LASU. Purchased focuses
+most on customer satisfaction. It aims to
+be the best online market in LASU.
+On our online store we have a wide
+selection of products and services. Our
+website has hundreds of buyers and
+sellers. You can contact a seller to get a
+product on the site. Sellers make delivery
+only within the campus. Site users can give
+good or bad reviews about other users.
+Contact our admin on any issue you might
+be having.
+Follow us on;
+Instagram : www.instagram.com/
+purchased.tech </h5>
             `
         settingsFunc.style.display = 'block'
     }
