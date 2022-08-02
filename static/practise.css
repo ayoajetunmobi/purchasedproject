@@ -232,6 +232,7 @@
     margin-bottom: 15px;
     padding: 0px 10px;
     overflow: hidden;
+    z-index: 1;
     border-bottom: 2px solid #00ffff;
 }
 
@@ -250,8 +251,10 @@
 
 .productdetails h6 {
     font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
-    font-size: small;
+    font-size: medium;
     margin: 8px;
+    z-index: 1;
+    border: 1px groove green;
 }
 
 footer {
