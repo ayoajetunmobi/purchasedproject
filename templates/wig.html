@@ -41,7 +41,7 @@
         </div>
         {%endif%} {%endfor%}
         <div class="productdetails">
-         h5>{{i.description|slice:"0:40"}} <span style='color:green' onclick="location.href ='{% url 'productspec' i.id %}';">see more  ...</span></h5>
+         <h5>{{i.description|slice:"0:40"}} <span style='color:green' onclick="location.href ='{% url 'productspec' i.id %}';">see more  ...</span></h5>
           <h5>{{i.searchTag}}</h5>
           <h3>N{{i.price}}.00</h3>
           <h6 style="color: #ff9966">
@@ -116,7 +116,7 @@
         </div>
         {%endif%} {%endfor%}
         <div class="productdetails">
-          h5>{{i.description|slice:"0:40"}} <span style='color:green' onclick="location.href ='{% url 'productspec' i.id %}';">see more  ...</span></h5>
+          <h5>{{i.description|slice:"0:40"}} <span style='color:green' onclick="location.href ='{% url 'productspec' i.id %}';">see more  ...</span></h5>
           <h5>{{i.searchTag}}</h5>
           <h3>N{{i.price}}.00</h3>
           <h6 style="color: #ff9966">
