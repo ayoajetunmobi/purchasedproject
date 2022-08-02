@@ -116,28 +116,27 @@
     
     <div class="productlist" id="productlist">
       <h3 style="margin-left: 20px">TRENDING ADS</h3>
-    <div id ="productConCov">
+     <div id ="productConCov">
       {% for i in product %}
-      <a class="productcover" href="{% url 'productspec' i.id %}">
-      
+        <div class="productcover">
         {%for j in picture %}{%if i.id == j.product_id %}
         <div class="productimg">
           <img src="{{j.product_img.url}}" alt="image here" />
         </div>
         {%endif%} {%endfor%}
         <div class="productdetails">
-          <h5>{{i.description|slice:"0:40"}} ...</h5>
+          <h5>{{i.description|slice:"0:40"}} <span style='color:green' onclick="location.href ='{% url 'productspec' i.id %}';">see more  ...</span></h5>
           <h5>{{i.searchTag}}</h5>
           <h3> N{{i.price}}.00 </h3>
           <h6 style="color: #ff9966">
             <a href="tel:{{i.user.contact}}" 
-              style="color: #66ff66; margin-left: 20px"
+              style="color: #66ff66; margin-left: 20px;text-decoration:none;"
               onclick="displayNum({{i.user.contact}})"
               ><i class="fa fa-phone"></i> contact seller
             </a>
           </h6>
         </div>
-      </a>
+       </div>
       {%endfor%}
       </div>
       <footer id="footer">
