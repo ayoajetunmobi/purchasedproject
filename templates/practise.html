@@ -118,7 +118,8 @@
       <h3 style="margin-left: 20px">TRENDING ADS</h3>
     <div id ="productConCov">
       {% for i in product %}
-        <div class="productcover" onclick="location.href ='{% url 'productspec' i.id %}';">
+      <a class="productcover" href="{% url 'productspec' i.id %}">
+      
         {%for j in picture %}{%if i.id == j.product_id %}
         <div class="productimg">
           <img src="{{j.product_img.url}}" alt="image here" />
@@ -136,7 +137,7 @@
             </a>
           </h6>
         </div>
-       </div>
+      </a>
       {%endfor%}
       </div>
       <footer id="footer">
