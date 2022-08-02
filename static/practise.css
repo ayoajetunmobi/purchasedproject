@@ -254,7 +254,11 @@
     font-size: medium;
     margin: 8px;
     z-index: 1;
-    border: 1px groove green;
+    border: 1px solid green;
+}
+
+.productdetails h6 a {
+    text-decoration: none;
 }
 
 footer {

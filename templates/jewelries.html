@@ -34,14 +34,14 @@
     <div  style="position:relative; height:fit-content;">
        <div id ="productConCov">
       {% for i in products %}
-        <div class="productcover" onclick="location.href ='{% url 'productspec' i.id %}';">
+        <div class="productcover">
         {%for j in pictures %}{%if i.id == j.product_id %}
         <div class="productimg">
           <img src="{{j.product_img.url}}" alt="image here" />
         </div>
         {%endif%} {%endfor%}
         <div class="productdetails">
-          <h5>{{i.description|slice:"0:40"}} ... </h5>
+          <h5>{{i.description|slice:"0:40"}} <span style='color:green' onclick="location.href ='{% url 'productspec' i.id %}';">see more  ...</span></h5>
           <h5>{{i.searchTag}}</h5>
           <h3>N{{i.price}}.00</h3>
           <h6 style="color: #ff9966">
@@ -108,14 +108,14 @@
       <h3 style="margin-left: 20px"> TRENDING ADS </h3>
       <div id ="productConCov">
        {% for i in trending %}
-        <div class="productcover" onclick="location.href ='{% url 'productspec' i.id %}';">
+        <div class="productcover">
         {%for j in trendingPic %}{%if i.id == j.product_id %}
         <div class="productimg">
           <img src="{{j.product_img.url}}" alt="image here" />
         </div>
         {%endif%} {%endfor%}
         <div class="productdetails">
-          <h5>{{i.description|slice:"0:40"}} ... </h5>
+          <h5>{{i.description|slice:"0:40"}} <span style='color:green' onclick="location.href ='{% url 'productspec' i.id %}';">see more  ...</span></h5>
           <h5>{{i.searchTag}}</h5>
           <h3>N{{i.price}}.00</h3>
           <h6 style="color: #ff9966">
