@@ -21,6 +21,7 @@ from django.views.decorators.csrf import csrf_exempt
 
 User=get_user_model()
 page_num = 1
+
 def index(request):
     context={}
     loged_in_user = request.user
@@ -808,12 +809,12 @@ def getting_post(request):
                 desc   = str(request.POST.get("desc1")).lower()
                 Images = request.FILES.getlist('images')
                 if len(Images)>0 :
-                    product= User_product(user=data,price=price,description=str(desc),campus=data.campus,category =categories,searchTag =categories)
                     for img in Images:
                         jim =str(img)
                         if jim[-4:] == '.png' or jim[-4:] == '.PNG' or jim[-4:] == '.jpg' or jim[-4:] == '.jpeg' or jim[-4:] == '.JPG' or jim[-4:] == '.JPEG':
-                            fs= FileSystemStorage()
+                            product= User_product(user=data,price=price,description=str(desc),campus=data.campus,category =categories,searchTag =categories)
                             product.save()
+                            fs= FileSystemStorage()
                             file_path= fs.save(img.name,img)
                             pimage = Product_image.objects.create(product=product, product_img=file_path)
     else:
