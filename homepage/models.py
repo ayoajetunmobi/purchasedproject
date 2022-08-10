@@ -85,7 +85,6 @@ class User_Detail(models.Model):
     gender            = models.CharField(max_length = 50,choices=gender)
     contact           = models.CharField( max_length = 150, unique = True)
     about             = models.TextField( max_length =150)
-    quote             = models.TextField(max_length = 500, blank=False, null=False)
     university        = models.CharField(max_length=100, default="LASU") 
     campus            = models.CharField(max_length=100, choices= campus) 
     profilepic        = models.ImageField(upload_to = 'profilepic', blank=True,null= True) 
@@ -118,15 +117,15 @@ class User_Detail(models.Model):
     
     
 class User_product(models.Model):
-    category = (('pef', 'PERFUME'),('lasureg', 'LASU REGISTRATIONS,FEES AND FORMS'),
-       ('shoe', 'SHOE'),('sneak', 'SNEAKERS'),('trouser', 'TROUSER'),('electronics', 'ELECTRONICS'),
+    category = (('perfume', 'PERFUME'),('lasureg', 'LASU REGISTRATIONS,FEES AND FORMS'), 
+       ('shoe', 'SHOE'),('sneaks', 'SNEAKERS'),('trouser', 'TROUSER'),('electronics', 'ELECTRONICS'),
        ('shirt', 'SHIRT'),('bag', 'BAG'),('bedsheet', 'BEDSHEET'),('health', 'HEALTH'),
        ('wig', 'WIG'),('graphics', 'GRAPHICS'),('phones', ''), ('furniture', 'HOME | FURNITURE | APPLIANCES') , 
        ('laptop', 'LAPTOPS'),('engineer', 'ENGINEERING'),('property', 'HOUSE TO LET | HOUSE TO BUY'),('cosmetics', ' BEUTY | COSMETICS'), 
-       ('meal', 'FAST MEALS'),('food', 'FOOD STUFF'),('gadgets', 'POWER BANK | CHARGER CORD | MUSIC BOX | EAR PIECE |  PS4'),('snack', 'SNACKS & PASTERIES'),('necklace', 'CUBBAN | JEWELRIES| EARRINGS | BRACELET | BEADS'), ('sport', ' SPORT | JERSY | FOOTBALL'),
+       ('meal', 'FAST MEALS'),('food', 'FOOD STUFF'),('gadgets', 'POWER BANK | CHARGER CORD | MP3 PLAYER | EAR PIECE |  PS4'),('snack', 'SNACKS & PASTERIES'),('necklace', 'CUBBAN | JEWELRIES| EARRINGS | BRACELET | BEADS'), ('sport', ' SPORT | JERSY | FOOTBALL'),
        ('drinks', 'DRINKS'),  ('webapp', 'SOFTWARE ENGINEER'), ('cloth', 'FEMALE CLOTHING'), ('services', 'OFFER SERVICE'), ('gown', 'GOWN AND DRESS'),
       ('maleCLTH', 'MALE CLOTHING'),('repairs', 'PLUMBER | CARPENTER | ELECTRICIAN'),('others', 'OTHERS'),
-                )
+    )
     
     id              = models.AutoField(primary_key=True)
     price           = models.IntegerField( blank=False,null=False)

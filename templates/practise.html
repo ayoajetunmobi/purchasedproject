@@ -25,8 +25,7 @@
         <div class="headernavigations">
           {% if user.is_authenticated %}
           <a href="#" onclick="display_profile()" class="sigin">
-            <i class="fa fa-user"></i></a
-          >
+            <i class="fa fa-user"></i>profile</a>
           <a href="{% url 'logout' %}" class="sigin"> sign out </a>
 
           {% else %}
@@ -71,7 +70,7 @@
             <img src="{% static 'sneakers.jpg' %}" alt="image here" />
           </div>
           </a>
-          SNEAKERS
+          SNEAKS | SHOES
           <h5 class='seokit'> comfortable canvas shoes that fit | quality training shoes for sports  | ladies casual outting sneakers | original nike sneakers (unisex) |  order a white nike sneakers from us </h5>
         </div>
         <div>

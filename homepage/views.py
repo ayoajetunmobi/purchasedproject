@@ -35,8 +35,11 @@ def index(request):
                                            Q(description__contains = "jalab") |
                                         Q(searchTag__contains = "jalab" ) |
                                         Q(description__contains = "jog")   |
-                                         Q(searchTag__contains = "shoe")   |
-                                           Q(description__contains = "dlg") 
+                                         Q(searchTag__contains = "perfume")   |
+                                          Q(description__contains = "perfume")   |
+                                           Q(searchTag__contains = "cosmetic") | 
+                                            Q(searchTag__contains = "earring" ) |
+                                        Q(description__contains = "earring")   
                                            ).order_by("-id")[:18]
     
     picarray = []
@@ -101,17 +104,17 @@ def register(request):
     context["form1"]=form1
     context["form2"]=form2
     Images = request.FILES.get('profileimages')
-    if form1.is_valid() and form2.is_valid() and Images:
-        email= form1.save(commit=False)
-        email.active = True
-        email.save()
-        profile= form2.save(commit=False)
-        profile.user=email
-        profile.profilepic = Images
-        profile.save()
-        return HttpResponseRedirect('/login/')
-    
-    
+    img = str(Images)
+    if img[-4:] == '.png' or img[-4:] == '.PNG' or img[-4:] == '.jpg' or img[-4:] == '.jpeg' or img[-4:] == '.JPG' or img[-4:] == '.JPEG':
+        if form1.is_valid() and form2.is_valid() and Images:
+            email= form1.save(commit=False)
+            email.active = True
+            email.save()
+            profile= form2.save(commit=False)
+            profile.user=email
+            profile.profilepic = Images
+            profile.save()
+            return HttpResponseRedirect('/login/')
     return render(request, 'register.html',context)
    
 def bagsPage(request):
@@ -197,7 +200,9 @@ def jewelries(request):
                                           Q(description__contains = "necklace") | 
                                           Q(searchTag__contains = "necklace")  |
                                           Q(description__contains = "earrin") | 
-                                          Q(searchTag__contains = "earrin")       
+                                          Q(searchTag__contains = "earrin")   |
+                                           Q(description__contains = "chain") | 
+                                          Q(searchTag__contains = "chain")  
                                            ).order_by("-id")
     
     pictures = []
@@ -804,11 +809,13 @@ def getting_post(request):
                 Images = request.FILES.getlist('images')
                 if len(Images)>0 :
                     product= User_product(user=data,price=price,description=str(desc),campus=data.campus,category =categories,searchTag =categories)
-                    product.save()
                     for img in Images:
-                        fs= FileSystemStorage()
-                        file_path= fs.save(img.name,img)
-                        pimage = Product_image.objects.create(product=product, product_img=file_path)
+                        jim =str(img)
+                        if jim[-4:] == '.png' or jim[-4:] == '.PNG' or jim[-4:] == '.jpg' or jim[-4:] == '.jpeg' or jim[-4:] == '.JPG' or jim[-4:] == '.JPEG':
+                            fs= FileSystemStorage()
+                            product.save()
+                            file_path= fs.save(img.name,img)
+                            pimage = Product_image.objects.create(product=product, product_img=file_path)
     else:
         return  render(request,'postad.html',context)         
         
