@@ -26,8 +26,7 @@ def index(request):
     context={}
     loged_in_user = request.user
     
-    product = User_product.objects.filter( Q(description__contains = "ladie") | 
-                                          Q(searchTag__contains = "ladie")   |
+    product = User_product.objects.filter(
                                           Q(searchTag__contains = "avila")    |
                                           Q(description__contains = "soap")   |
                                           Q(searchTag__contains = "box")  |
@@ -36,12 +35,10 @@ def index(request):
                                            Q(description__contains = "jalab") |
                                         Q(searchTag__contains = "jalab" ) |
                                         Q(description__contains = "jog")   |
-                                         Q(searchTag__contains = "perfume")   |
-                                          Q(description__contains = "perfume")   |
                                            Q(searchTag__contains = "cosmetic") | 
                                             Q(searchTag__contains = "earring" ) |
                                         Q(description__contains = "earring")   
-                                           ).order_by("-id")[:18]
+                                           ).order_by("-id")[:14]
     
     picarray = []
     for i in product:
@@ -132,7 +129,10 @@ def bagsPage(request):
     context['pictures'] = pictures
     
     trendingPic = []
-    trending = User_product.objects.all().order_by('-id')[:10]
+    trending =  User_product.objects.filter( 
+                                              Q(description__contains = "wig")  |
+                                              Q(searchTag__contains = "wig") 
+                                           ).order_by("-id")[:10]
         
     for i in trending:
         trendingPic.append(Product_image.objects.filter(product= i)[0])
@@ -141,10 +141,9 @@ def bagsPage(request):
     context['trendingPic']= trendingPic
         
     suggestPic = []
-    suggest = User_product.objects.filter( Q(description__contains = "ladie") | 
-                                          Q(searchTag__contains = "avila")    |
-                                          Q(description__contains = "soap")   |
-                                          Q(searchTag__contains = "box")
+    suggest = User_product.objects.filter( Q(description__contains = "bag") | 
+                                          Q(searchTag__contains = "bag")    
+                                        
                                            ).order_by("-id").order_by('id')[:10]
         
     for i in suggest:
@@ -153,13 +152,13 @@ def bagsPage(request):
     context['suggest']= suggest
     context['suggestPic']= suggestPic
     
-    return render(request,'bags.html',context)
+    return render(request ,'bags.html', context)
            
 def sneakers(request):
     context={}
     
     productList =  User_product.objects.filter( Q(description__contains = "sneak") | 
-                                          Q(searchTag__contains = "sneak")   |
+                                          Q(searchTag__contains = "sneak")     |
                                           Q(description__contains = "shoe") | 
                                           Q(searchTag__contains = "shoe")    
                                            ).order_by("-id")
@@ -171,8 +170,12 @@ def sneakers(request):
     context['pictures'] = pictures 
     
     trendingPic = []
-    trending = User_product.objects.all().order_by('-id')[10:25]
-        
+    trending =  User_product.objects.filter( 
+                                              Q(searchTag__contains = "trouser")  |
+                                              Q(description__contains = "trouser")  |
+                                              Q(searchTag__contains = "trouser")  |
+                                              Q(description__contains = "trouser")  
+                                           ).order_by("-id")[:10]
     for i in trending:
         trendingPic.append(Product_image.objects.filter(product= i)[0])
             
@@ -180,10 +183,8 @@ def sneakers(request):
     context['trendingPic']= trendingPic
         
     suggestPic = []
-    suggest =  User_product.objects.filter( Q(description__contains = "quality") | 
-                                          Q(searchTag__contains = "quality")  
-                                             
-                                           )[:10]
+    suggest =  User_product.objects.filter( Q(description__contains = "shoe") | 
+                                          Q(searchTag__contains = "shoe")  )[:10]
         
     for i in suggest:
       suggestPic.append(Product_image.objects.filter(product= i)[0])
@@ -196,8 +197,7 @@ def sneakers(request):
 def jewelries(request):
     context={}
     
-    productList =  User_product.objects.filter( Q(description__contains = "iced") | 
-                                          Q(searchTag__contains = "iced")   |
+    productList =  User_product.objects.filter( 
                                           Q(description__contains = "necklace") | 
                                           Q(searchTag__contains = "necklace")  |
                                           Q(description__contains = "earrin") | 
@@ -213,7 +213,12 @@ def jewelries(request):
     context['pictures'] = pictures
     
     trendingPic = []
-    trending = User_product.objects.all().order_by('-id')[25:35]
+    trending =  User_product.objects.filter( 
+                                              Q(searchTag__contains = "cloth")  |
+                                              Q(description__contains = "palazzo")  |
+                                              Q(searchTag__contains = "trouser")  |
+                                              Q(description__contains = "trouser")  
+                                           ).order_by("-id")[:10]
         
     for i in trending:
         trendingPic.append(Product_image.objects.filter(product= i)[0])
@@ -222,10 +227,8 @@ def jewelries(request):
     context['trendingPic']= trendingPic
         
     suggestPic = []
-    suggest =User_product.objects.filter( Q(description__contains = "roya") | 
-                                          Q(searchTag__contains = "roya")    |
-                                          Q(description__contains = "dress")   |
-                                          Q(searchTag__contains = "dress")
+    suggest =User_product.objects.filter( Q(description__contains = "chain") | 
+                                          Q(searchTag__contains = "chain")    
                                            ).order_by("-id").order_by('id')[:10]
         
     for i in suggest:
@@ -238,7 +241,8 @@ def jewelries(request):
                
 def gown(request):
     context={}
-    productList = productList = User_product.objects.filter( Q(description__contains = "gown") |
+    productList = productList = User_product.objects.filter( 
+                                              Q(description__contains = "gown") |
                                               Q(searchTag__contains = "gown") 
                                            ).order_by("-id")
     pictures = []
@@ -249,8 +253,12 @@ def gown(request):
     context['pictures'] = pictures
     
     trendingPic = []
-    trending = User_product.objects.all().order_by('-id')[35:50]
-        
+    trending =  User_product.objects.filter( 
+                                              Q(searchTag__contains = "sneak")  |
+                                              Q(description__contains = "sneak")  |
+                                              Q(searchTag__contains = "shoe")  |
+                                              Q(description__contains = "shoe")  
+                                           ).order_by("-id")[:10]
     for i in trending:
         trendingPic.append(Product_image.objects.filter(product= i)[0])
             
@@ -259,12 +267,9 @@ def gown(request):
         
     suggestPic = []
     suggest = User_product.objects.filter(
-                                          Q(description__contains = "necklace") | 
-                                          Q(searchTag__contains = "necklace")   |
-                                          Q(description__contains = "earrin")   | 
-                                          Q(searchTag__contains = "earrin")     |
-                                          Q(description__contains = "iced")     | 
-                                          Q(searchTag__contains = "iced")       
+                                          Q(description__contains = "gown") | 
+                                          Q(searchTag__contains = "gown")   
+                                       
                                            )[:10]
         
     for i in suggest:
@@ -279,10 +284,10 @@ def ladies_outfit(request):
     context={}
     
     productList = User_product.objects.filter(
-                                          Q(description__contains = "ladie") | 
-                                          Q(searchTag__contains = "ladie")   |
-                                          Q(description__contains = "wea")   | 
-                                          Q(searchTag__contains = "wea")     
+                                          Q(description__contains = "ladie")   | 
+                                          Q(searchTag__contains = "ladie")    |
+                                          Q(description__contains = "wea")    | 
+                                          Q(searchTag__contains = "wea")      
                                            )
     pictures = []
     
@@ -292,8 +297,12 @@ def ladies_outfit(request):
     context['pictures'] = pictures
     
     trendingPic = []
-    trending = User_product.objects.all().order_by('-id')[50:60]
-        
+    trending =  User_product.objects.filter( 
+                                             Q(searchTag__contains = "scarf")   |
+                                             Q(description__contains = "scarf") |
+                                             Q(searchTag__contains = "bag")   |
+                                             Q(description__contains = "bag")
+                                           ).order_by("-id")[:10]
     for i in trending:
         trendingPic.append(Product_image.objects.filter(product= i)[0])
             
@@ -330,7 +339,12 @@ def bedsheet(request):
     context['pictures'] = pictures
     
     trendingPic = []
-    trending = User_product.objects.all().order_by('-id')[60:75]
+    trending =  User_product.objects.filter( 
+                                              Q(searchTag__contains = "senator")  |
+                                              Q(description__contains = "senator")  |
+                                              Q(searchTag__contains = "zara")  |
+                                              Q(description__contains = "zara")  
+                                           ).order_by("-id")[:10]
         
     for i in trending:
         trendingPic.append(Product_image.objects.filter(product= i)[0])
@@ -340,9 +354,9 @@ def bedsheet(request):
         
     suggestPic = []
     suggest = User_product.objects.filter(
-                                          Q(description__contains = "up") | 
-                                          Q(searchTag__contains = "up")       
-                                           ).order_by('-id')[:10]
+                                          Q(description__contains = "bed") | 
+                                          Q(searchTag__contains = "bed")       
+                                           ).order_by('id')[:10]
         
     for i in suggest:
       suggestPic.append(Product_image.objects.filter(product= i)[0])
@@ -373,7 +387,12 @@ def clothing(request):
     context['pictures'] = pictures
     
     trendingPic = []
-    trending = User_product.objects.all().order_by('-id')[75:85]
+    trending =  User_product.objects.filter( 
+                                              Q(searchTag__contains = "sneak")  |
+                                              Q(description__contains = "sneak")  |
+                                              Q(searchTag__contains = "shoe")  |
+                                              Q(description__contains = "shoe")  
+                                           ).order_by("-id")[:10]
         
     for i in trending:
         trendingPic.append(Product_image.objects.filter(product= i)[0])
@@ -383,12 +402,8 @@ def clothing(request):
         
     suggestPic = []
     suggest =User_product.objects.filter(
-                                          Q(description__contains = "shoe") | 
-                                          Q(searchTag__contains = "shoe")  |
-                                          Q(description__contains = "jea") | 
-                                          Q(searchTag__contains = "jea")   |
-                                           Q(description__contains = "sui") | 
-                                          Q(searchTag__contains = "sui")      
+                                          Q(description__contains = "trouser") | 
+                                          Q(searchTag__contains = "trouser")   
                                            )[:10]
         
     for i in suggest:
@@ -402,12 +417,10 @@ def clothing(request):
 def cookedfood(request):
     context={}
     
-    productList = User_product.objects.filter( Q(description__contains = "food") | 
+    productList = User_product.objects.filter( Q(description__contains = "beef") | 
                                           Q(searchTag__contains = "food")    |
-                                          Q(description__contains = "rice")   |
-                                          Q(searchTag__contains = "rice")  |
-                                           Q(description__contains = "spaghet")   |
-                                          Q(searchTag__contains = "spaghet")
+                                          Q(description__contains = "moi")   |
+                                         Q(description__contains = "egg")  
                                            ).order_by("-id")
     pictures = []
     
@@ -417,7 +430,11 @@ def cookedfood(request):
     context['pictures'] = pictures
     
     trendingPic = []
-    trending = User_product.objects.all().order_by('-id')[85:95]
+    trending =  User_product.objects.filter( 
+                                              Q(searchTag__contains = "corn")  |
+                                              Q(description__contains = "paint")  |
+                                              Q(searchTag__contains = "milk")   
+                                           ).order_by("-id")[:10]
         
     for i in trending:
         trendingPic.append(Product_image.objects.filter(product= i)[0])
@@ -427,12 +444,8 @@ def cookedfood(request):
         
     suggestPic = []
     suggest = User_product.objects.filter(
-                                          Q(description__contains = "mil") | 
-                                          Q(searchTag__contains = "mil")  |
-                                          Q(description__contains = "shir") | 
-                                          Q(searchTag__contains = "shir")   |
-                                           Q(description__contains = "wea") | 
-                                          Q(searchTag__contains = "wea")      
+                                          Q(description__contains = "food") | 
+                                          Q(searchTag__contains = "food")  
                                            ).order_by('-id')[:10]
         
     for i in suggest:
@@ -479,10 +492,7 @@ def shoprandom(request):
                                           Q(description__contains = "neck") | 
                                           Q(searchTag__contains = "neck")  |
                                           Q(description__contains = "materia") | 
-                                          Q(searchTag__contains = "materia")  |
-                                          Q(description__contains = "bank") | 
-                                          Q(searchTag__contains = "bank")   
-                                              
+                                          Q(searchTag__contains = "materia")  
                                            ).order_by('-id')[:10]
         
     for i in suggest:
@@ -506,6 +516,8 @@ def food(request):
                                            Q(description__contains = "paint") | 
                                           Q(searchTag__contains = "paint")    
                                            ).order_by('-id')
+    
+    
     pictures = []
     
     for i in productList:
@@ -514,7 +526,10 @@ def food(request):
     context['pictures'] = pictures
     
     trendingPic = []
-    trending = User_product.objects.all().order_by('-id')[105:120]
+    trending =  User_product.objects.filter( 
+        Q(searchTag__contains = "food")  |
+        Q(description__contains = "food")     
+    ).order_by("-id")[:10]
         
     for i in trending:
         trendingPic.append(Product_image.objects.filter(product= i)[0])
@@ -524,12 +539,9 @@ def food(request):
         
     suggestPic = []
     suggest = User_product.objects.filter(
-                                          Q(description__contains = "graphic") | 
-                                          Q(searchTag__contains = "graphic")  |
-                                          Q(description__contains = "phone") | 
-                                          Q(searchTag__contains = "phone")   |
-                                           Q(description__contains = "croc") 
-                                           ).order_by('-id')[:10]
+         Q(description__contains = "soup")  | 
+         Q(searchTag__contains = "soup")).order_by('-id')[:10]
+    
     for i in suggest:
       suggestPic.append(Product_image.objects.filter(product= i)[0])
       
@@ -541,7 +553,7 @@ def food(request):
 def fragrance(request):
     context={}
     
-    productList =User_product.objects.filter(
+    productList = User_product.objects.filter(
                                           Q(description__contains = "perfum") | 
                                           Q(searchTag__contains = "perfum")).order_by("-id")
     pictures = []
@@ -552,7 +564,10 @@ def fragrance(request):
     context['pictures'] = pictures
     
     trendingPic = []
-    trending = User_product.objects.all().order_by('-id')[40:55]
+    trending = User_product.objects.filter( 
+        Q(searchTag__contains = "chain")  |
+        Q(description__contains = "chain")     
+    ).order_by("-id")[:10]
         
     for i in trending:
         trendingPic.append(Product_image.objects.filter(product= i)[0])
@@ -562,14 +577,8 @@ def fragrance(request):
         
     suggestPic = []
     suggest = User_product.objects.filter(
-                                          Q(description__contains = "trouse") | 
-                                          Q(searchTag__contains = "trouse")  |
-                                          Q(description__contains = "ladi") | 
-                                          Q(searchTag__contains = "ladi")   |
-                                           Q(description__contains = "croc") | 
-                                          Q(searchTag__contains = "croc")   |
-                                           Q(description__contains = "dress") | 
-                                          Q(searchTag__contains = "dress")    
+                                          Q(description__contains = "perfume") | 
+                                          Q(searchTag__contains = "perfume")            
                                            ).order_by('-id')[:10]
         
     for i in suggest:
@@ -582,16 +591,15 @@ def fragrance(request):
 
 def gadgets(request):
     context={}
-    
     productList =User_product.objects.filter(
-                                          Q(description__contains = "phone") | 
-                                          Q(searchTag__contains = "phone")  |
-                                          Q(description__contains = "uk") | 
-                                          Q(searchTag__contains = "uk")   |
-                                           Q(description__contains = "hp") | 
-                                          Q(searchTag__contains = "hp")   |
-                                           Q(description__contains = "bank") | 
-                                          Q(searchTag__contains = "bank")    
+                                          Q(description__contains = "phone")  | 
+                                          Q(searchTag__contains = "phone")    |
+                                          Q(description__contains = "uk")     | 
+                                          Q(searchTag__contains = "uk")       |
+                                           Q(description__contains = "hp")    | 
+                                          Q(searchTag__contains = "hp")       |
+                                           Q(description__contains = "bank")  | 
+                                          Q(searchTag__contains = "bank")     
                                            ).order_by('-id')
     pictures = []
     
@@ -601,7 +609,12 @@ def gadgets(request):
     context['pictures'] = pictures
     
     trendingPic = []
-    trending = User_product.objects.all().order_by('-id')[60:75]
+    trending =User_product.objects.filter( 
+        Q(description__contains = "hp")    | 
+                                          Q(searchTag__contains = "hp")       |
+                                           Q(description__contains = "bank")  | 
+                                          Q(searchTag__contains = "bank")       
+    ).order_by("-id")[:10]
         
     for i in trending:
         trendingPic.append(Product_image.objects.filter(product= i)[0])
@@ -614,11 +627,7 @@ def gadgets(request):
                                           Q(description__contains = "crypt") | 
                                           Q(searchTag__contains = "crypt")  |
                                           Q(description__contains = "bit") | 
-                                          Q(searchTag__contains = "bit")   |
-                                           Q(description__contains = "jala") | 
-                                          Q(searchTag__contains = "jala")    |
-                                           Q(description__contains = "necklace") | 
-                                          Q(searchTag__contains = "necklace")  
+                                          Q(searchTag__contains = "bit")   
                                            )[:10]
         
     for i in suggest:
@@ -643,7 +652,8 @@ def graphics(request):
     context['pictures'] = pictures
     
     trendingPic = []
-    trending = User_product.objects.all().order_by('-id')[80:90]
+    trending =  User_product.objects.filter(
+                Q(description__contains = "graphic")).order_by('-id')
         
     for i in trending:
         trendingPic.append(Product_image.objects.filter(product= i)[0])
@@ -654,13 +664,7 @@ def graphics(request):
     suggestPic = []
     suggest = User_product.objects.filter(
                                          Q(description__contains = "uk") | 
-                                          Q(searchTag__contains = "uk")   |
-                                           Q(description__contains = "bank") | 
-                                          Q(searchTag__contains = "bank")   |
-                                          Q(description__contains = "phone") | 
-                                          Q(searchTag__contains = "phone")   | 
-                                          Q(description__contains = "neck") | 
-                                          Q(searchTag__contains = "neck")     
+                                          Q(searchTag__contains = "uk")  
                                            )[:10]
         
     for i in suggest:
@@ -686,7 +690,10 @@ def postutme(request):
     context['pictures'] = pictures
     
     trendingPic = []
-    trending = User_product.objects.all().order_by('-id')[90:100]
+    trending =  User_product.objects.filter(
+                                          Q(description__contains = "post")|
+                                          Q(searchTag__contains = "utme")
+                                           ).order_by('-id')
         
     for i in trending:
         trendingPic.append(Product_image.objects.filter(product= i)[0])
@@ -696,14 +703,10 @@ def postutme(request):
         
     suggestPic = []
     suggest = User_product.objects.filter(
-                                         Q(description__contains = "uk") | 
-                                          Q(searchTag__contains = "uk")   |
                                            Q(description__contains = "bank") | 
                                           Q(searchTag__contains = "bank")   |
                                           Q(description__contains = "phone") | 
-                                          Q(searchTag__contains = "phone")   | 
-                                          Q(description__contains = "neck") | 
-                                          Q(searchTag__contains = "neck")     
+                                          Q(searchTag__contains = "phone")
                                            )[:10]
         
         
@@ -721,8 +724,9 @@ def trousers(request):
     productList =  User_product.objects.filter(
                                          Q(description__contains = "trouser") | 
                                           Q(searchTag__contains = "trouser")  |
-                                           Q(description__contains = "jean") | 
-                                          Q(searchTag__contains = "jean") )
+                                           Q(description__contains = "jean")  | 
+                                          Q(searchTag__contains = "jean")
+                                          )
     pictures = []
     
     for i in productList:
@@ -731,7 +735,11 @@ def trousers(request):
     context['pictures'] = pictures
     
     trendingPic = []
-    trending = User_product.objects.all().order_by('-id')[15:35]
+    trending =  User_product.objects.filter(
+                                         Q(description__contains = "trouser") | 
+                                          Q(searchTag__contains = "trouser")  |
+                                           Q(description__contains = "jean")  | 
+                                          Q(searchTag__contains = "jean") )    
         
     for i in trending:
         trendingPic.append(Product_image.objects.filter(product= i)[0])
@@ -742,12 +750,8 @@ def trousers(request):
     suggestPic = []
     suggest = User_product.objects.filter(
                                          Q(description__contains = "jalab") |                                          Q(searchTag__contains = "jalab")   |
-                                           Q(description__contains = "wea") | 
-                                          Q(searchTag__contains = "wea")     |
-                                          Q(description__contains = "ladie") | 
-                                          Q(searchTag__contains = "ladie")   | 
-                                          Q(description__contains = "suit")  | 
-                                          Q(searchTag__contains = "suit")     
+                                           Q(description__contains = "scarf") | 
+                                          Q(searchTag__contains = "scarf")       
                                            )[:10]
         
         
@@ -771,8 +775,12 @@ def wig(request):
     context['pictures'] = pictures
     
     trendingPic = []
-    trending = User_product.objects.all().order_by('-id')[10:25]
-        
+    trending =  User_product.objects.filter(
+                                         Q(description__contains = "hair") | 
+                                          Q(searchTag__contains = "hair")   |
+                                         Q(description__contains = "wig") | 
+                                          Q(searchTag__contains = "wig")  
+                                           )[:10]
     for i in trending:
         trendingPic.append(Product_image.objects.filter(product= i)[0])
             
@@ -849,12 +857,14 @@ def review(request):
 def changedp(request):
     loged_in_user = request.user
     Images = request.FILES.getlist('imagesdp')[0]
-    fs= FileSystemStorage()
-    file_path= fs.save(Images.name,Images)
-    user = User_Detail.objects.get(user=loged_in_user)
-    user.profilepic = file_path
-    user.save()
-    return redirect('home')
+    jim =str(Images)
+    if jim[-4:] == '.png' or jim[-4:] == '.PNG' or jim[-4:] == '.jpg' or jim[-4:] == '.jpeg' or jim[-4:] == '.JPG' or jim[-4:] == '.JPEG':
+        fs= FileSystemStorage()
+        file_path= fs.save(Images.name,Images)
+        user = User_Detail.objects.get(user=loged_in_user)
+        user.profilepic = file_path
+        user.save()
+        return redirect('home')
 
 def delete(request):
     context = {}

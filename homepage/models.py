@@ -118,13 +118,13 @@ class User_Detail(models.Model):
     
 class User_product(models.Model):
     category = (('perfume', 'PERFUME'),('lasureg', 'LASU REGISTRATIONS,FEES AND FORMS'), 
-       ('shoe', 'SHOE'),('sneaks', 'SNEAKERS'),('trouser', 'TROUSER'),('electronics', 'ELECTRONICS'),
+       ('shoe', 'SHOE'),('sneakers', 'SNEAKERS'),('trouser', 'TROUSER'),('electronics', 'ELECTRONICS'),
        ('shirt', 'SHIRT'),('bag', 'BAG'),('bedsheet', 'BEDSHEET'),('health', 'HEALTH'),
-       ('wig', 'WIG'),('graphics', 'GRAPHICS'),('phones', ''), ('furniture', 'HOME | FURNITURE | APPLIANCES') , 
+       ('wig', 'WIG'),('graphics', 'GRAPHICS'),('phones', 'PHONES'), ('furniture', 'HOME | FURNITURE | APPLIANCES') , 
        ('laptop', 'LAPTOPS'),('engineer', 'ENGINEERING'),('property', 'HOUSE TO LET | HOUSE TO BUY'),('cosmetics', ' BEUTY | COSMETICS'), 
        ('meal', 'FAST MEALS'),('food', 'FOOD STUFF'),('gadgets', 'POWER BANK | CHARGER CORD | MP3 PLAYER | EAR PIECE |  PS4'),('snack', 'SNACKS & PASTERIES'),('necklace', 'CUBBAN | JEWELRIES| EARRINGS | BRACELET | BEADS'), ('sport', ' SPORT | JERSY | FOOTBALL'),
        ('drinks', 'DRINKS'),  ('webapp', 'SOFTWARE ENGINEER'), ('cloth', 'FEMALE CLOTHING'), ('services', 'OFFER SERVICE'), ('gown', 'GOWN AND DRESS'),
-      ('maleCLTH', 'MALE CLOTHING'),('repairs', 'PLUMBER | CARPENTER | ELECTRICIAN'),('others', 'OTHERS'),
+      ('male cloth', 'MALE CLOTHING'),('repairs', 'PLUMBER | CARPENTER | ELECTRICIAN'),('others', 'OTHERS'),
     )
     
     id              = models.AutoField(primary_key=True)
