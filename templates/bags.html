@@ -29,11 +29,12 @@
     </div>
 
     <h5>Bag Collectionns </h5>
-    <h5 class='seokit'> shop school bag for students resuming | ladies hand bag for sale at discount price </h5>
+   
     <div  style="position:relative; height:fit-content;">
       <div id ="productConCov">
       {% for i in products %}
         <div class="productcover">
+           <h5 class='seokit'> shop school bag for students resuming | ladies hand bag for sale at discount price | quality hand bags | tote bags design | school bags</h5>
         {%for j in pictures %}{%if i.id == j.product_id %}
         <div class="productimg">
           <img src="{{ j.product_img.url }}" alt="image here" />

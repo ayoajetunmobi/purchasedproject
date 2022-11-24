@@ -10,6 +10,7 @@ from django.http import JsonResponse
 from django.contrib.auth.signals import user_logged_in, user_logged_out
 from django.dispatch import receiver
 import json
+from django.core.mail import send_mail
 from .models import   User_Detail , User_product , Product_image ,  Customer_care, Searchdata , Contacted, Reviews
 from django.contrib.auth import get_user_model
 from .forms import (RegistrationForm, UserDetailForm) 
@@ -27,15 +28,15 @@ def index(request):
     loged_in_user = request.user
     
     product = User_product.objects.filter(
-                                          Q(searchTag__contains = "avila")    |
-                                          Q(description__contains = "soap")   |
-                                          Q(searchTag__contains = "box")  |
-                                           Q(description__contains = "henna") |
-                                          Q(searchTag__contains = "henna" ) |
-                                           Q(description__contains = "jalab") |
-                                        Q(searchTag__contains = "jalab" ) |
-                                        Q(description__contains = "jog")   |
-                                           Q(searchTag__contains = "cosmetic") | 
+                                          Q(searchTag__contains = "avila")      |
+                                          Q(description__contains = "soap")     |
+                                          Q(searchTag__contains = "box")        |
+                                           Q(description__contains = "henna")   |
+                                          Q(searchTag__contains = "henna" )     |
+                                           Q(description__contains = "jalab")   |
+                                        Q(searchTag__contains = "jalab" )       |
+                                        Q(description__contains = "jog")        |
+                                           Q(searchTag__contains = "cosmetic")  | 
                                             Q(searchTag__contains = "earring" ) |
                                         Q(description__contains = "earring")   
                                            ).order_by("-id")[:14]
@@ -107,11 +108,21 @@ def register(request):
         if form1.is_valid() and form2.is_valid() and Images:
             email= form1.save(commit=False)
             email.active = True
+            email_subject = 'activate your account '
+            email_body = 'Here is the message.'
+            send_mail(
+                   email_subject,
+                   email_body,
+                   'noreply@shopatpurchased.com',
+                   [email.email],
+                   fail_silently=False,
+            )
             email.save()
             profile= form2.save(commit=False)
             profile.user=email
             profile.profilepic = Images
             profile.save()
+            
             return HttpResponseRedirect('/login/')
     return render(request, 'register.html',context)
    
@@ -417,10 +428,10 @@ def clothing(request):
 def cookedfood(request):
     context={}
     
-    productList = User_product.objects.filter( Q(description__contains = "beef") | 
-                                          Q(searchTag__contains = "food")    |
-                                          Q(description__contains = "moi")   |
-                                         Q(description__contains = "egg")  
+    productList = User_product.objects.filter( Q(description__contains = "beef")      | 
+                                               Q(searchTag__contains = "food")        |
+                                               Q(description__contains = "moi moi")   |
+                                               Q(description__contains = "egg")         
                                            ).order_by("-id")
     pictures = []
     
@@ -431,7 +442,7 @@ def cookedfood(request):
     
     trendingPic = []
     trending =  User_product.objects.filter( 
-                                              Q(searchTag__contains = "corn")  |
+                                              Q(searchTag__contains = "corn")     |
                                               Q(description__contains = "paint")  |
                                               Q(searchTag__contains = "milk")   
                                            ).order_by("-id")[:10]
@@ -598,7 +609,6 @@ def gadgets(request):
                                           Q(searchTag__contains = "uk")       |
                                            Q(description__contains = "hp")    | 
                                           Q(searchTag__contains = "hp")       |
-                                           Q(description__contains = "bank")  | 
                                           Q(searchTag__contains = "bank")     
                                            ).order_by('-id')
     pictures = []

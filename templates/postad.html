@@ -39,9 +39,9 @@
                 <br>
                 <label>Detailed Description <i class="fa fa-tag "></i></label> <br>
                 <br>
-                <textarea name="desc1" cols="24" rows="5" required maxlength="150" placeholder="Describe Product Properly, all it's specifications and why your product or service stands out... max 150 words"></textarea>
+                <textarea id="desc1" name="desc1" cols="24" rows="5" required maxlength="120" placeholder="Describe Product Properly, all it's specifications and why your product or service stands out... nothing less than 100 words"></textarea>
                 <br>
-                <br>
+                <h6 id="warning" style ="color:red; opacity:0;"> description is less than 100 words <h6>
                 <label for="category">category : </label>
 
                 <select id="cartegories" name="categories">
@@ -87,13 +87,29 @@
             </div><br>
 
             <input style="width:200px;height:50px;" type="button" id="addImage" onclick="myclick()" value="Add"> <br><br>
-            <input  style="background-color:blue; color:white; border-radius:5px; width:200px;height:50px;" type="submit" value="post" id="submit" />
-          
-          
+            <input  style="background-color:blue; color:white; border-radius:5px; width:200px;height:50px; opacity:0;" type="submit" value="post ad" id="submit" />
           </form>
 
  
     </div>
 </body>
  <script src="{% static 'practise.js' %} "></script>
+
+  <script >   
+  
+    document.addEventListener('click',()=>{
+      let submit_btn = document.getElementById('submit');
+      let description = document.getElementById('desc1').value;
+       let warning = document.getElementById('warning');
+      if(description.length > 0 && description.length <= 60){
+          submit_btn.style.opacity=0;
+         warning.style.opacity=1;
+      }
+      if(description.length > 60 && description.length <= 120){
+        submit_btn.style.opacity=1;
+        warning.style.opacity=0;
+      }
+    })
+  
+  </script>
 </html>

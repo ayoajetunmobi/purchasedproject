@@ -40,7 +40,7 @@
 }
 
 .headernavigations {
-    display: inline-flex;
+    display: inline-block;
     margin-left: 33%;
 }
 
@@ -587,6 +587,33 @@ footer {
     font-family: Verdana, Geneva, Tahoma, sans-serif;
 }
 
+.blogArticleContainer {
+    margin: 200px auto;
+}
+
+.blogArticle {
+    width: 40%;
+    height: fit-content;
+    text-align: center;
+    margin: 50px auto;
+    border-bottom: 1px solid black;
+}
+
+.blogArticle img {
+    width: 100%;
+    height: 300px;
+}
+
+.pagination {
+    text-align: center;
+    width: 100%;
+}
+
+.blogCont img {
+    width: 60%;
+    height: 30%
+}
+
 @media screen and (max-width: 700px) {
     .aboutimagescontainer {
         height: 12%;
@@ -713,5 +740,11 @@ footer {
     }
     .suggestedProduct div {
         margin-left: 20px;
+    }
+    .blogArticle {
+        width: 100%;
+    }
+    .blogCont img {
+        width: 100%;
     }
 }

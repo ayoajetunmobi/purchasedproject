@@ -1,0 +1,53 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <link
+      rel="stylesheet"
+      href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css"
+    />
+    <link rel="stylesheet" href="{% static 'practise.css' %}" />
+    <title></title>
+    <meta name="description" content="all the trending products" />
+  </head>
+
+  <body>
+    <header>
+      <header>
+        <div class="headercontainer">
+          <img src="{% static 'logopurchase.png' %}" alt="image here" />
+        </div>
+      </header>
+    </header>
+    <div class="blogCont" style="margin: 120px 10%">
+      <h1>{{post_details.title}}</h1>
+      <p>{{post_details.overview}}</p>
+      <p>{{post_details.dateupdated}}</p>
+      <img src="{{post_pic.blogImg.url}}" alt="image here" />
+      <div style="text-align: left">{{ post_details.content|safe }}</div>
+    </div>
+    <div class="RelatedArticle">
+      <h2>SUGGESTED ARTICLE</h2>
+      <p>Kitchen knifes and pancake</p>
+      <p>Wife Material</p>
+      <p>man kind</p>
+      <p>school children</p>
+    </div>
+
+    <div class="MostRecentArticle">
+      <h2>Recently Posted</h2>
+      {% for i in recentPOsted %}
+      <a href="{% url 'PostDetails' i.id %}"><p>{{i.title}}</p></a>
+      {% endfor %}
+    </div>
+
+    <br /><br /><br /><br /><br /><br /><br /><br /><br />
+    <div style="display: block; text-align: center">
+      AFFILATE INTENTIONS WITH AMAZON <br />
+      all rights reserved shopatpurchased
+    </div>
+  </body>
+</html>

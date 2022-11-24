@@ -21,5 +21,8 @@ from django.conf.urls.static import static
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('',include('homepage.urls')),
-    path('login/',include('login.urls'))
+    path('login/',include('login.urls')),
+    path('blog/',include('blog.urls')),
+    path('tinymce/', include('tinymce.urls')),
 ]+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+

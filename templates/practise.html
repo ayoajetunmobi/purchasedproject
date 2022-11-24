@@ -23,6 +23,7 @@
       <div class="headercontainer">
         <img src="{% static 'logopurchase.png' %}" alt="image here" />
         <div class="headernavigations">
+          <a href="{% url 'blog' %}" class="sigin"> Blog </a>
           {% if user.is_authenticated %}
           <a href="#" onclick="display_profile()" class="sigin">
             <i class="fa fa-user"></i>profile</a>

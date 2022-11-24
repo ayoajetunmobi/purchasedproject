@@ -1,0 +1,73 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <link
+      rel="stylesheet"
+      href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css"
+    />
+    <link rel="stylesheet" href="{% static 'practise.css' %}" />
+    <title></title>
+    <meta name="description" content="all the trending products" />
+  </head>
+
+  <body>
+    <header>
+      <header>
+        <div class="headercontainer">
+          <img src="{% static 'logopurchase.png' %}" alt="image here" />
+        </div>
+      </header>
+    </header>
+    <div class="blogArticleContainer">
+      {% for i in posts %}
+      <div
+        class="blogArticle"
+        onclick="location.href ='{% url 'PostDetails' i.id %}';"
+      >
+        <h1>{{i.title}}</h1>
+        {%for j in Post_img %}{%if i.id == j.post_id %}
+        <img src="{{j.blogImg.url}}" alt="image here" />
+        {%endif%} {%endfor%}
+        <br />
+        <h4>{{i.overview}}</h4>
+        <h5>last modified : {{i.dateupdated}}</h5>
+      </div>
+      {% endfor%}
+    </div>
+    {% if posts.has_other_pages %}
+    <div class="pagination">
+      {% if posts.has_previous %}
+      <a href="?page={{posts.previous_page_number}}"
+        ><button
+          style="
+            width: 80px;
+            height: 40px;
+            background-color: blue;
+            color: white;
+          "
+        >
+          Previous
+        </button></a
+      >
+      {% endif %} {% if posts.has_next %}
+      <a href="?page={{posts.next_page_number}}"
+        ><button
+          style="
+            width: 80px;
+            height: 40px;
+            background-color: blue;
+            color: white;
+          "
+        >
+          Next
+        </button></a
+      >
+      {% endif %}
+    </div>
+    {% endif %}
+  </body>
+</html>

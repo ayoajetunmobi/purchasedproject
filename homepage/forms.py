@@ -96,5 +96,12 @@ class UserDetailForm (forms.ModelForm):
         if  model.objects.filter(username=username).exists():
             raise ValidationError('this username is already taken')
         return username
+    
+    def clean_contact(self):
+        model=User_Detail
+        contact= self.cleaned_data.get('contact')
+        if  model.objects.filter(contact=contact).exists():
+            raise ValidationError('this contact belongs to another user')
+        return contact
 
 

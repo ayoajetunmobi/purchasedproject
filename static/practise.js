@@ -438,3 +438,11 @@ function closenumdisp() {
     let numberDisp = document.querySelector('.numberDisp');
     numberDisp.style.display = 'none'
 }
+
+function val_postad_form() {
+    let description = document.getElementsByName('desc1').values();
+    let submit_btn = document.getElementById('submit');
+
+    console.log(description)
+
+}
