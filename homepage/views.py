@@ -108,15 +108,6 @@ def register(request):
         if form1.is_valid() and form2.is_valid() and Images:
             email= form1.save(commit=False)
             email.active = True
-            email_subject = 'activate your account '
-            email_body = 'Here is the message.'
-            send_mail(
-                   email_subject,
-                   email_body,
-                   'noreply@shopatpurchased.com',
-                   [email.email],
-                   fail_silently=False,
-            )
             email.save()
             profile= form2.save(commit=False)
             profile.user=email
