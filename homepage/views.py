@@ -38,7 +38,9 @@ def index(request):
                                         Q(description__contains = "jog")        |
                                            Q(searchTag__contains = "cosmetic")  | 
                                             Q(searchTag__contains = "earring" ) |
-                                        Q(description__contains = "earring")   
+                                        Q(description__contains = "earring")|
+                                         Q(searchTag__contains = "bag" ) |
+                                        Q(description__contains = "bag")  
                                            ).order_by("-id")[:18]
     
     picarray = []
