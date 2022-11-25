@@ -263,10 +263,10 @@ footer {
     position: fixed;
     bottom: 0%;
     width: 100%;
-    color: white;
-    background-color: #000000;
+    color: rgb(0, 0, 0);
+    background-color: #ffffff;
     z-index: 2;
-    display: none;
+    display: block;
     height: 100px;
 }
 

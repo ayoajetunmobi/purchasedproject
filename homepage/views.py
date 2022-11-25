@@ -39,7 +39,7 @@ def index(request):
                                            Q(searchTag__contains = "cosmetic")  | 
                                             Q(searchTag__contains = "earring" ) |
                                         Q(description__contains = "earring")   
-                                           ).order_by("-id")[:14]
+                                           ).order_by("-id")[:18]
     
     picarray = []
     for i in product:

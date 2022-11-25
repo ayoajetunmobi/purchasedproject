@@ -28,12 +28,12 @@
     </div>
     <br>
 
-    <h5> Delicious Cooked Meal </h5>
-    <h5 class='seokit'>  buy ofada rice on campus for as low as N2500.00 per plate | tasty rice and stew at mayums store avaailable| a plate of jollof rice and chicken for as low as N2000.00 </h5>
+    <h2> Delicious Cooked Meal </h2>
 
     <div  style="position:relative; height:fit-content;">
       <div id ="productConCov">
       {% for i in products %}
+        <h5 class='seokit'>  buy ofada rice on campus for as low as N2500.00 per plate | tasty rice and stew at mayums store avaailable| a plate of jollof rice and chicken for as low as N2000.00 | spaghetti and chicken | chips</h5>
         <div class="productcover">
         {%for j in pictures %}{%if i.id == j.product_id %}
         <div class="productimg">

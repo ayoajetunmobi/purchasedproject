@@ -27,13 +27,13 @@
       </div>
     </div>
     
-    <h5> Ladies Fashion Outfit </h5>
-    <h5 class='seokit'>  quality fashion short crop top and crotchet wears  |beutifully made panty suit and short shirt gown in different size, color and length  check now| ladies up and down wears available in the below section </h5>
-
+    <h2> Ladies Fashion Outfit </h2>
+  
     <div  style="position:relative; height:fit-content;">
        <div id ="productConCov">
       {% for i in products %}
         <div class="productcover">
+           <h5 class='seokit'>  quality fashion short crop top and crotchet wears  |beutifully made panty suit and short shirt gown in different size, color and length  check now| ladies up and down wears available in the below section </h5>
         {%for j in pictures %}{%if i.id == j.product_id %}
         <div class="productimg">
           <img src="{{j.product_img.url}}" alt="image here" />

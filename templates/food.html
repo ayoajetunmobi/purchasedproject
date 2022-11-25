@@ -27,12 +27,13 @@
       </div>
     </div>
      
-    <h5> Fast Meals and Food Stuff </h5>
-    <h5 class='seokit'> best nigerian milk and cornflakes avaailable here  | energy giving food for kids all avaailable here | a plate of jollof rice and chicken incase you are hungry </h5>
+    <h2> Fast Meals and Food Stuff </h2>
+
 
     <div  style="position:relative; height:fit-content;">
        <div id ="productConCov">
       {% for i in products %}
+       <h5 class='seokit'> best nigerian milk and cornflakes avaailable here  | energy giving food for kids all avaailable here | a plate of jollof rice and chicken incase you are hungry </h5>
         <div class="productcover">
         {%for j in pictures %}{%if i.id == j.product_id %}
         <div class="productimg">

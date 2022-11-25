@@ -28,13 +28,12 @@
       </div>
     </div>
     
-    <h5> Wigs and Human hair  </h5> 
-    <h5 class="seokit"> we sell original bone straight at discount price | strong and solid wig stand for sale at our store </h5>
-
+    <h2> Wigs and Human hair  </h2> 
     <div  style="position:relative; height:fit-content;">
        <div id ="productConCov">
       {% for i in products %}
         <div class="productcover">
+              <h5 class="seokit"> we sell original bone straight at discount price | strong and solid wig stand for sale at our store </h5>
         {%for j in pictures %}{%if i.id == j.product_id %}
         <div class="productimg">
           <img src="{{j.product_img.url}}" alt="image here" />
