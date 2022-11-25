@@ -266,7 +266,6 @@ footer {
     color: rgb(0, 0, 0);
     background-color: #ffffff;
     z-index: 2;
-    display: block;
     height: 100px;
 }
 
