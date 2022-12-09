@@ -1,7 +1,6 @@
 from django.urls import path
 from . import views
-
-
+from .views import VerificationView 
 
 urlpatterns = [
   path('', views.index, name='home'),
@@ -25,6 +24,7 @@ urlpatterns = [
   path('postutme/',views.postutme,name='postutme'),
   path('trousers/',views.trousers,name='trousers'),
   path('wig/',views.wig,name='wig'),
+  path('activate/<uidb64>/<token>/', VerificationView.as_view(), name='activate'),
   path('search/',views.search,name= 'search'),
   path('productspec/<int:id>',views.Product_spec,name= 'productspec'),
   path('changedp/',views.changedp, name='changedp'),

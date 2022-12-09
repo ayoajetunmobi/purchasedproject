@@ -5,10 +5,18 @@ from django.contrib.auth.signals import user_logged_in, user_logged_out
 from django.dispatch import receiver
 from .forms import UserLoginForm, Password_resetform
 from django.urls import reverse
+from django.core.mail import send_mail
+from django.views.generic import View
 from django.http import HttpResponseRedirect
 from homepage.models import User_Detail, User_product
 from django.contrib.auth import get_user_model
 from django.forms import ValidationError
+
+
+from django.utils.encoding import force_bytes, force_str, DjangoUnicodeDecodeError
+from django.utils.http import urlsafe_base64_encode, urlsafe_base64_decode
+from django.contrib.sites.shortcuts import get_current_site
+from .utils import token_generator 
 
 
 User=get_user_model()
@@ -18,9 +26,9 @@ def login_user(request):
     nextt = request.GET.get('next')
     
     if form.is_valid():
-       email=form.cleaned_data.get('email')
-       password= form.cleaned_data.get('password')
-       user=authenticate(request, username=email, password=password)
+       email = form.cleaned_data.get('email')
+       password = form.cleaned_data.get('password')
+       user = authenticate(request, username=email, password=password)
        login(request, user)
        if nextt:
            return redirect(nextt)
@@ -29,19 +37,43 @@ def login_user(request):
     return render(request,'login.html',context)
   
 def password_reset(request):
-    form2 =  Password_resetform(request.POST or None)
-        
+    form2 =  Password_resetform(request.POST or None)    
     if form2.is_valid():
         email = form2.cleaned_data.get('email_address')
-        password2 = form2.cleaned_data.get('confirm_password')
-        
+        password2 = form2.cleaned_data.get('password2')
+        data_generate = str(str(email)+ " " + str(password2))
+        print(data_generate)
         user = User.objects.get(email=email)
-        user.password = make_password(password2)
-        user.save()
-        return redirect("login") 
-    
-    context = {"form2":form2} 
+        user = User_Detail.objects.get(user=user)
+        uidb64   = urlsafe_base64_encode(force_bytes(data_generate))
+        domain   = get_current_site(request).domain
+        link     = reverse('activate',kwargs={'uidb64':uidb64, 'token':token_generator.make_token(email)})
+        activate_url  = 'http://'+domain+link
+        sub_ject = 'activate your account'
+        message  = 'Hi '+ user.username + '  please click on link to reset your password' + \
+            '' + activate_url
+        send_mail(
+                  sub_ject,
+                  message,
+                  'noreply@shopatpurchased.com',
+                  [email,],
+        )
+    form2 =  Password_resetform()    
+    context = {"form2":form2}
+     
     return render(request,'password.html',context)       
+
+class VerificationView(View):
+    def get(self, request, uidb64, token):
+      
+          id  = force_str(urlsafe_base64_decode(uidb64)) 
+          password = id.split(" ")[1:][0]
+          email    = id.split(" ")[:1][0]
+          user = User.objects.get(email=email)
+          user.password = make_password(password)
+          user.save()
+          
+          return redirect('login')
 
 def logout_user(request):
     logout(request)

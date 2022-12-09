@@ -18,10 +18,11 @@ class Post(models.Model):
     def __str__(self):
         return (self.title)
     
+    
 class Post_Pic(models.Model):
      id                = models.AutoField(primary_key=True)
      post              = models.ForeignKey(Post, on_delete=models.CASCADE) 
-     blogImg           = models.ImageField(upload_to = "media") 
+     blogImg           = models.ImageField(upload_to = "blog") 
      
      def __str__(self):
         return str(self.post)

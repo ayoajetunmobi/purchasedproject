@@ -7,17 +7,23 @@ from django.contrib.auth.hashers import make_password
 from django.shortcuts import get_object_or_404
 from django.db.models import Q
 from django.http import JsonResponse
+from django.views.generic import View
 from django.contrib.auth.signals import user_logged_in, user_logged_out
 from django.dispatch import receiver
+from django.urls import reverse
 import json
 from django.core.mail import send_mail
-from .models import   User_Detail , User_product , Product_image ,  Customer_care, Searchdata , Contacted, Reviews
+from .models import  User_Detail , User_product , Product_image ,  Customer_care, Searchdata , Contacted, Reviews
 from django.contrib.auth import get_user_model
-from .forms import (RegistrationForm, UserDetailForm) 
+from .forms import (RegistrationForm , UserDetailForm) 
 from pygments.formatters import img
 from numpy import random
 from django.views.decorators.csrf import csrf_exempt
 
+from django.utils.encoding import force_bytes, force_str, DjangoUnicodeDecodeError
+from django.utils.http import urlsafe_base64_encode, urlsafe_base64_decode
+from django.contrib.sites.shortcuts import get_current_site
+from .utils import token_generator 
 
 
 User=get_user_model()
@@ -26,7 +32,6 @@ page_num = 1
 def index(request):
     context={}
     loged_in_user = request.user
-    
     product = User_product.objects.filter(
                                           Q(searchTag__contains = "avila")      |
                                           Q(description__contains = "soap")     |
@@ -108,16 +113,44 @@ def register(request):
     img = str(Images)
     if img[-4:] == '.png' or img[-4:] == '.PNG' or img[-4:] == '.jpg' or img[-4:] == '.jpeg' or img[-4:] == '.JPG' or img[-4:] == '.JPEG':
         if form1.is_valid() and form2.is_valid() and Images:
-            email= form1.save(commit=False)
-            email.active = True
+            email = form1.save(commit=False)
+            email.active = False
             email.save()
-            profile= form2.save(commit=False)
-            profile.user=email
+            profile = form2.save(commit=False)
+            profile.user = email
             profile.profilepic = Images
             profile.save()
             
+            
+            uidb64   = urlsafe_base64_encode(force_bytes(email.pk))
+            domain   = get_current_site(request).domain
+            link     = reverse('activate',kwargs={'uidb64':uidb64, 'token':token_generator.make_token(email)})
+            activate_url  = 'http://'+domain+link
+            sub_ject = 'activate your account'
+            message  = 'Hi '+profile.username + " " + \
+                'click on the link below to activate your account\n' + activate_url
+            send_mail(
+                  sub_ject,
+                  message,
+                  'noreply@shopatpurchased.com',
+                  [email.email,],
+            )
             return HttpResponseRedirect('/login/')
     return render(request, 'register.html',context)
+
+class VerificationView(View):
+    def get(self, request, uidb64, token):
+        try:
+          id  = force_str(urlsafe_base64_decode(uidb64))
+          user  = User.objects.get(pk=id)
+          
+          if user.is_active:
+             return redirect('login')
+          user.active = True
+          user.save()
+        except Exception as ex:
+            pass
+        return redirect('login')
    
 def bagsPage(request):
     context={}

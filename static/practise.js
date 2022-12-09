@@ -6,6 +6,11 @@ let screening = screen.width;
 let close = [...document.querySelectorAll('.close')];
 let closeprofilePage = document.getElementById('closeprofilePage');
 
+
+// document.addEventListener("DOMContentLoaded", () => {
+//     my_push_notification()
+// })
+
 function spinner() {
     let spinnerdiv = document.getElementById('spinnerdiv');
     spinnerdiv.style.display = 'block';
