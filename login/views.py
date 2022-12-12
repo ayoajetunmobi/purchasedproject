@@ -48,7 +48,7 @@ def password_reset(request):
         domain   = get_current_site(request).domain
         link     = reverse('activated',kwargs={'uidb64':uidb64, 'token':token_generator.make_token(email)})
         activate_url  = 'http://'+domain+link
-        sub_ject = 'Reset your mail'
+        sub_ject = 'Reset your pasrd'
         message  = 'Hi '+ user.username + '  please click on link to reset your password' + \
             '' + activate_url
         send_mail(
@@ -57,7 +57,7 @@ def password_reset(request):
                   'noreply@shopatpurchased.com',
                   [email,],
         )
-    form2 =  Password_resetform()    
+    form2 =  Password_resetform()  
     context = {"form2":form2}
      
     return render(request,'password.html',context)       

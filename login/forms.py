@@ -24,7 +24,7 @@ class UserLoginForm (forms.Form):
             if authenticate(username =email, password=password):
                  return super(UserLoginForm,self).clean(*args, **kwargs)
             elif user.is_active == False:
-               raise forms.ValidationError('check your email to activate account') 
+               raise forms.ValidationError('check your mail to activate account') 
             else:
                 raise forms.ValidationError('check credentials and try again')
             
