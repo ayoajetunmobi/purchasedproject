@@ -46,9 +46,9 @@ def password_reset(request):
         user = User_Detail.objects.get(user=user)
         uidb64   = urlsafe_base64_encode(force_bytes(data_generate))
         domain   = get_current_site(request).domain
-        link     = reverse('activate',kwargs={'uidb64':uidb64, 'token':token_generator.make_token(email)})
+        link     = reverse('activated',kwargs={'uidb64':uidb64, 'token':token_generator.make_token(email)})
         activate_url  = 'http://'+domain+link
-        sub_ject = 'activate your account'
+        sub_ject = 'Reset your mail'
         message  = 'Hi '+ user.username + '  please click on link to reset your password' + \
             '' + activate_url
         send_mail(
