@@ -42,7 +42,6 @@ def password_reset(request):
         email = form2.cleaned_data.get('email_address')
         password2 = form2.cleaned_data.get('password2')
         data_generate = str(str(email)+ " " + str(password2))
-        print(data_generate)
         user = User.objects.get(email=email)
         user = User_Detail.objects.get(user=user)
         uidb64   = urlsafe_base64_encode(force_bytes(data_generate))
@@ -63,7 +62,7 @@ def password_reset(request):
      
     return render(request,'password.html',context)       
 
-class VerificationView(View):
+class PassWordVerificationView(View):
     def get(self, request, uidb64, token):
       
           id  = force_str(urlsafe_base64_decode(uidb64)) 
