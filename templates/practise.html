@@ -437,31 +437,7 @@
           }); //Convert response to JSON
         });
       }*/
-      if(window.scrollY >= 150){
-          console.log('yes1')
-          Notification.requestPermission().then(perm => {
-            
-         })
-      }
-      let notif;
-      document.addEventListener('visibilitychange',()=>{
-        if (document.visibilityState === "hidden"){
-              notif = new Notification("Best offers available for you",{
-              body:"dont't miss out",
-              icon: "{% static 'logopurchase.png' %}",
-             })
-       
-        }else if (document.visibilityState === "hidden" && navigator.userAgent.match(/firefox|fxios/i)){
-              notif = new Notification("Best offers available for you",{
-              body:"dont't miss out",
-              icon: "{% static 'logopurchase.png' %}",
-              tag:"welcome back"
-             })
-        }
-        else{
-          notif.close()
-        }
-      })
+      
 
       if (window.scrollY >= 2500) {
       let foot = document.getElementById("footer");
