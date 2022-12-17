@@ -7,7 +7,7 @@ from celery.schedules import crontab
 # Set the default Django settings module for the 'celery' program.
 os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'purchased.settings')
 
-app = Celery('purchased'
+app = Celery('purchased',
                CELERY_broker='redis://localhost:6379/0',
                CELERY_backend='redis://localhost:6379/0'
                )
