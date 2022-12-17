@@ -8,8 +8,8 @@ from celery.schedules import crontab
 os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'purchased.settings')
 
 app = Celery('purchased',
-               CELERY_broker='redis://localhost:6379/0',
-               CELERY_backend='redis://localhost:6379/0'
+               CELERY_BROKER_URL='redis://localhost:6379/0',
+               CELERY_BACKEND_URL ='redis://localhost:6379/0'
                )
 
 app.conf.enable_utc=False
