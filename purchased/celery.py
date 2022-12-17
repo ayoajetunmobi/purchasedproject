@@ -8,8 +8,6 @@ from celery.schedules import crontab
 os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'purchased.settings')
 
 app = Celery('purchased'
-               broker='redis://localhost:6379/0',
-               backend='redis://localhost:6379/0'
                )
 
 app.conf.enable_utc=False
@@ -27,7 +25,7 @@ app.config_from_object(settings, namespace='CELERY')
 app.conf.beat_schedule = {
     'Send_mail_to_Client': {
         'task': 'homepage.tasks.send_mail_task',
-        'schedule': crontab(), #every 30 seconds it will be called
+        'schedule': crontab(hour=7, minute=30, day_of_week=1), #every 30 seconds it will be called
         #'args': (2,) you can pass arguments also if rquired 
     }
 }
