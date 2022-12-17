@@ -203,3 +203,13 @@ CELERY_RESULT_BACKEND = 'django-db'
 
 #Celery beat Setting
 CELERY_BEAT_SCHEDULER = 'django_celery_beat.schedulers:DatabaseScheduler'
+
+from celery.schedules import crontab
+from datetime import datetime
+CELERY_BEAT_SCHEDULE = { # scheduler configuration 
+   'Send_mail_to_Client': {
+        'task': 'homepage.tasks.send_mail_task',
+        'schedule': crontab(hour=7, minute=30, day_of_week=1), #every 30 seconds it will be called
+        #'args': (2,) you can pass arguments also if rquired 
+    }
+}
