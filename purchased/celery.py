@@ -7,7 +7,10 @@ from celery.schedules import crontab
 # Set the default Django settings module for the 'celery' program.
 os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'purchased.settings')
 
-app = Celery('purchased')
+app = Celery('purchased',
+               broker='redis://localhost:6379/0',
+               backend='redis://localhost:6379/0'
+            )
 
 app.conf.enable_utc=False
 app.conf.update(timezone='Africa/Lagos')
