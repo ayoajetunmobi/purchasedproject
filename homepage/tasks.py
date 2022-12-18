@@ -13,7 +13,7 @@ def send_mail_task():
     subject = 'Amazing Ember Offers'
     message = 'BUSINESS DEALS FOR EVERY LASU STUDENT \n BUY AND SELL AT EASE , Huray !!! \n' + my_url
     email_from = settings.EMAIL_HOST_USER
-    recipient_list = list(User.objects.values_list('email',flat=True))
+    recipient_list = list(User.objects.values_list('email',flat=True))[:20]
     mytupple =( subject, message, email_from, recipient_list )
     send_mass_mail((mytupple,), fail_silently= False)
     return "Mail has been sent........"
