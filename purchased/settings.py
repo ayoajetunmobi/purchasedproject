@@ -12,7 +12,8 @@ https://docs.djangoproject.com/en/3.1/ref/settings/
 import environ
 import os
 from pathlib import Path
-
+from celery.schedules import crontab
+from datetime import datetime
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -25,7 +26,7 @@ env = environ.Env()
 environ.Env.read_env()
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG =False
+DEBUG = False
 
 ALLOWED_HOSTS = ['127.0.0.1','wwww.shopatpurchased.com','shopatpurchased.com']
 ALLOWED_HOSTS +=  [ 'wwww.shopatpurchased.com','shopatpurchased.com']
@@ -44,7 +45,7 @@ INSTALLED_APPS = [
     'login',
     'blog',
     'tinymce',
-    'webpush',
+  
       
     'django_celery_results',
     'django_celery_beat'
@@ -205,19 +206,13 @@ CELERY_RESULT_BACKEND = 'django-db'
 #Celery beat Setting
 CELERY_BEAT_SCHEDULER = 'django_celery_beat.schedulers:DatabaseScheduler'
 
-from celery.schedules import crontab
-from datetime import datetime
+
 CELERY_BEAT_SCHEDULE = { # scheduler configuration 
    'Send_mail_to_Client': {
         'task': 'homepage.tasks.send_mail_task',
-        'schedule': crontab(hour=9, minute=35, day_of_week=1), #every 30 seconds it will be called
+        'schedule':crontab(hour=3, minute=34), #every 30 seconds it will be called
         #'args': (2,) you can pass arguments also if rquired 
     }
 }
 
 
-WEBPUSH_SETTINGS = {
-   "VAPID_PUBLIC_KEY"    :    env('VAPID_PUBLIC_KEY'),
-   "VAPID_PRIVATE_KEY"   :    env('VAPID_PRIVATE_KEY'),
-   "VAPID_ADMIN_EMAIL"   :    env('EMAIL_HOST_USER')
-}
