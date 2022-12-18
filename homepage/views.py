@@ -19,6 +19,9 @@ from .forms import (RegistrationForm , UserDetailForm)
 from pygments.formatters import img
 from numpy import random
 from django.views.decorators.csrf import csrf_exempt
+from django.views.decorators.http import require_GET
+from webpush import send_user_notification
+
 
 from django.utils.encoding import force_bytes, force_str, DjangoUnicodeDecodeError
 from django.utils.http import urlsafe_base64_encode, urlsafe_base64_decode
@@ -29,6 +32,7 @@ from .utils import token_generator
 User=get_user_model()
 page_num = 1
 
+@require_GET
 def index(request):
     context={}
     loged_in_user = request.user
@@ -1360,4 +1364,3 @@ def Product_spec(request ,id = id):
 #     context['suggestionImg'] = list(suggestionImg)
     
 #     return JsonResponse(context , safe=False)
-

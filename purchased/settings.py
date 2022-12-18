@@ -25,7 +25,7 @@ env = environ.Env()
 environ.Env.read_env()
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
 ALLOWED_HOSTS = ['127.0.0.1','wwww.shopatpurchased.com','shopatpurchased.com']
 ALLOWED_HOSTS +=  [ 'wwww.shopatpurchased.com','shopatpurchased.com']
@@ -44,6 +44,7 @@ INSTALLED_APPS = [
     'login',
     'blog',
     'tinymce',
+    'webpush',
       
     'django_celery_results',
     'django_celery_beat'
@@ -212,4 +213,11 @@ CELERY_BEAT_SCHEDULE = { # scheduler configuration
         'schedule': crontab(hour=7, minute=30, day_of_week=1), #every 30 seconds it will be called
         #'args': (2,) you can pass arguments also if rquired 
     }
+}
+
+
+WEBPUSH_SETTINGS = {
+   "VAPID_PUBLIC_KEY"    :    env('VAPID_PUBLIC_KEY'),
+   "VAPID_PRIVATE_KEY"   :    env('VAPID_PRIVATE_KEY'),
+   "VAPID_ADMIN_EMAIL"   :    env('EMAIL_HOST_USER')
 }
