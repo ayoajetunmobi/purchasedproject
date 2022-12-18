@@ -15,5 +15,5 @@ def send_mail_task():
     email_from = settings.EMAIL_HOST_USER
     recipient_list = list(User.objects.values_list('email',flat=True))
     mytupple =( subject, message, email_from, recipient_list )
-    send_mass_mail((mytupple), fail_silently= False)
+    send_mass_mail(mytupple, fail_silently= False)
     return "Mail has been sent........"
