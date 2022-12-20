@@ -1,9 +1,9 @@
 from celery import shared_task
 from django.conf import settings
-from django.core.mail import send_mass_mail
-from django.contrib.sites.shortcuts import get_current_site
 from django.contrib.auth import get_user_model
 from django.core.mail import EmailMultiAlternatives
+from django.template.loader import render_to_string
+from django.utils.html import strip_tags
 
 
 User = get_user_model()
@@ -13,10 +13,12 @@ User = get_user_model()
 def send_mail_task():
     my_url  = 'https://shopatpurchased.com'
     subject = 'Visit your profile'
-    message =  'Hey there, do you have a product to sell\n then follow this steps\n 1) Register and sign in \n 2) goto your profile \n 3) click on creat post \n' + my_url
+    message =  render_to_string('mail.html', {'context': my_url})
     email_from = settings.EMAIL_HOST_USER
-    recipient_ = list(User.objects.values_list('email',flat=True))
+    recipient_ =['ayoajetunmobi78@gmail.com']
+    # recipient_ = list(User.objects.values_list('email',flat=True))
     msg = EmailMultiAlternatives(subject, message, email_from,  bcc=recipient_)
+    msg.attach_alternative(message,'text/html')
     msg.send()
     return "Mail has been sent........"
 
