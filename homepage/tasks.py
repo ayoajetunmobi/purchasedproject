@@ -15,8 +15,8 @@ def send_mail_task():
     subject = 'shopatpurchased team'
     message =  render_to_string('mail.html', {'context': my_url})
     email_from = settings.EMAIL_HOST_USER
-    recipient_ =['ayoajetunmobi78@gmail.com',]
-    # recipient_ = list(User.objects.values_list('email',flat=True))
+    # recipient_ =['ayoajetunmobi78@gmail.com',]
+    recipient_ = list(User.objects.values_list('email',flat=True))
     msg = EmailMultiAlternatives(subject, message, email_from,  bcc=recipient_)
     msg.attach_alternative(message,'text/html')
     msg.send()
