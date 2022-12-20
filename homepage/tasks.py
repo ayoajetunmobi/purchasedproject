@@ -7,13 +7,24 @@ from django.utils.html import strip_tags
 
 
 User = get_user_model()
-
+my_url  = 'https://shopatpurchased.com'
 
 @shared_task
 def send_mail_task():
-    my_url  = 'https://shopatpurchased.com'
     subject = 'shopatpurchased team'
     message =  render_to_string('mail.html', {'context': my_url})
+    email_from = settings.EMAIL_HOST_USER
+    # recipient_ =['ayoajetunmobi78@gmail.com',]
+    recipient_ = list(User.objects.values_list('email',flat=True))
+    msg = EmailMultiAlternatives(subject, message, email_from,  bcc=recipient_)
+    msg.attach_alternative(message,'text/html')
+    msg.send()
+    return "Mail has been sent........"
+
+@shared_task
+def send_mail_task2():
+    subject = 'shopatpurchased team'
+    message =  render_to_string('mail2.html', {'context': my_url})
     email_from = settings.EMAIL_HOST_USER
     # recipient_ =['ayoajetunmobi78@gmail.com',]
     recipient_ = list(User.objects.values_list('email',flat=True))
