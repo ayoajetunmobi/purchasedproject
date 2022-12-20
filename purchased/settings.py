@@ -210,7 +210,7 @@ CELERY_BEAT_SCHEDULER = 'django_celery_beat.schedulers:DatabaseScheduler'
 CELERY_BEAT_SCHEDULE = { # scheduler configuration 
    'Send_mail_to_Client': {
         'task': 'homepage.tasks.send_mail_task',
-        'schedule':crontab(hour=13, minute=36), #every 30 seconds it will be called
+        'schedule':crontab(hour='6,15', minute=10), #every 30 seconds it will be called
         #'args': (2,) you can pass arguments also if rquired 
     }
 }
