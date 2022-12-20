@@ -26,7 +26,7 @@ env = environ.Env()
 environ.Env.read_env()
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 ALLOWED_HOSTS = ['127.0.0.1','wwww.shopatpurchased.com','shopatpurchased.com']
 ALLOWED_HOSTS +=  [ 'wwww.shopatpurchased.com','shopatpurchased.com']
@@ -210,7 +210,7 @@ CELERY_BEAT_SCHEDULER = 'django_celery_beat.schedulers:DatabaseScheduler'
 CELERY_BEAT_SCHEDULE = { # scheduler configuration 
    'Send_mail_to_Client': {
         'task': 'homepage.tasks.send_mail_task',
-        'schedule':crontab(hour=13, minute=31), #every 30 seconds it will be called
+        'schedule':crontab(hour=13, minute=36), #every 30 seconds it will be called
         #'args': (2,) you can pass arguments also if rquired 
     }
 }
