@@ -13,7 +13,7 @@ User = get_user_model()
 def send_mail_task():
     my_url  = 'https://shopatpurchased.com'
     subject = 'Visit your profile'
-    message =  "Hey there, if you've got a product to sell\n then follow this steps\n 1) Register and sign in \n 2) goto your profile \n 3)click on creat pos \n" + my_url
+    message =  'Hey there, do you have a product to sell\n then follow this steps\n 1) Register and sign in \n 2) goto your profile \n 3) click on creat post \n' + my_url
     email_from = settings.EMAIL_HOST_USER
     recipient_ = list(User.objects.values_list('email',flat=True))
     msg = EmailMultiAlternatives(subject, message, email_from,  bcc=recipient_)
