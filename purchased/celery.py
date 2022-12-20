@@ -24,6 +24,15 @@ app.config_from_object(settings, namespace='CELERY')
 # Load task modules from all registered Django apps.
 
 # Celery Beat tasks registration 
+app.conf.beat_schedule = {
+    'Send_mail_to_Client': {
+        'task': 'homepage.tasks.send_mail_task',
+        'schedule':crontab(hour=6, minute=30), #every 30 seconds it will be called
+        #'args': (2,) you can pass arguments also if rquired 
+    }
+}
+
+
 
 app.autodiscover_tasks()
 @app.task(bind=True)
