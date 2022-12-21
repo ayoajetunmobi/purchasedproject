@@ -82,8 +82,9 @@
     height: 30px;
 }
 
-.searchcontainer button {
-    padding: 9.5px;
+#submitttsearch {
+    width: 10%;
+    height: 50px;
 }
 
 .aboutimagescontainer {

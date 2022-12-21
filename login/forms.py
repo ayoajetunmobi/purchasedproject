@@ -19,16 +19,16 @@ class UserLoginForm (forms.Form):
     def clean(self, *args, **kwargs):
         email = self.cleaned_data.get('email')
         password = self.cleaned_data.get('password')
-        user = User.objects.get(email=email)
-        if email and password:
+        if email and password and User.objects.filter(email=email).exists():
+            user = User.objects.get(email=email)
             if authenticate(username =email, password=password):
-                 return super(UserLoginForm,self).clean(*args, **kwargs)
+                    return super(UserLoginForm,self).clean(*args, **kwargs)
             elif user.is_active == False:
-               raise forms.ValidationError('check your mail to activate account') 
+                  raise forms.ValidationError('check your mail to activate account') 
             else:
-                raise forms.ValidationError('check credentials and try again')
-            
-    
+               raise forms.ValidationError('check credentials and try again')
+        else:
+            raise forms.ValidationError('check credentials and try again')
 
                   
 class Password_resetform (forms.Form):

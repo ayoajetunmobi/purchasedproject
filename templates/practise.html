@@ -36,8 +36,10 @@
         </nav>
       </div>
       <div class="searchcontainer">
-        <input  id="searchinput" type="text" placeholder=" products /services / username " />
-        <button id="submitttsearch" onclick="submitSearcsignals(1)"> search </button>
+        <form action="{% url 'search' %}" method=POST>{%csrf_token%}
+            <input name="searchinput"  id="searchinput" type="text" placeholder=" products /services  " />
+            <input type='submit' id="submitttsearch" value= 'SEARCH'/> 
+        </form>
       </div>
     </header>
 
@@ -374,7 +376,7 @@
       </div>
 
       <div id="productDiv">
-            <div id ="productConCov">
+        <div id ="productConCov">
         {%for i in userProduct %}
         <div class="productcover deleteMsg" data={{i.id}}>
           {% for j in userProductPic %}{%if i.id == j.product_id %}

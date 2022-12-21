@@ -70,39 +70,6 @@ def index(request):
         context['userProductPic'] = user_pic
         context['review'] = review
         context['userDetail'] = user
-            
-    # if request.headers.get('x-requested-with') == 'XMLHttpRequest':
-    #     contextual={}
-        
-    #     productlist = []
-    #     productlistImg = []
-     
-     
-    #     product =User_product.objects.filter(
-    #             Q(description__contains = "sho") |
-    #             Q(searchTag__contains = "sho" )  |
-    #                  Q(description__contains = "jog")   |
-    #                  Q(description__contains = "dlg") |
-    #                   Q(searchTag__contains = "wea" ) 
-    #             ).order_by("-id")
-    #     for i in product:
-    #         productlistImg.append(Product_image.objects.filter(product=i).values()[0])
-            
-    #     product2 =User_product.objects.filter(
-    #             Q(description__contains = "henna") |
-    #             Q(searchTag__contains = "henna" ) |
-    #             Q(description__contains = "jalab") |
-    #             Q(searchTag__contains = "jalab" ) 
-    #             ).order_by("-id")
-    #     for i in product2:
-    #         productlistImg.append(Product_image.objects.filter(product=i).values()[0])
-        
-    
-    #     contextual['products']= list((product).values())
-    #     contextual['products2']= list((product2).values())
-    #     contextual['productlistImg']= list(productlistImg)
-         
-    #     return JsonResponse(contextual, safe=False)
 
     return render(request,'practise.html', context)
 
@@ -857,11 +824,11 @@ def getting_post(request):
                 desc   = str(request.POST.get("desc1")).lower()
                 Images = request.FILES.getlist('images')
                 if len(Images)>0 :
+                    product= User_product(user=data,price=price,description=str(desc),campus=data.campus,category =categories,searchTag =categories)
+                    product.save()
                     for img in Images:
                         jim =str(img)
                         if jim[-4:] == '.png' or jim[-4:] == '.PNG' or jim[-4:] == '.jpg' or jim[-4:] == '.jpeg' or jim[-4:] == '.JPG' or jim[-4:] == '.JPEG':
-                            product= User_product(user=data,price=price,description=str(desc),campus=data.campus,category =categories,searchTag =categories)
-                            product.save()
                             fs= FileSystemStorage()
                             file_path= fs.save(img.name,img)
                             pimage = Product_image.objects.create(product=product, product_img=file_path)
@@ -935,37 +902,6 @@ def Prof_Update(request , id=id):
     context['review']= review
     context['productrec']= productrec
     
-    # if request.user.is_authenticated:
-    #     if request.headers.get('x-requested-with') == 'XMLHttpRequest':
-    #         response = json.load(request)['post_data']
-    
-    #         user = User_Detail.objects.get(id=response['target'])
-
-    #         context['profileupdate']= True
-    #         context['userdetail'] = {
-    #             "username":user.username,"about":user.about,
-    #             "gender":user.gender,"matricverified":user.matricverified, "topuser":user.topuser,
-    #             "online":user.online , "propic":str(user.profilepic),"contact":user.contact
-    #         }
-            
-    #         if User_product.objects.filter(user=user).exists(): 
-    #             imagefill=[]           
-    #             data1  = User_product.objects.filter(user=user).order_by('-id')
-    #             context['data1']= list(User_product.objects.filter(user=user).order_by('-id').values())
-    #             for i in data1:
-    #                 imagefill.append(Product_image.objects.filter(product = i).values()[0])
-    #                 context['images'] = list(imagefill)
-    #         else:
-    #             context['images'] = [{"product_img":""}] 
-    #             context['data1']  =  [{"searchTag":"no product yet"}] 
-                
-                 
-    #         if Reviews.objects.filter(user=user).exists(): 
-    #             context['reviews']= list(Reviews.objects.filter(user=user).order_by('-id').values())
-    #         else:
-    #             context['reviews']= [{"review":"no reviews yet","username":"no reviews yet","as_buyer":"no reviews yet"}]
- 
-
     return render(request,'profile.html',context)
 
 def settingsfunctionality(request):
@@ -1029,246 +965,53 @@ def settingsfunctionality(request):
                 context['data'] = succmsg2
                       
     return JsonResponse(context,safe=False)
-# def get_profile(request):
-#     context={}
-    # if request.user.is_authenticated:
-    #     if request.headers.get('x-requested-with') == 'XMLHttpRequest':
-                
-    #         user = User_Detail.objects.get(user = request.user)
-            
-    #         context['userdetail'] = {
-    #           "username":user.username,"about":user.about,
-    #             "gender":user.gender,"matricverified":user.matricverified, "topuser":user.topuser,
-    #             "online":user.online , "propic":str(user.profilepic), "contact":user.contact
-    #         }
-            
-    #         if User_product.objects.filter(user=user).exists(): 
-    #             imagefill = [] 
-                
-    #             data1  = User_product.objects.filter(user=user).order_by('-id')
-    #             context['data1'] = list(User_product.objects.filter(user=user).order_by('-id').values())
-                
-    #             for i in data1:
-    #                 imagefill.append(Product_image.objects.filter(product = i).values()[0])
-    #                 context['images'] = list(imagefill)
 
-    #         else:
-    #             context['images'] = [{"product_img":""}] 
-    #             context['data1']  =  [{"description":"no product yet"}] 
-                  
-    #         if Reviews.objects.filter(user=user).exists(): 
-    #             context['reviews']= list(Reviews.objects.filter(user=user).order_by('-id').values())
-    #         else:
-    #             context['reviews']= [{"review":"no reviews yet","username":"no reviews yet","as_buyer":"no reviews yet"}]
-    # return JsonResponse(context , safe=False)
-
-# def pagination_page(request):
-#     context={}
-#     picture=[]
-    
-#     global page_num
-    
-#     listt= User_product.objects.all().order_by("-id")
-    
-#     page = request.GET.get('page', page_num)
-    
-#     paginator = Paginator(listt, 4)
-    
-#     try:
-#         users = paginator.page(page)
-#     except PageNotAnInteger:
-#         users = paginator.page(1)
-        
-#     for i in users.object_list:
-#         picture.append(list((Product_image.objects.filter(product=i.id)).values())[0])
-    
-#     if users.has_next() == True:
-#         page_num = users.next_page_number()
-#         context["pictures"] = picture
-#         context["data"]= list((users.object_list).values())
-        
-#     if users.has_next() == False:
-#        context["pictures"] = picture
-#        context["data"]= list((users.object_list).values())
-#        page_num = 1
-       
-#     return JsonResponse( context, safe=False)
-
-@csrf_exempt 
 def search(request):
     context = {}
-    if request.headers.get('x-requested-with') == 'XMLHttpRequest':
-        images = []
-        response = json.load(request)['post_data'] 
-        target = response['target']
-        res = str(response['target2']).strip()
-        response = str(response['target2']).lower()
-        response = response.strip()
-        if int(target) == 1:
-            if User_Detail.objects.filter(username = res).exists():
-                data = User_Detail.objects.get(username = res)
-                data2 = User_product.objects.filter(user=data)[0]
-                context["username"] =[str(data.username),str(data.profilepic),str(data2.id)]    
-            elif User_product.objects.filter(Q(description__contains = response)|Q(searchTag__contains = response)).exists(): 
-                data2 =  User_product.objects.filter(
-                Q(description__contains = response) | Q(searchTag__contains = response)).order_by("-id")[:20]
-                context["product"] = list((data2).values())
-                for i in data2:
-                    images.append(Product_image.objects.filter(product = i).values()[0])
-                    context['images'] = list(images)
-                context["yes"] = True 
-                Searchdata.objects.create(word=response)
-            else:
-                context['noData'] =  str("No MATCH FOR SEARCH")     
-                     
-            # if int(target) == 2:
-            #     if request.user.is_authenticated:
-            #         user = User_Detail.objects.get(user= request.user)
-            #         data2 =  User_product.objects.filter(
-            #         Q(description__contains = 'shoe') | Q(description__contains = 'bag') | Q(description__contains = 'wear') | Q(searchTag__contains = 'wear') | Q(description__contains = 'sneaker')  | Q(searchTag__contains = 'material') | Q(description__contains = 'cloth')
-            #         | Q(description__contains = 'dress') | Q(searchTag__contains = 'jewel') | Q(description__contains = 'wig') | Q(description__contains = 'suit')  | Q(description__contains = 'women')  | Q(searchTag__contains = 'ladies') & Q(campus__contains = user.campus)
-            #         ).order_by("-id")[:20]
-            #         context["product"] = list((data2).values())
-            #         for i in data2:
-            #             images.append(Product_image.objects.filter(product = i).values()[0])
-            #             context['images'] = list(images)
-            #         context["yes"] = True 
-            #         Searchdata.objects.create(word=response,timesSearched =0,user=user)
-            #     else:
-            #         data2 =  User_product.objects.filter(
-            #         Q(description__contains = 'shoes') | Q(description__contains = 'bag') | Q(searchTag__contains = 'wear') | Q(description__contains = 'sneaker') | Q(description__contains = 'material') | Q(description__contains = 'cloth')
-            #         | Q(description__contains = 'dress') | Q(searchTag__contains = 'jewel') | Q(description__contains = 'wig') | Q(description__contains = 'suit')  | Q(description__contains = 'ladies')
-            #         ).order_by("-id")[:20]
-            #         for i in data2:
-            #             images.append(Product_image.objects.filter(product = i).values()[0])
-            #             context['images'] = list(images)
-            #         context["product"] = list((data2).values())
-            #         context["yes"] = True
-                    
-            # if int(target) == 3:
-            #     if request.user.is_authenticated:
-            #         user = User_Detail.objects.get(user = request.user)
-            #         data2 =  User_product.objects.filter(
-            #         Q(description__contains = 'food') | Q(searchTag__contains = 'rice') | Q(description__contains = 'asun') | Q(searchTag__contains = 'ofada') | Q(searchTag__contains = 'spag')
-            #         | Q(searchTag__contains = 'food') | Q(searchTag__contains = 'soup') | Q(description__contains = 'turkey') & Q(campus__contains = user.campus)
-            #          ).order_by("-id")[:20]
-            #         context["product"] = list((data2).values())
-            #         for i in data2:
-            #             images.append(Product_image.objects.filter(product = i).values()[0])
-            #             context['images'] = list(images)
-            #         context["yes"] = True 
-            #         Searchdata.objects.create(word=response,timesSearched =0, user=user)
-            #     else:
-            #         data2 =  User_product.objects.filter(
-            #         Q(description__contains = 'food') | Q(searchTag__contains = 'rice') | Q(description__contains = 'asun') | Q(searchTag__contains = 'ofada') | Q(searchTag__contains = 'spag') 
-            #         | Q(searchTag__contains = 'food') | Q(searchTag__contains = 'soup') | Q(description__contains = 'turkey')
-            #          ).order_by("-id")[:20]
-            #         for i in data2:
-            #             images.append(Product_image.objects.filter(product = i).values()[0])
-            #             context['images'] = list(images)
-            #         context["product"] = list((data2).values())
-            #         context["yes"] = True
-                    
-                    
-            # if int(target) == 4:
-            #     if request.user.is_authenticated:
-            #         user = User_Detail.objects.get(user= request.user)
-            #         data2 =  User_product.objects.filter(
-            #          Q(searchTag__contains = 'milk') | Q(searchTag__contains = 'flake') | Q(searchTag__contains = 'morn')
-            #         | Q(description__contains = 'cereals')  & Q(campus__contains = user.campus)
-            #         ).order_by("-id")[:20]
-            #         context["product"] = list((data2).values())
-            #         for i in data2:
-            #             images.append(Product_image.objects.filter(product = i).values()[0])
-            #             context['images'] = list(images)
-            #             context["yes"] = True 
-            #         Searchdata.objects.create(word=response,timesSearched =0,user=user)
-            #     else:
-            #         data2 =  User_product.objects.filter(
-            #         Q(searchTag__contains = 'milk') | Q(searchTag__contains = 'flakes') | Q(searchTag__contains = 'morn')
-            #         | Q(description__contains = 'cereals') 
-            #         ).order_by("-id")[:20]
-            #         for i in data2:
-            #             images.append(Product_image.objects.filter(product = i).values()[0])
-            #             context['images'] = list(images)
-            #         context["product"] = list((data2).values())
-            #         context["yes"] = True
-                    
-            # if int(target) == 5:
-            #     if request.user.is_authenticated:
-            #         user = User_Detail.objects.get(user= request.user)
-            #         data2 =  User_product.objects.filter(
-            #         Q(description__contains = 'phone') | Q(searchTag__contains = 'laptop') | Q(description__contains = 'gadget') & Q(campus__contains = user.campus)
-            #         ).order_by("-id")[:20]
-            #         context["product"] = list((data2).values())
-            #         for i in data2:
-            #             images.append(Product_image.objects.filter(product = i).values()[0])
-            #             context['images'] = list(images)
-            #         context["yes"] = True 
-            #         Searchdata.objects.create(word=response,timesSearched =0,user=user)
-            #     else:
-            #         data2 =  User_product.objects.filter(
-            #             Q(description__contains = 'phone') | Q(searchTag__contains = 'laptop') | Q(description__contains = 'gadget') 
-            #         ).order_by("-id")[:20]
-            #         for i in data2:
-            #             images.append(Product_image.objects.filter(product = i).values()[0])
-            #             context['images'] = list(images)
-            #         context["product"] = list((data2).values())
-            #         context["yes"] = True
-                    
-            # if int(target) == 6:
-            #     if request.user.is_authenticated:
-            #         user = User_Detail.objects.get(user= request.user)
-            #         data2 =  User_product.objects.filter(
-            #         Q(description__contains = 'graphic') |  Q(searchTag__contains = 'graphic') & Q(campus__contains = user.campus)
-            #         ).order_by("-id")[:20]
-            #         context["product"] = list((data2).values())
-            #         for i in data2:
-            #             images.append(Product_image.objects.filter(product = i).values()[0])
-            #             context['images'] = list(images)
-            #         context["yes"] = True 
-            #         Searchdata.objects.create(word=response,timesSearched =0,user=user)
-            #     else:
-            #         data2 =  User_product.objects.filter(
-            #          Q(description__contains = 'graphics') |  Q(searchTag__contains = 'graphic')
-            #         ).order_by("-id")[:20]
-            #         for i in data2:
-            #             images.append(Product_image.objects.filter(product = i).values()[0])
-            #             context['images'] = list(images)
-            #         context["product"] = list((data2).values())
-            #         context["yes"] = True
+    searchdata = request.POST.get("searchinput")
+    searchdata= str(searchdata)
+    
+    trendingPic = []
+    trending =  User_product.objects.filter(
+            Q(description__contains = searchdata) | 
+            Q(searchTag__contains = searchdata))
+    
+    for i in trending:
+        trendingPic.append(Product_image.objects.filter(product= i)[0])
+            
+    context['trending']= trending
+    context['trendingPic']= trendingPic
+        
+    
+    print(searchdata)
+    # if request.headers.get('x-requested-with') == 'XMLHttpRequest':
+    #     images = []
+    #     response = json.load(request)['post_data'] 
+    #     target = response['target']
+    #     res = str(response['target2']).strip()
+    #     response = str(response['target2']).lower()
+    #     response = response.strip()
+    #     if int(target) == 1:
+    #         if User_Detail.objects.filter(username = res).exists():
+    #             data = User_Detail.objects.get(username = res)
+    #             data2 = User_product.objects.filter(user=data)[0]
+    #             context["username"] =[str(data.username),str(data.profilepic),str(data2.id)]    
+    #         elif User_product.objects.filter(Q(description__contains = response)|Q(searchTag__contains = response)).exists(): 
+    #             data2 =  User_product.objects.filter(
+    #             Q(description__contains = response) | Q(searchTag__contains = response)).order_by("-id")[:20]
+    #             context["product"] = list((data2).values())
+    #             for i in data2:
+    #                 images.append(Product_image.objects.filter(product = i).values()[0])
+    #                 context['images'] = list(images)
+    #             context["yes"] = True 
+    #             Searchdata.objects.create(word=response)
+    #         else:
+    #             context['noData'] =  str("No MATCH FOR SEARCH")     
                 
-            return JsonResponse(context , safe=False)
+    return render (request,'search.html',context)  
 
 def Product_spec(request ,id = id):
         context={}
-        # if request.headers.get('x-requested-with') == 'XMLHttpRequest':
-        #     response = json.load(request)['post_data']
-        #     response = response['data']
-        #  # this part gets the product id and displays other pictures and full product description
-        #     data1  = User_product.objects.get(id=response)
-        #     context['data1'] = {
-        #         "price":data1.price, "description":data1.description,"searchTag":data1.searchTag, 
-        #         "propic":str(data1.profile_pic), "username":data1.username, "online":data1.online, "id":data1.user_id
-        #     }
-        #     imagefill = list(Product_image.objects.filter(product = data1).values())
-        #     context['images'] = imagefill
-
-        #     userContact = data1.user.contact
-        #     context['contact'] = str(userContact)
-                                     
-            
-        #     # suggested products
-         
-        #     Simagefill = []               
-        #     Sproduct  = User_product.objects.all().order_by('-id')[:5]
-        #     context['Sproduct'] = list(User_product.objects.all().order_by('-id').values())[:5]
-        #     for i in Sproduct:
-        #         Simagefill.append(Product_image.objects.filter(product = i).values()[0])
-        #         context['Simages'] = list(Simagefill)
-                
-        #     context['userthatwascontacted'] = str(data1.user.username)
-             
         product = get_object_or_404(User_product,id=id)
         pictures = Product_image.objects.filter(product=product)
         context['product']= product
@@ -1294,73 +1037,3 @@ def Product_spec(request ,id = id):
         
         
         return render(request,'products.html',context)          
-            
-# def whencontacted(request):
-#     context={}
-#     if request.user.is_authenticated:
-#         if request.headers.get('x-requested-with') == 'XMLHttpRequest':
-#             response = json.load(request)['post_data']
-#             response = response['seler']
-                 
-#             seler = User_Detail.objects.get(username=response)
-#             buyer = User_Detail.objects.get(user = request.user)
-#             if str(buyer.username) == str(seler.username):
-#                  return JsonResponse(context , safe=False)
-#             else:     
-#                   #message to person who contacted/buyer
-#                       Messages.objects.create(message = "Hi "+buyer.username+" you contacted "+seler.username+" please leave a review on that user after business meeting",
-#                                    user_to_review= seler.username, my_messages = buyer) 
-            
-#                  #  Message to person contacted/seler
-#                       Messages.objects.create(message = "Hi "+seler.username+" your contact was requested by "+buyer.username+" please leave a review on that user after business meeting",
-#                          contacted = True, user_to_review= buyer.username, my_messages = seler)
-            
-#                       Contacted.objects.create(username = seler.username, user =buyer)
-                           
-#     return JsonResponse(context , safe=False)
- 
-
-# def msgDisplay(request):
-#     context={}
-#     if request.user.is_authenticated:
-#         if request.headers.get('x-requested-with') == 'XMLHttpRequest':
-                
-#             user = User_Detail.objects.get(user = request.user)
-#             if Messages.objects.filter(my_messages = user).exists:
-#                 message = list( Messages.objects.filter(my_messages =user).order_by('-id').values())
-                
-#                 context['message'] = message
-#     return JsonResponse(context , safe=False)   
-
-
-
-# def suggestproduct(request):
-#     context={}
-#     products = User_product.objects.all()[30:40]
-#     suggestions  = []
-#     suggestions1 = User_product.objects.filter(Q(searchTag__contains = 'food') | Q(description__contains = 'rice')).order_by("-id")[:1]
-#     suggestions2 = User_product.objects.filter(Q(searchTag__contains = 'laptop') | Q(description__contains = 'laptop') | Q(description__contains = 'phone')).order_by("-id")[:1]
-#     suggestions3 = User_product.objects.filter(Q(searchTag__contains = 'wear') | Q(description__contains = 'wear')).order_by("-id")[:1]
-#     suggestions4 =  User_product.objects.filter(Q(searchTag__contains = 'hp') | Q(description__contains = 'games')).order_by("-id")[:1]
-    
-#     suggestions = [suggestions1,suggestions2,suggestions3,suggestions4]
-#     suggestionImg = []
-#     for i in suggestions:
-#         suggestionImg.append(Product_image.objects.filter(product = i).values()[0])
-        
-        
-#     productsrotateImg =[]
-#     for i in products:
-#          productsrotateImg.append(Product_image.objects.filter(product = i).values()[0])
-         
-#     context['products'] =  list(User_product.objects.all().values()[30:40])
-#     context['productsrotateImg'] = list(productsrotateImg)
-        
-#     context['suggestion1'] = list((suggestions1).values())
-#     context['suggestion2'] = list((suggestions2).values())
-#     context['suggestion3'] = list((suggestions3).values())
-#     context['suggestion4'] = list((suggestions4).values())
-        
-#     context['suggestionImg'] = list(suggestionImg)
-    
-#     return JsonResponse(context , safe=False)
