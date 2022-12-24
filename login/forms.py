@@ -6,6 +6,8 @@ from django.core.exceptions import ValidationError
 
 
 User = get_user_model()
+
+
 class UserLoginForm (forms.Form):
     email= forms.EmailField( label= "" ,widget=forms.TextInput(attrs={  
         "placeholder":"Enter email" , "class":"inputs"
@@ -19,18 +21,24 @@ class UserLoginForm (forms.Form):
     def clean(self, *args, **kwargs):
         email = self.cleaned_data.get('email')
         password = self.cleaned_data.get('password')
-        if email and password and User.objects.filter(email=email).exists():
-            user = User.objects.get(email=email)
-            if authenticate(username =email, password=password):
-                    return super(UserLoginForm,self).clean(*args, **kwargs)
-            elif user.is_active == False:
-                  raise forms.ValidationError('check your mail to activate account') 
-            else:
-               raise forms.ValidationError('check credentials and try again')
-        else:
-            raise forms.ValidationError('check credentials and try again')
+        if len(password) < 8 : 
+            password = str(password)
+            if password.isalpha() | password.isnumeric():
+                raise forms.ValidationError('password must contain letters and alphabet')
+            elif email and password and User.objects.filter(email=email).exists():
+                    user = User.objects.get(email=email)
+                    if authenticate(username =email, password=password):
+                        return super(UserLoginForm,self).clean(*args, **kwargs)
+                    elif user.is_active == False:
+                        raise forms.ValidationError('check your mail to activate account') 
+                    else:
+                        raise forms.ValidationError('wrrong credentials  , try again')
+            else: raise forms.ValidationError('User does not exist')
+                    
+        else:raise forms.ValidationError('password should be atleast 8 charecters')
+            
 
-                  
+
 class Password_resetform (forms.Form):
     email_address = forms.EmailField(required=True ,label = "", widget=forms.TextInput(attrs={  
         "placeholder":"Enter email" , "class":"inputs"

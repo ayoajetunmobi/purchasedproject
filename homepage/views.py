@@ -18,7 +18,6 @@ from django.contrib.auth import get_user_model
 from .forms import (RegistrationForm , UserDetailForm) 
 from pygments.formatters import img
 from numpy import random
-from django.views.decorators.csrf import csrf_exempt
 from django.views.decorators.http import require_GET
 from webpush import send_user_notification
 
@@ -122,7 +121,8 @@ class VerificationView(View):
         except Exception as ex:
             pass
         return redirect('login')
-   
+
+@require_GET   
 def bagsPage(request):
     context={}
     
@@ -161,7 +161,8 @@ def bagsPage(request):
     context['suggestPic']= suggestPic
     
     return render(request ,'bags.html', context)
-           
+
+@require_GET           
 def sneakers(request):
     context={}
     
@@ -201,7 +202,8 @@ def sneakers(request):
     context['suggestPic']= suggestPic
     
     return render(request,'sneakers.html',context)
-                   
+ 
+@require_GET                  
 def jewelries(request):
     context={}
     
@@ -246,7 +248,8 @@ def jewelries(request):
     context['suggestPic']= suggestPic
     
     return render(request,'jewelries.html',context)
-               
+
+@require_GET               
 def gown(request):
     context={}
     productList = productList = User_product.objects.filter( 
@@ -287,7 +290,8 @@ def gown(request):
     context['suggestPic']= suggestPic
     
     return render(request,'gown.html',context)
-           
+
+@require_GET           
 def ladies_outfit(request):
     context={}
     
@@ -332,7 +336,8 @@ def ladies_outfit(request):
     context['suggestPic']= suggestPic
     
     return render(request,'ladies.html',context)
-                          
+  
+@require_GET                          
 def bedsheet(request):
     context={}
     productList = User_product.objects.filter(
@@ -373,7 +378,8 @@ def bedsheet(request):
     context['suggestPic'] = suggestPic
     
     return render(request,'bedsheet.html',context)
-                                                    
+
+@require_GET                                                   
 def clothing(request):
     context={}
     
@@ -421,7 +427,8 @@ def clothing(request):
     context['suggestPic']= suggestPic
     
     return render(request,'clothing.html',context)
-  
+
+@require_GET 
 def cookedfood(request):
     context={}
     
@@ -463,7 +470,8 @@ def cookedfood(request):
     context['suggestPic']= suggestPic
     
     return render(request,'cookedfood.html',context)
-  
+
+@require_GET 
 def shoprandom(request):
     context={}
     
@@ -510,7 +518,8 @@ def shoprandom(request):
     context['suggestPic']= suggestPic
     
     return render(request,'shoprandom.html',context)
-  
+
+@require_GET  
 def food(request):
     context={}
     
@@ -557,7 +566,8 @@ def food(request):
     context['suggestPic']= suggestPic
     
     return render(request,'food.html',context)
-                                                     
+
+@require_GET                                                  
 def fragrance(request):
     context={}
     
@@ -597,6 +607,7 @@ def fragrance(request):
     
     return render(request,'fragrance.html',context)
 
+@require_GET
 def gadgets(request):
     context={}
     productList =User_product.objects.filter(
@@ -644,7 +655,8 @@ def gadgets(request):
     context['suggestPic']= suggestPic
     
     return render(request,'gadgets.html',context)
-                                                        
+
+@require_GET                                                       
 def graphics(request):
     context={}
     
@@ -681,7 +693,8 @@ def graphics(request):
     context['suggestPic']= suggestPic
     
     return render(request,'graphics.html',context)
-                          
+
+@require_GET                        
 def postutme(request):
     context={}
     
@@ -724,7 +737,8 @@ def postutme(request):
     context['suggestPic']= suggestPic
     
     return render(request,'postutme.html',context)
-                          
+
+@require_GET                        
 def trousers(request):
     context={}
     
@@ -769,7 +783,8 @@ def trousers(request):
     context['suggestPic']= suggestPic
     
     return render(request,'trousers.html',context)
-                                                  
+ 
+@require_GET                                                 
 def wig(request):
     context={}
     

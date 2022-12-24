@@ -10,7 +10,6 @@ User = get_user_model()
        model=User
 admin.site.register(User,UserAdmin) """
 
-
    
 admin.site.register(User)
 admin.site.register(User_Detail)

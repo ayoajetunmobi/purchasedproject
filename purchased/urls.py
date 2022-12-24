@@ -17,14 +17,35 @@ from django.contrib import admin
 from django.urls import path,include
 from django.conf import settings
 from django.conf.urls.static import static
+from django_otp.admin import OTPAdminSite
+from django.contrib.auth.models import User
+from homepage.models import  User_Detail , User_product , Product_image ,  Customer_care , Searchdata , Contacted, Reviews
+from django_otp.plugins.otp_totp.models import TOTPDevice
+from django_otp.plugins.otp_totp.admin import TOTPDeviceAdmin
+from django.contrib.auth import get_user_model
 
+User = get_user_model()
+
+class OTPAdmin(OTPAdminSite):
+    pass
+
+admin_site = OTPAdminSite(name='OTPAdmin')
+admin_site.register(User)
+admin_site.register(User_Detail)
+admin_site.register( User_product)
+admin_site.register(Product_image)
+admin_site.register(Customer_care)
+admin_site.register(Searchdata)
+admin_site.register(Contacted)
+admin_site.register(Reviews)
+
+admin_site.register(TOTPDevice, TOTPDeviceAdmin)
 
 urlpatterns = [
-    path('admin/', admin.site.urls),
     path('',include('homepage.urls')),
+    path('post-product/', admin_site.urls),  # auth token django login
+    # path('post-products/', admin.site.urls), # normal django login
     path('login/',include('login.urls')),
     path('blog/',include('blog.urls')),
-    path('tinymce/', include('tinymce.urls'))
-    
+    path('tinymce/', include('tinymce.urls')) 
 ]+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
-
