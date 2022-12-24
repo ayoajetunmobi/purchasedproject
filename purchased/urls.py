@@ -43,8 +43,7 @@ admin_site.register(TOTPDevice, TOTPDeviceAdmin)
 
 urlpatterns = [
     path('',include('homepage.urls')),
-    path('post-product/', admin_site.urls),  # auth token django login
-    # path('post-products/', admin.site.urls), # normal django login
+    path('post-product/', admin_site.urls), 
     path('login/',include('login.urls')),
     path('blog/',include('blog.urls')),
     path('tinymce/', include('tinymce.urls')) 
