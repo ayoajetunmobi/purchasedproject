@@ -18,7 +18,7 @@ from django.contrib.auth import get_user_model
 from .forms import (RegistrationForm , UserDetailForm) 
 from pygments.formatters import img
 from numpy import random
-from django.views.decorators.http import require_GET
+from django.views.decorators.http import require_GET,require_POST
 from webpush import send_user_notification
 
 
@@ -827,19 +827,20 @@ def wig(request):
     context['suggestPic']= suggestPic
     
     return render(request,'wig.html',context)
-                                                                                             
+ 
+@require_POST                                                                                          
 def getting_post(request):
     context={}
     loged_in_user = request.user
     if  loged_in_user.is_authenticated:
             if request.method == 'POST':
                 data = get_object_or_404(User_Detail,user=loged_in_user)
-                price  = request.POST.get("price")
-                categories   =  request.POST['categories']
+                price  =request.POST.get("price")
+                categories   = str(request.POST['categories'])
                 desc   = str(request.POST.get("desc1")).lower()
                 Images = request.FILES.getlist('images')
                 if len(Images)>0 :
-                    product= User_product(user=data,price=price,description=str(desc),campus=data.campus,category =categories,searchTag =categories)
+                    product= User_product(user=data,price=float(price),description=desc,campus=data.campus,category =categories,searchTag =categories)
                     product.save()
                     for img in Images:
                         jim =str(img)
@@ -851,6 +852,7 @@ def getting_post(request):
         return  render(request,'postad.html',context)         
         
     return render(request,'postad.html',context)
+
 
 def review(request):
     context={}
@@ -981,10 +983,12 @@ def settingsfunctionality(request):
                       
     return JsonResponse(context,safe=False)
 
+@require_POST
 def search(request):
     context = {}
     searchdata = request.POST.get("searchinput")
-    searchdata= str(searchdata)
+    searchdata= str(searchdata).strip()
+    searchdata = searchdata.lower()
     
     trendingPic = []
     trending =  User_product.objects.filter(
@@ -1025,6 +1029,7 @@ def search(request):
                 
     return render (request,'search.html',context)  
 
+@require_GET 
 def Product_spec(request ,id = id):
         context={}
         product = get_object_or_404(User_product,id=id)
