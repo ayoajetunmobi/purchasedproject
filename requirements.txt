@@ -22,9 +22,13 @@ django-celery-results==2.4.0
 django-cors-headers==3.13.0
 django-environ==0.9.0
 django-extensions==3.1.3
+django-formtools==2.4
+django-otp==1.1.4
+django-phonenumber-field==6.4.0
 django-supervisor==0.4.0
 django-timezone-field==5.0
 django-tinymce==3.5.0
+django-two-factor-auth==1.14.0
 django-webpush==0.3.4
 docutils==0.14
 environ==1.0
@@ -34,6 +38,7 @@ idna==3.3
 importlib-metadata==4.13.0
 kombu==5.2.4
 numpy==1.21.6
+phonenumberslite==8.13.3
 Pillow==9.2.0
 prompt-toolkit==3.0.36
 psycopg2==2.9.3
@@ -45,6 +50,7 @@ python-dateutil==2.8.2
 python-decouple==3.5
 pytz==2022.1
 pywebpush==1.9.4
+qrcode==7.3.1
 redis==4.4.0
 requests==2.27.1
 sendmail==2.0
